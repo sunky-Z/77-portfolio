@@ -2,10 +2,11 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-export default function Magnetic({ children, className = '' }) {
+export default function Magnetic({ children, className = '', disabled = false }) {
   const outerRef = useRef(null);
   const innerRef = useRef(null);
   useEffect(() => {
+    if (disabled) return;
     const media = gsap.matchMedia();
     media.add('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)', () => {
       const outer = outerRef.current;
@@ -28,6 +29,6 @@ export default function Magnetic({ children, className = '' }) {
       };
     });
     return () => media.revert();
-  }, []);
-  return <span className={`magnetic ${className}`} ref={outerRef}><span className="magnetic-inner" ref={innerRef}>{children}</span></span>;
+  }, [disabled]);
+  return <span className={`magnetic${disabled ? ' magnetic-static' : ''} ${className}`} ref={outerRef}><span className="magnetic-inner" ref={innerRef}>{children}</span></span>;
 }

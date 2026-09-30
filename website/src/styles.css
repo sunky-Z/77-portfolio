@@ -26,9 +26,10 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline-color:#628
 .header-contact:hover{background:#315bff;border-color:#315bff}
 .magnetic,.magnetic-inner{display:inline-flex;position:relative}
 .magnetic-inner{will-change:transform}
+.magnetic-static .magnetic-inner{will-change:auto}
 .status-dot{width:6px;height:6px;background:#6287ff;border-radius:50%;display:inline-block;margin-right:15px;vertical-align:middle;box-shadow:0 0 18px #315bff80}
 .hero{background:#090b0f}
-.hero-media{background-position:75% 48%}
+.hero-media{background-position:75% 48%;pointer-events:none}
 .hero-media video{object-position:75% center}
 .hero-media video.ready{opacity:.85}
 .hero-shade{background:linear-gradient(90deg,#07090eef 0%,#07090e99 38%,#07102418 75%),linear-gradient(0deg,#090b0f 0%,transparent 30%)}
@@ -74,10 +75,7 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline-color:#628
 .project-card-2,.project-card-4{padding-top:105px}
 .project-card-2 .project-image,.project-card-3 .project-image{height:400px}
 .project-parallax{display:block;position:absolute;inset:-7% 0;height:114%}
-.project-photo{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(.95);transition:filter .8s}
-.project-card-2 .project-photo{object-position:63% center}
-.project-card-3 .project-photo{object-position:30% center;filter:brightness(.7) saturate(.6)}
-.project-card-4 .project-photo{object-position:45% center}
+.project-photo{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.92) saturate(1);transition:filter .8s}
 .project-image:hover .project-photo{filter:brightness(1) saturate(1)}
 .project-open{border-radius:50%;background:#eef2fb;color:#111827;transition:transform .6s cubic-bezier(.22,1,.36,1),background .5s,color .5s}
 .project-image:hover .project-open{background:#315bff;color:white;transform:rotate(90deg)}
