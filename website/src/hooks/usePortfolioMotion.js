@@ -5,9 +5,12 @@ import { cases } from '../content.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function usePortfolioMotion(rootRef) {
+export default function usePortfolioMotion(rootRef, language) {
   const hasOpened = useRef(false);
+  const previousLanguage = useRef(language);
   useLayoutEffect(() => {
+    if (previousLanguage.current !== language) hasOpened.current = true;
+    previousLanguage.current = language;
     const root = rootRef.current;
     const hash = window.location.hash;
     const linkedCase = hash.startsWith('#work/') ? hash.slice(6) : '';
@@ -83,5 +86,5 @@ export default function usePortfolioMotion(rootRef) {
       };
     }, root);
     return () => context.revert();
-  }, [rootRef]);
+  }, [rootRef, language]);
 }

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { cases } from '../content.js';
 
-const pageTitle = '77 · Product Manager / AI Builder';
+const defaultPageTitle = '77 · Product Manager / AI Builder';
 
 function caseFromHash() {
   const id = window.location.hash.replace(/^#work\//, '');
   return window.location.hash.startsWith('#work/') && Object.hasOwn(cases, id) ? id : null;
 }
 
-export default function useCaseNavigation() {
+export default function useCaseNavigation(localizedCases = cases, pageTitle = defaultPageTitle) {
   const [selectedCase, setSelectedCase] = useState(caseFromHash);
   const trigger = useRef(null);
   const openedHere = useRef(false);
@@ -25,7 +25,10 @@ export default function useCaseNavigation() {
   }, []);
 
   useEffect(() => {
-    document.title = selectedCase ? `${cases[selectedCase].title} · 77` : pageTitle;
+    document.title = selectedCase ? `${localizedCases[selectedCase].title} · 77` : pageTitle;
+  }, [selectedCase, localizedCases, pageTitle]);
+
+  useEffect(() => {
     if (!selectedCase && previousCase.current) {
       openedHere.current = false;
       const target = trigger.current?.isConnected ? trigger.current :

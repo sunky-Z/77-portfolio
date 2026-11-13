@@ -10,7 +10,8 @@
 
 - `src/App.jsx`：五个页面模块与交互，联系邮箱。
 - `src/styles.css`：1700px 版心、PC 和移动端布局、减少动态设置。
-- `src/content.js`：职业经历与案例详情。
+- `src/content.js` / `src/content.zh.js`：英文原文与中文对照的职业经历、案例详情。
+- `src/i18n.js`：页面文案翻译、语言选择与本机偏好记忆。
 - `src/hooks/usePortfolioMotion.js`：GSAP 开场、标题揭幕、卡片序列与图片视差。
 - `src/components/`：DarkVeil 蓝色背景与磁吸交互；第三方来源见 `THIRD_PARTY_NOTICES.md`。
 - `public/assets/`：原创概念视觉与背景视频，不是真实产品截图。
@@ -29,9 +30,9 @@ DROI 用 AI Product & Growth 组织 Agent 体验、技能生态与商业化交�
 
 ## 字体与段落
 
-英文与数字优先调用系统 Times New Roman / Times，不分发 Windows 字体文件。中文使用免费商用的 Noto Serif SC（SIL OFL 1.1），保留完整许可于 `public/fonts/OFL-NotoSerifSC.txt`。
+英文与数字继续使用系统 Times New Roman / Times。中文按 Apple 中国官网的字体链使用 SF Pro SC / PingFang SC，再依设备回退到 Hiragino Sans GB / Microsoft YaHei。Apple 字体文件不随站点分发；在未安装 Apple 中文字体的 Windows 上会使用系统中文字体。字体参考：https://www.apple.com.cn/v/homepage/a/styles/main.built.css 。
 
-中文字体已按本页字符生成 400–600 字重的 WOFF2 子集。增加文案后运行 `python tools/subset-font.py` 更新字形（需 fonttools 与 brotli）；原始字体缓存于忽略目录 `.sites-runtime/fonts/`。正文和简介使用均衡换行，避免段尾只有少量文字；可在 `src/styles.css` 调整 `text-wrap` 与字号。
+右上角的语言按钮支持中文与英文即时切换，案例详情内也保留入口。页面的正文、案例、导航、按钮、提示、辅助描述和浏览器标题一并切换。首次按浏览器语言选择，后续在本机记住选择；切换语言保留当前区块、职业经历选项和案例链接。中文是现有英文的对照翻译，未增补新的履历或成果。
 
 ## GitHub Pages 部署
 

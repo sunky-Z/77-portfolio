@@ -235,3 +235,24 @@ a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline-color:#628
 @media(max-width:380px){.share-project>span{display:none}.dialog-tools .share-project{padding:9px}}
 
 .display-title:focus,#case-title:focus{outline:none}
+
+/* Language control shares the existing header and dialog tools. */
+.language-switch{display:inline-flex;align-items:center;justify-content:center;min-width:54px;min-height:44px;padding:9px 12px;background:#ffffff08;border:1px solid #ffffff40;color:#d6dfef;font-size:.875rem;line-height:1.2;flex-shrink:0;white-space:nowrap}
+.language-switch:hover{background:#ffffff15;border-color:#8ea7e6}
+.dialog-tools .language-switch{min-width:54px}
+.dialog-bar>span{flex:1;min-width:0}
+.language-zh .hero h1,.language-zh .display-title{letter-spacing:-.025em;font-weight:500}
+.language-zh .hero h1>.accent-line{font-style:normal}
+.language-zh .hero-heading>.eyebrow,.language-zh .eyebrow,.language-zh .brand-caption{letter-spacing:.07em}
+.language-zh .experience-detail h3,.language-zh .project-info h3,.language-zh .strength-card h3,.language-zh .detail-title h2{letter-spacing:0;line-height:1.6}
+@media(max-width:900px){.header-inner{gap:20px}.main-nav{gap:20px}.header-contact{gap:18px}}
+@media(max-width:640px){
+  .header-contact-action{display:none}
+  .header-inner{gap:14px}
+  .language-switch{min-width:52px}
+  .dialog-bar>span{max-width:none}
+  .dialog-tools{gap:6px}
+  .dialog-tools .language-switch{min-width:44px;padding-inline:9px}
+  .dialog-tools .share-project{min-width:44px;padding:9px}
+  .dialog-tools .share-project>span{display:none}
+}

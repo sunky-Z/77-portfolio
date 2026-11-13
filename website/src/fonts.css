@@ -1,12 +1,6 @@
-/* Noto Serif SC: SIL OFL 1.1. Copyright and license: /fonts/OFL-NotoSerifSC.txt */
-@font-face {
-  font-family: 'Noto Serif SC';
-  src: url('/fonts/noto-serif-sc-77-subset.woff2') format('woff2');
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-}
-
+/* Latin uses Times New Roman. Chinese follows Apple China's font stack.
+   Apple font files are not bundled; use installed fonts, then system fallbacks. */
 :root {
-  --font-family: 'Times New Roman', Times, 'Noto Serif SC', 'Songti SC', SimSun, serif;
+  --font-family: 'Times New Roman', Times, 'SF Pro SC', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
