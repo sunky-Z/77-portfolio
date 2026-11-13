@@ -1,53 +1,39 @@
-# Digital77 · Work
+# 77 个人站
 
-以 77 的职业经历为基础的英文个人作品站。文案使用简洁英文，学校名称按用户指定使用 WNU 与 YBU。内容使用履历中的高层职责与方法，案例为方法复盘，不包含公司内部指标、业务细节或个人隐私。
+面向初次认识 77 的访客，提供中英双语的个人介绍、职业经历、项目经过与工作方法。视觉采用黑白灰、留白和轻边框，搭配原创简笔画。英文与数字沿用 Times New Roman / Times，中文优先使用 SF Pro SC / PingFang SC；设备未安装时回退到系统中文字体，不分发 Apple 字体文件。
 
-## 本地预览
+## 信息结构
 
-使用 React + Vite。在本目录运行 `npm install`，然后运行 `npm run dev`，浏览 `http://127.0.0.1:5177`。`npm run build` 生成生产文件，`npm run preview` 在 4177 端口预览生产版本。
+首页用三张入口卡片概括“先认识我、看项目经历、了解做事方式”。HR 可以先看职业经历与教育背景；业务负责人可以进入项目正文读具体工作和交付物；陌生访客可以从简介及自然语言概括开始。
 
-## 内容维护
+阅读采用总览、分类卡片、详细正文的层级。经历、项目和能力分别有独立链接；项目与能力互相关联。详情页有面包屑、页内目录、返回入口和复制链接。目录滚动不改变详情链接，切换语言保留当前分支和阅读位置。
 
-- `src/App.jsx`：五个页面模块与交互，联系邮箱。
-- `src/styles.css`：1700px 版心、PC 和移动端布局、减少动态设置。
-- `src/content.js` / `src/content.zh.js`：英文原文与中文对照的职业经历、案例详情。
-- `src/i18n.js`：页面文案翻译、语言选择与本机偏好记忆。
-- `src/hooks/usePortfolioMotion.js`：GSAP 开场、标题揭幕、卡片序列与图片视差。
-- `src/components/`：DarkVeil 蓝色背景与磁吸交互；第三方来源见 `THIRD_PARTY_NOTICES.md`。
-- `public/assets/`：原创概念视觉与背景视频，不是真实产品截图。
+- `#experience/huawei`、`#experience/hardware`、`#experience/current`：三段职业经历。
+- `#work/ai-ecosystem`、`#work/energy-research`、`#work/hardware-research`、`#work/product-business`：四个项目主题。
+- `#skills/research`、`#skills/planning`、`#skills/ai`、`#skills/delivery`：四个能力与方法分支。
 
-网站文案依据用户确认的履历整理，源简历与个人资料不包含在本仓库中。
+页面文案以具体工作、操作和产物为主，保留参与、负责及协作范围。现有材料能支持的职责、方法与交付物已经展开，不新增业绩数字、样本、前后对比或外部评价。6 条产品线与 178 个已验证并上架技能属于 DROI 的工作范围及过程记录，不作为个人独立业绩。
 
-职业经历按用户确认展示：HUAWEI（2021.06–2024.04）、NINESTAR（2024.06–2025.04）与 DROI（2025.11–PRESENT，Product Manager）。DROI 的日期与职责已根据用户提供的简历核对；华为名称沿用用户最新指定。所有案例保留参与范围，不虚构收益或独立主导成果。
+## 源码维护
 
-About 以 Research / Strategy / Build 三个信息块介绍背景与方向；经历面板保留一句背景、三条工作内容和关键词，优势卡片保留标题与三条能力。详细项目复盘保留在弹窗内。
+- `src/App.jsx`：首页、三类正文和全部交互。
+- `src/portfolio.js`：双语简介、概览卡片、职业入口、项目卡片和能力正文。
+- `src/content.js`、`src/content.zh.js`：双语项目正文与职业经历详情。
+- `src/hooks/usePortfolioNavigation.js`：链接、浏览器历史、滚动和焦点恢复。
+- `src/i18n.js`：语言选择，首次按浏览器语言，后续记住本机选择。
+- `src/styles.css`、`src/fonts.css`：黑白灰卡片与正文布局、响应式、字体和减少动态设置。
+- `public/assets/sketch-*.webp`：四张原创黑白插画，900×600，总约 169KB；是通用人物插画，不是 77 肖像或真实产品截图。
 
-DROI 用 AI Product & Growth 组织 Agent 体验、技能生态与商业化交付。6 条产品线、178 个已上架验证技能属于工作范围与过程证据；不将留存率或收益变化写成个人独立成果，69 个信息结构化设计暂不作为技能数量展示。AI 项目与商业化项目保留各自的贡献和协同范围。
+页面不再引用旧的视频、WebGL 背景、磁吸或开场动效。原组件与素材保留在源码中，但不进入当前页面运行和下载路径。概念插画使用内置 imagegen 生成：白纸背景、黑色墨线与少量灰填充，分别表现人物与机器人整理任务、访谈记录、观察硬件使用、比较纸面图表。
 
-首页背景保留原创蓝色玻璃视觉，使用 1080p / 60fps / 20 秒的慢速周期运动。首屏和导航按钮关闭磁吸位移，背景不响应鼠标。当前头像为 77 文字头像；四张作品封面分别使用 AI 流动结构、光学研究、精密硬件与增长平台的原创概念图，WebP 总体积约 347KB，不是真实产品截图。联系邮箱由用户明确提供。
+内容来源保持为已核对的职业经历与原项目说明。公司日期为 HUAWEI（2021.06–2024.04）、NINESTAR（2024.06–2025.04）、DROI（2025.11–至今）；学校沿用 WNU 与 YBU，联系邮箱由本人提供。私人档案源文件不进入公开仓库或站点。
 
-动效以遮罩、位移和压缩归位为主，无弹跳缓动。WebGL 背景限制分辨率与 30fps 绘制，视频和背景在屏幕外暂停；触屏关闭悬停扫光与图片视差，系统开启“减少动态效果”时直接呈现内容与静态背景。
+## 本地预览与发布
 
-## 字体与段落
+使用 React + Vite。依赖已安装时直接运行 `npm run dev`，访问 http://127.0.0.1:5177 。`npm run build` 生成 `dist/`，`npm run preview` 在 4177 端口预览。
 
-英文与数字继续使用系统 Times New Roman / Times。中文按 Apple 中国官网的字体链使用 SF Pro SC / PingFang SC，再依设备回退到 Hiragino Sans GB / Microsoft YaHei。Apple 字体文件不随站点分发；在未安装 Apple 中文字体的 Windows 上会使用系统中文字体。字体参考：https://www.apple.com.cn/v/homepage/a/styles/main.built.css 。
+网站源码位于本仓库的 `website/`，默认生产路径为 `/77-portfolio/`。构建时也可通过 `VITE_BASE_PATH` 指定，生产预览访问 http://127.0.0.1:4177/77-portfolio/ 。
 
-右上角的语言按钮支持中文与英文即时切换，案例详情内也保留入口。页面的正文、案例、导航、按钮、提示、辅助描述和浏览器标题一并切换。首次按浏览器语言选择，后续在本机记住选择；切换语言保留当前区块、职业经历选项和案例链接。中文是现有英文的对照翻译，未增补新的履历或成果。
+推送 `main` 后，GitHub Actions 使用 Node.js 24 安装依赖并构建，只发布 `website/dist`。网站地址为 https://sunky-z.github.io/77-portfolio/ 。
 
-## GitHub Pages 部署
-
-网站源码保存在 `website/`；GitHub Actions 配置位于根目录 `.github/workflows/deploy-pages.yml`。推送网站改动到 `main` 后，工作流使用 Node.js 24 执行 `npm ci` 和构建，仅发布 `website/dist`。
-
-仓库的 Settings → Pages 中需使用 GitHub Actions 作为发布源。本仓库为公开的网站专用仓库，通过 GitHub Pages 发布。
-
-默认生产构建使用 `/77-portfolio/` 子路径，本地开发保留 `/`。工作流通过 `VITE_BASE_PATH` 自动按仓库名称设置路径；图片、视频和字体也适配该路径。生产预览访问 `http://127.0.0.1:4177/77-portfolio/`。
-
-不将本机依赖、构建产物、临时文件、环境变量或旧 Sites 元数据提交到 GitHub。
-
-## 浏览与分享
-
-页面滚动后导航保持可用，手机菜单支持 Escape、点击外部和跳转后关闭，并将焦点移到目标标题。项目封面与标题使用真实链接；`#work/项目ID` 可直接访问、刷新和分享。案例内切换下一项不会增加多余返回层级；浏览器返回或关闭可回到作品列表。详情补充公司、个人职责与工作范围，并提供复制链接。卡片和详情统一标题，保留原有贡献边界。
-
-`src/hooks/useCaseNavigation.js` 管理项目 URL、页面标题与关闭后的焦点恢复；`src/hooks/useBackgroundVideo.js` 统一管理视频。开启系统减少动态或浏览器省流时不挂载视频源，使用静态背景；用户可主动播放。滚出首屏或切换到后台时暂停视频。直接进入页面区块或项目链接时跳过开场动画；图片视差仅在宽屏且具有精细指针和悬停能力时启用。
-
-首屏静态背景使用原图转码的 `hero-poster.webp`（约 57KB，原 PNG 约 1.82MB），视频保持原有视觉。页面补充 canonical、社交分享封面和无 JavaScript 时的联系入口。公开地址仍为 https://sunky-z.github.io/77-portfolio/ 。
+不提交本机依赖、构建产物、环境变量、运行资料或临时文件。第三方组件的历史许可保留于 `THIRD_PARTY_NOTICES.md`。

@@ -1,54 +1,113 @@
-
-
+// Public project notes describe my role and deliverables within team work.
 export const cases = {
-  "ai-ecosystem": {
-    overview: [["Company", "DROI"], ["My role", "Product design & delivery"], ["Focus", "Agent experiences & skills"]],
-    label: "01 / DROI · AI ASSISTANT", title: "Everyday AI",
-    intro: "At DROI, I plan AI assistant experiences and skill workflows, from notifications and tasks to reliable everyday use.",
-    tags: ["Agent experience", "Skill ecosystem", "Product design", "Platform flows"],
-    problem: "AI capability needs a clear path to use.", problemText: "An assistant must help people process information, complete tasks and discover the right skill. It also needs clear model access, usage limits and recovery paths.",
-    actions: ["<strong>Plan agent experiences:</strong> Define notifications, scheduled tasks and memory scenarios. Lead the product design for the shift from AI summaries to smart notifications.", "<strong>Build the skill ecosystem:</strong> Design screening, classification, search and publication flows, including review and usability-validation agents.", "<strong>Connect usage and value:</strong> Contribute to accounts, subscriptions, Credits and model-access flows, including insufficient balance and payment failures.", "<strong>Drive delivery:</strong> Turn requirements into PRDs and prototypes; coordinate algorithm, engineering, design, QA and operations through reviews, acceptance and releases."],
-    outputs: [["Agent experiences", "Notifications, tasks & memory"], ["Skill operations", "Discovery, review & validation"], ["Platform flows", "Accounts, Credits & model access"]],
-    lesson: "Useful AI combines clear experiences, trusted skills and sustainable operations.",
-    boundary: "My role covers product design, skill operations and delivery coordination. I collaborate with algorithm, engineering, design and QA teams."
+  'ai-ecosystem': {
+    overview: [['Company', 'DROI'], ['My role', 'Product design, skill operations & delivery'], ['Work', 'AI assistant & skill platform']],
+    label: '01 / DROI · AI PRODUCTS',
+    title: 'AI assistant & skill platform',
+    intro: 'At DROI, I work on the AI assistant and skill platform. My scope includes notifications, scheduled tasks, memory, skill discovery and review, as well as account, subscription and model-access flows.',
+    tags: ['AI assistant', 'Skill platform', 'Product design', 'Delivery'],
+    problem: 'What can the assistant do, and where does a user start?',
+    problemText: 'An AI assistant has many capabilities, but people use it through specific flows: acting on a notification, creating a task, finding a useful skill or handling an unavailable model. Product design needs to explain the entry points, actions and exceptions.',
+    actions: [
+      '<strong>Design assistant features:</strong> Define scenarios and flows for notifications, scheduled tasks and memory. Lead product design for the move from AI summaries to smart notifications.',
+      '<strong>Design the skill platform:</strong> Work on screening, categories, search and publishing, including review and usability-validation agents, and contribute to skill operations.',
+      '<strong>Work on platform flows:</strong> Contribute to accounts, subscriptions, Credits and model access, including what happens when a balance is insufficient or a payment fails.',
+      '<strong>Follow through on delivery:</strong> Write requirements and prototypes, and work with algorithm, engineering, design, QA and operations teams on reviews, acceptance and releases.',
+    ],
+    outputs: [
+      ['Assistant feature plans', 'Scenarios and flows for notifications, tasks and memory'],
+      ['Skill platform plans', 'Discovery, review, validation and publishing flows'],
+      ['Requirements & prototypes', 'Accounts, Credits, model access and exceptions'],
+    ],
+    lesson: 'Assistant features and platform rules need to be designed together. The normal flow matters, as do permissions, usage limits and what people can do when something fails.',
+    boundary: 'My work focuses on product plans, skill operations and delivery coordination. Models, algorithms, implementation, visual design and testing involve the respective teams.',
   },
-  "energy-research": {
-    overview: [["Company", "HUAWEI"], ["My role", "Market & user research"], ["Focus", "Product planning & validation"]],
-    label: "02 / STRATEGY · USER RESEARCH", title: "From insight to opportunity",
-    intro: "At HUAWEI, I worked on energy products, contributing to market and user research for product planning.",
-    tags: ["Market insights", "User research", "User journeys", "Requirements"],
-    problem: "One platform. Different roles, contexts and goals.", problemText: "Product planning needs industry context, user motivations and real usage insights. Research informs product opportunities and requirements trade-offs.",
-    actions: ["<strong>Understand markets:</strong> Conduct desk research on industries, market participants, platform types and ecosystem relationships.", "<strong>Understand users:</strong> Contribute to interviews, surveys and data analysis, mapping user differences, goals and key journeys.", "<strong>Define requirements:</strong> Turn insights into profiles, opportunities and priorities, connecting product planning with requirements design.", "<strong>Evaluate experience:</strong> Contribute to prototype and usability evaluations; follow up on issues and improvement recommendations."],
-    outputs: [["Market & user insights", "Reports, profiles and opportunities"], ["Key user journeys", "Roles, goals and usage"], ["Requirements & validation", "Priorities, needs and recommendations"]],
-    lesson: "Research should inform who to prioritize, what to develop and how to test those decisions.",
-    boundary: "I contributed to market, user and requirements research. Internal variables, business data and unreleased features are excluded; development outcomes reflect teamwork."
+  'energy-research': {
+    overview: [['Company', 'HUAWEI'], ['My role', 'Market, user & requirements research'], ['Work', 'Energy product planning & evaluation']],
+    label: '02 / HUAWEI · RESEARCH & PLANNING',
+    title: 'User & market research for energy products',
+    intro: 'At HUAWEI, I contributed to market, user and requirements research for energy products, providing research material for product planning and experience improvements.',
+    tags: ['Market research', 'User research', 'User journeys', 'Requirements'],
+    problem: 'One product serves people with different roles and goals.',
+    problemText: 'Industry knowledge is only part of the picture. The team also needs to understand who uses the product, why they use it and what they need to complete. Research brings this context together to inform opportunities and priorities.',
+    actions: [
+      '<strong>Study the market:</strong> Use desk research to map the industry, market participants, platform types and ecosystem relationships as background for user and product research.',
+      '<strong>Contribute to user research:</strong> Take part in interviews, surveys and data analysis to describe user goals, differences and key journeys.',
+      '<strong>Organize needs and opportunities:</strong> Turn findings into profiles, product opportunities and requirements priorities to support planning and requirements design.',
+      '<strong>Evaluate the experience:</strong> Contribute to prototype and usability evaluations, record issues, recommend changes and follow up on them.',
+    ],
+    outputs: [
+      ['Market & user research', 'Industry context, user profiles and product opportunities'],
+      ['Key user journeys', 'The goals and use of different roles'],
+      ['Requirements & evaluation notes', 'Priorities, experience issues and recommendations'],
+    ],
+    lesson: 'Research should help answer specific product questions: whom to serve first, which needs to address and whether a proposed design needs to change.',
+    boundary: 'I contributed to market, user, requirements and experience research. Product planning and development were team efforts. These notes describe my methods and role; internal business data and unreleased features are not included.',
   },
-  "hardware-research": {
-    overview: [["Company", "NINESTAR"], ["My role", "User & experience research"], ["Focus", "Hardware & software workflows"]],
-    label: "03 / INDUSTRY · SMART HARDWARE", title: "Inside real workflows",
-    intro: "At NINESTAR, I researched users and markets for smart hardware and companion software, covering consumers and users within industry organizations.",
-    tags: ["Industry users", "Field research", "Shadowing & interviews", "IPD process"],
-    problem: "Hardware value emerges within a wider workflow.", problemText: "People buy, manage and use products differently. Requirements need real contexts, organizational roles and hardware and software constraints.",
-    actions: ["<strong>Observe contexts:</strong> Study real industry workflows through fieldwork, shadowing and in-depth interviews.", "<strong>Distinguish roles:</strong> Analyze goals and needs across departments, buyers and users, identifying differences between roles.", "<strong>Assess feasibility:</strong> Support positioning and opportunity analysis using desk research, industry information and technical costs.", "<strong>Support development:</strong> Deliver research, requirements and experience evaluations at development milestones; track issues and improvements."],
-    outputs: [["Contexts & roles", "Real workflows and differing needs"], ["Market & requirements", "Positioning, opportunities and priorities"], ["Experience evaluation", "Validation and feedback at milestones"]],
-    lesson: "Real use shows how software, hardware, organizations and human needs shape one another.",
-    boundary: "My role focused on user, market and experience research within product development. Hardware engineering, supply-chain decisions and full product development are not presented as individual achievements."
+  'hardware-research': {
+    overview: [['Company', 'NINESTAR'], ['My role', 'User, market & experience research'], ['Work', 'Smart hardware & companion software']],
+    label: '03 / NINESTAR · SMART HARDWARE',
+    title: 'User research for smart hardware',
+    intro: 'At NINESTAR, I researched users and markets for smart hardware and companion software, covering consumers as well as the needs of different roles within industry organizations.',
+    tags: ['Field research', 'Industry users', 'Hardware & software', 'Requirements'],
+    problem: 'The people buying, managing and using a product have different concerns.',
+    problemText: 'Smart hardware becomes part of a working process. Departments, buyers and users can have different goals, while software use is affected by hardware and organizational conditions. Research needs to examine these contexts before needs are considered alongside product and technical constraints.',
+    actions: [
+      '<strong>Observe actual use:</strong> Study how products fit into industry workflows through fieldwork, shadowing and in-depth interviews.',
+      '<strong>Distinguish user roles:</strong> Describe the goals and needs of departments, buyers and users, and identify the differences between them.',
+      '<strong>Support positioning and requirements:</strong> Combine desk research, industry information and technical costs to inform positioning, opportunities and requirements research.',
+      '<strong>Evaluate during development:</strong> Deliver research, requirements and experience evaluations at product milestones, record issues and follow up on improvements.',
+    ],
+    outputs: [
+      ['Contexts & role analysis', 'Actual workflows, goals and differences in needs'],
+      ['Market & requirements research', 'Research material for positioning, opportunities and priorities'],
+      ['Experience evaluations', 'Findings, issues and recommendations at development milestones'],
+    ],
+    lesson: 'Hardware and software need to be examined in use. Looking at an interface alone can miss the effects of role divisions, hardware conditions and the steps around it.',
+    boundary: 'My role covered user, market and experience research during product development. Hardware engineering, supply-chain work and full product development belonged to different teams.',
   },
-  "product-business": {
-    overview: [["Company", "DROI"], ["My role", "Product analysis & monetization"], ["Focus", "Six consumer product lines"]],
-    label: "04 / DROI · PRODUCT GROWTH", title: "From usage to value",
-    intro: "At DROI, I analyze six consumer product lines and design monetization flows.",
-    tags: ["Product analytics", "Monetization", "Global products", "Release delivery"],
-    problem: "Better experiences need a viable business model.", problemText: "Ad exposure, retention, payment and model costs affect the same experience. Product decisions need to balance them across user groups and markets.",
-    actions: ["<strong>Diagnose product health:</strong> Use BI, user feedback and event data to examine activity, retention, conversion and monetization across six product lines.", "<strong>Design monetization:</strong> Define ad-placement and reward flows; contribute to subscriptions, Credits, paid-model access and overseas monetization.", "<strong>Turn data into decisions:</strong> Combine user segmentation, channel performance and model costs to prioritize product changes.", "<strong>Close the delivery loop:</strong> Own requirements, prototypes and reviews; coordinate staged rollouts, acceptance and release evaluation."],
-    outputs: [["Product diagnosis", "BI insights & iteration priorities"], ["Monetization flows", "Ads, subscriptions & Credits"], ["Release decisions", "Reviews, rollouts & evaluation"]],
-    lesson: "Use data to make experience and monetization decisions testable.",
-    boundary: "My contributions cover product analysis, monetization flows and release coordination. Results reflect work with engineering, design, testing and operations."
-  }
+  'product-business': {
+    overview: [['Company', 'DROI'], ['My role', 'Product analysis, monetization & releases'], ['Scope', '6 consumer product lines']],
+    label: '04 / DROI · PRODUCT ANALYSIS',
+    title: 'Product analysis & monetization',
+    intro: 'At DROI, I analyze data and user feedback across 6 consumer product lines, contribute to advertising, subscription and Credits flows, and follow up on requirements, releases and evaluation.',
+    tags: ['Product analysis', 'Ads & subscriptions', 'Monetization', 'Release evaluation'],
+    problem: 'Experience, revenue and usage costs need to be considered together.',
+    problemText: 'Advertising, payment entry points and model-access rules all affect the experience. User groups, channels and markets can also behave differently. Product analysis combines activity, retention, conversion, revenue and model costs to inform specific changes.',
+    actions: [
+      '<strong>Analyze product performance:</strong> Use BI, user feedback and event data to examine activity, retention, conversion and monetization across 6 product lines.',
+      '<strong>Design monetization flows:</strong> Define ad placements and reward flows, and contribute to subscriptions, Credits, paid-model access and overseas monetization.',
+      '<strong>Inform priorities:</strong> Combine user segmentation, channel performance and model-cost analysis to describe product issues and recommend iterations.',
+      '<strong>Follow requirements and releases:</strong> Own requirements, prototypes and reviews; coordinate staged rollouts and acceptance, and contribute to post-release evaluation.',
+    ],
+    outputs: [
+      ['Product analysis', 'Performance, issues and recommended iteration priorities'],
+      ['Monetization requirements', 'Ad, subscription, Credits and model-access flows'],
+      ['Release & evaluation notes', 'Reviews, staged rollouts, acceptance and evaluation'],
+    ],
+    lesson: 'A product change needs to be assessed in terms of how people use it, how the product earns revenue and what that usage costs. Analysis and evaluation should address the change being made.',
+    boundary: 'I own or contribute to product analysis, monetization plans and release coordination, working with engineering, design, QA and operations. The 6 product lines describe my work scope, rather than business growth attributable to me alone.',
+  },
 };
 
 export const stages = {
-  huawei: {label:"01 / UX & STRATEGY",title:"Research & strategy",description:"UX, user research and product strategy at HUAWEI.",actions:["Study behavior, human factors and market context.","Combine user research and data to map key journeys.","Support product validation."],tags:["Human factors","Mixed methods","Strategy"]},
-  hardware: {label:"02 / INDUSTRY & HARDWARE",title:"Real-world workflows",description:"Smart hardware and software research across user roles at NINESTAR.",actions:["Observe real use through fieldwork and interviews.","Assess markets and technical costs.","Support requirements research and validation."],tags:["Smart hardware","Industry users","Validation"]},
-  current: {label:"03 / DROI",title:"AI Product & Growth",description:"Agent experiences, skill ecosystems and monetization at DROI.",actions:["Plan notifications, tasks and personalized AI.","Design skill discovery and validation workflows.","Connect product insights, monetization and delivery."],tags:["Agent Experience","Skill Ecosystem","Product Growth"],metrics:[{value:"6",label:"Product lines"},{value:"178",label:"Skills validated & published"}]}
+  huawei: {
+    label: '01 / HUAWEI', title: 'User research & product strategy',
+    description: 'Contributed to market, user and requirements research for energy products, supporting planning and experience improvements.',
+    actions: ['Studied industry and market context; contributed to interviews, surveys and data analysis.', 'Mapped user profiles, goals and key journeys.', 'Contributed to requirements research, prototype reviews and usability evaluations.'],
+    tags: ['User research', 'Market research', 'Product strategy'],
+  },
+  hardware: {
+    label: '02 / NINESTAR', title: 'Smart hardware user research',
+    description: 'Researched the contexts and needs of consumers and industry users of smart hardware and companion software.',
+    actions: ['Observed actual use through fieldwork, shadowing and interviews.', 'Distinguished the needs of buyers, managers and users in organizations.', 'Contributed to positioning, requirements research and experience evaluation during development.'],
+    tags: ['Smart hardware', 'Industry users', 'Experience evaluation'],
+  },
+  current: {
+    label: '03 / DROI', title: 'AI products & monetization',
+    description: 'Currently a Product Manager at DROI, working on the AI assistant, skill platform, product analysis and monetization.',
+    actions: ['Design flows for notifications, scheduled tasks, memory, and skill discovery and validation.', 'Contribute to accounts, subscriptions, Credits and model-access plans.', 'Analyze product data and follow requirements, reviews, acceptance and releases.'],
+    tags: ['AI products', 'Skill platform', 'Product analysis'],
+    metrics: [{ value: '6', label: 'Product lines in scope' }, { value: '178', label: 'Skills validated & published' }],
+  },
 };

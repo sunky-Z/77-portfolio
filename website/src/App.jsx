@@ -1,200 +1,383 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { portfolio } from './portfolio.js';
 import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
-import { translate, useLanguage } from './i18n.js';
-import DarkVeil from './components/DarkVeil.jsx';
-import Magnetic from './components/Magnetic.jsx';
-import usePortfolioMotion from './hooks/usePortfolioMotion.js';
-import useCaseNavigation from './hooks/useCaseNavigation.js';
-import useBackgroundVideo from './hooks/useBackgroundVideo.js';
+import { useLanguage } from './i18n.js';
+import usePortfolioNavigation from './hooks/usePortfolioNavigation.js';
 
 const EMAIL = 'Zysq09@gmail.com';
-const asset = filename => `${import.meta.env.BASE_URL}assets/${filename}`;
-const projects = [
-  { id: 'ai-ecosystem', title: 'Everyday AI', category: 'DROI / AI ASSISTANT & ECOSYSTEM', image: asset('project-ai-flow-v2.webp'), imageAlt: 'Interwoven silver and cobalt glass ribbons, an original AI ecosystem concept', description: 'Designing agent experiences, skill discovery and platform flows.', tags: ['AI Agents', 'Skill Ecosystem', 'Product Design'] },
-  { id: 'energy-research', title: 'From insight to opportunity', category: 'RESEARCH / STRATEGY', image: asset('project-research-optics-v2.webp'), imageAlt: 'Layered optical glass arcs with a cobalt light beam, an original research concept', description: 'Turning market and user research into product priorities.', tags: ['Strategy', 'Research', 'Requirements'] },
-  { id: 'hardware-research', title: 'Inside real workflows', category: 'INDUSTRY / HARDWARE', image: asset('project-hardware-exploded-v2.webp'), imageAlt: 'Exploded silver hardware module with a cobalt core, an original hardware concept', description: 'Field research across hardware, software and industry roles.', tags: ['Industry', 'Hardware', 'Validation'] },
-  { id: 'product-business', title: 'From usage to value', category: 'DROI / PRODUCT GROWTH', image: asset('project-growth-platform-v2.webp'), imageAlt: 'Ascending silver and glass platforms with a blue path, an original product growth concept', description: 'Product analysis and monetization flows across six product lines.', tags: ['Analytics', 'Monetization', 'Delivery'] },
-];
-const career = [
-  { key: 'huawei', date: '2021.06 — 2024.04', company: 'HUAWEI', role: 'UX / Research / Strategy' },
-  { key: 'hardware', date: '2024.06 — 2025.04', company: 'NINESTAR', role: 'Industry / Smart Hardware' },
-  { key: 'current', date: '2025.11 — PRESENT', company: 'DROI', role: 'Product Manager / AI & Growth' },
-];
-const strengths = [
-  { number: '01', title: 'Understand people', en: 'HUMAN INSIGHT', items: ['Interviews & observation', 'Mixed methods', 'Personas & journeys'] },
-  { number: '02', title: 'Spot opportunities', en: 'STRATEGIC THINKING', items: ['Markets & competitors', 'Prioritization', 'Positioning & business'] },
-  { number: '03', title: 'Ship the product', en: 'PRODUCT EXECUTION', items: ['Flows & requirements', 'Delivery coordination', 'Validation & feedback'] },
-  { number: '04', title: 'Build with AI', en: 'AI CONSTRUCTION', items: ['Skills & agents', 'Model access', 'Failures & limits'] },
-];
-const aboutFocus = [
-  { label: '01 / HUMAN', title: 'Research', context: 'Psychology' },
-  { label: '02 / PRODUCT', title: 'Strategy', context: 'Business' },
-  { label: '03 / AI', title: 'Build', context: 'Product & AI' },
-];
+const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
 
-function Glyph({ kind, size = 22, ...props }) {
+function Glyph({ kind, size = 20 }) {
   const paths = {
-    plus: <><path d="M12 4v16M4 12h16" /></>,
+    arrow: <path d="M4 12h15m-6-6 6 6-6 6" />,
+    back: <path d="M20 12H5m6-6-6 6 6 6" />,
     mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
     copy: <><rect x="8" y="8" width="12" height="12" rx="2" /><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" /></>,
-    pause: <><path d="M9 5v14M15 5v14" /></>,
-    play: <><path d="m8 4 12 8-12 8Z" /></>,
-    close: <><path d="m6 6 12 12M6 18 18 6" /></>,
-    menu: <><path d="M4 8h16M4 16h16" /></>,
+    close: <path d="m6 6 12 12M6 18 18 6" />,
+    menu: <path d="M4 7h16M4 12h16M4 17h16" />,
   };
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>{paths[kind]}</svg>;
-}
-
-function RevealTitle({ lines, id, className = '' }) {
-  return <h2 id={id} tabIndex={-1} className={`display-title ${className}`}>{lines.map(line => <span className="title-mask" key={line}><span className="title-word">{line}</span></span>)}</h2>;
-}
-
-function SectionHeading({ number, label, title, lines, id, children }) {
-  return <div className="section-heading"><div><p className="eyebrow">{number} / {label}</p><RevealTitle lines={lines} id={id} />{title && <p className="section-subtitle">{title}</p>}</div>{children && <p className="section-description">{children}</p>}</div>;
-}
-
-function HeroLine({ text, accent = false }) {
-  return <span className={`hero-title-line${accent ? ' accent-line' : ''}`} aria-hidden="true">{[...text].map((char, index) => <span className="hero-char" key={index}>{char === ' ' ? '\u00a0' : char}</span>)}</span>;
-}
-
-function Contribution({ html }) {
-  const text = html.replace(/<[^>]+>/g, '');
-  const match = text.match(/^([^:：]+)([:：])\s*(.*)$/);
-  return match ? <><strong>{match[1]}{match[2]} </strong>{match[3]}</> : text;
-}
-
-function CaseDialog({ selected, onClose, onNext, onCopyLink, copyStatus, caseContent, t, language, onToggleLanguage }) {
-  const ref = useRef(null);
-  const item = selected && caseContent[selected];
-  const ids = Object.keys(caseContent);
-  const caseIndex = ids.indexOf(selected);
-  const nextTitle = caseContent[ids[(caseIndex + 1) % ids.length]].title;
-  useEffect(() => {
-    const dialog = ref.current;
-    if (selected) {
-      if (!dialog.open) dialog.showModal();
-      dialog.scrollTop = 0;
-      document.body.style.overflow = 'hidden';
-      dialog.querySelector('#case-title').focus({ preventScroll: true });
-    } else {
-      dialog.close();
-      document.body.style.overflow = '';
-    }
-    return () => { document.body.style.overflow = ''; };
-  }, [selected]);
-  const handleBackdrop = event => {
-    if (event.target !== ref.current) return;
-    const r = ref.current.getBoundingClientRect();
-    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) onClose();
-  };
-  return <dialog ref={ref} className="case-dialog" aria-labelledby="case-title" onCancel={event => { event.preventDefault(); onClose(); }} onClick={handleBackdrop}>
-    {item && <><div className="dialog-bar"><span>{item.label}</span><div className="dialog-tools"><LanguageSwitch language={language} onToggle={onToggleLanguage} /><button className="share-project" onClick={onCopyLink} aria-label={t('Copy project link')}><Glyph kind="copy" size={17} /><span>{t('Copy link')}</span></button><button onClick={onClose} aria-label={t('Close project')}><Glyph kind="close" /></button></div></div><div className="dialog-body"><div className="detail-title"><p className="eyebrow">{t('PROJECT NOTES')}</p><h2 id="case-title" tabIndex={-1}>{item.title}</h2><p>{item.intro}</p><div className="tags">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div><dl className="case-overview">{item.overview.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></div><section className="detail-section"><p className="eyebrow">{t('01 / CONTEXT')}</p><h3>{item.problem}</h3><p>{item.problemText}</p></section><section className="detail-section"><p className="eyebrow">{t('02 / MY CONTRIBUTION')}</p><h3>{t('What I worked on')}</h3><ul>{item.actions.map(action => <li key={action}><Contribution html={action} /></li>)}</ul></section><section className="detail-section"><p className="eyebrow">{t('03 / DELIVERABLES')}</p><div className="deliverables">{item.outputs.map(([title, text]) => <div key={title}><h3>{title}</h3><p>{text}</p></div>)}</div></section><section className="detail-section"><p className="eyebrow">{t('04 / REFLECTION')}</p><p className="detail-takeaway">{item.lesson}</p></section><aside className="contribution-boundary"><h3>{t('Contribution & collaboration')}</h3><p>{item.boundary}</p></aside><div className="dialog-bottom"><span>{String(caseIndex + 1).padStart(2, '0')} / 04 {t('PROJECTS')}</span><button onClick={onNext}><span><small>{t('Next project')}</small>{nextTitle}</span><Glyph kind="plus" size={18} /></button></div></div><div role="status" className={copyStatus ? 'toast visible' : 'toast'} aria-live="polite">{copyStatus}</div></>}
-  </dialog>;
+  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{paths[kind]}</svg>;
 }
 
 function LanguageSwitch({ language, onToggle }) {
-  const label = language === 'en' ? 'Switch to Chinese' : '切换为英文';
-  return <button type="button" className="language-switch" onClick={onToggle} aria-label={label} title={label}><span lang={language === 'en' ? 'zh-CN' : 'en'}>{language === 'en' ? '中文' : 'EN'}</span></button>;
+  const label = language === 'zh' ? '切换为英文' : 'Switch to Chinese';
+  return <button type="button" className="language-switch" aria-label={label} title={label} onClick={onToggle}>
+    <span lang={language === 'zh' ? 'en' : 'zh-CN'}>{language === 'zh' ? 'EN' : '中文'}</span>
+  </button>;
+}
+
+function SectionHeading({ id, number, title, children }) {
+  return <header className="section-heading">
+    <div>
+      <p className="eyebrow">{number}</p>
+      <h2 id={id} tabIndex={-1}>{title}</h2>
+    </div>
+    {children && <p className="section-intro">{children}</p>}
+  </header>;
+}
+
+function Education({ items, L }) {
+  return <div>
+    <h3 className="education-heading">{L('教育背景', 'Education')}</h3>
+    <div className="education-grid">
+      {items.map(item => <div className="education-item" key={`${item.school}-${item.degree}`}>
+        <p className="card-topline">{item.school} <span>{item.date}</span></p>
+        <h4>{item.degree} · {item.field}</h4>
+      </div>)}
+    </div>
+  </div>;
+}
+
+function ProjectCard({ project, skills, navigate, L, compact = false }) {
+  if (compact) return <a className="related-card" href={`#work/${project.id}`} onClick={event => navigate(`#work/${project.id}`, event)}>
+    <p className="card-topline">{project.company}</p>
+    <h3>{project.title}</h3>
+    <p className="card-description">{project.summary}</p>
+    <span className="card-footer">{L('查看项目', 'Read project')} <Glyph kind="arrow" size={17} /></span>
+  </a>;
+  return <a className="project-card" href={`#work/${project.id}`} onClick={event => navigate(`#work/${project.id}`, event)}>
+    <div className="project-cover">
+      <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
+    </div>
+    <div className="project-body">
+      <p className="card-topline">{project.company}<span>{project.role}</span></p>
+      <h3 className="card-title">{project.title}</h3>
+      <p className="card-description">{project.summary}</p>
+      <div className="tag-list">{project.skills.map(id => <span key={id}>{skills[id].title}</span>)}</div>
+      <span className="card-footer">{L('查看项目经过', 'Read the project')} <Glyph kind="arrow" size={18} /></span>
+    </div>
+  </a>;
+}
+
+function SkillCard({ id, skill, index, navigate, L, compact = false }) {
+  return <a className={compact ? 'related-card' : 'skill-card'} href={`#skills/${id}`} onClick={event => navigate(`#skills/${id}`, event)}>
+    {!compact && <span className="card-index">{String(index + 1).padStart(2, '0')}</span>}
+    <h3 className="card-title">{skill.title}</h3>
+    <p className="card-description">{skill.summary}</p>
+    <span className="card-footer">{L('看具体做法', 'See how I work')} <Glyph kind="arrow" size={18} /></span>
+  </a>;
+}
+
+function HomePage({ data, navigate, L, onCopyEmail }) {
+  return <>
+    <section id="top" className="hero wrap" aria-labelledby="home-title" data-reading-anchor>
+      <div className="hero-layout">
+        <div className="hero-copy">
+          <p className="eyebrow">{L('77 的个人介绍', 'A little about 77')}</p>
+          <h1 id="home-title" tabIndex={-1}>{data.profile.title.map(line => <span key={line}>{line}</span>)}</h1>
+          <p className="page-intro">{data.profile.intro}</p>
+          <div className="hero-actions">
+            <a className="button button-primary" href="#projects" onClick={event => navigate('#projects', event)}>{L('看看我做过什么', 'See my work')} <Glyph kind="arrow" size={18} /></a>
+            <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('了解我的经历', 'My background')}</a>
+          </div>
+        </div>
+        <div className="hero-visual" aria-hidden="true"><img src={asset('sketch-research.webp')} alt="" width="900" height="600" fetchPriority="high" /></div>
+      </div>
+      <div className="overview-grid">
+        {data.profile.summaryCards.map((card, index) => <a className="overview-card" href={card.href} key={card.id} onClick={event => navigate(card.href, event)}>
+          <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
+          <h2>{card.title}</h2>
+          <p>{card.summary}</p>
+          <span className="card-link" aria-hidden="true"><Glyph kind="arrow" size={19} /></span>
+        </a>)}
+      </div>
+    </section>
+
+    <section id="about" className="section wrap" aria-labelledby="about-title" data-reading-anchor>
+      <SectionHeading id="about-title" number="01" title={L('我的经历', 'My background')}>
+        {L('我先后在这三家公司做过研究和产品相关工作。', 'I have worked in research and product across these three companies.')}
+      </SectionHeading>
+      <div className="career-grid">
+        {data.career.map(item => <a className="career-card" href={`#experience/${item.id}`} key={item.id} onClick={event => navigate(`#experience/${item.id}`, event)}>
+          <p className="card-topline">{item.date}</p>
+          <h3 className="card-title">{item.company}</h3>
+          <p className="card-role">{item.role}</p>
+          <p className="card-description">{item.summary}</p>
+          <span className="card-footer">{L('展开这段经历', 'Read about this role')} <Glyph kind="arrow" size={17} /></span>
+        </a>)}
+      </div>
+      <Education items={data.profile.education} L={L} />
+    </section>
+
+    <section id="projects" className="section wrap" aria-labelledby="projects-title" data-reading-anchor>
+      <SectionHeading id="projects-title" number="02" title={L('做过的项目', 'Selected work')}>
+        {L('按工作主题整理。每一篇都写清楚背景、我的工作，以及交付了什么。', 'Organized by work area, with the context, my contribution and the work I delivered.')}
+      </SectionHeading>
+      <div className="project-grid">
+        {data.projects.map(project => <ProjectCard key={project.id} project={project} skills={data.skills} navigate={navigate} L={L} />)}
+      </div>
+    </section>
+
+    <section id="strengths" className="section wrap" aria-labelledby="skills-title" data-reading-anchor>
+      <SectionHeading id="skills-title" number="03" title={L('我怎么做事', 'How I work')}>
+        {L('从了解问题到跟进交付。每一项都附上具体做法和对应的项目。', 'From understanding a problem to following through on delivery. Each area includes my methods and relevant projects.')}
+      </SectionHeading>
+      <div className="skills-grid">
+        {Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} navigate={navigate} L={L} />)}
+      </div>
+    </section>
+
+    <section id="contact" className="contact section wrap" aria-labelledby="contact-title" data-reading-anchor>
+      <div className="contact-inner">
+        <div>
+          <p className="eyebrow">04</p>
+          <h2 id="contact-title" tabIndex={-1}>{L('联系我', 'Get in touch')}</h2>
+          <p>{data.profile.contactText}</p>
+        </div>
+        <div className="contact-actions">
+          <a className="contact-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <button type="button" className="copy-button" onClick={onCopyEmail} aria-label={L('复制邮箱地址', 'Copy email address')}><Glyph kind="copy" /></button>
+        </div>
+      </div>
+    </section>
+  </>;
+}
+
+function Contents({ items, L }) {
+  function readSection(id) {
+    const section = document.getElementById(id);
+    section?.querySelector('h2')?.focus({ preventScroll: true });
+    section?.scrollIntoView({ behavior: 'instant', block: 'start' });
+  }
+  return <aside className="article-aside">
+    <nav className="toc" aria-label={L('本页目录', 'On this page')}>
+      <p className="toc-title">{L('本页内容', 'On this page')}</p>
+      {items.map(([id, title]) => <button type="button" key={id} onClick={() => readSection(id)}>{title}</button>)}
+    </nav>
+  </aside>;
+}
+
+function ArticleSection({ id, title, children }) {
+  return <section id={id} className="article-section" data-reading-anchor>
+    <h2 tabIndex={-1}>{title}</h2>
+    {children}
+  </section>;
+}
+
+function ActionList({ actions }) {
+  return <div className="action-list">
+    {actions.map(action => {
+      const plain = action.replace(/<[^>]+>/g, '');
+      const match = plain.match(/^([^:：]+)[:：]\s*(.*)$/s);
+      return <div className="action-entry" key={action}>
+        {match ? <><h3>{match[1]}</h3><p>{match[2]}</p></> : <p>{plain}</p>}
+      </div>;
+    })}
+  </div>;
+}
+
+function ProjectArticle({ id, item, data, navigate, L }) {
+  const project = data.projects.find(entry => entry.id === id);
+  const sections = [
+    ['project-context', L('工作背景', 'Context')],
+    ['project-contribution', L('我具体做了什么', 'My work')],
+    ['project-outputs', L('交付了什么', 'Deliverables')],
+    ['project-reflection', L('回头看这段工作', 'Looking back')],
+    ['project-related', L('相关能力与项目', 'Related work')],
+  ];
+  return <div className="detail-layout">
+    <article className="article-body">
+      <ArticleSection id="project-context" title={sections[0][1]}>
+        <h3>{item.problem}</h3><p>{item.problemText}</p>
+      </ArticleSection>
+      <ArticleSection id="project-contribution" title={sections[1][1]}><ActionList actions={item.actions} /></ArticleSection>
+      <ArticleSection id="project-outputs" title={sections[2][1]}>
+        <div className="outputs-grid">{item.outputs.map(([title, text]) => <div className="output-card" key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>
+      </ArticleSection>
+      <ArticleSection id="project-reflection" title={sections[3][1]}>
+        <p>{item.lesson}</p>
+        <div className="contribution-boundary"><h3>{L('我的职责与协作范围', 'My role and collaborators')}</h3><p>{item.boundary}</p></div>
+      </ArticleSection>
+      <ArticleSection id="project-related" title={sections[4][1]}>
+        <h3 className="related-heading">{L('这段工作用到的方法', 'Methods used in this work')}</h3>
+        <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} navigate={navigate} L={L} compact />)}</div>
+        <h3 className="related-heading">{L('继续看看其他项目', 'More projects')}</h3>
+        <div className="related-grid">{data.projects.filter(entry => entry.id !== id).slice(0, 2).map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+      </ArticleSection>
+    </article>
+    <Contents items={sections} L={L} />
+  </div>;
+}
+
+function SkillArticle({ item, data, navigate, L }) {
+  const sections = [
+    ['skill-methods', L('具体怎么做', 'How I approach it')],
+    ['skill-projects', L('用在哪些项目里', 'Where I used it')],
+    ['skill-scope', L('适用范围', 'Scope')],
+  ];
+  return <div className="detail-layout">
+    <article className="article-body">
+      <ArticleSection id="skill-methods" title={sections[0][1]}>
+        {item.methods.map(method => <div className="action-entry" key={method.title}><h3>{method.title}</h3><p>{method.text}</p></div>)}
+      </ArticleSection>
+      <ArticleSection id="skill-projects" title={sections[1][1]}>
+        <div className="related-grid">{item.projects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+      </ArticleSection>
+      <ArticleSection id="skill-scope" title={sections[2][1]}><p>{item.boundary}</p></ArticleSection>
+    </article>
+    <Contents items={sections} L={L} />
+  </div>;
+}
+
+function CareerArticle({ item, stage, data, navigate, L }) {
+  const sections = [
+    ['career-work', L('这段经历里做了什么', 'What I worked on')],
+    ['career-projects', L('相关项目', 'Related projects')],
+  ];
+  return <div className="detail-layout">
+    <article className="article-body">
+      <ArticleSection id="career-work" title={sections[0][1]}>
+        <p>{stage.description}</p>
+        <ul>{stage.actions.map(action => <li key={action}>{action}</li>)}</ul>
+        <div className="tag-list">{stage.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+        {stage.metrics && <dl className="detail-meta work-metrics">{stage.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>}
+      </ArticleSection>
+      <ArticleSection id="career-projects" title={sections[1][1]}>
+        <div className="related-grid">{item.relatedProjects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+      </ArticleSection>
+    </article>
+    <Contents items={sections} L={L} />
+  </div>;
+}
+
+function DetailPage({ route, data, cases, stages, navigate, goBack, L, onCopyLink }) {
+  const project = route.type === 'project';
+  const skill = route.type === 'skill';
+  const item = project ? cases[route.id] : skill ? data.skills[route.id] : data.career.find(entry => entry.id === route.id);
+  const category = project ? L('项目经历', 'Projects') : skill ? L('工作方法', 'Methods') : L('职业经历', 'Experience');
+  const fallback = project ? '#projects' : skill ? '#strengths' : '#about';
+  const title = project || skill ? item.title : item.company;
+  const intro = project || skill ? item.intro : item.summary;
+  return <div className="detail-page">
+    <div className="detail-wrap wrap">
+      <nav className="breadcrumb" aria-label={L('当前位置', 'Breadcrumb')}>
+        <a href="#top" onClick={event => navigate('#top', event)}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span>
+        <a href={fallback} onClick={event => navigate(fallback, event)}>{category}</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{title}</span>
+      </nav>
+      <header className="detail-heading" id="detail-heading" data-reading-anchor>
+        <p className="eyebrow">{project ? item.label : skill ? category : `${item.company} · ${item.date}`}</p>
+        <h1 tabIndex={-1}>{title}</h1>
+        {!project && !skill && <p className="card-role">{item.role}</p>}
+        <p className="page-intro">{intro}</p>
+        {project && <>
+          <dl className="detail-meta">{item.overview.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+          <div className="tag-list">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+        </>}
+        <div className="detail-actions">
+          <a href={fallback} className="back-link" onClick={event => goBack(fallback, event)}><Glyph kind="back" size={17} />{L('返回上一页', 'Back')}</a>
+          <button type="button" className="copy-button" onClick={onCopyLink}><Glyph kind="copy" size={17} /><span>{L('复制本页链接', 'Copy page link')}</span></button>
+        </div>
+      </header>
+      {project ? <ProjectArticle id={route.id} item={item} data={data} navigate={navigate} L={L} /> : skill ? <SkillArticle item={item} data={data} navigate={navigate} L={L} /> : <CareerArticle item={item} stage={stages[route.id]} data={data} navigate={navigate} L={L} />}
+      <div className="detail-nav"><a className="back-link" href={fallback} onClick={event => navigate(fallback, event)}><Glyph kind="back" size={17} />{L('回到', 'Back to ')}{category}</a><a href="#contact" onClick={event => navigate('#contact', event)}>{L('联系我', 'Get in touch')} <Glyph kind="arrow" size={17} /></a></div>
+    </div>
+  </div>;
 }
 
 export default function App() {
   const [language, toggleLanguage] = useLanguage();
-  const t = text => translate(language, text);
+  const data = portfolio[language];
   const cases = language === 'zh' ? chineseCases : englishCases;
   const stages = language === 'zh' ? chineseStages : englishStages;
-  const projectList = projects.map(project => ({ ...project, title: cases[project.id].title, category: t(project.category), description: t(project.description), imageAlt: t(project.imageAlt), tags: project.tags.map(t) }));
-  const careerList = career.map(item => ({ ...item, date: t(item.date), role: t(item.role) }));
-  const strengthList = strengths.map(item => ({ ...item, title: t(item.title), en: t(item.en), items: item.items.map(t) }));
-  const aboutList = aboutFocus.map(item => ({ ...item, label: t(item.label), title: t(item.title), context: t(item.context) }));
+  const L = (zh, en) => language === 'zh' ? zh : en;
+  const validIds = { project: data.projects.map(item => item.id), skill: Object.keys(data.skills), career: data.career.map(item => item.id) };
+  const { route, navigate, goBack } = usePortfolioNavigation(validIds);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [stage, setStage] = useState('current');
-  const { selectedCase, openCase, closeCase, nextCase } = useCaseNavigation(cases, language === 'zh' ? '77 · 产品经理 / AI 构建者' : '77 · Product Manager / AI Builder');
-  const [headerScrolled, setHeaderScrolled] = useState(() => window.scrollY > 40);
-  const [copyStatus, setCopyStatus] = useState('');
-  const { videoRef, videoReady, videoPaused, videoEnabled, onVideoReady, onVideoError, toggleVideo } = useBackgroundVideo();
-  const menuButtonRef = useRef(null);
-  const copyTimer = useRef(null);
-  const rootRef = useRef(null);
-  usePortfolioMotion(rootRef, language);
-  const activeStageKey = stages[stage] ? stage : 'huawei';
-  const activeStage = stages[activeStageKey];
+  const [status, setStatus] = useState('');
+  const menuRef = useRef(null);
+  const statusTimer = useRef(null);
+  const readingPosition = useRef(null);
+
+  function changeLanguage() {
+    const anchors = Array.from(document.querySelectorAll('[data-reading-anchor]'));
+    const anchor = anchors.filter(item => item.getBoundingClientRect().top <= 180).at(-1) || anchors[0];
+    readingPosition.current = anchor ? { id: anchor.id, top: anchor.getBoundingClientRect().top } : null;
+    toggleLanguage();
+  }
+
+  useLayoutEffect(() => {
+    const position = readingPosition.current;
+    if (!position) return;
+    const anchor = document.getElementById(position.id);
+    if (anchor) window.scrollTo({ top: window.scrollY + anchor.getBoundingClientRect().top - position.top, behavior: 'instant' });
+    readingPosition.current = null;
+  }, [language]);
+
   useEffect(() => {
-    const hash = window.location.hash.startsWith('#work/') ? '#projects' : window.location.hash;
-    if (!['#about', '#projects', '#strengths', '#contact'].includes(hash)) return;
-    const frame = requestAnimationFrame(() => rootRef.current?.querySelector(hash)?.scrollIntoView({ behavior: 'instant', block: 'start' }));
-    return () => cancelAnimationFrame(frame);
-  }, []);
-  useEffect(() => {
-    if (!menuOpen) return;
-    const closeMenu = event => {
-      if (event.key === 'Escape') {
-        setMenuOpen(false);
-        menuButtonRef.current?.focus();
-      }
-    };
-    document.addEventListener('keydown', closeMenu);
-    return () => document.removeEventListener('keydown', closeMenu);
-  }, [menuOpen]);
-  useEffect(() => {
-    const updateHeader = () => setHeaderScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', updateHeader, { passive: true });
-    return () => window.removeEventListener('scroll', updateHeader);
-  }, []);
+    const current = route.type === 'project' ? cases[route.id].title : route.type === 'skill' ? data.skills[route.id].title : route.type === 'career' ? data.career.find(item => item.id === route.id).company : L('个人介绍', 'Profile');
+    document.title = `${current} · 77`;
+  }, [route.key, language, cases, data]);
+
+  useEffect(() => { setMenuOpen(false); setStatus(''); }, [route.key]);
+  useEffect(() => () => clearTimeout(statusTimer.current), []);
   useEffect(() => {
     if (!menuOpen) return;
-    const closeOutside = event => {
-      if (!event.target.closest('.site-header')) setMenuOpen(false);
+    const dismiss = event => {
+      if (event.key === 'Escape') { setMenuOpen(false); menuRef.current?.focus(); }
     };
-    const desktop = window.matchMedia('(min-width: 641px)');
-    const closeOnDesktop = event => { if (event.matches) setMenuOpen(false); };
-    document.addEventListener('pointerdown', closeOutside);
-    desktop.addEventListener('change', closeOnDesktop);
+    const outside = event => { if (!event.target.closest('.site-header')) setMenuOpen(false); };
+    const desktop = window.matchMedia('(min-width: 621px)');
+    const resize = event => { if (event.matches) setMenuOpen(false); };
+    document.addEventListener('keydown', dismiss);
+    document.addEventListener('pointerdown', outside);
+    desktop.addEventListener('change', resize);
     return () => {
-      document.removeEventListener('pointerdown', closeOutside);
-      desktop.removeEventListener('change', closeOnDesktop);
+      document.removeEventListener('keydown', dismiss);
+      document.removeEventListener('pointerdown', outside);
+      desktop.removeEventListener('change', resize);
     };
   }, [menuOpen]);
-  useEffect(() => () => clearTimeout(copyTimer.current), []);
-  function navigateToSection(id, event) {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    setMenuOpen(false);
-    const section = document.getElementById(id);
-    section?.querySelector('h2')?.focus({ preventScroll: true });
-    if (window.location.hash !== `#${id}`) window.history.pushState(window.history.state, '', `#${id}`);
-    section?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+
+  async function copy(value, success, fallback) {
+    try { await navigator.clipboard.writeText(value); setStatus(success); }
+    catch { setStatus(fallback); }
+    clearTimeout(statusTimer.current);
+    statusTimer.current = setTimeout(() => setStatus(''), 3000);
   }
-  async function copyText(value, message, fallback) {
-    try { await navigator.clipboard.writeText(value); setCopyStatus(message); }
-    catch { setCopyStatus(fallback); }
-    clearTimeout(copyTimer.current);
-    copyTimer.current = setTimeout(() => setCopyStatus(''), 3000);
-  }
-  const nav = [{ id: 'about', text: t('About') }, { id: 'projects', text: t('Work') }, { id: 'strengths', text: t('Approach') }];
-  return <div className={`portfolio language-${language}`} lang={language === 'zh' ? 'zh-CN' : 'en'} ref={rootRef}>
-    <div className="opening" aria-hidden="true"><div className="opening-panels"><span className="opening-panel" /><span className="opening-panel" /><span className="opening-panel" /></div><div className="opening-mark-mask"><span className="opening-mark">77<span>.</span></span></div></div>
-    <a className="skip-link" href="#main">{t('Skip to content')}</a>
-    <header className={`site-header${headerScrolled || menuOpen ? ' is-scrolled' : ''}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false); }}><div className="wrap header-inner"><a href="#top" className="brand" aria-label={t('Digital77 home')}><span className="brand-number">77<span>.</span></span><span className="brand-caption">{t('DIGITAL SELF')}<br />{t('WORK & CREATION')}</span></a><nav id="main-navigation" aria-label={t('Main navigation')} className={menuOpen ? 'main-nav open' : 'main-nav'}>{nav.map(link => <a key={link.id} href={`#${link.id}`} onClick={event => navigateToSection(link.id, event)}>{link.text}</a>)}</nav><Magnetic disabled className="header-contact-action"><a className="header-contact" href="#contact" onClick={event => navigateToSection('contact', event)}>{t('LET’S TALK')} <Glyph kind="plus" size={16} /></a></Magnetic><LanguageSwitch language={language} onToggle={toggleLanguage} /><button ref={menuButtonRef} className="menu-button" aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)} aria-label={t(menuOpen ? 'Close navigation' : 'Open navigation')} aria-expanded={menuOpen}><Glyph kind={menuOpen ? 'close' : 'menu'} /></button></div></header>
+
+  const links = [
+    ['#about', L('经历', 'Background')], ['#projects', L('项目', 'Work')],
+    ['#strengths', L('能力', 'Methods')], ['#contact', L('联系', 'Contact')],
+  ];
+  const headerNavigate = (href, event) => { setMenuOpen(false); navigate(href, event); };
+  return <div className={`portfolio language-${language}`} lang={language === 'zh' ? 'zh-CN' : 'en'}>
+    <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); const heading = document.querySelector('main h1'); heading?.focus({ preventScroll: true }); heading?.scrollIntoView({ behavior: 'instant', block: 'start' }); }}>{L('跳到正文', 'Skip to content')}</a>
+    <header className="site-header" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false); }}>
+      <div className="header-inner wrap">
+        <a className="brand" href="#top" onClick={event => headerNavigate('#top', event)} aria-label={L('77 个人介绍首页', '77 profile home')}><span className="brand-number">77.</span><span className="brand-caption">{L('个人介绍', 'Profile')}</span></a>
+        <nav id="main-navigation" className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label={L('主导航', 'Main navigation')}>
+          {links.map(([href, title]) => <a href={href} key={href} onClick={event => headerNavigate(href, event)} aria-current={route.type === 'home' && route.section === href.slice(1) ? 'location' : undefined}>{title}</a>)}
+        </nav>
+        <div className="header-actions"><LanguageSwitch language={language} onToggle={changeLanguage} /><button type="button" ref={menuRef} className="menu-button" onClick={() => setMenuOpen(open => !open)} aria-label={menuOpen ? L('关闭导航', 'Close navigation') : L('打开导航', 'Open navigation')} aria-expanded={menuOpen} aria-controls="main-navigation"><Glyph kind={menuOpen ? 'close' : 'menu'} /></button></div>
+      </div>
+    </header>
     <main id="main">
-      <section id="top" className="hero" aria-labelledby="hero-title">
-        <div className="hero-media" aria-hidden="true">{videoEnabled && <video ref={videoRef} className={videoReady ? 'ready' : ''} muted loop playsInline poster={asset('hero-poster.webp')} preload="metadata" onLoadedData={onVideoReady} onError={onVideoError} src={asset('hero-loop-smooth-v2.mp4')} />}</div><div className="hero-shade" />
-        <div className="wrap hero-content"><div className="hero-heading"><p className="eyebrow"><span className="status-dot" />{t('77 / PRODUCT MANAGER · AI BUILDER')}</p><h1 id="hero-title" aria-label={t('Product Mind. AI Builder.')}><HeroLine text={t('PRODUCT MIND.')} /><HeroLine text={t('AI BUILDER.')} accent /></h1><div className="hero-copy"><span className="copy-rule" /><p>{t('From human insight to product and AI.')}</p></div><Magnetic disabled><a className="hero-link" href="#projects">{t('Explore the work')} <span>{t('04 PROJECTS')}</span></a></Magnetic></div><div className="hero-bottom"><span>{t('HUMAN · PRODUCT · AI')}</span><span className="hero-scroll">{t('SCROLL TO EXPLORE')} <span aria-hidden="true">↓</span></span><button className="video-control" onClick={toggleVideo} aria-pressed={!videoPaused} aria-label={t(videoPaused ? 'Play background video' : 'Pause background video')}><Glyph kind={videoPaused ? 'play' : 'pause'} size={16} /><span>{t(videoPaused ? 'PLAY' : 'PAUSE')}</span></button></div></div>
-      </section>
-
-      <section id="about" className="about section wrap" aria-labelledby="about-title">
-        <SectionHeading number="01" label={t('ABOUT & EXPERIENCE')} id="about-title" lines={['ABOUT', 'THE BUILDER.'].map(t)} />
-        <div className="about-layout"><div className="identity-panel"><div className="identity-top"><span>{t('MEET THE BUILDER')}</span><span>{t('77 / CN')}</span></div><div className="identity-monogram" role="img" aria-label={t('77 typographic portrait')}>77<span>.</span></div><div className="identity-bottom"><p>{t('Product Manager')}<br />{t('AI Builder')}</p><span>{t('HUMAN × PRODUCT × AI')}</span></div></div><div className="about-content"><div className="person-line"><div className="avatar" role="img" aria-label={t('77 typographic portrait')}>77</div><div><h3>{t('I’m 77.')}</h3><p>{t('Product Manager / AI Builder')}</p></div></div><dl className="about-focus" aria-label={t('Background and focus')}>{aboutList.map(item => <div className="focus-block" key={item.title}><dt><span className="focus-label">{item.label}</span>{item.title}</dt><dd>{item.context}</dd></div>)}</dl><a className="about-email" href={`mailto:${EMAIL}`}><Glyph kind="mail" size={19} />{EMAIL}</a><div className="profile-data"><div><strong>2021<span>—</span></strong><p>{t('Career start')}</p></div><div><strong>04</strong><p>{t('Selected projects')}</p></div><div><strong>02</strong><p>{t('Fields of study')}</p></div></div></div></div>
-        <div className="experience-layout"><div className="experience-list" role="tablist" aria-label={t('Career stages')} aria-orientation="vertical">{careerList.map((item, index) => <button key={item.key} id={`stage-tab-${item.key}`} role="tab" aria-controls="experience-detail" aria-selected={activeStageKey === item.key} tabIndex={activeStageKey === item.key ? 0 : -1} onClick={() => setStage(item.key)} onKeyDown={event => { const keys = ['ArrowDown', 'ArrowUp', 'Home', 'End']; if (!keys.includes(event.key)) return; event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? career.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + career.length) % career.length; setStage(career[next].key); document.getElementById(`stage-tab-${career[next].key}`).focus(); }}><span className="experience-index">0{index + 1}</span><span className="experience-company">{item.company}<small>{item.role}</small></span><span className="experience-date">{item.date}</span><Glyph kind="plus" size={17} /></button>)}</div><div className="experience-detail" id="experience-detail" role="tabpanel" aria-labelledby={`stage-tab-${activeStageKey}`} tabIndex={0}><p className="eyebrow">{activeStage.label}</p><h3>{activeStage.title}</h3><p>{activeStage.description}</p><ul>{activeStage.actions.map(action => <li key={action}>{action}</li>)}</ul><div className="experience-tags" aria-label={t('Focus')}>{activeStage.tags.map(tag => <span key={tag}>{tag}</span>)}</div>{activeStage.metrics && <dl className="experience-metrics" aria-label={t('Work scope')}>{activeStage.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>}</div></div>
-      </section>
-
-      <section id="projects" className="projects section wrap" aria-labelledby="projects-title"><SectionHeading number="02" label={t('SELECTED PROJECTS')} id="projects-title" lines={language === 'zh' ? ['精选', '作品。'] : ['SELECTED', 'WORK.']}>{t('AI experiences, research and product growth. A closer look at my role and the work behind each project.')}</SectionHeading><div className="project-grid">{projectList.map((project, index) => <article className={`project-card project-card-${index + 1}`} key={project.id}><a className={`project-image${index < 2 ? ' glare-hover' : ''}`} href={`#work/${project.id}`} onClick={event => openCase(project.id, event)} aria-haspopup="dialog" aria-label={`${t('View project:')} ${project.title}`}><span className="project-parallax"><img className="project-photo" src={project.image} alt={project.imageAlt} loading="lazy" width="1672" height="941" /></span><div className="project-image-overlay"><span className="project-image-number">0{index + 1}</span><span className="concept-label">{t('CONCEPT VISUAL')}</span><span className="project-open"><Glyph kind="plus" size={27} /></span></div></a><div className="project-info"><div><p className="eyebrow">{project.category}</p><h3><a href={`#work/${project.id}`} onClick={event => openCase(project.id, event)} aria-haspopup="dialog">{project.title}<span className="project-title-arrow" aria-hidden="true">↗</span></a></h3><p className="project-description">{project.description}</p></div><div className="project-tags">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div></div></article>)}</div></section>
-
-      <section id="strengths" className="strengths section" aria-labelledby="strengths-title"><div className="wrap"><SectionHeading number="03" label={t('MY STRENGTHS')} id="strengths-title" lines={language === 'zh' ? ['我的', '工作方式。'] : ['HOW I', 'WORK.']} /><div className="strength-grid">{strengthList.map(item => <article className="strength-card" key={item.number}><div className="strength-top"><span>{item.number}</span><Glyph kind="plus" size={19} /></div><p className="eyebrow">{item.en}</p><h3>{item.title}</h3><ul>{item.items.map(text => <li key={text}>{text}</li>)}</ul></article>)}</div><div className="education-line"><span>{t('EDUCATION / FOUNDATION')}</span><p>{t('Bachelor’s · Psychology')} <small>WNU · 2016—2020</small></p><p>{t('Master’s · Business Administration')} <small>YBU · 2023—2025</small></p></div></div></section>
-
-      <section id="contact" className="contact-section" aria-labelledby="contact-title"><div className="contact-veil" aria-hidden="true"><DarkVeil speed={.22} resolutionScale={.65} paused={videoPaused} /></div><div className="contact-shade" /><div className="wrap contact-inner"><p className="eyebrow">{t("04 / LET'S MAKE SOMETHING REAL")}</p><RevealTitle id="contact-title" lines={["LET'S BUILD.", "WHAT'S NEXT?"].map(t)} /><p className="contact-description">{t('A product or AI idea? Let’s talk.')}</p><div className="contact-actions"><a href={`mailto:${EMAIL}`} className="contact-email">{EMAIL}</a><button className="copy-email" onClick={() => copyText(EMAIL, t('Email copied'), t('Select the address to copy'))} aria-label={t('Copy email address')}><Glyph kind="copy" size={21} /></button></div><Magnetic className="contact-cta"><a className="mail-button" href={`mailto:${EMAIL}?subject=${encodeURIComponent(t('Hello 77 | Product & AI'))}`}><Glyph kind="mail" size={19} />{t('Write to me')}</a></Magnetic><div className="contact-bottom"><a className="brand-number" href="#top" aria-label={t('Back to top')}>77<span>.</span></a><span>{t('PRODUCT MANAGER / AI BUILDER')}</span><p>{t('Always learning. Always building.')}</p><button className="video-control" onClick={toggleVideo} aria-pressed={!videoPaused} aria-label={t(videoPaused ? 'Play motion' : 'Pause motion')}><Glyph kind={videoPaused ? 'play' : 'pause'} size={14} /><span>{t(videoPaused ? 'PLAY' : 'PAUSE')}</span></button><a href="#top">{t('Back to top')}</a></div></div></section>
+      {route.invalid && <p className="empty-state wrap">{L('这个链接没有对应的页面。你可以从下面重新了解我。', 'This link does not match a page. You can start with the overview below.')}</p>}
+      {route.type === 'home' ? <HomePage data={data} navigate={navigate} L={L} onCopyEmail={() => copy(EMAIL, L('邮箱已复制', 'Email copied'), L('请选择邮箱地址后复制', 'Select the email address to copy'))} /> : <DetailPage route={route} data={data} cases={cases} stages={stages} navigate={navigate} goBack={goBack} L={L} onCopyLink={() => copy(window.location.href, L('页面链接已复制', 'Page link copied'), L('请从地址栏复制链接', 'Copy the link from your address bar'))} />}
     </main>
-    <CaseDialog caseContent={cases} t={t} language={language} onToggleLanguage={toggleLanguage} copyStatus={copyStatus} selected={selectedCase} onClose={closeCase} onNext={nextCase} onCopyLink={() => copyText(window.location.href, t('Project link copied'), t('Copy the link from your address bar'))} />
-    {!selectedCase && <div role="status" className={copyStatus ? 'toast visible' : 'toast'} aria-live="polite">{copyStatus}</div>}
+    <footer className="site-footer wrap"><span>77 · {L('个人介绍', 'Profile')}</span><a href="#top" onClick={event => navigate('#top', event)}>{L('回到首页', 'Back to home')} <Glyph kind="arrow" size={16} /></a></footer>
+    <div className={status ? 'toast visible' : 'toast'} role="status" aria-live="polite">{status}</div>
   </div>;
 }
