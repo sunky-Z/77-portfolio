@@ -86,7 +86,7 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
         <div className="hero-copy">
           <p className="eyebrow">{L('77 · 产品经理', '77 · Product Manager')}</p>
           <h1 id="home-title" tabIndex={-1}>{data.profile.title.map(line => <span key={line}>{line}</span>)}</h1>
-          <p className="page-intro">{data.profile.intro}</p>
+          {data.profile.intro.split('\n').map(paragraph => <p className="page-intro" key={paragraph}>{paragraph}</p>)}
           <div className="hero-actions">
             <a className="button button-primary" href="#projects" onClick={event => navigate('#projects', event)}>{L('浏览项目', 'Explore projects')} <Glyph kind="arrow" size={18} /></a>
             <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('职业经历', 'Career')}</a>

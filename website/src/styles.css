@@ -50,7 +50,8 @@ h1:focus, h2:focus { outline: none; }
 .hero-layout { display: grid; grid-template-columns: 1.2fr 1fr; gap: 68px; align-items: center; min-height: 370px; }
 .hero h1 { font-size: clamp(44px, 5.6vw, 72px); font-weight: 500; line-height: 1.14; letter-spacing: -.035em; margin-bottom: 27px; }
 .hero h1 span { display: block; }
-.hero-copy > p:not(.eyebrow) { max-width: 520px; font-size: 18px; color: #64645e; line-height: 1.85; white-space: pre-line; }
+.hero-copy > p:not(.eyebrow) { max-width: 520px; font-size: 18px; color: #64645e; line-height: 1.85; }
+.hero-copy > .page-intro + .page-intro { margin-top: 8px; }
 .hero-visual { min-width: 0; }
 .hero-visual img { width: 100%; max-height: 350px; aspect-ratio: 1.4; object-fit: contain; filter: grayscale(1); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
