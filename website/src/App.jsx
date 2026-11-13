@@ -4,6 +4,7 @@ import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
 import { useLanguage } from './i18n.js';
 import usePortfolioNavigation from './hooks/usePortfolioNavigation.js';
+import { routeHref } from './routes.js';
 
 const EMAIL = 'Zysq09@gmail.com';
 const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
@@ -27,42 +28,33 @@ function LanguageSwitch({ language, onToggle }) {
   </button>;
 }
 
-function SectionHeading({ id, number, title, children }) {
-  return <header className="section-heading">
-    <div>
-      <p className="eyebrow">{number}</p>
-      <h2 id={id} tabIndex={-1}>{title}</h2>
-    </div>
-    {children && <p className="section-intro">{children}</p>}
-  </header>;
-}
-
 function Education({ items, L }) {
   return <div>
-    <h3 className="education-heading">{L('教育背景', 'Education')}</h3>
+    <h2 className="education-heading">{L('教育背景', 'Education')}</h2>
     <div className="education-grid">
       {items.map(item => <div className="education-item" key={`${item.school}-${item.degree}`}>
         <p className="card-topline">{item.school} <span>{item.date}</span></p>
-        <h4>{item.degree} · {item.field}</h4>
+        <h3>{item.degree} · {item.field}</h3>
       </div>)}
     </div>
   </div>;
 }
 
-function ProjectCard({ project, skills, navigate, L, compact = false }) {
-  if (compact) return <a className="related-card" href={`#work/${project.id}`} onClick={event => navigate(`#work/${project.id}`, event)}>
+function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3' }) {
+  const Heading = headingTag;
+  if (compact) return <a className="related-card" href={routeHref(`/projects/${project.id}/`)}>
     <p className="card-topline">{project.company}</p>
     <h3>{project.title}</h3>
     <p className="card-description">{project.summary}</p>
     <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={17} /></span>
   </a>;
-  return <a className="project-card" href={`#work/${project.id}`} onClick={event => navigate(`#work/${project.id}`, event)}>
+  return <a className="project-card" href={routeHref(`/projects/${project.id}/`)}>
     <div className="project-cover">
       <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
     </div>
     <div className="project-body">
       <p className="card-topline">{project.company}<span>{project.role}</span></p>
-      <h3 className="card-title">{project.title}</h3>
+      <Heading className="card-title">{project.title}</Heading>
       <p className="card-description">{project.summary}</p>
       <div className="tag-list">{project.skills.map(id => <span key={id}>{skills[id].title}</span>)}</div>
       <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={18} /></span>
@@ -70,16 +62,27 @@ function ProjectCard({ project, skills, navigate, L, compact = false }) {
   </a>;
 }
 
-function SkillCard({ id, skill, index, navigate, L, compact = false }) {
-  return <a className={compact ? 'related-card' : 'skill-card'} href={`#skills/${id}`} onClick={event => navigate(`#skills/${id}`, event)}>
+function SkillCard({ id, skill, index, L, compact = false, headingTag = 'h3' }) {
+  const Heading = headingTag;
+  return <a className={compact ? 'related-card' : 'skill-card'} href={routeHref(`/capabilities/${id}/`)}>
     {!compact && <span className="card-index">{String(index + 1).padStart(2, '0')}</span>}
-    <h3 className="card-title">{skill.title}</h3>
+    <Heading className="card-title">{skill.title}</Heading>
     <p className="card-description">{skill.summary}</p>
     <span className="card-footer">{L('了解方法', 'Explore approach')} <Glyph kind="arrow" size={18} /></span>
   </a>;
 }
 
-function HomePage({ data, navigate, L, onCopyEmail }) {
+function CareerCard({ item, L }) {
+  return <a className="career-card" href={routeHref(`/experience/${item.id}/`)}>
+    <p className="card-topline">{item.date}</p>
+    <h2 className="card-title">{item.company}</h2>
+    <p className="card-role">{item.role}</p>
+    <p className="card-description">{item.summary}</p>
+    <span className="card-footer">{L('了解经历', 'View experience')} <Glyph kind="arrow" size={17} /></span>
+  </a>;
+}
+
+function HomePage({ data, L }) {
   return <>
     <section id="top" className="hero wrap" aria-labelledby="home-title" data-reading-anchor>
       <div className="hero-layout">
@@ -88,14 +91,14 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
           <h1 id="home-title" tabIndex={-1}>{data.profile.title.map(line => <span key={line}>{line}</span>)}</h1>
           {data.profile.intro.split('\n').map(paragraph => <p className="page-intro" key={paragraph}>{paragraph}</p>)}
           <div className="hero-actions">
-            <a className="button button-primary" href="#projects" onClick={event => navigate('#projects', event)}>{L('浏览项目', 'Explore projects')} <Glyph kind="arrow" size={18} /></a>
-            <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('职业经历', 'Career')}</a>
+            <a className="button button-primary" href={routeHref('/projects/')}>{L('浏览项目', 'Explore projects')} <Glyph kind="arrow" size={18} /></a>
+            <a className="button button-secondary" href={routeHref('/experience/')}>{L('职业经历', 'Career')}</a>
           </div>
         </div>
         <div className="hero-visual" aria-hidden="true"><img src={asset('hero-profile-summary-v1.webp')} alt="" width="1200" height="800" fetchPriority="high" /></div>
       </div>
       <div className="overview-grid">
-        {data.profile.summaryCards.map((card, index) => <a className="overview-card" href={card.href} key={card.id} onClick={event => navigate(card.href, event)}>
+        {data.profile.summaryCards.map((card, index) => <a className="overview-card" href={routeHref(card.href)} key={card.id}>
           <span className="card-index">{String(index + 1).padStart(2, '0')}</span>
           <h2>{card.title}</h2>
           <p>{card.summary}</p>
@@ -103,49 +106,51 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
         </a>)}
       </div>
     </section>
-
-    <section id="about" className="section wrap" aria-labelledby="about-title" data-reading-anchor>
-      <SectionHeading id="about-title" number="01" title={L('职业经历', 'Career')} />
-      <div className="career-grid">
-        {data.career.map(item => <a className="career-card" href={`#experience/${item.id}`} key={item.id} onClick={event => navigate(`#experience/${item.id}`, event)}>
-          <p className="card-topline">{item.date}</p>
-          <h3 className="card-title">{item.company}</h3>
-          <p className="card-role">{item.role}</p>
-          <p className="card-description">{item.summary}</p>
-          <span className="card-footer">{L('了解经历', 'View experience')} <Glyph kind="arrow" size={17} /></span>
-        </a>)}
-      </div>
-      <Education items={data.profile.education} L={L} />
+    <section className="home-selected section wrap" aria-labelledby="selected-title" id="selected" data-reading-anchor>
+      <header className="section-heading">
+        <div><p className="eyebrow">{L('项目', 'Work')}</p><h2 id="selected-title" tabIndex={-1}>{L('项目精选', 'Selected projects')}</h2></div>
+        <a className="section-more" href={routeHref('/projects/')}>{L('查看全部项目', 'All projects')} <Glyph kind="arrow" size={17} /></a>
+      </header>
+      <div className="project-grid">{data.projects.slice(0, 2).map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} />)}</div>
     </section>
-
-    <section id="projects" className="section wrap" aria-labelledby="projects-title" data-reading-anchor>
-      <SectionHeading id="projects-title" number="02" title={L('项目实践', 'Selected projects')} />
-      <div className="project-grid">
-        {data.projects.map(project => <ProjectCard key={project.id} project={project} skills={data.skills} navigate={navigate} L={L} />)}
-      </div>
-    </section>
-
-    <section id="strengths" className="section wrap" aria-labelledby="skills-title" data-reading-anchor>
-      <SectionHeading id="skills-title" number="03" title={L('能力与方法', 'Capabilities')} />
-      <div className="skills-grid">
-        {Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} navigate={navigate} L={L} />)}
-      </div>
-    </section>
-
-    <section id="contact" className="contact section wrap" aria-labelledby="contact-title" data-reading-anchor>
-      <div className="contact-inner">
-        <div>
-          <p className="eyebrow">04</p>
-          <h2 id="contact-title" tabIndex={-1}>{L('联系我', 'Get in touch')}</h2>
-          <p>{data.profile.contactText}</p>
-        </div>
-        <div className="contact-actions">
-          <a className="contact-email" href={`mailto:${EMAIL}`}>{EMAIL}</a>
-          <button type="button" className="copy-button" onClick={onCopyEmail} aria-label={L('复制邮箱地址', 'Copy email address')}><Glyph kind="copy" /></button>
-        </div>
-      </div>
+    <section className="home-contact wrap" aria-label={L('联系', 'Contact')}>
+      <p>{data.profile.contactText}</p>
+      <a className="back-link" href={routeHref('/contact/')}>{L('联系我', 'Get in touch')} <Glyph kind="arrow" size={17} /></a>
     </section>
   </>;
+}
+
+function CategoryPage({ route, data, L, onCopyEmail }) {
+  const categories = {
+    experience: { path: '/experience/', number: '01', title: L('职业经历', 'Career & background'), intro: L('三段职业经历，两项学科背景。', 'Three roles. A foundation in psychology and business.') },
+    projects: { path: '/projects/', number: '02', title: L('项目实践', 'Projects'), intro: L('能源产品、智能硬件、AI 助手与商业化。', 'Energy products, smart hardware, AI assistants and monetization.') },
+    capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('用户研究、产品规划、AI 产品设计与交付协作。', 'User research, product planning, AI product design and delivery.') },
+    contact: { path: '/contact/', number: '04', title: L('联系我', 'Get in touch'), intro: data.profile.contactText },
+  };
+  const category = categories[route.type];
+  return <div className="category-page"><div className="wrap">
+    <nav className="breadcrumb" aria-label={L('当前位置', 'Breadcrumb')}>
+      <a href={routeHref('/')}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span><span aria-current="page">{category.title}</span>
+    </nav>
+    <header className="category-heading" id="category-heading" data-reading-anchor>
+      <p className="eyebrow">{category.number}</p>
+      <h1 tabIndex={-1}>{category.title}</h1>
+      <p className="page-intro">{category.intro}</p>
+    </header>
+    <section className="category-content" id="category-content" data-reading-anchor aria-label={category.title}>
+      {route.type === 'experience' && <><div className="career-grid">{data.career.map(item => <CareerCard key={item.id} item={item} L={L} />)}</div><Education items={data.profile.education} L={L} /></>}
+      {route.type === 'projects' && <div className="project-grid">{data.projects.map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} headingTag="h2" />)}</div>}
+      {route.type === 'capabilities' && <div className="skills-grid">{Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} L={L} headingTag="h2" />)}</div>}
+      {route.type === 'contact' && <div className="contact-inner"><div><h2>{L('邮件联系', 'Email')}</h2></div><div className="contact-actions"><a className="contact-email" href={`mailto:${EMAIL}`}>{EMAIL}</a><button type="button" className="copy-button" onClick={onCopyEmail} aria-label={L('复制邮箱地址', 'Copy email address')}><Glyph kind="copy" /></button></div></div>}
+    </section>
+    <nav className="category-next" aria-label={L('继续了解', 'Explore more')}>
+      {Object.entries(categories).filter(([type]) => type !== route.type).map(([type, item]) => <a className="back-link" key={type} href={routeHref(item.path)}>{item.title} <Glyph kind="arrow" size={17} /></a>)}
+    </nav>
+  </div></div>;
+}
+
+function NotFoundPage({ L }) {
+  return <div className="category-page"><div className="wrap"><header className="category-heading" id="not-found" data-reading-anchor><p className="eyebrow">404</p><h1 tabIndex={-1}>{L('页面未找到', 'Page not found')}</h1><p className="page-intro">{L('可以从首页、经历或项目继续浏览。', 'Continue from the home page, career or projects.')}</p></header><nav className="category-next" aria-label={L('继续浏览', 'Continue exploring')}><a className="button button-primary" href={routeHref('/')}>{L('回到首页', 'Home')}</a><a className="back-link" href={routeHref('/experience/')}>{L('职业经历', 'Career')}</a><a className="back-link" href={routeHref('/projects/')}>{L('项目实践', 'Projects')}</a></nav></div></div>;
 }
 
 function Contents({ items, L }) {
@@ -181,7 +186,7 @@ function ActionList({ actions }) {
   </div>;
 }
 
-function ProjectArticle({ id, item, data, navigate, L }) {
+function ProjectArticle({ id, item, data, L }) {
   const project = data.projects.find(entry => entry.id === id);
   const sections = [
     ['project-context', L('工作背景', 'Context')],
@@ -205,16 +210,16 @@ function ProjectArticle({ id, item, data, navigate, L }) {
       </ArticleSection>
       <ArticleSection id="project-related" title={sections[4][1]}>
         <h3 className="related-heading">{L('相关方法', 'Related methods')}</h3>
-        <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} navigate={navigate} L={L} compact />)}</div>
+        <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} L={L} compact />)}</div>
         <h3 className="related-heading">{L('更多项目', 'More projects')}</h3>
-        <div className="related-grid">{data.projects.filter(entry => entry.id !== id).slice(0, 2).map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+        <div className="related-grid">{data.projects.filter(entry => entry.id !== id).slice(0, 2).map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} L={L} compact />)}</div>
       </ArticleSection>
     </article>
     <Contents items={sections} L={L} />
   </div>;
 }
 
-function SkillArticle({ item, data, navigate, L }) {
+function SkillArticle({ item, data, L }) {
   const sections = [
     ['skill-methods', L('方法实践', 'Approach')],
     ['skill-projects', L('应用项目', 'Project examples')],
@@ -226,7 +231,7 @@ function SkillArticle({ item, data, navigate, L }) {
         {item.methods.map(method => <div className="action-entry" key={method.title}><h3>{method.title}</h3><p>{method.text}</p></div>)}
       </ArticleSection>
       <ArticleSection id="skill-projects" title={sections[1][1]}>
-        <div className="related-grid">{item.projects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+        <div className="related-grid">{item.projects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} L={L} compact />)}</div>
       </ArticleSection>
       <ArticleSection id="skill-scope" title={sections[2][1]}><p>{item.boundary}</p></ArticleSection>
     </article>
@@ -234,7 +239,7 @@ function SkillArticle({ item, data, navigate, L }) {
   </div>;
 }
 
-function CareerArticle({ item, stage, data, navigate, L }) {
+function CareerArticle({ item, stage, data, L }) {
   const sections = [
     ['career-work', L('职责与实践', 'Responsibilities')],
     ['career-projects', L('相关项目', 'Related projects')],
@@ -247,26 +252,26 @@ function CareerArticle({ item, stage, data, navigate, L }) {
         {stage.metrics && <dl className="detail-meta work-metrics">{stage.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>}
       </ArticleSection>
       <ArticleSection id="career-projects" title={sections[1][1]}>
-        <div className="related-grid">{item.relatedProjects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
+        <div className="related-grid">{item.relatedProjects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} L={L} compact />)}</div>
       </ArticleSection>
     </article>
     <Contents items={sections} L={L} />
   </div>;
 }
 
-function DetailPage({ route, data, cases, stages, navigate, goBack, L, onCopyLink }) {
+function DetailPage({ route, data, cases, stages, L, onCopyLink }) {
   const project = route.type === 'project';
   const skill = route.type === 'skill';
   const item = project ? cases[route.id] : skill ? data.skills[route.id] : data.career.find(entry => entry.id === route.id);
-  const category = project ? L('项目经历', 'Projects') : skill ? L('能力与方法', 'Capabilities') : L('职业经历', 'Experience');
-  const fallback = project ? '#projects' : skill ? '#strengths' : '#about';
+  const category = project ? L('项目实践', 'Projects') : skill ? L('能力与方法', 'Capabilities') : L('职业经历', 'Experience');
+  const fallback = routeHref(project ? '/projects/' : skill ? '/capabilities/' : '/experience/');
   const title = project || skill ? item.title : item.company;
   const intro = project || skill ? item.intro : item.summary;
   return <div className="detail-page">
     <div className="detail-wrap wrap">
       <nav className="breadcrumb" aria-label={L('当前位置', 'Breadcrumb')}>
-        <a href="#top" onClick={event => navigate('#top', event)}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span>
-        <a href={fallback} onClick={event => navigate(fallback, event)}>{category}</a><span aria-hidden="true">/</span>
+        <a href={routeHref('/')}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span>
+        <a href={fallback}>{category}</a><span aria-hidden="true">/</span>
         <span aria-current="page">{title}</span>
       </nav>
       <header className="detail-heading" id="detail-heading" data-reading-anchor>
@@ -279,12 +284,12 @@ function DetailPage({ route, data, cases, stages, navigate, goBack, L, onCopyLin
           <div className="tag-list">{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
         </>}
         <div className="detail-actions">
-          <a href={fallback} className="back-link" onClick={event => goBack(fallback, event)}><Glyph kind="back" size={17} />{L('返回上一页', 'Back')}</a>
+          <a href={fallback} className="back-link"><Glyph kind="back" size={17} />{L('返回', 'Back to ')}{category}</a>
           <button type="button" className="copy-button" onClick={onCopyLink}><Glyph kind="copy" size={17} /><span>{L('复制本页链接', 'Copy page link')}</span></button>
         </div>
       </header>
-      {project ? <ProjectArticle id={route.id} item={item} data={data} navigate={navigate} L={L} /> : skill ? <SkillArticle item={item} data={data} navigate={navigate} L={L} /> : <CareerArticle item={item} stage={stages[route.id]} data={data} navigate={navigate} L={L} />}
-      <div className="detail-nav"><a className="back-link" href={fallback} onClick={event => navigate(fallback, event)}><Glyph kind="back" size={17} />{L('回到', 'Back to ')}{category}</a><a href="#contact" onClick={event => navigate('#contact', event)}>{L('联系我', 'Get in touch')} <Glyph kind="arrow" size={17} /></a></div>
+      {project ? <ProjectArticle id={route.id} item={item} data={data} L={L} /> : skill ? <SkillArticle item={item} data={data} L={L} /> : <CareerArticle item={item} stage={stages[route.id]} data={data} L={L} />}
+      <div className="detail-nav"><a className="back-link" href={fallback}><Glyph kind="back" size={17} />{L('回到', 'Back to ')}{category}</a><a href={routeHref('/contact/')}>{L('联系我', 'Get in touch')} <Glyph kind="arrow" size={17} /></a></div>
     </div>
   </div>;
 }
@@ -295,8 +300,7 @@ export default function App() {
   const cases = language === 'zh' ? chineseCases : englishCases;
   const stages = language === 'zh' ? chineseStages : englishStages;
   const L = (zh, en) => language === 'zh' ? zh : en;
-  const validIds = { project: data.projects.map(item => item.id), skill: Object.keys(data.skills), career: data.career.map(item => item.id) };
-  const { route, navigate, goBack } = usePortfolioNavigation(validIds);
+  const { route } = usePortfolioNavigation();
   const [menuOpen, setMenuOpen] = useState(false);
   const [status, setStatus] = useState('');
   const menuRef = useRef(null);
@@ -319,9 +323,9 @@ export default function App() {
   }, [language]);
 
   useEffect(() => {
-    const current = route.type === 'project' ? cases[route.id].title : route.type === 'skill' ? data.skills[route.id].title : route.type === 'career' ? data.career.find(item => item.id === route.id).company : L('个人介绍', 'Profile');
+    const current = document.querySelector('main h1')?.textContent || L('个人介绍', 'Profile');
     document.title = `${current} · 77`;
-  }, [route.key, language, cases, data]);
+  }, [route.key, language]);
 
   useEffect(() => { setMenuOpen(false); setStatus(''); }, [route.key]);
   useEffect(() => () => clearTimeout(statusTimer.current), []);
@@ -351,26 +355,26 @@ export default function App() {
   }
 
   const links = [
-    ['#about', L('经历', 'Background')], ['#projects', L('项目', 'Work')],
-    ['#strengths', L('能力', 'Capabilities')], ['#contact', L('联系', 'Contact')],
+    ['experience', '/experience/', L('经历', 'Background')], ['projects', '/projects/', L('项目', 'Work')],
+    ['capabilities', '/capabilities/', L('能力', 'Capabilities')], ['contact', '/contact/', L('联系', 'Contact')],
   ];
-  const headerNavigate = (href, event) => { setMenuOpen(false); navigate(href, event); };
+  const activeCategory = route.type === 'career' ? 'experience' : route.type === 'project' ? 'projects' : route.type === 'skill' ? 'capabilities' : route.type;
+  const copyEmail = () => copy(EMAIL, L('邮箱已复制', 'Email copied'), L('请选择邮箱地址后复制', 'Select the email address to copy'));
   return <div className={`portfolio language-${language}`} lang={language === 'zh' ? 'zh-CN' : 'en'}>
     <a className="skip-link" href="#main" onClick={event => { event.preventDefault(); const heading = document.querySelector('main h1'); heading?.focus({ preventScroll: true }); heading?.scrollIntoView({ behavior: 'instant', block: 'start' }); }}>{L('跳到正文', 'Skip to content')}</a>
     <header className="site-header" onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMenuOpen(false); }}>
       <div className="header-inner wrap">
-        <a className="brand" href="#top" onClick={event => headerNavigate('#top', event)} aria-label={L('77 个人介绍首页', '77 profile home')}><span className="brand-number">77.</span><span className="brand-caption">{L('个人介绍', 'Profile')}</span></a>
+        <a className="brand" href={routeHref('/')} aria-label={L('77 个人介绍首页', '77 profile home')}><span className="brand-number">77.</span><span className="brand-caption">{L('个人介绍', 'Profile')}</span></a>
         <nav id="main-navigation" className={menuOpen ? 'main-nav open' : 'main-nav'} aria-label={L('主导航', 'Main navigation')}>
-          {links.map(([href, title]) => <a href={href} key={href} onClick={event => headerNavigate(href, event)} aria-current={route.type === 'home' && route.section === href.slice(1) ? 'location' : undefined}>{title}</a>)}
+          {links.map(([type, path, title]) => <a href={routeHref(path)} key={type} aria-current={activeCategory === type ? route.type === type ? 'page' : 'location' : undefined}>{title}</a>)}
         </nav>
         <div className="header-actions"><LanguageSwitch language={language} onToggle={changeLanguage} /><button type="button" ref={menuRef} className="menu-button" onClick={() => setMenuOpen(open => !open)} aria-label={menuOpen ? L('关闭导航', 'Close navigation') : L('打开导航', 'Open navigation')} aria-expanded={menuOpen} aria-controls="main-navigation"><Glyph kind={menuOpen ? 'close' : 'menu'} /></button></div>
       </div>
     </header>
     <main id="main">
-      {route.invalid && <p className="empty-state wrap">{L('页面未找到。请从总览继续浏览。', 'Page not found. Explore the overview below.')}</p>}
-      {route.type === 'home' ? <HomePage data={data} navigate={navigate} L={L} onCopyEmail={() => copy(EMAIL, L('邮箱已复制', 'Email copied'), L('请选择邮箱地址后复制', 'Select the email address to copy'))} /> : <DetailPage route={route} data={data} cases={cases} stages={stages} navigate={navigate} goBack={goBack} L={L} onCopyLink={() => copy(window.location.href, L('页面链接已复制', 'Page link copied'), L('请从地址栏复制链接', 'Copy the link from your address bar'))} />}
+      {route.type === 'home' ? <HomePage data={data} L={L} /> : ['experience', 'projects', 'capabilities', 'contact'].includes(route.type) ? <CategoryPage route={route} data={data} L={L} onCopyEmail={copyEmail} /> : route.type === 'notfound' ? <NotFoundPage L={L} /> : <DetailPage route={route} data={data} cases={cases} stages={stages} L={L} onCopyLink={() => copy(window.location.href, L('页面链接已复制', 'Page link copied'), L('请从地址栏复制链接', 'Copy the link from your address bar'))} />}
     </main>
-    <footer className="site-footer wrap"><span>77 · {L('个人介绍', 'Profile')}</span><a href="#top" onClick={event => navigate('#top', event)}>{L('回到首页', 'Back to home')} <Glyph kind="arrow" size={16} /></a></footer>
+    <footer className="site-footer wrap"><span>77 · {L('个人介绍', 'Profile')}</span><a href={routeHref('/')}>{L('回到首页', 'Back to home')} <Glyph kind="arrow" size={16} /></a></footer>
     <div className={status ? 'toast visible' : 'toast'} role="status" aria-live="polite">{status}</div>
   </div>;
 }

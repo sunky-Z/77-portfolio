@@ -42,19 +42,19 @@ export const portfolio = {
           "id": "about",
           "title": "职业经历",
           "summary": "三段职业经历，两项学科背景。",
-          "href": "#about"
+          "href": "/experience/"
         },
         {
           "id": "projects",
           "title": "项目实践",
           "summary": "能源产品、智能硬件、AI 助手与商业化。",
-          "href": "#projects"
+          "href": "/projects/"
         },
         {
           "id": "strengths",
           "title": "能力与方法",
           "summary": "用户研究、产品规划、AI 产品设计与交付协作。",
-          "href": "#strengths"
+          "href": "/capabilities/"
         }
       ],
       "education": [
@@ -188,19 +188,19 @@ export const portfolio = {
           "id": "about",
           "title": "Career & background",
           "summary": "Three roles. A foundation in psychology and business.",
-          "href": "#about"
+          "href": "/experience/"
         },
         {
           "id": "projects",
           "title": "Selected projects",
           "summary": "Energy products, smart hardware, AI assistants and monetization.",
-          "href": "#projects"
+          "href": "/projects/"
         },
         {
           "id": "strengths",
           "title": "Capabilities",
           "summary": "User research, product planning, AI product design and delivery.",
-          "href": "#strengths"
+          "href": "/capabilities/"
         }
       ],
       "education": [
