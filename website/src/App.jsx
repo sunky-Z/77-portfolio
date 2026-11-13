@@ -56,6 +56,7 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3' })
       <p className="card-topline">{project.company}<span>{project.role}</span></p>
       <Heading className="card-title">{project.title}</Heading>
       <p className="card-description">{project.summary}</p>
+      {project.highlight && <p className="project-fact">{project.highlight}</p>}
       <div className="tag-list">{project.skills.map(id => <span key={id}>{skills[id].title}</span>)}</div>
       <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={18} /></span>
     </div>
@@ -111,7 +112,7 @@ function HomePage({ data, L }) {
         <div><p className="eyebrow">{L('项目', 'Work')}</p><h2 id="selected-title" tabIndex={-1}>{L('项目精选', 'Selected projects')}</h2></div>
         <a className="section-more" href={routeHref('/projects/')}>{L('查看全部项目', 'All projects')} <Glyph kind="arrow" size={17} /></a>
       </header>
-      <div className="project-grid">{data.projects.slice(0, 2).map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} />)}</div>
+      <div className="project-grid">{data.projects.filter(project => project.featured).map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} />)}</div>
     </section>
     <section className="home-contact wrap" aria-label={L('联系', 'Contact')}>
       <p>{data.profile.contactText}</p>
@@ -123,7 +124,7 @@ function HomePage({ data, L }) {
 function CategoryPage({ route, data, L, onCopyEmail }) {
   const categories = {
     experience: { path: '/experience/', number: '01', title: L('职业经历', 'Career & background'), intro: L('三段职业经历，两项学科背景。', 'Three roles. A foundation in psychology and business.') },
-    projects: { path: '/projects/', number: '02', title: L('项目实践', 'Projects'), intro: L('能源产品、智能硬件、AI 助手与商业化。', 'Energy products, smart hardware, AI assistants and monetization.') },
+    projects: { path: '/projects/', number: '02', title: L('项目实践', 'Projects'), intro: L('AI 产品、商业化、海外适配与用户研究。', 'AI products, monetization, localization and user research.') },
     capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('用户研究、产品规划、AI 产品设计与交付协作。', 'User research, product planning, AI product design and delivery.') },
     contact: { path: '/contact/', number: '04', title: L('联系我', 'Get in touch'), intro: data.profile.contactText },
   };
@@ -190,29 +191,39 @@ function ProjectArticle({ id, item, data, L }) {
   const project = data.projects.find(entry => entry.id === id);
   const sections = [
     ['project-context', L('工作背景', 'Context')],
+    ...(item.decisions?.length ? [['project-decisions', L('关键判断', 'Key decisions')]] : []),
     ['project-contribution', L('关键工作', 'Contribution')],
     ['project-outputs', L('主要交付', 'Deliverables')],
+    ...(item.progress?.length ? [['project-progress', L('交付进展', 'Delivery progress')]] : []),
     ['project-reflection', L('实践思考', 'Reflections')],
     ['project-related', L('相关方法与项目', 'Related methods & projects')],
   ];
+  const titles = Object.fromEntries(sections);
+  const relatedProjects = (project.relatedProjects || []).map(projectId => data.projects.find(entry => entry.id === projectId)).filter(Boolean);
   return <div className="detail-layout">
     <article className="article-body">
-      <ArticleSection id="project-context" title={sections[0][1]}>
+      <ArticleSection id="project-context" title={titles['project-context']}>
         <h3>{item.problem}</h3><p>{item.problemText}</p>
       </ArticleSection>
-      <ArticleSection id="project-contribution" title={sections[1][1]}><ActionList actions={item.actions} /></ArticleSection>
-      <ArticleSection id="project-outputs" title={sections[2][1]}>
+      {item.decisions?.length > 0 && <ArticleSection id="project-decisions" title={titles['project-decisions']}>
+        {item.decisions.map(decision => <div className="action-entry" key={decision.title}><h3>{decision.title}</h3><p>{decision.text}</p></div>)}
+      </ArticleSection>}
+      <ArticleSection id="project-contribution" title={titles['project-contribution']}><ActionList actions={item.actions} /></ArticleSection>
+      <ArticleSection id="project-outputs" title={titles['project-outputs']}>
         <div className="outputs-grid">{item.outputs.map(([title, text]) => <div className="output-card" key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>
       </ArticleSection>
-      <ArticleSection id="project-reflection" title={sections[3][1]}>
+      {item.progress?.length > 0 && <ArticleSection id="project-progress" title={titles['project-progress']}>
+        {item.progress.map(entry => <div className="action-entry" key={entry.title}><h3>{entry.title}</h3><p>{entry.text}</p></div>)}
+      </ArticleSection>}
+      <ArticleSection id="project-reflection" title={titles['project-reflection']}>
         <p>{item.lesson}</p>
         <div className="contribution-boundary"><h3>{L('职责与协作', 'Role & collaboration')}</h3><p>{item.boundary}</p></div>
       </ArticleSection>
-      <ArticleSection id="project-related" title={sections[4][1]}>
+      <ArticleSection id="project-related" title={titles['project-related']}>
         <h3 className="related-heading">{L('相关方法', 'Related methods')}</h3>
         <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} L={L} compact />)}</div>
         <h3 className="related-heading">{L('更多项目', 'More projects')}</h3>
-        <div className="related-grid">{data.projects.filter(entry => entry.id !== id).slice(0, 2).map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} L={L} compact />)}</div>
+        <div className="related-grid">{relatedProjects.map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} L={L} compact />)}</div>
       </ArticleSection>
     </article>
     <Contents items={sections} L={L} />

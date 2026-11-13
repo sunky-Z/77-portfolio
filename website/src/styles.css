@@ -352,3 +352,18 @@ h1[tabindex]:focus-visible, h2[tabindex]:focus-visible { outline: none; }
 
 .category-next > .button-primary { color: #fff; }
 .category-content .contact-inner h2 { font-size: 29px; font-weight: 500; line-height: 1.35; }
+
+.home-selected .project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.home-selected .project-body { padding: 23px; }
+.home-selected .card-title { font-size: 23px; }
+@media (max-width: 850px) {
+  .home-selected .project-grid { grid-template-columns: 1fr; }
+  .home-selected .project-card { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+  .home-selected .project-cover { height: 100%; aspect-ratio: auto; border-bottom: 0; border-right: 1px solid var(--line); }
+}
+@media (max-width: 620px) {
+  .home-selected .project-card { display: flex; }
+  .home-selected .project-cover { height: auto; aspect-ratio: 1.85; border-right: 0; border-bottom: 1px solid var(--line); }
+}
+
+.project-fact { margin-top: 14px; font-size: 14px; line-height: 1.7; color: #454540; }
