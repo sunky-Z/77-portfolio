@@ -92,7 +92,7 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
             <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('职业经历', 'Career')}</a>
           </div>
         </div>
-        <div className="hero-visual" aria-hidden="true"><img src={asset('sketch-research-v2.webp')} alt="" width="900" height="600" fetchPriority="high" /></div>
+        <div className="hero-visual" aria-hidden="true"><img src={asset('hero-profile-summary-v1.webp')} alt="" width="1200" height="800" fetchPriority="high" /></div>
       </div>
       <div className="overview-grid">
         {data.profile.summaryCards.map((card, index) => <a className="overview-card" href={card.href} key={card.id} onClick={event => navigate(card.href, event)}>

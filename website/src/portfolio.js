@@ -36,7 +36,7 @@ export const portfolio = {
         "从用户研究，",
         "到 AI 产品。"
       ],
-      "intro": "心理学本科，工商管理硕士。职业经历涵盖用户研究、产品策略与智能硬件，现于 DROI 从事 AI 产品与商业化。",
+      "intro": "心理学本科，工商管理硕士。关注人机交互与产品商业化。职业经历涵盖用户研究、产品策略与智能硬件，现从事 AI 产品与 GTM 商业化策略。",
       "summaryCards": [
         {
           "id": "about",
@@ -182,7 +182,7 @@ export const portfolio = {
         "From user research.",
         "To AI products."
       ],
-      "intro": "A bachelor’s in psychology and a master’s in business administration. Experience across user research, product strategy and smart hardware. Now working on AI products and monetization at DROI.",
+      "intro": "A bachelor’s in psychology and a master’s in business administration. Interested in human–computer interaction and product commercialization. Experience across user research, product strategy and smart hardware. Now working on AI products and go-to-market (GTM) strategy.",
       "summaryCards": [
         {
           "id": "about",
