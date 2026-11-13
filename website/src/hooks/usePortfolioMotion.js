@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { cases } from '../content.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -8,9 +9,14 @@ export default function usePortfolioMotion(rootRef) {
   const hasOpened = useRef(false);
   useLayoutEffect(() => {
     const root = rootRef.current;
+    const hash = window.location.hash;
+    const linkedCase = hash.startsWith('#work/') ? hash.slice(6) : '';
+    if (['#top', '#about', '#projects', '#strengths', '#contact'].includes(hash) || Object.hasOwn(cases, linkedCase)) {
+      hasOpened.current = true;
+    }
     const context = gsap.context(() => {
       const media = gsap.matchMedia();
-      media.add({ animate: '(prefers-reduced-motion: no-preference)', desktop: '(min-width: 901px)' }, ({ conditions }) => {
+      media.add({ animate: '(prefers-reduced-motion: no-preference)', desktop: '(min-width: 901px)', parallax: '(min-width: 901px) and (hover: hover) and (pointer: fine)' }, ({ conditions }) => {
         if (!conditions.animate) {
           gsap.set('.opening', { autoAlpha: 0 });
           hasOpened.current = true;
@@ -59,7 +65,7 @@ export default function usePortfolioMotion(rootRef) {
             .from(frame, { clipPath: 'inset(100% 0% 0% 0%)', y: mobile ? 30 : 70, duration: 1.35, ease: 'power4.inOut' })
             .from(photo, { scale: 1.18, duration: 1.6, ease: 'power3.out' }, 0)
             .from(card.querySelector('.project-info'), { y: 32, autoAlpha: 0, duration: .95, ease: 'power3.out' }, .65);
-          if (!mobile) gsap.fromTo(card.querySelector('.project-parallax'), { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1.4 } });
+          if (conditions.parallax) gsap.fromTo(card.querySelector('.project-parallax'), { yPercent: -4 }, { yPercent: 4, ease: 'none', scrollTrigger: { trigger: card, start: 'top bottom', end: 'bottom top', scrub: 1.4 } });
         });
 
         const contact = root.querySelector('.contact-section');

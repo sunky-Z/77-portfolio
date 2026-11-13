@@ -2,6 +2,7 @@
 
 export const cases = {
   "ai-ecosystem": {
+    overview: [["Company", "DROI"], ["My role", "Product design & delivery"], ["Focus", "Agent experiences & skills"]],
     label: "01 / DROI · AI ASSISTANT", title: "Everyday AI",
     intro: "At DROI, I plan AI assistant experiences and skill workflows, from notifications and tasks to reliable everyday use.",
     tags: ["Agent experience", "Skill ecosystem", "Product design", "Platform flows"],
@@ -12,7 +13,8 @@ export const cases = {
     boundary: "My role covers product design, skill operations and delivery coordination. I collaborate with algorithm, engineering, design and QA teams."
   },
   "energy-research": {
-    label: "02 / STRATEGY · USER RESEARCH", title: "User differences, product opportunities",
+    overview: [["Company", "HUAWEI"], ["My role", "Market & user research"], ["Focus", "Product planning & validation"]],
+    label: "02 / STRATEGY · USER RESEARCH", title: "From insight to opportunity",
     intro: "At HUAWEI, I worked on energy products, contributing to market and user research for product planning.",
     tags: ["Market insights", "User research", "User journeys", "Requirements"],
     problem: "One platform. Different roles, contexts and goals.", problemText: "Product planning needs industry context, user motivations and real usage insights. Research informs product opportunities and requirements trade-offs.",
@@ -22,7 +24,8 @@ export const cases = {
     boundary: "I contributed to market, user and requirements research. Internal variables, business data and unreleased features are excluded; development outcomes reflect teamwork."
   },
   "hardware-research": {
-    label: "03 / INDUSTRY · SMART HARDWARE", title: "Understand needs in context",
+    overview: [["Company", "NINESTAR"], ["My role", "User & experience research"], ["Focus", "Hardware & software workflows"]],
+    label: "03 / INDUSTRY · SMART HARDWARE", title: "Inside real workflows",
     intro: "At NINESTAR, I researched users and markets for smart hardware and companion software, covering consumers and users within industry organizations.",
     tags: ["Industry users", "Field research", "Shadowing & interviews", "IPD process"],
     problem: "Hardware value emerges within a wider workflow.", problemText: "People buy, manage and use products differently. Requirements need real contexts, organizational roles and hardware and software constraints.",
@@ -32,6 +35,7 @@ export const cases = {
     boundary: "My role focused on user, market and experience research within product development. Hardware engineering, supply-chain decisions and full product development are not presented as individual achievements."
   },
   "product-business": {
+    overview: [["Company", "DROI"], ["My role", "Product analysis & monetization"], ["Focus", "Six consumer product lines"]],
     label: "04 / DROI · PRODUCT GROWTH", title: "From usage to value",
     intro: "At DROI, I analyze six consumer product lines and design monetization flows.",
     tags: ["Product analytics", "Monetization", "Global products", "Release delivery"],
