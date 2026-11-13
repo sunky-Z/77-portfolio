@@ -36,7 +36,7 @@ export const portfolio = {
         "从用户研究，",
         "到 AI 产品。"
       ],
-      "intro": "心理学本科，工商管理硕士，ENFJ\n关注人机交互与产品商业化，职业经历涵盖用户研究、产品策略与智能硬件\n现从事 AI 产品与 GTM 商业化策略",
+      "intro": "心理学本科，工商管理硕士，ENFJ\n关注人机交互与商业化，职业经历涵盖用户研究、产品与 GTM 策略\n现从事 AI 产品与商业化策略",
       "summaryCards": [
         {
           "id": "about",
@@ -182,7 +182,7 @@ export const portfolio = {
         "From user research.",
         "To AI products."
       ],
-      "intro": "A bachelor’s in psychology and a master’s in business administration, ENFJ\nInterested in human–computer interaction and product commercialization. Experience across user research, product strategy and smart hardware\nNow working on AI products and go-to-market (GTM) strategy",
+      "intro": "A bachelor’s in psychology and a master’s in business administration, ENFJ\nInterested in human–computer interaction and commercialization. Experience across user research, product and go-to-market (GTM) strategy\nNow working on AI products and commercialization strategy",
       "summaryCards": [
         {
           "id": "about",
