@@ -32,8 +32,14 @@ jobs:
           cache-dependency-path: website/package-lock.json
       - name: Install dependencies
         run: npm ci
+      - name: Check routes and content
+        run: npm test
       - name: Build portfolio
         run: npm run build
+        env:
+          VITE_BASE_PATH: /${{ github.event.repository.name }}/
+      - name: Check deployable files
+        run: npm run check:build
         env:
           VITE_BASE_PATH: /${{ github.event.repository.name }}/
       - name: Upload static site

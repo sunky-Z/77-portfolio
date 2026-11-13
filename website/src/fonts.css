@@ -1,6 +1,27 @@
-/* Latin uses Times New Roman. Chinese follows Apple China's font stack.
-   Apple font files are not bundled; use installed fonts, then system fallbacks. */
+/* Restrict local Times to Latin so its OS font-linking cannot select a CJK serif.
+   No font binaries are bundled. Apple and Windows fonts use local installations. */
+@font-face {
+  font-family: 'Portfolio Times';
+  src: local('Times New Roman'), local('Times'), local('Liberation Serif');
+  font-style: normal;
+  font-weight: 400;
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2100-214F;
+}
+@font-face {
+  font-family: 'Portfolio Times';
+  src: local('Times New Roman Italic'), local('Times Italic'), local('Liberation Serif Italic');
+  font-style: italic;
+  font-weight: 400;
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2100-214F;
+}
+@font-face {
+  font-family: 'Portfolio Times';
+  src: local('Times New Roman Bold'), local('Times Bold'), local('Liberation Serif Bold');
+  font-style: normal;
+  font-weight: 600 900;
+  unicode-range: U+0000-024F, U+1E00-1EFF, U+2000-206F, U+20A0-20CF, U+2100-214F;
+}
 :root {
-  --font-family: 'Times New Roman', Times, 'SF Pro SC', 'PingFang SC',
-    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-family: 'Portfolio Times', 'SF Pro SC', 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif;
 }

@@ -10,7 +10,7 @@ await build({ root });
 
 const output = resolve(root, config.build.outDir);
 const template = await readFile(resolve(output, 'index.html'), 'utf8');
-const origin = 'https://sunky-z.github.io';
+const origin = (process.env.VITE_SITE_ORIGIN || 'https://sunky-z.github.io').replace(/\/$/, '');
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
 
 function pageHTML(page) {
@@ -25,6 +25,7 @@ function pageHTML(page) {
     .replace(/(<meta property="og:description" content=")[^"]*("\s*\/?>)/, `$1${description}$2`)
     .replace(/(<link rel="canonical" href=")[^"]*("\s*\/?>)/, `$1${canonical}$2`)
     .replace(/(<meta property="og:url" content=")[^"]*("\s*\/?>)/, `$1${canonical}$2`)
+    .replace(/(<meta property="og:image" content=")[^"]*("\s*\/?>)/, `$1${origin}${routeHref('/assets/hero-profile-summary-v1.webp', config.base)}$2`)
     .replace(/<noscript>[\s\S]*?<\/noscript>/, `<noscript><h1>${title}</h1><p>${description}</p><p><a href="${routeHref('/', config.base)}">77 · 首页</a> · <a href="mailto:Zysq09@gmail.com">Zysq09@gmail.com</a></p></noscript>`);
 }
 
