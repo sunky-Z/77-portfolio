@@ -54,7 +54,7 @@ function ProjectCard({ project, skills, navigate, L, compact = false }) {
     <p className="card-topline">{project.company}</p>
     <h3>{project.title}</h3>
     <p className="card-description">{project.summary}</p>
-    <span className="card-footer">{L('查看项目', 'Read project')} <Glyph kind="arrow" size={17} /></span>
+    <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={17} /></span>
   </a>;
   return <a className="project-card" href={`#work/${project.id}`} onClick={event => navigate(`#work/${project.id}`, event)}>
     <div className="project-cover">
@@ -65,7 +65,7 @@ function ProjectCard({ project, skills, navigate, L, compact = false }) {
       <h3 className="card-title">{project.title}</h3>
       <p className="card-description">{project.summary}</p>
       <div className="tag-list">{project.skills.map(id => <span key={id}>{skills[id].title}</span>)}</div>
-      <span className="card-footer">{L('查看项目经过', 'Read the project')} <Glyph kind="arrow" size={18} /></span>
+      <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={18} /></span>
     </div>
   </a>;
 }
@@ -75,7 +75,7 @@ function SkillCard({ id, skill, index, navigate, L, compact = false }) {
     {!compact && <span className="card-index">{String(index + 1).padStart(2, '0')}</span>}
     <h3 className="card-title">{skill.title}</h3>
     <p className="card-description">{skill.summary}</p>
-    <span className="card-footer">{L('看具体做法', 'See how I work')} <Glyph kind="arrow" size={18} /></span>
+    <span className="card-footer">{L('了解方法', 'Explore approach')} <Glyph kind="arrow" size={18} /></span>
   </a>;
 }
 
@@ -84,15 +84,15 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
     <section id="top" className="hero wrap" aria-labelledby="home-title" data-reading-anchor>
       <div className="hero-layout">
         <div className="hero-copy">
-          <p className="eyebrow">{L('77 的个人介绍', 'A little about 77')}</p>
+          <p className="eyebrow">{L('77 · 产品经理', '77 · Product Manager')}</p>
           <h1 id="home-title" tabIndex={-1}>{data.profile.title.map(line => <span key={line}>{line}</span>)}</h1>
           <p className="page-intro">{data.profile.intro}</p>
           <div className="hero-actions">
-            <a className="button button-primary" href="#projects" onClick={event => navigate('#projects', event)}>{L('看看我做过什么', 'See my work')} <Glyph kind="arrow" size={18} /></a>
-            <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('了解我的经历', 'My background')}</a>
+            <a className="button button-primary" href="#projects" onClick={event => navigate('#projects', event)}>{L('浏览项目', 'Explore projects')} <Glyph kind="arrow" size={18} /></a>
+            <a className="button button-secondary" href="#about" onClick={event => navigate('#about', event)}>{L('职业经历', 'Career')}</a>
           </div>
         </div>
-        <div className="hero-visual" aria-hidden="true"><img src={asset('sketch-research.webp')} alt="" width="900" height="600" fetchPriority="high" /></div>
+        <div className="hero-visual" aria-hidden="true"><img src={asset('sketch-research-v2.webp')} alt="" width="900" height="600" fetchPriority="high" /></div>
       </div>
       <div className="overview-grid">
         {data.profile.summaryCards.map((card, index) => <a className="overview-card" href={card.href} key={card.id} onClick={event => navigate(card.href, event)}>
@@ -105,34 +105,28 @@ function HomePage({ data, navigate, L, onCopyEmail }) {
     </section>
 
     <section id="about" className="section wrap" aria-labelledby="about-title" data-reading-anchor>
-      <SectionHeading id="about-title" number="01" title={L('我的经历', 'My background')}>
-        {L('我先后在这三家公司做过研究和产品相关工作。', 'I have worked in research and product across these three companies.')}
-      </SectionHeading>
+      <SectionHeading id="about-title" number="01" title={L('职业经历', 'Career')} />
       <div className="career-grid">
         {data.career.map(item => <a className="career-card" href={`#experience/${item.id}`} key={item.id} onClick={event => navigate(`#experience/${item.id}`, event)}>
           <p className="card-topline">{item.date}</p>
           <h3 className="card-title">{item.company}</h3>
           <p className="card-role">{item.role}</p>
           <p className="card-description">{item.summary}</p>
-          <span className="card-footer">{L('展开这段经历', 'Read about this role')} <Glyph kind="arrow" size={17} /></span>
+          <span className="card-footer">{L('了解经历', 'View experience')} <Glyph kind="arrow" size={17} /></span>
         </a>)}
       </div>
       <Education items={data.profile.education} L={L} />
     </section>
 
     <section id="projects" className="section wrap" aria-labelledby="projects-title" data-reading-anchor>
-      <SectionHeading id="projects-title" number="02" title={L('做过的项目', 'Selected work')}>
-        {L('按工作主题整理。每一篇都写清楚背景、我的工作，以及交付了什么。', 'Organized by work area, with the context, my contribution and the work I delivered.')}
-      </SectionHeading>
+      <SectionHeading id="projects-title" number="02" title={L('项目实践', 'Selected projects')} />
       <div className="project-grid">
         {data.projects.map(project => <ProjectCard key={project.id} project={project} skills={data.skills} navigate={navigate} L={L} />)}
       </div>
     </section>
 
     <section id="strengths" className="section wrap" aria-labelledby="skills-title" data-reading-anchor>
-      <SectionHeading id="skills-title" number="03" title={L('我怎么做事', 'How I work')}>
-        {L('从了解问题到跟进交付。每一项都附上具体做法和对应的项目。', 'From understanding a problem to following through on delivery. Each area includes my methods and relevant projects.')}
-      </SectionHeading>
+      <SectionHeading id="skills-title" number="03" title={L('能力与方法', 'Capabilities')} />
       <div className="skills-grid">
         {Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} navigate={navigate} L={L} />)}
       </div>
@@ -191,10 +185,10 @@ function ProjectArticle({ id, item, data, navigate, L }) {
   const project = data.projects.find(entry => entry.id === id);
   const sections = [
     ['project-context', L('工作背景', 'Context')],
-    ['project-contribution', L('我具体做了什么', 'My work')],
-    ['project-outputs', L('交付了什么', 'Deliverables')],
-    ['project-reflection', L('回头看这段工作', 'Looking back')],
-    ['project-related', L('相关能力与项目', 'Related work')],
+    ['project-contribution', L('关键工作', 'Contribution')],
+    ['project-outputs', L('主要交付', 'Deliverables')],
+    ['project-reflection', L('实践思考', 'Reflections')],
+    ['project-related', L('相关方法与项目', 'Related methods & projects')],
   ];
   return <div className="detail-layout">
     <article className="article-body">
@@ -207,12 +201,12 @@ function ProjectArticle({ id, item, data, navigate, L }) {
       </ArticleSection>
       <ArticleSection id="project-reflection" title={sections[3][1]}>
         <p>{item.lesson}</p>
-        <div className="contribution-boundary"><h3>{L('我的职责与协作范围', 'My role and collaborators')}</h3><p>{item.boundary}</p></div>
+        <div className="contribution-boundary"><h3>{L('职责与协作', 'Role & collaboration')}</h3><p>{item.boundary}</p></div>
       </ArticleSection>
       <ArticleSection id="project-related" title={sections[4][1]}>
-        <h3 className="related-heading">{L('这段工作用到的方法', 'Methods used in this work')}</h3>
+        <h3 className="related-heading">{L('相关方法', 'Related methods')}</h3>
         <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} navigate={navigate} L={L} compact />)}</div>
-        <h3 className="related-heading">{L('继续看看其他项目', 'More projects')}</h3>
+        <h3 className="related-heading">{L('更多项目', 'More projects')}</h3>
         <div className="related-grid">{data.projects.filter(entry => entry.id !== id).slice(0, 2).map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} navigate={navigate} L={L} compact />)}</div>
       </ArticleSection>
     </article>
@@ -222,9 +216,9 @@ function ProjectArticle({ id, item, data, navigate, L }) {
 
 function SkillArticle({ item, data, navigate, L }) {
   const sections = [
-    ['skill-methods', L('具体怎么做', 'How I approach it')],
-    ['skill-projects', L('用在哪些项目里', 'Where I used it')],
-    ['skill-scope', L('适用范围', 'Scope')],
+    ['skill-methods', L('方法实践', 'Approach')],
+    ['skill-projects', L('应用项目', 'Project examples')],
+    ['skill-scope', L('工作范围', 'Scope')],
   ];
   return <div className="detail-layout">
     <article className="article-body">
@@ -242,13 +236,12 @@ function SkillArticle({ item, data, navigate, L }) {
 
 function CareerArticle({ item, stage, data, navigate, L }) {
   const sections = [
-    ['career-work', L('这段经历里做了什么', 'What I worked on')],
+    ['career-work', L('职责与实践', 'Responsibilities')],
     ['career-projects', L('相关项目', 'Related projects')],
   ];
   return <div className="detail-layout">
     <article className="article-body">
       <ArticleSection id="career-work" title={sections[0][1]}>
-        <p>{stage.description}</p>
         <ul>{stage.actions.map(action => <li key={action}>{action}</li>)}</ul>
         <div className="tag-list">{stage.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
         {stage.metrics && <dl className="detail-meta work-metrics">{stage.metrics.map(metric => <div key={metric.label}><dt>{metric.label}</dt><dd>{metric.value}</dd></div>)}</dl>}
@@ -265,7 +258,7 @@ function DetailPage({ route, data, cases, stages, navigate, goBack, L, onCopyLin
   const project = route.type === 'project';
   const skill = route.type === 'skill';
   const item = project ? cases[route.id] : skill ? data.skills[route.id] : data.career.find(entry => entry.id === route.id);
-  const category = project ? L('项目经历', 'Projects') : skill ? L('工作方法', 'Methods') : L('职业经历', 'Experience');
+  const category = project ? L('项目经历', 'Projects') : skill ? L('能力与方法', 'Capabilities') : L('职业经历', 'Experience');
   const fallback = project ? '#projects' : skill ? '#strengths' : '#about';
   const title = project || skill ? item.title : item.company;
   const intro = project || skill ? item.intro : item.summary;
@@ -359,7 +352,7 @@ export default function App() {
 
   const links = [
     ['#about', L('经历', 'Background')], ['#projects', L('项目', 'Work')],
-    ['#strengths', L('能力', 'Methods')], ['#contact', L('联系', 'Contact')],
+    ['#strengths', L('能力', 'Capabilities')], ['#contact', L('联系', 'Contact')],
   ];
   const headerNavigate = (href, event) => { setMenuOpen(false); navigate(href, event); };
   return <div className={`portfolio language-${language}`} lang={language === 'zh' ? 'zh-CN' : 'en'}>
@@ -374,7 +367,7 @@ export default function App() {
       </div>
     </header>
     <main id="main">
-      {route.invalid && <p className="empty-state wrap">{L('这个链接没有对应的页面。你可以从下面重新了解我。', 'This link does not match a page. You can start with the overview below.')}</p>}
+      {route.invalid && <p className="empty-state wrap">{L('页面未找到。请从总览继续浏览。', 'Page not found. Explore the overview below.')}</p>}
       {route.type === 'home' ? <HomePage data={data} navigate={navigate} L={L} onCopyEmail={() => copy(EMAIL, L('邮箱已复制', 'Email copied'), L('请选择邮箱地址后复制', 'Select the email address to copy'))} /> : <DetailPage route={route} data={data} cases={cases} stages={stages} navigate={navigate} goBack={goBack} L={L} onCopyLink={() => copy(window.location.href, L('页面链接已复制', 'Page link copied'), L('请从地址栏复制链接', 'Copy the link from your address bar'))} />}
     </main>
     <footer className="site-footer wrap"><span>77 · {L('个人介绍', 'Profile')}</span><a href="#top" onClick={event => navigate('#top', event)}>{L('回到首页', 'Back to home')} <Glyph kind="arrow" size={16} /></a></footer>
