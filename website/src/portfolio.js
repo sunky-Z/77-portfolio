@@ -1,14 +1,16 @@
 import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
 
-const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'hardware-research', 'product-business'];
+const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
 const projectDetails = {
   'ai-ecosystem': { highlight: { zh: '29 套卡片模板 · 38 个视觉变体', en: '29 card templates · 38 visual variants' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'sketch-ai-v2.webp', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '智能通知、任务反馈与用户介入，让 AI 任务的状态和操作清楚可见。', en: 'Notifications, task feedback and user input make AI task states and actions visible.' } },
   'skill-ecosystem': { highlight: { zh: '标签体系：295 → 47 个共享标签', en: 'Taxonomy: 295 labels → 47 shared tags' }, relatedProjects: ['ai-ecosystem', 'international-product'], company: 'DROI', image: 'case-skills.svg', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '整理技能分类、使用说明与审核发布流程，覆盖发现到首次使用。', en: 'Skill categories, usage guidance and review flows, from discovery to first use.' } },
   'ai-commercialization': { highlight: { zh: '订阅原型覆盖 15 类账户场景', en: 'Subscription prototype covering 15 account scenarios' }, relatedProjects: ['product-business', 'international-product'], company: 'DROI', image: 'case-subscription.svg', skills: ['planning', 'ai', 'delivery'], featured: true, summary: { zh: '梳理账号、设备、订阅与积分的关系，设计权益规则及支付异常流程。', en: 'Account, device, subscription and Credits rules, including payment exceptions.' } },
   'international-product': { highlight: { zh: '内容配置：19 条技能 × 46 个语言配置', en: 'Content configuration: 19 skills × 46 language configurations' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'case-localization.svg', skills: ['planning', 'delivery'], summary: { zh: '多语言技能、套餐与奖励说明的内容配置、核验和海外演示适配。', en: 'Multilingual skills, plan and reward content, with configuration checks and overseas demos.' } },
-  'energy-research': { relatedProjects: ['hardware-research', 'ai-ecosystem'], company: 'HUAWEI', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '以市场与用户研究，支持能源产品规划。', en: 'Market and user research supporting energy product planning.' } },
-  'hardware-research': { relatedProjects: ['energy-research', 'product-business'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research', 'planning'], summary: { zh: '研究真实使用情境，分析软硬件需求。', en: 'Research into real use and the requirements of hardware and companion software.' } },
+  'energy-research': { relatedProjects: ['station-control-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '以市场与用户研究，支持能源产品规划。', en: 'Market and user research supporting energy product planning.' } },
+  'station-control-research': { relatedProjects: ['energy-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '同一套站控系统，采购时关注什么，投入使用后又服务哪些岗位？从购买决策和现场旅程两端梳理需求。', en: 'How do the criteria used to buy a control system relate to the work people do with it in a solar plant?' } },
+  'hardware-research': { relatedProjects: ['hardware-human-factors', 'station-control-research'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research', 'planning'], summary: { zh: '以一次设备报障为例，梳理日常使用者、IT 和服务人员各自接手什么，以及问题怎样传到下一位处理者。', en: 'A printer fault connects three jobs. The employee reports the interruption, IT investigates, and a service technician may take over.' } },
+  'hardware-human-factors': { relatedProjects: ['hardware-research', 'ai-ecosystem'], company: 'NINESTAR', image: 'sketch-hardware.webp', skills: ['research'], summary: { zh: '把“哪种操作更顺手”变成可比较的任务，分别记录用户怎样做、能否完成，以及做完后怎样评价。', en: 'Turned questions about ease of use into comparable tasks, recording what participants did, whether they finished and how the action felt.' } },
   'product-business': { relatedProjects: ['ai-commercialization', 'international-product'], company: 'DROI', image: 'sketch-growth-v2.webp', skills: ['planning', 'delivery'], summary: { zh: '分析 6 条消费端产品线，结合经营数据与用户反馈支持广告与版本迭代。', en: 'Analysis across 6 consumer product lines to inform advertising and release decisions.' } },
 };
 
@@ -29,8 +31,8 @@ function projectCards(cases, language) {
 
 function careerCards(stages, language) {
   return [
-    { id: 'huawei', company: 'HUAWEI', date: '2021.06 — 2024.04', relatedProjects: ['energy-research'] },
-    { id: 'hardware', company: 'NINESTAR', date: '2024.06 — 2025.04', relatedProjects: ['hardware-research'] },
+    { id: 'huawei', company: 'HW', date: '2021.06 — 2024.04', relatedProjects: ['station-control-research', 'energy-research'] },
+    { id: 'hardware', company: 'NINESTAR', date: '2024.06 — 2025.04', relatedProjects: ['hardware-research', 'hardware-human-factors'] },
     { id: 'current', company: 'DROI', date: language === 'zh' ? '2025.11 — 至今' : '2025.11 — Present', relatedProjects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'product-business'] },
   ].map(item => ({ ...item, role: stages[item.id].title, summary: stages[item.id].description }));
 }
@@ -104,9 +106,11 @@ export const portfolio = {
         ],
         "projects": [
           "energy-research",
-          "hardware-research"
+          "station-control-research",
+          "hardware-research",
+          "hardware-human-factors"
         ],
-        "boundary": "实践主要来自 HUAWEI 与 NINESTAR 的用户、市场和体验研究工作。研究支持规划与开发，相关决策及交付由团队共同完成。"
+        "boundary": "实践主要来自 HW 与 NINESTAR 的用户、市场和体验研究工作。研究支持规划与开发，相关决策及交付由团队共同完成。"
       },
       "planning": {
         "title": "产品规划",
@@ -128,6 +132,7 @@ export const portfolio = {
         ],
         "projects": [
           "energy-research",
+          "station-control-research",
           "hardware-research",
           "ai-commercialization",
           "product-business"
@@ -255,9 +260,11 @@ export const portfolio = {
         ],
         "projects": [
           "energy-research",
-          "hardware-research"
+          "station-control-research",
+          "hardware-research",
+          "hardware-human-factors"
         ],
-        "boundary": "Based on user, market and experience research at HUAWEI and NINESTAR. Research supports planning and development; decisions and delivery involve the wider team."
+        "boundary": "Based on user, market and experience research at HW and NINESTAR. Research supports planning and development; decisions and delivery involve the wider team."
       },
       "planning": {
         "title": "Product planning",
@@ -279,6 +286,7 @@ export const portfolio = {
         ],
         "projects": [
           "energy-research",
+          "station-control-research",
           "hardware-research",
           "ai-commercialization",
           "product-business"

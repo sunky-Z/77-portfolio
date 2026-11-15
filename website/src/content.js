@@ -317,7 +317,7 @@ export const cases = {
     "overview": [
       [
         "Company",
-        "HUAWEI"
+        "HW"
       ],
       [
         "Role",
@@ -328,9 +328,9 @@ export const cases = {
         "Energy product planning & evaluation"
       ]
     ],
-    "label": "05 / HUAWEI · RESEARCH & PLANNING",
+    "label": "05 / HW · RESEARCH & PLANNING",
     "title": "Research for energy products",
-    "intro": "Contributed to market, user and requirements research at HUAWEI, informing energy product planning and experience improvements.",
+    "intro": "Contributed to market, user and requirements research at HW, informing energy product planning and experience improvements.",
     "tags": [
       "Market research",
       "User research",
@@ -370,46 +370,40 @@ export const cases = {
       ],
       [
         "Role",
-        "User, market & experience research"
+        "Industry user and workflow research"
       ],
       [
         "Area",
-        "Smart hardware & companion software"
+        "Office printers and companion software"
       ]
     ],
     "label": "06 / NINESTAR · SMART HARDWARE",
-    "title": "User research for smart hardware",
-    "intro": "Researched users and markets at NINESTAR, covering consumers and industry roles using smart hardware and companion software.",
+    "title": "Office printing, from everyday use to IT support",
+    "intro": "At NINESTAR, I studied the work of both the people using office printers and the IT staff maintaining them. Reporting a fault may be the last step for an employee. For IT, it starts the process of diagnosing, resolving or escalating the problem.",
+    "problem": "Who takes over between a failed print job and a working printer?",
+    "problemText": "Watching someone at the printer reveals only part of the work. Driver installation, device setup, routine checks and service requests also shape the experience. The research brought these tasks into the same timeline.",
     "tags": [
-      "Field research",
       "Industry users",
-      "Hardware & software",
-      "Requirements"
+      "Role profiles",
+      "IT support journey"
     ],
-    "problem": "Different roles. Different requirements.",
-    "problemText": "Buyers, managers and users have different goals and constraints. Research examines actual workflows, organizational roles, hardware conditions and software use to inform product positioning and development.",
     "actions": [
-      "<strong>Contextual research:</strong> Study product use within industry workflows through fieldwork, shadowing and in-depth interviews.",
-      "<strong>Roles and requirements:</strong> Analyze the goals and needs of departments, buyers and users, identifying differences between roles.",
-      "<strong>Positioning and requirements:</strong> Combine desk research, industry information and technical costs to support positioning, opportunity assessment and requirements analysis.",
-      "<strong>Development evaluation:</strong> Deliver research, requirements and experience evaluations at product milestones. Record issues and follow improvements."
+      "Used fieldwork, shadowing and interviews to examine the priorities of everyday users, device administrators and buyers.",
+      "Mapped installation, routine management, fault handling and service. Marked where employees reported an issue, where IT diagnosed it and when a technician took over.",
+      "Turned features and claims from comparable devices into interview questions to examine which differences mattered in everyday work."
     ],
     "outputs": [
       [
-        "Context & role analysis",
-        "Actual workflows, role goals and differences in needs"
+        "Role profiles",
+        "Distinguished the goals of users, administrators and buyers to guide interviews and requirements discussions."
       ],
       [
-        "Market & requirements research",
-        "Research for positioning, opportunities and priorities"
-      ],
-      [
-        "Experience evaluations",
-        "Findings, issues and recommendations at development milestones"
+        "IT support journey",
+        "Mapped roles, tools and handoffs across equipment use, software configuration and service support."
       ]
     ],
-    "lesson": "Hardware and software experience needs to be evaluated in use. Roles, device conditions and the surrounding workflow all influence the product experience.",
-    "boundary": "My role covered user, market and experience research during development. Hardware engineering, supply-chain work and full product development were handled by different teams."
+    "lesson": "A failed print job is unfinished work for an employee and a fault to diagnose for IT. A requirement becomes more specific once it names who discovers the issue, who acts and who verifies recovery.",
+    "boundary": "I contributed to industry user research and competitive analysis, including role profiles, the support journey and interview topics. Product and engineering teams evaluated changes to the hardware and software."
   },
   "product-business": {
     "overview": [
@@ -459,14 +453,100 @@ export const cases = {
     ],
     "lesson": "Read performance indicators alongside the relevant users, channels and versions. Assess product changes against specific usage issues and a defined evaluation scope.",
     "boundary": "The 6 product lines describe the analysis and requirements scope. Engineering, design, QA and operations share release delivery. This topic covers consumer tools; AI subscriptions and entitlements have a separate case."
+  },
+  "station-control-research": {
+    "overview": [
+      [
+        "Company",
+        "HW"
+      ],
+      [
+        "Role",
+        "Research with buyers and operators"
+      ],
+      [
+        "Area",
+        "Utility-scale solar plant management"
+      ]
+    ],
+    "label": "HW",
+    "title": "Solar plant controls, from purchase to field use",
+    "intro": "At HW, I contributed to research on control systems for utility-scale solar plants. We looked at how buyers learned about and evaluated a system, and how people in production, maintenance and site operations used it in their daily work.",
+    "problem": "Whose work does a feature on a purchasing checklist support?",
+    "problemText": "Buyers can explain what matters when they choose a system. Understanding a feature in use also requires knowing who uses it and where it fits into their work. Plant diagnostics offered one concrete case.",
+    "tags": [
+      "Industry users",
+      "Buying decisions",
+      "User journeys"
+    ],
+    "actions": [
+      "Mapped the buying process to distinguish how buyers learned about a system from what they weighed when making a decision.",
+      "Contributed to user segmentation and profiles, and mapped journeys across production, maintenance and site operations.",
+      "Studied diagnostic features with plant users, applying a funnel model to examine usage and reviewing comparable capabilities in competing products."
+    ],
+    "outputs": [
+      [
+        "Buyer decision criteria",
+        "Organized the information buyers looked for across the purchase process."
+      ],
+      [
+        "User profiles and journeys",
+        "Placed each role’s goals in the context of production, maintenance and site operations."
+      ]
+    ],
+    "lesson": "A diagnostic feature can appear both on a purchasing checklist and in a maintenance task. Describing those situations separately helps a team identify whom to consult about a requirement.",
+    "boundary": "I contributed to user and requirements research and organized buyer criteria, user profiles and journeys for product discussions."
+  },
+  "hardware-human-factors": {
+    "overview": [
+      [
+        "Company",
+        "NINESTAR"
+      ],
+      [
+        "Role",
+        "Human factors research and evaluation"
+      ],
+      [
+        "Area",
+        "Physical interaction with office equipment"
+      ]
+    ],
+    "label": "NINESTAR",
+    "title": "Human factors testing for everyday printer tasks",
+    "intro": "At NINESTAR, I contributed to studies of everyday actions such as using printer controls and handling a paper tray. In a design review, it is easy to assume others will use a device the way you do. I framed the comparison around a common task that participants could perform under similar conditions.",
+    "problem": "When people call an action easy, do they mean successful or comfortable?",
+    "problemText": "Someone can complete a task on the first try and still describe the movement as awkward. The test made room for both an observation of performance and the participant’s own assessment.",
+    "tags": [
+      "Human factors",
+      "Comparative testing",
+      "Physical interaction"
+    ],
+    "actions": [
+      "Defined tasks around the actions under review and chose appropriate measures such as completion, comfort or satisfaction.",
+      "Piloted the instructions and recording procedure. In the comparison, participants performed the task before rating the experience.",
+      "Brought observed behavior, ratings and qualitative feedback together in a report so the design team could see the evidence behind each judgment."
+    ],
+    "outputs": [
+      [
+        "Test plan and tasks",
+        "Translated design questions into actions participants could perform and defined how each action would be recorded."
+      ],
+      [
+        "Human factors evaluation",
+        "Presented observed movements alongside participants’ assessments to support comparison at design review."
+      ]
+    ],
+    "lesson": "Watching someone use a device before asking what they prefer gives a follow-up question a specific focus. The participant can point to the movement that felt difficult.",
+    "boundary": "My work covered study design, test sessions and analysis. Design and engineering teams weighed the findings when reviewing the product."
   }
 };
 
 export const stages = {
   "huawei": {
-    "label": "01 / HUAWEI",
+    "label": "01 / HW",
     "title": "User research & product strategy",
-    "description": "Contributed to market, user and requirements research for energy products, supporting planning and experience evaluation.",
+    "description": "Contributed to energy user and market research, including solar plant work across production, maintenance and operations, and the buyer’s decision process.",
     "actions": [
       "Mapped industry and market context; contributed to interviews, surveys and data analysis.",
       "Analyzed goals and differences, documenting user profiles and key journeys.",
@@ -481,11 +561,12 @@ export const stages = {
   "hardware": {
     "label": "02 / NINESTAR",
     "title": "Smart hardware user research",
-    "description": "Consumer and industry-user research across smart hardware and companion software.",
+    "description": "Studied how office equipment is used and maintained, bringing field research and human factors testing into product reviews.",
     "actions": [
       "Studied actual use through fieldwork, shadowing and interviews.",
       "Distinguished requirements across buyers, managers and users.",
-      "Contributed to product positioning, requirements research and experience evaluation during development."
+      "Contributed to product positioning, requirements research and experience evaluation during development.",
+      "Mapped the IT support journey and contributed to comparative human factors tests of everyday printer tasks."
     ],
     "tags": [
       "Smart hardware",

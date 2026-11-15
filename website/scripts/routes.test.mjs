@@ -7,7 +7,7 @@ import { cases as enCases } from '../src/content.js';
 import { legacyHashPath, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
 
 test('all independent pages resolve under both local and GitHub Pages prefixes', () => {
-  assert.equal(portfolioPages.length, 19);
+  assert.equal(portfolioPages.length, 21);
   for (const base of ['/', '/77-portfolio/']) {
     for (const page of portfolioPages) {
       const href = routeHref(page.path, base);
@@ -43,7 +43,7 @@ test('former shared hashes map to documents while page-local section hashes do n
 
 test('project routes, translations, category cards and related links stay in sync', async () => {
   const projectRoutes = portfolioPages.filter(page => page.type === 'project');
-  assert.equal(projectRoutes.length, 7);
+  assert.equal(projectRoutes.length, 9);
   for (const [language, cases] of [['zh', zhCases], ['en', enCases]]) {
     const data = portfolio[language];
     assert.deepEqual(Object.keys(cases).sort(), projectRoutes.map(page => page.id).sort());
@@ -62,6 +62,19 @@ test('project routes, translations, category cards and related links stay in syn
       assert.ok(cases[id].decisions.length >= 2, `${language}/${id} decisions`);
       assert.ok(cases[id].progress.length >= 2, `${language}/${id} progress`);
       assert.equal(cases[id].actions.length, (language === 'zh' ? enCases : zhCases)[id].actions.length);
+    }
+  }
+});
+
+test('research cases are reachable from their employers and research methods in both languages', () => {
+  for (const data of Object.values(portfolio)) {
+    for (const [company, ids] of [['HW', ['station-control-research']], ['NINESTAR', ['hardware-research', 'hardware-human-factors']]]) {
+      const career = data.career.find(entry => entry.company === company);
+      for (const id of ids) {
+        assert.ok(career.relatedProjects.includes(id));
+        assert.ok(data.skills.research.projects.includes(id));
+        assert.equal(data.projects.find(entry => entry.id === id).company, company);
+      }
     }
   }
 });

@@ -36,7 +36,7 @@ npm run dev
 | `npm ci` | 按锁文件安装；首次下载或依赖变化后运行 |
 | `npm run dev` | 开发服务，默认端口 5177 |
 | `npm test` | 核对独立路由、内容映射、中英项目与关联链接 |
-| `npm run build` | 生成资源、19 个独立页面和 `404.html` 到 `dist/` |
+| `npm run build` | 生成资源、21 个独立页面和 `404.html` 到 `dist/` |
 | `npm run check:build` | 构建后核对 HTML、入口资源、静态文件与部署前缀 |
 | `npm run preview` | 预览构建结果，默认端口 4177 |
 
@@ -105,11 +105,11 @@ npm run check:build
 | 层级 | 路径 | 内容 |
 |---|---|---|
 | 首页 | `/` | 简介、精选项目及分类入口 |
-| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、七个项目、四个能力分支 |
+| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、九个项目、四个能力分支 |
 | 联系 | `/contact/` | 邮箱及复制入口 |
 | 经历详情 | `/experience/huawei/`、`/experience/hardware/`、`/experience/current/` | 三段职业经历 |
 | AI 项目 | `/projects/ai-ecosystem/`、`/projects/skill-ecosystem/`、`/projects/ai-commercialization/`、`/projects/international-product/` | 主动服务、技能治理、订阅权益、海外本地化 |
-| 研究及产品分析 | `/projects/energy-research/`、`/projects/hardware-research/`、`/projects/product-business/` | 能源、智能硬件、消费端产品 |
+| 研究及产品分析 | `/projects/energy-research/`、`/projects/station-control-research/`、`/projects/hardware-research/`、`/projects/hardware-human-factors/`、`/projects/product-business/` | 能源、电站站控、商用打印运维、人因实验和消费端产品 |
 | 方法详情 | `/capabilities/research/`、`/capabilities/planning/`、`/capabilities/ai/`、`/capabilities/delivery/` | 方法、应用项目和工作范围 |
 
 所有页面都有自己的 HTML，可直接访问、刷新、分享或在新标签中打开。面包屑和返回链接指向父分类；经历、项目和方法之间有相关链接。切换语言保留当前页面与阅读位置；旧版 `#about`、`#projects`、`#work/…` 等地址会转换到对应页面。
