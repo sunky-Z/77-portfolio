@@ -200,11 +200,11 @@ function TaskFlow({ L }) {
   </figure>;
 }
 
-function DecisionFeature({ id, decision, project, L }) {
+function DecisionFeature({ id, decision, project, L, title, eyebrow }) {
   return <div className="decision-feature">
     <div className="decision-copy">
-      <p className="editorial-label" lang="en">Decision</p>
-      <h2 tabIndex={-1}>{L('关键决策', 'Key decision')}</h2>
+      <p className="editorial-label" lang="en">{eyebrow || 'Decision'}</p>
+      <h2 tabIndex={-1}>{title || L('关键决策', 'Key decision')}</h2>
       <h3>{decision.title}</h3>
       <p>{decision.text}</p>
       {project.highlight && <ProjectFact>{project.highlight}</ProjectFact>}
@@ -216,7 +216,7 @@ function DecisionFeature({ id, decision, project, L }) {
 function ProjectArticle({ id, item, data, L }) {
   const project = data.projects.find(entry => entry.id === id);
   const sections = [
-    ...(item.decisions?.length ? [['project-decisions', L('关键判断', 'Key decisions')]] : []),
+    ...(item.decisions?.length ? [['project-decisions', item.decisionLabel || L('关键判断', 'Key decisions')]] : []),
     ['project-context', L('工作背景', 'Context')],
     ['project-contribution', L('关键工作', 'Contribution')],
     ['project-outputs', L('主要交付', 'Deliverables')],
@@ -229,7 +229,7 @@ function ProjectArticle({ id, item, data, L }) {
   return <div className="project-reading">
     <article className="article-body">
       {item.decisions?.length > 0 && <section id="project-decisions" className="article-section decision-section" data-reading-anchor>
-        <DecisionFeature id={id} decision={item.decisions[0]} project={project} L={L} />
+        <DecisionFeature id={id} decision={item.decisions[0]} project={project} L={L} title={item.decisionLabel} eyebrow={item.decisionEyebrow} />
         <div className="additional-decisions">{item.decisions.slice(1).map(decision => <div className="action-entry" key={decision.title}><h3>{decision.title}</h3><p>{decision.text}</p></div>)}</div>
       </section>}
       <Contents items={sections} L={L} horizontal />

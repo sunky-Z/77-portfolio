@@ -370,40 +370,53 @@ export const cases = {
       ],
       [
         "Role",
-        "Industry user and workflow research"
+        "Questionnaire design, research execution & quantitative and qualitative analysis"
       ],
       [
-        "Area",
-        "Office printers and companion software"
+        "Context",
+        "Bank service counters and office work"
       ]
     ],
-    "label": "06 / NINESTAR · SMART HARDWARE",
-    "title": "Office printing, from everyday use to IT support",
-    "intro": "At NINESTAR, I studied the work of both the people using office printers and the IT staff maintaining them. Reporting a fault may be the last step for an employee. For IT, it starts the process of diagnosing, resolving or escalating the problem.",
-    "problem": "Who takes over between a failed print job and a working printer?",
-    "problemText": "Watching someone at the printer reveals only part of the work. Driver installation, device setup, routine checks and service requests also shape the experience. The research brought these tasks into the same timeline.",
+    "label": "06 / NINESTAR · USER RESEARCH",
+    "title": "Financial-Sector Printing Experience Research",
+    "intro": "As part of a financial-sector user experience study, I researched counter-service and office contexts at a bank’s municipal-level branch. My main responsibilities were questionnaire design, research execution, quantitative analysis and organization of qualitative material, examining usage differences and requirement priorities across groups.",
+    "problem": "Requirement differences between counter service and everyday office work",
+    "problemText": "Printing equipment in the same bank served different working contexts. The study included regular employees, managers, IT staff and users handling confidential material, with experience analyzed in relation to their actual tasks.",
     "tags": [
-      "Industry users",
-      "Role profiles",
-      "IT support journey"
+      "Financial services",
+      "Contextual research",
+      "Questionnaires and data analysis",
+      "Role differences"
+    ],
+    "decisionLabel": "Key finding",
+    "decisionEyebrow": "Finding",
+    "decisions": [
+      {
+        "title": "Counter service emphasizes clarity, speed and smooth operation",
+        "text": "Customer-facing employees mainly handled business tasks and required clear, quick and smooth operation. Requirements were analyzed in the context of those specific business processes."
+      },
+      {
+        "title": "Office work emphasizes convenient printing services",
+        "text": "Staff in the office building mainly printed office content and placed greater emphasis on convenient local-network access, shared printing and cloud-printing services. These priorities differed from those of counter-service work."
+      }
     ],
     "actions": [
-      "Used fieldwork, shadowing and interviews to examine the priorities of everyday users, device administrators and buyers.",
-      "Mapped installation, routine management, fault handling and service. Marked where employees reported an issue, where IT diagnosed it and when a technician took over.",
-      "Turned features and claims from comparable devices into interview questions to examine which differences mattered in everyday work."
+      "Questionnaire design and research execution: Designed the questionnaire around financial-sector printing experience and conducted research at a municipal-level bank branch, covering counter-service and office contexts and different user roles.",
+      "Quantitative analysis: Analyzed study data by user group and working context to identify differences in the printing requirements of counter-service and everyday office work.",
+      "Qualitative material: Organized the qualitative research material and grouped user needs into findings on counter-service experience and the convenience of office-printing services."
     ],
     "outputs": [
       [
-        "Role profiles",
-        "Distinguished the goals of users, administrators and buyers to guide interviews and requirements discussions."
+        "Questionnaire and research analysis material",
+        "Questionnaire design, research records, quantitative analysis and organized qualitative material."
       ],
       [
-        "IT support journey",
-        "Mapped roles, tools and handoffs across equipment use, software configuration and service support."
+        "Context and requirement findings",
+        "Clarity, speed and smooth operation for counter service; convenient local-network access, sharing and cloud printing for office work."
       ]
     ],
-    "lesson": "A failed print job is unfinished work for an employee and a fault to diagnose for IT. A requirement becomes more specific once it names who discovers the issue, who acts and who verifies recovery.",
-    "boundary": "I contributed to industry user research and competitive analysis, including role profiles, the support journey and interview topics. Product and engineering teams evaluated changes to the hardware and software."
+    "lesson": "Industry user research benefits from distinguishing specific working contexts. Business processing and everyday office work can place different requirements on equipment and services within the same industry.",
+    "boundary": "The research was conducted as a team. My main responsibilities were questionnaire design, research execution, quantitative analysis and qualitative material organization, producing requirement findings for counter-service and office scenarios."
   },
   "product-business": {
     "overview": [
@@ -462,40 +475,59 @@ export const cases = {
       ],
       [
         "Role",
-        "Research with buyers and operators"
+        "Field research, questionnaire design, analysis & reporting"
       ],
       [
         "Area",
-        "Utility-scale solar plant management"
+        "SaaS management for ground-mounted solar plants"
       ]
     ],
     "label": "HW",
-    "title": "Solar plant controls, from purchase to field use",
-    "intro": "At HW, I contributed to research on control systems for utility-scale solar plants. We looked at how buyers learned about and evaluated a system, and how people in production, maintenance and site operations used it in their daily work.",
-    "problem": "Whose work does a feature on a purchasing checklist support?",
-    "problemText": "Buyers can explain what matters when they choose a system. Understanding a feature in use also requires knowing who uses it and where it fits into their work. Plant diagnostics offered one concrete case.",
+    "title": "Solar Plant Management System User Research and Functional Improvement",
+    "intro": "I researched the work, profiles and use problems of people using a SaaS management system for ground-mounted solar plants, provided alongside photovoltaic inverters. Its customers included energy companies and smaller plant owners. I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting, informing functional improvements and early exploration of AI maintenance.",
+    "problem": "Difficulty and safety risks in mountain-site inspections",
+    "problemText": "Maintenance staff at one plant in mountainous terrain needed to carry out weekly inspections. Site conditions increased the difficulty of the task and involved safety risks. The research connected system requirements to specific roles, working conditions and tasks.",
     "tags": [
-      "Industry users",
-      "Buying decisions",
-      "User journeys"
+      "Plant management",
+      "User profiles",
+      "Functional improvement",
+      "Maintenance research"
+    ],
+    "decisionLabel": "Key finding",
+    "decisionEyebrow": "Finding",
+    "decisions": [
+      {
+        "title": "Identify use needs through field conditions",
+        "text": "Mountain-site inspection problems were directly related to the working environment and tasks. I examined users’ tasks and difficulties to identify how the existing management functions could support their work and organize improvement directions."
+      },
+      {
+        "title": "Propose assisted inspection and individual-panel alerts",
+        "text": "I considered drone- or camera-assisted inspection and separate alerts for faults in individual solar panels. These functional directions were documented in the research report."
+      }
     ],
     "actions": [
-      "Mapped the buying process to distinguish how buyers learned about a system from what they weighed when making a decision.",
-      "Contributed to user segmentation and profiles, and mapped journeys across production, maintenance and site operations.",
-      "Studied diagnostic features with plant users, applying a funnel model to examine usage and reviewing comparable capabilities in competing products."
+      "Research design and execution: Organized the research around actual system-use problems, designed questionnaires and conducted field research to understand users’ roles, working contexts and task requirements.",
+      "Data analysis and user profiles: Analyzed questionnaire data and qualitative material to identify user characteristics, use problems and functional needs, informing profiles and improvements to existing modules.",
+      "Functional directions and reporting: Organized use problems into improvement proposals and produced the research report. For mountain-site inspections, I proposed drone- or camera-assisted inspection and individual-panel fault alerts, alongside early exploration of AI maintenance and inspection."
     ],
     "outputs": [
       [
-        "Buyer decision criteria",
-        "Organized the information buyers looked for across the purchase process."
+        "User research report",
+        "Documented use contexts, user profiles, use problems and proposals for functional improvements."
       ],
       [
-        "User profiles and journeys",
-        "Placed each role’s goals in the context of production, maintenance and site operations."
+        "Maintenance directions",
+        "Research proposals for assisted inspection and individual-panel fault alerts, with early exploration of AI maintenance and inspection."
       ]
     ],
-    "lesson": "A diagnostic feature can appear both on a purchasing checklist and in a maintenance task. Describing those situations separately helps a team identify whom to consult about a requirement.",
-    "boundary": "I contributed to user and requirements research and organized buyer criteria, user profiles and journeys for product discussions."
+    "progress": [
+      {
+        "title": "Proposals documented in the report",
+        "text": "The assisted-inspection and individual-panel alerting ideas were written into the research report as input for subsequent product discussion."
+      }
+    ],
+    "lesson": "Management-system requirements need to be examined in their field conditions. Roles, tasks, operating environments and execution risks provided specific evidence for functional improvements.",
+    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting. The inspection and alerting directions described in this case were documented in the research report."
   },
   "hardware-human-factors": {
     "overview": [
@@ -505,40 +537,62 @@ export const cases = {
       ],
       [
         "Role",
-        "Human factors research and evaluation"
+        "Human factors research, option evaluation & product form design"
       ],
       [
         "Area",
-        "Physical interaction with office equipment"
+        "Physical interaction with printing equipment"
       ]
     ],
     "label": "NINESTAR",
-    "title": "Human factors testing for everyday printer tasks",
-    "intro": "At NINESTAR, I contributed to studies of everyday actions such as using printer controls and handling a paper tray. In a design review, it is easy to assume others will use a device the way you do. I framed the comparison around a common task that participants could perform under similar conditions.",
-    "problem": "When people call an action easy, do they mean successful or comfortable?",
-    "problemText": "Someone can complete a task on the first try and still describe the movement as awkward. The test made room for both an observation of performance and the participant’s own assessment.",
+    "title": "Printer Human Factors Evaluation and Product Form Design",
+    "intro": "I was responsible for human factors research and product form design for key printer components. The work covered A/B trials of left/right layouts, control-panel operation and paper handling, use observation and human factors assessment using 3D models. I combined task performance, participant feedback and scenario analysis to compare options and develop the product form. The product entered production.",
+    "problem": "Layout effects on posture, visibility and task completion",
+    "problemText": "The output tray and the position and layout of the control panel required assessment in real tasks. The analysis considered task completion, standing and seated operating postures, attention to the panel and output area, and obstruction of the output area.",
     "tags": [
       "Human factors",
-      "Comparative testing",
-      "Physical interaction"
+      "A/B testing",
+      "Physical interaction",
+      "Product form"
+    ],
+    "decisions": [
+      {
+        "title": "Include standing and seated use in scenario comparison",
+        "text": "I analyzed panel operation, paper loading and paper retrieval in standing and seated scenarios, comparing layouts through task performance, observed posture and participant feedback."
+      },
+      {
+        "title": "Address panel attention and output-area visibility together",
+        "text": "I considered attention during interaction, comparing the conditions that would allow users to attend to both the control panel and paper output. I also considered obstruction of the output area and integrated the strengths of the options into the product form design."
+      }
     ],
     "actions": [
-      "Defined tasks around the actions under review and chose appropriate measures such as completion, comfort or satisfaction.",
-      "Piloted the instructions and recording procedure. In the comparison, participants performed the task before rating the experience.",
-      "Brought observed behavior, ratings and qualitative feedback together in a report so the design team could see the evidence behind each judgment."
+      "Study design and task analysis: Set up A/B comparisons around left/right layouts, the output tray and control-panel position, breaking down panel operation, paper loading and paper retrieval into real tasks.",
+      "Operation records and participant feedback: Recorded task completion, errors and operating effort, and observed posture. Asked participants about visibility, comfort and fatigue, ease of use and option preferences, and recorded their responses.",
+      "Human factors and attention analysis: Used 3D models to assess the use requirements of parts and buttons. Analyzed standing and seated scenarios and attention during interaction, comparing the layout and obstruction relationships between the panel and paper output.",
+      "Option comparison and form design: Combined human factors data, operation observations and participant feedback to compare the options and integrate their strengths into a product form. The product entered production."
     ],
     "outputs": [
       [
-        "Test plan and tasks",
-        "Translated design questions into actions participants could perform and defined how each action would be recorded."
+        "Human factors assessment material",
+        "A/B operation records, posture observations, participant feedback and human factors assessment using 3D models."
       ],
       [
-        "Human factors evaluation",
-        "Presented observed movements alongside participants’ assessments to support comparison at design review."
+        "Operating scenarios and layout analysis",
+        "Analysis of standing and seated use, attention allocation and visibility of the panel and paper output."
+      ],
+      [
+        "Product-form proposal",
+        "A product form integrating the strengths of the options based on the comparison findings."
       ]
     ],
-    "lesson": "Watching someone use a device before asking what they prefer gives a follow-up question a specific focus. The participant can point to the movement that felt difficult.",
-    "boundary": "My work covered study design, test sessions and analysis. Design and engineering teams weighed the findings when reviewing the product."
+    "progress": [
+      {
+        "title": "Production",
+        "text": "I completed the research and evaluation, data analysis, scenario concepts, option comparison and product form design. The product entered production."
+      }
+    ],
+    "lesson": "Evaluating physical interaction requires operation records, posture observation and participant feedback. Examining tasks, posture and visibility within the same use scenario makes the basis for product form decisions clearer.",
+    "boundary": "I carried out the research, analysis, standing and seated scenario concepts, attention concepts, option comparison and product form design in this case. The product entered production."
   }
 };
 
@@ -546,11 +600,11 @@ export const stages = {
   "huawei": {
     "label": "01 / HW",
     "title": "User research & product strategy",
-    "description": "Contributed to energy user and market research, including solar plant work across production, maintenance and operations, and the buyer’s decision process.",
+    "description": "Researched users of a ground-mounted solar plant management system, examining actual use problems, user profiles and functional improvement directions.",
     "actions": [
-      "Mapped industry and market context; contributed to interviews, surveys and data analysis.",
-      "Analyzed goals and differences, documenting user profiles and key journeys.",
-      "Contributed to requirements research, prototype evaluation and usability evaluation."
+      "Took responsibility for field research, questionnaire design, data analysis, qualitative analysis and research reporting.",
+      "Analyzed use problems in relation to roles, tasks and field conditions, and researched improvements to existing modules.",
+      "Documented assisted-inspection and individual-panel alerting ideas for mountain-site inspections in a report, and explored early AI maintenance and inspection directions."
     ],
     "tags": [
       "User research",
@@ -561,12 +615,12 @@ export const stages = {
   "hardware": {
     "label": "02 / NINESTAR",
     "title": "Smart hardware user research",
-    "description": "Studied how office equipment is used and maintained, bringing field research and human factors testing into product reviews.",
+    "description": "Contributed to financial-sector printing experience research and took responsibility for human factors research and product form design for a printer that entered production.",
     "actions": [
-      "Studied actual use through fieldwork, shadowing and interviews.",
-      "Distinguished requirements across buyers, managers and users.",
-      "Contributed to product positioning, requirements research and experience evaluation during development.",
-      "Mapped the IT support journey and contributed to comparative human factors tests of everyday printer tasks."
+      "Responsible for questionnaire design, research execution, quantitative analysis and qualitative material organization within a team study of financial-sector users.",
+      "Analyzed usage differences between bank counter-service and office contexts, identifying experience requirements and printing-service needs.",
+      "Took responsibility for printer A/B trials, use observation and human factors assessment using 3D models.",
+      "Combined task data, standing and seated scenarios, attention concepts and option comparison into a product form design. The product entered production."
     ],
     "tags": [
       "Smart hardware",
