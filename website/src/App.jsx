@@ -62,7 +62,7 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3', f
       <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
     </div>
     <div className="project-body">
-      {!featured && <p className="card-topline">{topic ? L('产品专题', 'Product topic') : byline}{!overview && <span>{project.role}</span>}</p>}
+      <p className="card-topline">{topic ? L('产品专题', 'Product topic') : byline}{!featured && !overview && <span>{project.role}</span>}</p>
       <Heading className="card-title">{project.title}</Heading>
       <p className="card-description">{project.summary}</p>
       {project.highlight && <ProjectFact>{project.highlight}</ProjectFact>}
@@ -96,14 +96,13 @@ function ProjectIndex({ data, L }) {
   const findProject = id => data.projects.find(project => project.id === id);
   return <>
     <nav className="project-directions" aria-label={L('项目方向', 'Project areas')}>
-      {projectGroups.map((group, index) => <a key={group.id} href={`#${group.id}`}>
-        <span className="direction-number">{String(index + 1).padStart(2, '0')}</span>
-        <span>{L(group.title.zh, group.title.en)}</span><Glyph kind="arrow" size={18} />
+      {projectGroups.map(group => <a key={group.id} href={`#${group.id}`}>
+        <span className="direction-copy"><strong className="direction-title">{L(group.title.zh, group.title.en)}</strong><span className="direction-summary">{L(group.navigationSummary.zh, group.navigationSummary.en)}</span></span>
+        <Glyph kind="arrow" size={20} />
       </a>)}
     </nav>
-    {projectGroups.map((group, index) => <section className="project-group" id={group.id} key={group.id} data-reading-anchor aria-labelledby={`${group.id}-title`}>
+    {projectGroups.map(group => <section className="project-group" id={group.id} key={group.id} data-reading-anchor aria-labelledby={`${group.id}-title`}>
       <header className="project-group-heading">
-        <p className="eyebrow">{String(index + 1).padStart(2, '0')}</p>
         <h2 id={`${group.id}-title`} tabIndex={-1}>{L(group.title.zh, group.title.en)}</h2>
         <p>{L(group.description.zh, group.description.en)}</p>
       </header>
@@ -143,10 +142,8 @@ function SkillCard({ id, skill, index, L, compact = false, headingTag = 'h3' }) 
 function CareerCard({ item, L }) {
   return <a className="career-card" href={routeHref(`/experience/${item.id}/`)}>
     <p className="card-topline">{item.date}</p>
-    <h2 className="card-title">{item.company}</h2>
-    <p className="card-role">{item.role}</p>
-    <p className="card-description">{item.summary}</p>
-    <span className="card-footer">{L('了解经历', 'View experience')} <Glyph kind="arrow" size={17} /></span>
+    <div className="career-identity"><h2 className="card-title">{item.company}</h2><p className="card-role">{item.role}</p></div>
+    <div className="career-summary"><p className="card-description">{item.summary}</p><span className="card-footer">{L('了解经历', 'View experience')} <Glyph kind="arrow" size={17} /></span></div>
   </a>;
 }
 
@@ -173,14 +170,14 @@ function HomePage({ data, L }) {
     </div>
     <section className="home-selected section wrap" aria-labelledby="selected-title" id="selected" data-reading-anchor>
       <header className="section-heading">
-        <div><p className="eyebrow editorial-label" lang="en">Projects</p><h2 id="selected-title" tabIndex={-1}>{L('精选项目', 'Selected projects')}</h2></div>
+        <h2 id="selected-title" tabIndex={-1}>{L('精选项目', 'Selected projects')}</h2>
         <a className="section-more" href={routeHref('/projects/')}>{L('查看全部项目', 'All projects')} <Glyph kind="arrow" size={17} /></a>
       </header>
       <div className="selected-projects">{data.projects.filter(project => project.featured).sort((a, b) => a.featuredOrder - b.featuredOrder).map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} featured />)}</div>
     </section>
     <section className="home-capabilities section wrap" aria-labelledby="capabilities-title" id="capabilities" data-reading-anchor>
       <header className="section-heading">
-        <div><p className="eyebrow editorial-label" lang="en">Approach</p><h2 id="capabilities-title" tabIndex={-1}>{L('能力与方法', 'Capabilities')}</h2></div>
+        <h2 id="capabilities-title" tabIndex={-1}>{L('能力与方法', 'Capabilities')}</h2>
         <a className="section-more" href={routeHref('/capabilities/')}>{L('查看全部能力', 'All capabilities')} <Glyph kind="arrow" size={17} /></a>
       </header>
       <div className="home-skills-grid">{Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} L={L} />)}</div>
@@ -205,7 +202,6 @@ function CategoryPage({ route, data, L, onCopyEmail }) {
       <a href={routeHref('/')}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span><span aria-current="page">{category.title}</span>
     </nav>
     <header className="category-heading" id="category-heading" data-reading-anchor>
-      <p className="eyebrow">{category.number}</p>
       <h1 tabIndex={-1}>{category.title}</h1>
       <p className="page-intro">{category.intro}</p>
     </header>

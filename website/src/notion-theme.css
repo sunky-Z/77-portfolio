@@ -56,10 +56,10 @@ body, .portfolio { background: var(--paper); }
 .project-card:hover, .career-card:hover, .skill-card:hover, .related-card:hover { background: #fff; border-color: #B5BDB1; }
 .project-card[data-tone] .project-cover { background: var(--tone, var(--sky)); border: 0; }
 .project-cover img { mix-blend-mode: multiply; padding: 0; object-fit: contain; object-position: 50% 50%; transform: translate(var(--illustration-x, 0), var(--illustration-y, 0)) scale(var(--illustration-scale, 1)); }
-.project-card[data-project="ai-ecosystem"] { --illustration-scale: 1.02; }
-.project-card[data-project="hardware-human-factors"] { --illustration-scale: 1.04; --illustration-x: .8%; --illustration-y: -1.5%; }
-.project-card[data-project="station-control-research"] { --illustration-scale: 1.10; --illustration-y: -2%; }
-.project-card[data-project="energy-product-planning"] { --illustration-scale: 1.08; }
+.project-card[data-project="ai-ecosystem"] { --illustration-scale: .96; }
+.project-card[data-project="hardware-human-factors"] { --illustration-scale: .98; --illustration-x: .8%; --illustration-y: -1.5%; }
+.project-card[data-project="station-control-research"] { --illustration-scale: 1.03; --illustration-y: -2%; }
+.project-card[data-project="energy-product-planning"] { --illustration-scale: 1.01; }
 .project-group .project-cover { aspect-ratio: 1.95; }
 .project-group .project-cover img { padding: 10px 24px; }
 .project-body { background: #fff; }
@@ -70,9 +70,14 @@ body, .portfolio { background: var(--paper); }
 .project-row[data-tone] { padding: 24px; border: 0; border-radius: 12px; background: #fff; }
 .project-row[data-tone] .card-topline { display: inline-flex; padding: 3px 9px; border-radius: 6px; background: var(--tone, var(--sky)); color: var(--ink); margin-bottom: 10px; }
 .project-row[data-tone]:hover { background: #fff; outline: 1px solid #B5BDB1; outline-offset: -1px; }
-.project-directions a { border: 0; border-radius: 12px; background: var(--blue); }
-.project-directions a:last-child { background: var(--sky); }
-.project-directions a:hover { background: var(--amber); }
+.project-directions { grid-auto-rows: 1fr; }
+.project-directions a { min-height: 112px; padding: 22px 24px; border: 1px solid #D8D7D3; border-radius: 12px; background: #fff; gap: 20px; }
+.project-directions a:hover { background: #fff; border-color: #A1ADB3; }
+.direction-copy { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+.direction-title { font-size: 20px; font-weight: 500; line-height: 1.5; }
+.direction-summary { color: var(--muted); font-size: 15px; line-height: 1.6; }
+.project-directions svg { flex-shrink: 0; color: var(--ink); }
+.project-directions a:hover .direction-title { text-decoration: underline; text-underline-offset: 5px; text-decoration-thickness: 1px; }
 .project-product, .independent-projects { border-top: 0; }
 .project-supplement { border-radius: 12px; background: #fff; }
 .career-card:nth-child(1) { --tone: var(--blue); }
@@ -151,7 +156,7 @@ body, .portfolio { background: var(--paper); }
   .home-selected .featured-card:not(:first-child) .project-cover { height: 220px; margin: 0; }
   .home-selected .featured-card .project-cover img { padding: 12px 16px; }
   .project-card[data-project="station-control-research"],
-  .project-card[data-project="energy-product-planning"] { --illustration-scale: 1; }
+  .project-card[data-project="energy-product-planning"] { --illustration-scale: .94; }
   .project-card[data-project] .project-cover img { object-fit: contain; }
   .project-group .project-cover { height: 100%; aspect-ratio: auto; }
   .project-group .project-cover img { padding: 8px; min-height: 220px; }
@@ -167,6 +172,9 @@ body, .portfolio { background: var(--paper); }
   .section-heading h2 { font-size: 28px; }
   .section-heading .editorial-label { font-size: 15px; }
   .section-more { font-size: 13px; }
+  .project-directions { gap: 12px; }
+  .project-directions a { padding: 18px 20px; gap: 14px; }
+  .direction-title { font-size: 18px; }
   .home-selected .selected-projects { grid-template-columns: 1fr; gap: 20px; }
   .home-selected .featured-card:first-child, .home-selected .featured-card:not(:first-child) { display: flex; flex-direction: column; gap: 0; padding: 0; }
   .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { order: 0; padding: 24px; }

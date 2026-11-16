@@ -3,6 +3,7 @@ export const projectGroups = [
     id: 'ai',
     projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'product-business'],
     title: { zh: 'AI 产品与商业化', en: 'AI products & monetization' },
+    navigationSummary: { zh: 'AI 助手与消费端工具', en: 'AI assistant and consumer tools' },
     description: {
       zh: 'DroiClaw AI 助手的产品专题，以及消费端工具产品的分析与交付实践。',
       en: 'Product topics within the DroiClaw AI assistant, alongside analysis and delivery across consumer tools.',
@@ -12,6 +13,7 @@ export const projectGroups = [
     id: 'research',
     projects: ['energy-product-planning', 'station-control-research', 'hardware-human-factors', 'hardware-research'],
     title: { zh: '用户研究与产品设计', en: 'User research & product design' },
+    navigationSummary: { zh: '能源行业与打印设备研究', en: 'Energy and printer research' },
     description: {
       zh: '从市场与人群洞察，到实际作业与操作场景，呈现需求判断、功能规划与产品形态设计。',
       en: 'Market and audience research, fieldwork and task analysis inform requirements, feature planning and product-form design.',

@@ -1,0 +1,229 @@
+/* Portfolio refinement: open work gallery, method index and readable case files.
+   Hero composition and its scoped colours remain in notion-theme.css. */
+:root {
+  --paper: #FBFAF8;
+  --surface: #FFFFFF;
+  --ink: #252725;
+  --body-text: #4B504B;
+  --muted: #686D67;
+  --line: #DADDD5;
+  --soft: #F0F1EC;
+  --accent: #3F554C;
+  --accent-hover: #293D34;
+  --accent-soft: #E5EAE3;
+  --amber: #E8E9E2;
+  --coral: #EBE3DC;
+  --blue: #DFE6DF;
+  --sky: #EAEFEB;
+  --peach: #EFE7DF;
+  --mocha: #E8E5DA;
+  --midnight: #303D36;
+  --edge: 4px;
+}
+::selection { background: var(--accent-soft); color: var(--ink); }
+.section { padding-block: 64px; }
+.section-heading { margin-bottom: 30px; }
+.section-heading h2 { font-size: 34px; line-height: 1.35; }
+.section-more { color: var(--muted); }
+.section-more:hover { color: var(--ink); }
+.category-heading { margin-block: 44px 48px; }
+.category-heading h1 { margin-bottom: 18px; }
+.category-heading .page-intro { color: var(--body-text); }
+
+/* Gallery surfaces end at the image. Titles, context and outputs sit on the page. */
+.project-card, .related-card { background: transparent; border: 0; border-radius: 0; }
+.project-card:hover, .related-card:hover { background: transparent; border: 0; }
+.project-card .project-cover { border-radius: var(--edge); }
+.project-card .project-body { background: transparent; padding: 24px 0 0; }
+.project-card .card-topline { margin-bottom: 10px; color: var(--muted); }
+.project-card:hover .card-title, .related-card:hover .card-title,
+.related-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
+.project-fact { color: var(--ink); }
+.card-footer { color: var(--accent); }
+.card-footer svg { transition: transform .16s ease; }
+a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform: translateX(3px); }
+.home-selected .selected-projects { gap: 48px 36px; }
+.home-selected .featured-card,
+.home-selected .featured-card:not(:first-child) { background: transparent; border-radius: 0; overflow: visible; }
+.home-selected .featured-card .project-body { padding: 24px 0 0; }
+.home-selected .featured-card .project-cover { border-radius: var(--edge); }
+.home-selected .featured-card .card-description { font-size: 17px; line-height: 1.85; }
+.home-selected .featured-card .card-footer { padding-top: 18px; }
+.home-selected .featured-card:first-child {
+  grid-template-columns: minmax(0, 1.14fr) minmax(0, 1fr);
+  gap: 44px; align-items: center; background: transparent; border: 0; padding: 0;
+}
+.home-selected .featured-card:first-child .project-cover { order: 0; height: 330px; min-height: 0; }
+.home-selected .featured-card:first-child .project-body { order: 1; padding: 12px 0; }
+.home-selected .featured-card:first-child .card-title { font-size: 34px; line-height: 1.45; margin-bottom: 16px; }
+.home-selected .featured-card:first-child .card-footer { margin-top: 16px; }
+.home-selected .featured-card:not(:first-child) .card-title { font-size: 27px; line-height: 1.45; }
+.home-selected .featured-card:nth-child(3) { border: 0; padding: 0; }
+
+/* A quieter method index, separate in scale and structure from project work. */
+.home-capabilities { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; }
+.home-capabilities .section-heading { display: block; margin: 0; }
+.home-capabilities .section-more { margin-top: 18px; }
+.home-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px 40px; }
+.skill-card, .home-skills-grid .skill-card {
+  display: grid; grid-template-columns: 28px minmax(0, 1fr); align-content: start;
+  gap: 0 14px; background: transparent; border: 0; border-radius: 0;
+  padding: 22px 0 0; border-top: 1px solid var(--line);
+}
+.skill-card:hover { border-color: var(--accent); background: transparent; }
+.skill-card .card-index { grid-column: 1; grid-row: 1; display: block; width: auto; min-height: 0; margin: 3px 0 0; padding: 0; background: transparent; color: var(--muted); font-size: 15px; line-height: 1.7; border-radius: 0; }
+.skill-card .card-title, .home-skills-grid .skill-card .card-title { grid-column: 2; grid-row: 1; font-size: 24px; line-height: 1.5; margin-bottom: 12px; }
+.skill-card .card-description, .skill-card .card-footer { grid-column: 2; }
+.home-skills-grid .skill-card .card-description { font-size: 16px; line-height: 1.85; }
+.skill-card .card-footer, .home-skills-grid .skill-card .card-footer { margin: 0; padding-top: 16px; font-size: 15px; }
+.skills-grid { gap: 40px 64px; }
+.skills-grid .skill-card { padding-block: 26px 16px; }
+.skills-grid .card-title { font-size: 28px; }
+.skills-grid .card-description { max-width: 52ch; }
+.home-contact { background: transparent; border: 0; border-top: 1px solid var(--line); border-radius: 0; margin-block: 16px 32px; padding: 30px 0; }
+.home-contact p { color: var(--body-text); font-size: 18px; }
+.home-contact > a, .home-contact > a:hover { color: var(--accent); }
+
+/* Two equal directions; a lead case and a compact supporting index. */
+.project-directions { gap: 24px; }
+.project-directions a { background: var(--surface); border-color: var(--line); border-radius: var(--edge); }
+.project-directions a:hover { background: var(--surface); border-color: var(--accent); }
+.direction-summary { color: var(--muted); }
+.project-group { margin-top: 64px; }
+.project-group-heading { margin-bottom: 36px; }
+.project-group-heading h2 { font-size: 32px; }
+.project-product { padding-top: 8px; }
+.project-product-heading { margin-bottom: 30px; }
+.project-group-layout { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 52px; }
+.project-list { gap: 0; }
+.project-row[data-tone] { position: relative; background: transparent; padding: 28px 28px 28px 24px; border-radius: var(--edge); border: 0; }
+.project-list .project-row:first-child { padding-top: 0; }
+.project-list .project-row + .project-row { margin-top: 8px; }
+.project-row[data-tone]:hover { background: var(--soft); outline: none; }
+.project-row[data-tone] .card-topline { padding: 0; background: transparent; border-radius: 0; color: var(--muted); font-size: 13px; }
+.project-row .project-row-title { font-size: 24px; }
+.project-row .card-description { font-size: 16px; line-height: 1.85; }
+.project-row .card-footer { padding-top: 12px; }
+.independent-projects { margin-top: 44px; padding: 28px; background: var(--soft); border-radius: var(--edge); }
+.independent-projects .project-row { padding: 0; }
+.project-supplement { padding: 20px 0; border-radius: 0; border-top: 1px solid var(--line); background: transparent; margin-top: 40px; }
+
+/* Career is chronological information, with roles and scope in distinct columns. */
+.career-grid { display: block; }
+.career-card {
+  display: grid; grid-template-columns: 190px 230px minmax(0, 1fr); gap: 40px;
+  border: 0; border-radius: 0; background: transparent; padding: 34px 0;
+}
+.career-card + .career-card { border-top: 1px solid var(--line); }
+.career-card:hover { border-color: var(--line); background: transparent; }
+.career-card .card-topline { display: block; align-self: start; padding: 5px 0 0; margin: 0; background: transparent; border-radius: 0; color: var(--muted); font-size: 16px; }
+.career-card .card-title { margin-bottom: 10px; font-size: 30px; }
+.career-card .card-role { margin: 0; color: var(--body-text); }
+.career-card .card-footer { padding-top: 18px; }
+.career-card:hover .card-title { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 1px; }
+.education-heading { margin-top: 56px; }
+.education-item { border-color: var(--line); }
+.contact-inner { border-radius: var(--edge); background: var(--soft); padding: 36px; }
+
+/* Case files: a concise brief, readable chapters and explicit interaction state. */
+.project-brief { background: var(--soft); border-radius: var(--edge); padding: 28px 32px; }
+.project-brief h2 { padding: 0; margin-bottom: 24px; background: transparent; border-radius: 0; font-size: 21px; }
+.project-brief dt { color: var(--muted); font-size: 14px; }
+.project-brief dd { color: var(--ink); }
+.project-role-note { color: var(--body-text); }
+.article-section { margin-bottom: 72px; }
+.article-section .section-number { background: transparent; border-radius: 0; min-width: 0; padding: 0; margin-right: 16px; font-size: 15px; color: var(--muted); }
+.article-section h2 { margin-bottom: 24px; }
+.toc button[aria-current="location"] { background: var(--accent-soft); color: var(--ink); }
+.toc button[aria-current="location"] .toc-number { color: var(--accent); }
+.work-topic-list button { border-color: var(--line); border-radius: var(--edge); background: transparent; }
+.work-topic-list button:hover { border-color: var(--accent); background: var(--soft); }
+.work-topic-list button[aria-selected="true"] { border-color: var(--accent); background: var(--accent); color: var(--surface); }
+.work-panel { background: var(--surface); border-radius: var(--edge); border: 1px solid var(--line); }
+.full-view .work-panel { border: 0; background: var(--soft); }
+.output-card { background: transparent; border-radius: 0; border-top: 1px solid var(--line); padding: 20px 0 0; }
+.method-evidence { background: var(--soft); border-radius: var(--edge); color: var(--accent); }
+.related-card { padding: 22px 0; border-top: 1px solid var(--line); }
+.related-card:hover { border-top: 1px solid var(--accent); }
+.flow-step, .flow-controls dt { border-radius: var(--edge); background: var(--surface); }
+.flow-controls > div:first-child dt { background: var(--accent-soft); }
+
+@media (max-width: 1100px) {
+  .home-selected .featured-card:first-child { gap: 32px; }
+  .home-selected .featured-card:first-child .project-body { padding: 8px 0; }
+  .home-selected .featured-card:first-child .card-title { font-size: 30px; }
+  .home-capabilities { grid-template-columns: 210px minmax(0, 1fr); gap: 36px; }
+  .home-skills-grid { gap: 28px; }
+  .home-skills-grid .skill-card { padding: 20px 0 0; }
+  .home-skills-grid .skill-card .card-title { font-size: 22px; }
+  .career-card { grid-template-columns: 150px 190px minmax(0, 1fr); gap: 28px; }
+  .project-group-layout { gap: 36px; }
+}
+@media (max-width: 850px) {
+  .section { padding-block: 48px; }
+  .home-selected .featured-card:first-child { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .home-selected .featured-card:first-child .project-cover { height: 270px; min-height: 0; }
+  .home-selected .featured-card:first-child .project-body { padding: 0; }
+  .home-selected .featured-card .project-body { padding: 20px 0 0; }
+  .home-selected .featured-card .card-description { font-size: 16px; }
+  .home-capabilities { display: block; }
+  .home-capabilities .section-heading { display: flex; margin-bottom: 30px; }
+  .home-capabilities .section-more { margin: 0; }
+  .home-skills-grid { gap: 32px 36px; }
+  .home-skills-grid .skill-card { padding: 22px 0 0; }
+  .project-group-layout { grid-template-columns: 1fr; gap: 36px; }
+  .project-group .project-body { padding: 20px 0 20px 24px; }
+  .project-list .project-row:first-child { padding-top: 24px; }
+  .project-row[data-tone] { padding: 24px; background: var(--soft); }
+  .project-list .project-row + .project-row { margin-top: 16px; }
+  .career-card { grid-template-columns: 155px minmax(0, 1fr); gap: 16px 28px; }
+  .career-summary { grid-column: 2; }
+  .skills-grid { gap: 32px; }
+}
+@media (max-width: 620px) {
+  .section { padding-block: 36px; }
+  .section-heading, .home-capabilities .section-heading { gap: 14px; margin-bottom: 24px; }
+  .section-heading h2 { font-size: 28px; }
+  .category-heading { margin-block: 28px 36px; }
+  .home-selected .selected-projects { gap: 36px; }
+  .home-selected .featured-card:first-child, .home-selected .featured-card:not(:first-child) { display: flex; gap: 0; }
+  .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { order: 0; padding: 0 0 20px; }
+  .home-selected .featured-card .project-cover, .home-selected .featured-card:first-child .project-cover, .home-selected .featured-card:not(:first-child) .project-cover { order: 1; height: auto; min-height: 0; aspect-ratio: 1.7; }
+  .home-selected .featured-card:first-child .card-title, .home-selected .featured-card:not(:first-child) .card-title { font-size: 25px; margin-bottom: 12px; }
+  .home-selected .featured-card:first-child .card-footer { margin-top: 0; }
+  .home-selected .featured-card .card-topline { font-size: 13px; }
+  .home-skills-grid { grid-template-columns: 1fr; gap: 28px; }
+  .home-skills-grid .skill-card { padding: 20px 0 0; }
+  .home-skills-grid .skill-card .card-title { font-size: 23px; }
+  .home-contact { padding: 26px 0; margin-block: 12px 20px; }
+  .home-contact p { font-size: 16px; }
+  .project-directions { gap: 12px; }
+  .project-group { margin-top: 48px; }
+  .project-group-heading { margin-bottom: 24px; }
+  .project-group-heading h2 { font-size: 27px; }
+  .project-group .project-body { padding: 0 0 22px; }
+  .project-list .project-row:first-child, .project-row[data-tone] { padding: 22px; }
+  .project-row .project-row-title { font-size: 22px; }
+  .independent-projects { padding: 22px; margin-top: 28px; }
+  .independent-projects .project-row { padding: 0; }
+  .project-supplement { margin-top: 28px; }
+  .career-card { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
+  .career-card .card-topline { padding: 0; font-size: 15px; }
+  .career-summary { grid-column: 1; }
+  .career-card .card-title { font-size: 28px; }
+  .career-card .card-description { font-size: 16px; }
+  .skills-grid { gap: 24px; }
+  .skills-grid .skill-card { padding-block: 22px 8px; }
+  .skill-card .card-title { font-size: 25px; }
+  .project-brief { padding: 24px; }
+  .project-brief h2 { margin-bottom: 20px; }
+  .article-section { margin-bottom: 48px; }
+  .article-section h2 { font-size: 26px; }
+  .article-section .section-number { margin-right: 12px; }
+  .contact-inner { padding: 26px; }
+}
+@media (prefers-reduced-motion: reduce) { .card-footer svg { transition: none; } }
+@media print {
+  .home-selected .featured-card, .skill-card, .career-card { break-inside: avoid; }
+  .project-work .work-panel { border: 0; background: transparent; }
+}
