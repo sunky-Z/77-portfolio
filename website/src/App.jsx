@@ -57,7 +57,7 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3', f
     <p className="card-description">{project.summary}</p>
     <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={17} /></span>
   </a>;
-  return <a className={`project-card${featured ? ' featured-card' : ''}`} data-tone={projectTones[project.id]} href={routeHref(`/projects/${project.id}/`)}>
+  return <a className={`project-card${featured ? ' featured-card' : ''}`} data-project={project.id} data-tone={projectTones[project.id]} href={routeHref(`/projects/${project.id}/`)}>
     <div className="project-cover">
       <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
     </div>

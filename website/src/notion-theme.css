@@ -55,7 +55,14 @@ body, .portfolio { background: var(--paper); }
 .project-card, .career-card, .skill-card, .related-card { border: 1px solid transparent; border-radius: 12px; background: #fff; box-shadow: none; }
 .project-card:hover, .career-card:hover, .skill-card:hover, .related-card:hover { background: #fff; border-color: #B5BDB1; }
 .project-card[data-tone] .project-cover { background: var(--tone, var(--sky)); border: 0; }
-.project-cover img { mix-blend-mode: multiply; }
+.project-cover img { mix-blend-mode: multiply; padding: 0; object-fit: contain; object-position: 50% 50%; transform: translate(var(--illustration-x, 0), var(--illustration-y, 0)) scale(var(--illustration-scale, 1)); }
+.project-card[data-project="ai-ecosystem"] { --illustration-scale: 1.08; }
+.project-card[data-project="hardware-human-factors"] { --illustration-scale: 1.12; --illustration-x: 2%; --illustration-y: -4%; }
+.project-card[data-project="station-control-research"] .project-cover img,
+.project-card[data-project="energy-product-planning"] .project-cover img { object-fit: cover; object-position: 50% 62%; }
+.project-group .project-cover { aspect-ratio: 1.75; }
+.project-group .project-card[data-project="energy-product-planning"] .project-cover { aspect-ratio: 2; }
+.project-group .project-cover img { padding: 0; }
 .project-body { background: #fff; }
 .card-description, .related-card p { color: var(--body-text); }
 .card-footer { color: var(--ink); }
@@ -79,15 +86,15 @@ body, .portfolio { background: var(--paper); }
 .home-selected .selected-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .home-selected .featured-card { display: flex; flex-direction: column; gap: 0; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: #fff; }
 .home-selected .featured-card .project-body { order: 1; padding: 28px; }
-.home-selected .featured-card .project-cover { order: 0; height: 210px; min-height: 0; aspect-ratio: auto; margin: 0; background: var(--tone, var(--sky)); }
-.home-selected .featured-card .project-cover img { padding: 22px 36px; }
+.home-selected .featured-card .project-cover { order: 0; height: 320px; min-height: 0; aspect-ratio: auto; margin: 0; background: var(--tone, var(--sky)); }
+.home-selected .featured-card .project-cover img { padding: 0; }
 .home-selected .featured-card .card-description { font-size: 17px; line-height: 1.8; }
 .home-selected .featured-card .project-fact { font-size: 16px; margin-top: 12px; }
 .home-selected .featured-card .card-footer { font-size: 16px; padding-top: 20px; }
 .home-selected .featured-card:first-child { grid-column: 1 / -1; grid-row: auto; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; background: var(--tone, var(--blue)); }
 .home-selected .featured-card:first-child .project-body { order: 0; padding: 40px; background: transparent; }
-.home-selected .featured-card:first-child .project-cover { order: 1; height: auto; min-height: 300px; margin: 0; }
-.home-selected .featured-card:first-child .project-cover img { padding: 28px 40px; }
+.home-selected .featured-card:first-child .project-cover { order: 1; height: auto; min-height: 360px; margin: 0; }
+.home-selected .featured-card:first-child .project-cover img { padding: 0; }
 .home-selected .featured-card:first-child .card-title { font-size: 34px; line-height: 1.4; margin-bottom: 14px; }
 .home-selected .featured-card:not(:first-child) { display: flex; grid-template-columns: none; align-items: stretch; gap: 0; }
 .home-selected .featured-card:not(:first-child) .card-title { font-size: 27px; line-height: 1.4; margin-bottom: 12px; }
@@ -139,10 +146,14 @@ body, .portfolio { background: var(--paper); }
   .section-heading h2 { font-size: 31px; }
   .home-selected .featured-card:first-child { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); padding: 0; border: 0; gap: 0; }
   .home-selected .featured-card:first-child .project-body { padding: 26px; }
-  .home-selected .featured-card:first-child .project-cover { height: auto; min-height: 260px; margin: 0; }
-  .home-selected .featured-card:first-child .project-cover img { padding: 22px; }
+  .home-selected .featured-card:first-child .project-cover { height: auto; min-height: 280px; margin: 0; }
+  .home-selected .featured-card:first-child .project-cover img { padding: 0; }
   .home-selected .featured-card:not(:first-child) { display: flex; gap: 0; }
-  .home-selected .featured-card:not(:first-child) .project-cover { height: 180px; margin: 0; }
+  .home-selected .featured-card:not(:first-child) .project-cover { height: 260px; margin: 0; }
+  .project-card[data-project] .project-cover img { object-fit: contain; }
+  .project-group .project-cover,
+  .project-group .project-card[data-project="energy-product-planning"] .project-cover { height: 100%; aspect-ratio: auto; }
+  .project-group .project-cover img { padding: 0; min-height: 240px; }
   .home-selected .featured-card:not(:first-child) .card-title { font-size: 24px; }
   .home-selected .featured-card .project-body { padding: 24px; }
   .home-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
@@ -158,8 +169,11 @@ body, .portfolio { background: var(--paper); }
   .home-selected .selected-projects { grid-template-columns: 1fr; gap: 20px; }
   .home-selected .featured-card:first-child, .home-selected .featured-card:not(:first-child) { display: flex; flex-direction: column; gap: 0; padding: 0; }
   .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { order: 0; padding: 24px; }
-  .home-selected .featured-card .project-cover, .home-selected .featured-card:first-child .project-cover, .home-selected .featured-card:not(:first-child) .project-cover { order: 1; height: 160px; min-height: 0; margin: 0; aspect-ratio: auto; }
-  .home-selected .featured-card .project-cover img, .home-selected .featured-card:first-child .project-cover img { padding: 16px 28px; }
+  .home-selected .featured-card .project-cover, .home-selected .featured-card:first-child .project-cover, .home-selected .featured-card:not(:first-child) .project-cover { order: 1; height: auto; min-height: 0; margin: 0; aspect-ratio: 1.5; }
+  .home-selected .featured-card .project-cover img, .home-selected .featured-card:first-child .project-cover img { padding: 0; }
+  .project-group .project-cover,
+  .project-group .project-card[data-project="energy-product-planning"] .project-cover { height: auto; aspect-ratio: 1.5; }
+  .project-group .project-cover img { min-height: 0; }
   .home-selected .featured-card:first-child .card-title, .home-selected .featured-card:not(:first-child) .card-title { font-size: 25px; margin-bottom: 12px; }
   .home-selected .featured-card .card-description { font-size: 16px; }
   .home-selected .featured-card .project-fact { font-size: 15px; }
