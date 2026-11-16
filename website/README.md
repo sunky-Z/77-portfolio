@@ -84,8 +84,9 @@ npm run check:build
 | 橙色、背景、文字、间距、响应式 | `src/styles.css` 中的样式变量和组件规则 |
 | 中英文字体与回退 | `src/fonts.css` |
 | 首页、分类页、正文布局和交互 | `src/App.jsx` |
-| 双语简介、项目卡片、职业入口与能力内容 | `src/portfolio.js` |
+| 双语简介、项目卡片、职业入口与能力关联 | `src/portfolio.js` |
 | AI 产品设计能力的双语正文与逐项项目依据 | `src/ai-capability.js` |
+| 用户研究、产品规划与交付、项目管理的双语正文与项目依据 | `src/research-capability.js`、`src/planning-capability.js`、`src/project-management-capability.js` |
 | 项目分组、开篇场景说明及交付状态 | `src/project-reading.js` |
 | 双语项目及职业正文 | `src/content.zh.js`、`src/content.js` |
 | 页面清单、层级与旧地址映射 | `src/routes.js` |
@@ -112,7 +113,8 @@ npm run check:build
 | 经历详情 | `/experience/huawei/`、`/experience/hardware/`、`/experience/current/` | 三段职业经历 |
 | AI 项目 | `/projects/ai-ecosystem/`、`/projects/skill-ecosystem/`、`/projects/ai-commercialization/`、`/projects/international-product/` | 主动服务、技能治理、订阅权益、海外本地化 |
 | 研究及产品分析 | `/projects/energy-research/`、`/projects/station-control-research/`、`/projects/hardware-research/`、`/projects/hardware-human-factors/`、`/projects/product-business/` | 能源、电站管理系统、金融行业打印体验、人因评估与形态设计、消费端产品 |
-| 方法详情 | `/capabilities/research/`、`/capabilities/planning/`、`/capabilities/ai/`、`/capabilities/delivery/` | 方法、应用项目和工作范围 |
+| 方法详情 | `/capabilities/research/`、`/capabilities/planning/`、`/capabilities/ai/`、`/capabilities/project-management/` | 用户研究、产品规划与交付、AI 产品设计、项目管理 |
+| 兼容地址 | `/capabilities/delivery/` | 跳转至合并后的 `/capabilities/planning/`，保留查询参数和正文位置 |
 
 所有页面都有自己的 HTML，可直接访问、刷新、分享或在新标签中打开。面包屑和返回链接指向父分类；经历、项目和方法之间有相关链接。切换语言保留当前页面与阅读位置；旧版 `#about`、`#projects`、`#work/…` 等地址会转换到对应页面。
 

@@ -1,6 +1,9 @@
 import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
 import { aiCapabilities } from './ai-capability.js';
+import { researchCapabilities } from './research-capability.js';
+import { planningCapabilities } from './planning-capability.js';
+import { projectManagementCapabilities } from './project-management-capability.js';
 
 const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
 const featuredProjectIds = ['ai-ecosystem', 'hardware-human-factors', 'station-control-research'];
@@ -10,15 +13,15 @@ const projectCardTitles = {
   'hardware-research': { zh: '金融行业打印体验研究', en: 'Financial-sector printing research' },
 };
 const projectDetails = {
-  'ai-ecosystem': { highlight: { zh: '29 套卡片模板 · 38 个视觉变体', en: '29 card templates · 38 visual variants' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'sketch-ai-v2.webp', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '智能通知、任务反馈与用户介入，让 AI 任务的状态和操作清楚可见。', en: 'Notifications, task feedback and user input make AI task states and actions visible.' } },
-  'skill-ecosystem': { highlight: { zh: '标签体系：295 → 47 个共享标签', en: 'Taxonomy: 295 labels → 47 shared tags' }, relatedProjects: ['ai-ecosystem', 'international-product'], company: 'DROI', image: 'case-skills.svg', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '整理技能分类、使用说明与审核发布流程，覆盖发现到首次使用。', en: 'Skill categories, usage guidance and review flows, from discovery to first use.' } },
-  'ai-commercialization': { highlight: { zh: '订阅原型覆盖 15 类账户场景', en: 'Subscription prototype covering 15 account scenarios' }, relatedProjects: ['product-business', 'international-product'], company: 'DROI', image: 'case-subscription.svg', skills: ['planning', 'ai', 'delivery'], featured: true, summary: { zh: '梳理账号、设备、订阅与积分的关系，设计权益规则及支付异常流程。', en: 'Account, device, subscription and Credits rules, including payment exceptions.' } },
-  'international-product': { highlight: { zh: '内容配置：19 条技能 × 46 个语言配置', en: 'Content configuration: 19 skills × 46 language configurations' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'case-localization.svg', skills: ['planning', 'delivery'], summary: { zh: '多语言技能、套餐与奖励说明的内容配置、核验和海外演示适配。', en: 'Multilingual skills, plan and reward content, with configuration checks and overseas demos.' } },
+  'ai-ecosystem': { highlight: { zh: '29 套卡片模板 · 38 个视觉变体', en: '29 card templates · 38 visual variants' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'sketch-ai-v2.webp', skills: ['ai', 'planning'], featured: true, summary: { zh: '智能通知、任务反馈与用户介入，让 AI 任务的状态和操作清楚可见。', en: 'Notifications, task feedback and user input make AI task states and actions visible.' } },
+  'skill-ecosystem': { highlight: { zh: '标签体系：295 → 47 个共享标签', en: 'Taxonomy: 295 labels → 47 shared tags' }, relatedProjects: ['ai-ecosystem', 'international-product'], company: 'DROI', image: 'case-skills.svg', skills: ['ai', 'planning'], featured: true, summary: { zh: '整理技能分类、使用说明与审核发布流程，覆盖发现到首次使用。', en: 'Skill categories, usage guidance and review flows, from discovery to first use.' } },
+  'ai-commercialization': { highlight: { zh: '订阅原型覆盖 15 类账户场景', en: 'Subscription prototype covering 15 account scenarios' }, relatedProjects: ['product-business', 'international-product'], company: 'DROI', image: 'case-subscription.svg', skills: ['planning', 'ai'], featured: true, summary: { zh: '梳理账号、设备、订阅与积分的关系，设计权益规则及支付异常流程。', en: 'Account, device, subscription and Credits rules, including payment exceptions.' } },
+  'international-product': { highlight: { zh: '内容配置：19 条技能 × 46 个语言配置', en: 'Content configuration: 19 skills × 46 language configurations' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'case-localization.svg', skills: ['planning'], summary: { zh: '多语言技能、套餐与奖励说明的内容配置、核验和海外演示适配。', en: 'Multilingual skills, plan and reward content, with configuration checks and overseas demos.' } },
   'energy-research': { relatedProjects: ['station-control-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '以市场与用户研究，支持能源产品规划。', en: 'Market and user research supporting energy product planning.' } },
   'station-control-research': { highlight: { zh: '巡检与报警功能方向已纳入研究报告', en: 'Inspection and alert proposals documented in the research report' }, relatedProjects: ['energy-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '围绕地面光伏电站管理系统开展用户研究，分析山地巡检问题、用户画像与功能改进方向。', en: 'User research for a solar plant management system, covering field inspection needs, user profiles and functional improvements.' } },
   'hardware-research': { relatedProjects: ['hardware-human-factors', 'station-control-research'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research', 'planning'], summary: { zh: '研究银行前厅业务与楼内办公的使用差异，承担问卷设计、调研执行及定量定性分析。', en: 'Research into printing needs in bank counter services and office work, covering questionnaire design, fieldwork and quantitative and qualitative analysis.' } },
   'hardware-human-factors': { highlight: { zh: '完成产品形态设计，相关产品最终投产', en: 'Completed product-form design; the product entered production' }, relatedProjects: ['hardware-research', 'ai-ecosystem'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research'], summary: { zh: '结合 A/B 试验、操作观察和 3D 人因评估，分析布局、姿态与注意力分配，形成产品形态方案。', en: 'A/B testing, task observation and 3D human factors evaluation informed layout, posture, attention allocation and product-form design.' } },
-  'product-business': { relatedProjects: ['ai-commercialization', 'international-product'], company: 'DROI', image: 'sketch-growth-v2.webp', skills: ['planning', 'delivery'], summary: { zh: '分析 6 条消费端产品线，结合经营数据与用户反馈支持广告与版本迭代。', en: 'Analysis across 6 consumer product lines to inform advertising and release decisions.' } },
+  'product-business': { relatedProjects: ['ai-commercialization', 'international-product'], company: 'DROI', image: 'sketch-growth-v2.webp', skills: ['planning', 'project-management'], summary: { zh: '分析 6 条消费端产品线，结合经营数据与用户反馈支持广告与版本迭代。', en: 'Analysis across 6 consumer product lines to inform advertising and release decisions.' } },
 };
 
 function projectCards(cases, language) {
@@ -71,7 +74,7 @@ export const portfolio = {
         {
           "id": "strengths",
           "title": "能力与方法",
-          "summary": "用户研究、产品规划、AI 产品设计与交付协作。",
+          "summary": "用户研究、产品规划与交付、AI 产品设计及项目管理。",
           "href": "/capabilities/"
         }
       ],
@@ -94,86 +97,10 @@ export const portfolio = {
     "career": careerCards(chineseStages, 'zh'),
     "projects": projectCards(chineseCases, 'zh'),
     "skills": {
-      "research": {
-        "title": "用户研究",
-        "summary": "识别角色差异，理解真实需求。",
-        "intro": "覆盖消费者与行业用户研究，结合访谈、问卷、实地调研、跟岗观察与数据分析，梳理使用情境、用户目标与需求差异。研究结论用于产品规划与体验评估。",
-        "methods": [
-          {
-            "title": "角色与目标",
-            "text": "区分购买、管理、使用及不同部门的角色，梳理各自目标与需求差异。"
-          },
-          {
-            "title": "情境与旅程",
-            "text": "通过访谈、实地调研与跟岗观察，还原实际使用过程及前后环节。"
-          },
-          {
-            "title": "发现与需求",
-            "text": "形成用户画像、关键旅程、需求与体验问题，为产品规划和改进提供依据。"
-          }
-        ],
-        "projects": [
-          "energy-research",
-          "station-control-research",
-          "hardware-research",
-          "hardware-human-factors"
-        ],
-        "boundary": "实践主要来自 HW 与 NINESTAR 的用户、市场和体验研究工作。人因评估案例中的研究、分析与产品形态设计由本人完成；金融行业调研由团队共同开展，本人承担问卷、执行及数据分析工作。"
-      },
-      "planning": {
-        "title": "产品规划",
-        "summary": "从用户问题，形成可评审的产品规则。",
-        "intro": "结合用户研究、产品数据与反馈梳理问题，将使用目标、技术条件与商业约束转为流程、规则及产品方案。实践包括研究支持下的产品规划、AI 订阅权益及消费端产品分析。",
-        "methods": [
-          {
-            "title": "问题与范围",
-            "text": "结合行业信息、用户研究与经营数据，明确问题涉及的人群、场景和产品范围。"
-          },
-          {
-            "title": "业务规则建模",
-            "text": "区分账号、设备、套餐权限与积分余额，整理赠送、领取、订阅、升级、到期和异常处理之间的关系。"
-          },
-          {
-            "title": "方案与规格",
-            "text": "将规则落实到流程和原型，并与 PRD、用户说明及验收规格对照，补齐状态、限制和退出路径。"
-          }
-        ],
-        "projects": [
-          "energy-research",
-          "station-control-research",
-          "hardware-research",
-          "ai-commercialization",
-          "product-business"
-        ],
-        "boundary": "研究、业务与技术条件共同影响产品方案；优先级和产品取舍由业务、产品及研发团队协作确定。"
-      },
+      "research": researchCapabilities.zh,
+      "planning": planningCapabilities.zh,
       "ai": aiCapabilities.zh,
-      "delivery": {
-        "title": "产品交付",
-        "summary": "从规则评审，到具体验收与发布核验。",
-        "intro": "围绕需求文档、产品原型与流程规格，协同算法、研发、设计、测试和运营推进交付。实践覆盖 AI 任务体验、技能审核发布、订阅支付及多语言配置。",
-        "methods": [
-          {
-            "title": "规则与文档对照",
-            "text": "将业务规则同步到原型、PRD、用户说明及验收规格，逐项核对字段、状态、权限和异常路径。"
-          },
-          {
-            "title": "验收与发布",
-            "text": "围绕支付失败、零余额、赠送期切换、通知流转等具体路径核对流程和限制，跟进产品验收、问题处理与正式服发布。"
-          },
-          {
-            "title": "批量交付核验",
-            "text": "按技能标识、版本与语言配置检查内容和元数据，区分测试与正式环境；批量更新后回读或抽查，保留核验记录。"
-          }
-        ],
-        "projects": [
-          "ai-ecosystem",
-          "skill-ecosystem",
-          "ai-commercialization",
-          "international-product"
-        ],
-        "boundary": "不同功能分别记录设计、验收与上线进展。产品、研发、测试与运营各有分工；方案覆盖数量与实际发布范围分别说明。"
-      }
+      "project-management": projectManagementCapabilities.zh
     }
   },
   "en": {
@@ -201,7 +128,7 @@ export const portfolio = {
         {
           "id": "strengths",
           "title": "Capabilities",
-          "summary": "User research, product planning, AI product design and delivery.",
+          "summary": "User research, product planning and delivery, AI product design and project management.",
           "href": "/capabilities/"
         }
       ],
@@ -224,86 +151,10 @@ export const portfolio = {
     "career": careerCards(englishStages, 'en'),
     "projects": projectCards(englishCases, 'en'),
     "skills": {
-      "research": {
-        "title": "User research",
-        "summary": "Understand roles and needs.",
-        "intro": "Consumer and industry research using interviews, surveys, fieldwork, shadowing and data analysis. The work identifies contexts, user goals and differences in needs to inform planning and experience evaluation.",
-        "methods": [
-          {
-            "title": "Roles and goals",
-            "text": "Distinguish buyers, managers, users and departments, and identify their goals and differing needs."
-          },
-          {
-            "title": "Context and journeys",
-            "text": "Use interviews, fieldwork and shadowing to document actual use and the steps around it."
-          },
-          {
-            "title": "Findings and requirements",
-            "text": "Develop profiles, key journeys, requirements and experience findings as input to product planning and improvements."
-          }
-        ],
-        "projects": [
-          "energy-research",
-          "station-control-research",
-          "hardware-research",
-          "hardware-human-factors"
-        ],
-        "boundary": "Based on user, market and experience research at HW and NINESTAR. I completed the research, analysis and product-form design in the human factors case. The financial-sector study was a team effort; my work covered questionnaires, fieldwork and data analysis."
-      },
-      "planning": {
-        "title": "Product planning",
-        "summary": "Turn user problems into rules ready for review.",
-        "intro": "Combine user research, product data and feedback to define problems, then translate goals, technical conditions and business constraints into flows, rules and plans. Examples include research-informed planning, AI subscription entitlements and consumer product analysis.",
-        "methods": [
-          {
-            "title": "Problem and scope",
-            "text": "Combine industry context, user research and operating data to identify the people, scenarios and product scope affected."
-          },
-          {
-            "title": "Business rules",
-            "text": "Separate accounts, devices, plan permissions and Credits balances. Map the relationships between gifts, claims, subscriptions, upgrades, expiry and exceptions."
-          },
-          {
-            "title": "Plans and specifications",
-            "text": "Translate rules into flows and prototypes, then check them against requirements, user explanations and acceptance specifications, including states, limits and exit paths."
-          }
-        ],
-        "projects": [
-          "energy-research",
-          "station-control-research",
-          "hardware-research",
-          "ai-commercialization",
-          "product-business"
-        ],
-        "boundary": "Research, business and technical conditions inform the plans. Business, product and engineering teams determine priorities and trade-offs together."
-      },
+      "research": researchCapabilities.en,
+      "planning": planningCapabilities.en,
       "ai": aiCapabilities.en,
-      "delivery": {
-        "title": "Product delivery",
-        "summary": "From rule reviews to acceptance and release checks.",
-        "intro": "Use requirements, prototypes and flow specifications to coordinate algorithm, engineering, design, QA and operations teams. Examples cover AI task experience, skill review and publishing, subscription payments and multilingual configuration.",
-        "methods": [
-          {
-            "title": "Rules and documentation",
-            "text": "Align business rules across prototypes, requirements, user explanations and acceptance specifications. Check fields, states, permissions and exception paths."
-          },
-          {
-            "title": "Acceptance and releases",
-            "text": "Check flows and restrictions for specific paths such as failed payments, zero balances, gift-period transitions and notification routing. Follow acceptance, issue resolution and production releases."
-          },
-          {
-            "title": "Batch delivery checks",
-            "text": "Check content and metadata by skill identifier, version and language configuration, keeping test and production environments separate. Read back or sample batch updates and retain verification records."
-          }
-        ],
-        "projects": [
-          "ai-ecosystem",
-          "skill-ecosystem",
-          "ai-commercialization",
-          "international-product"
-        ],
-        "boundary": "Design, acceptance and release progress are recorded separately for each feature. Product, engineering, QA and operations have their respective roles; planned coverage and released scope are reported separately."
-      }
+      "project-management": projectManagementCapabilities.en
     }
   }
 };

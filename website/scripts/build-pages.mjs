@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build, resolveConfig } from 'vite';
-import { portfolioPages, routeHref } from '../src/routes.js';
+import { legacyPageRedirects, portfolioPages, routeHref } from '../src/routes.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const config = await resolveConfig({ root }, 'build', 'production', 'production');
@@ -35,8 +35,35 @@ for (const page of portfolioPages) {
   await writeFile(resolve(directory, 'index.html'), pageHTML(page), 'utf8');
 }
 
+for (const redirect of legacyPageRedirects) {
+  const page = portfolioPages.find(entry => entry.path === redirect.to);
+  if (!page) throw new Error(`Missing redirect destination: ${redirect.to}`);
+  const target = routeHref(redirect.to, config.base);
+  const canonical = `${origin}${target}`;
+  const html = `<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHTML(page.title)} · 77</title>
+    <meta name="description" content="${escapeHTML(page.description)}" />
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href="${escapeHTML(canonical)}" />
+    <meta http-equiv="refresh" content="0;url=${escapeHTML(target)}" />
+    <script>window.location.replace(${JSON.stringify(target)} + window.location.search + window.location.hash);</script>
+  </head>
+  <body>
+    <p>页面已合并至 <a href="${escapeHTML(target)}">${escapeHTML(page.title)}</a></p>
+  </body>
+</html>
+`;
+  const directory = resolve(output, redirect.path.slice(1));
+  await mkdir(directory, { recursive: true });
+  await writeFile(resolve(directory, 'index.html'), html, 'utf8');
+}
+
 const missing = pageHTML({ path: '/404.html', title: '页面未找到', description: '这个页面不存在，请从首页、职业经历、项目实践或能力与方法继续浏览。' })
   .replace('</head>', '    <meta name="robots" content="noindex" />\n  </head>');
 await writeFile(resolve(output, '404.html'), missing, 'utf8');
 await writeFile(resolve(output, '.nojekyll'), '', 'utf8');
-console.log(`Generated ${portfolioPages.length} independent page documents and 404.html.`);
+console.log(`Generated ${portfolioPages.length} content pages, ${legacyPageRedirects.length} legacy redirects and 404.html.`);

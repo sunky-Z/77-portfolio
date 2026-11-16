@@ -2,15 +2,21 @@ import assert from 'node:assert/strict';
 import { access, readFile, stat } from 'node:fs/promises';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { runInNewContext } from 'node:vm';
 import { resolveConfig } from 'vite';
-import { portfolioPages, routeHref } from '../src/routes.js';
+import { legacyPageRedirects, portfolioPages, routeHref } from '../src/routes.js';
 
 const root = fileURLToPath(new URL('..', import.meta.url));
 const config = await resolveConfig({ root }, 'build', 'production', 'production');
 const output = resolve(root, config.build.outDir);
 const base = routeHref('/', config.base);
 const expectedOrigin = new URL(process.env.VITE_SITE_ORIGIN || 'https://sunky-z.github.io').origin;
-const documents = [...portfolioPages, { path: '/404.html', title: '页面未找到' }];
+const redirectDocuments = legacyPageRedirects.map(entry => ({
+  path: entry.path,
+  title: portfolioPages.find(page => page.path === entry.to)?.title,
+  redirectTo: entry.to,
+}));
+const documents = [...portfolioPages, ...redirectDocuments, { path: '/404.html', title: '页面未找到' }];
 let checkedReferences = 0;
 
 async function checkReference(value, documentPath, canonicalOrigin) {
@@ -34,20 +40,41 @@ for (const page of documents) {
   assert.ok(canonical, `${filename}: missing canonical URL`);
   const canonicalURL = new URL(canonical);
   assert.equal(canonicalURL.origin, expectedOrigin, `${filename}: incorrect canonical origin`);
-  assert.equal(canonicalURL.pathname, routeHref(page.path, config.base), `${filename}: canonical base mismatch`);
+  assert.equal(canonicalURL.pathname, routeHref(page.redirectTo || page.path, config.base), `${filename}: canonical base mismatch`);
   assert.ok(html.includes(`<title>${page.title}`), `${filename}: incorrect document title`);
   assert.match(html, /<meta\s+name="description"\s+content="[^"]+"/i, `${filename}: missing description`);
-  assert.match(html, /<script[^>]+type="module"[^>]+src="[^"]+"/i, `${filename}: missing module entry`);
+  if (page.redirectTo) {
+    const target = routeHref(page.redirectTo, config.base);
+    assert.match(html, /<meta\s+name="robots"\s+content="noindex"/i, `${filename}: redirect must not be indexed`);
+    const refresh = html.match(/<meta\s+http-equiv="refresh"\s+content="([^"]+)"/i)?.[1];
+    assert.equal(refresh, `0;url=${target}`, `${filename}: incorrect refresh destination`);
+    assert.ok(html.includes(`<a href="${target}">`), `${filename}: missing manual redirect link`);
+    assert.doesNotMatch(html, /<script[^>]+type="module"/i, `${filename}: redirect unexpectedly loads the app`);
+    const script = html.match(/<script>([\s\S]*?)<\/script>/i)?.[1];
+    assert.ok(script, `${filename}: missing redirect script`);
+    let redirected;
+    runInNewContext(script, { window: { location: {
+      search: '?source=bookmark', hash: '#skill-methods',
+      replace: value => { redirected = value; },
+    } } }, { timeout: 100 });
+    assert.equal(redirected, `${target}?source=bookmark#skill-methods`, `${filename}: redirect loses query or section`);
+  } else {
+    assert.match(html, /<script[^>]+type="module"[^>]+src="[^"]+"/i, `${filename}: missing module entry`);
+  }
   assert.doesNotMatch(html, /(?:src|href)="\/src\//i, `${filename}: source module leaked into production HTML`);
-  const socialURL = html.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i)?.[1];
-  assert.equal(socialURL, canonical, `${filename}: social URL differs from canonical URL`);
+  if (!page.redirectTo) {
+    const socialURL = html.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i)?.[1];
+    assert.equal(socialURL, canonical, `${filename}: social URL differs from canonical URL`);
+  }
   for (const match of html.matchAll(/\b(?:src|href)="([^"]+)"/gi)) {
     await checkReference(match[1], page.path, canonicalURL.origin);
   }
-  const socialImage = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1];
-  assert.ok(socialImage, `${filename}: missing social image`);
-  assert.equal(new URL(socialImage).origin, canonicalURL.origin, `${filename}: social image origin mismatch`);
-  await checkReference(socialImage, page.path, canonicalURL.origin);
+  if (!page.redirectTo) {
+    const socialImage = html.match(/<meta\s+property="og:image"\s+content="([^"]+)"/i)?.[1];
+    assert.ok(socialImage, `${filename}: missing social image`);
+    assert.equal(new URL(socialImage).origin, canonicalURL.origin, `${filename}: social image origin mismatch`);
+    await checkReference(socialImage, page.path, canonicalURL.origin);
+  }
 }
 
 await access(resolve(output, '.nojekyll'));

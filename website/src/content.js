@@ -448,7 +448,9 @@ export const cases = {
       "Performance diagnosis: Combine BI, event data, user feedback and support issues to analyze activity, retention, conversion and monetization across 6 consumer product lines.",
       "Versions and channels: Contribute to staged-rollout analysis, channel reviews and churn investigations. Distinguish user groups and version conditions when identifying issues and recommending changes.",
       "Advertising flows: Contribute requirements and flows for lock-screen icons, portrait images and template advertising, assessing changes alongside experience and monetization performance.",
-      "Requirements and releases: Own relevant requirements, prototypes and reviews. Work with engineering, design, QA and operations on staged rollouts, acceptance and post-release evaluation."
+      "Requirements and releases: Own relevant requirements, prototypes and reviews. Work with engineering, design, QA and operations on staged rollouts, acceptance and post-release evaluation.",
+      "Multi-project coordination and phased delivery: Track development across product lines and advance staged acceptance of quarterly goals. Maintain a dedicated requirements backlog, align requirements with marketing and operations, and follow first-phase assignment, development progress and second-phase scope alignment.",
+      "Release risks and issue tracking: Track crashes, ANRs and device-adaptation issues alongside rollout and channel data. Follow interface integration and testing of fixes, check version intake and freeze milestones, and advance phased handovers."
     ],
     "outputs": [
       [
@@ -460,8 +462,8 @@ export const cases = {
         "Flows and requirements for lock-screen, portrait-image and template advertising"
       ],
       [
-        "Version evaluation & release coordination",
-        "Staged-rollout analysis, requirements reviews, acceptance and release evaluation"
+        "Project coordination & release evaluation",
+        "Requirements backlog, development tracking, staged acceptance, rollout analysis and release evaluation"
       ]
     ],
     "lesson": "Read performance indicators alongside the relevant users, channels and versions. Assess product changes against specific usage issues and a defined evaluation scope.",

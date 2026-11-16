@@ -5,7 +5,7 @@ import { portfolio } from '../src/portfolio.js';
 import { projectGroups, projectBriefs } from '../src/project-reading.js';
 import { cases as zhCases } from '../src/content.zh.js';
 import { cases as enCases } from '../src/content.js';
-import { legacyHashPath, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
+import { legacyHashPath, legacyPageRedirects, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
 
 test('all independent pages resolve under both local and GitHub Pages prefixes', () => {
   assert.equal(portfolioPages.length, 21);
@@ -27,6 +27,25 @@ test('parent category and document-style URLs remain valid', () => {
   assert.equal(parsePortfolioPath('/77-portfolio', '/77-portfolio/').type, 'home');
 });
 
+test('merged delivery addresses resolve to planning without creating a fifth capability branch', () => {
+  const skills = portfolioPages.filter(page => page.type === 'skill');
+  assert.deepEqual(skills.map(page => page.id).sort(), ['ai', 'planning', 'project-management', 'research']);
+  assert.equal(skills.find(page => page.id === 'planning').title, '产品规划与交付');
+  for (const base of ['/', '/77-portfolio/']) {
+    for (const redirect of legacyPageRedirects) {
+      assert.ok(!portfolioPages.some(page => page.path === redirect.path));
+      const target = portfolioPages.find(page => page.path === redirect.to);
+      assert.ok(target);
+      for (const suffix of ['', 'index.html']) {
+        const route = parsePortfolioPath(`${routeHref(redirect.path, base)}${suffix}`, base);
+        assert.equal(route.key, target.key);
+        assert.equal(route.redirectTo, redirect.to);
+      }
+      assert.equal(parsePortfolioPath(routeHref(redirect.path, base).replace(/\/$/, ''), base).redirectTo, redirect.to);
+    }
+  }
+});
+
 test('unrecognized, out-of-prefix and over-nested paths produce the missing page', () => {
   for (const path of ['/projects/', '/77-portfolio-old/projects/', '/77-portfolio/projects/unknown/', '/77-portfolio/projects/ai-ecosystem/extra/']) {
     assert.equal(parsePortfolioPath(path, '/77-portfolio/').type, 'notfound');
@@ -37,6 +56,8 @@ test('former shared hashes map to documents while page-local section hashes do n
   assert.equal(legacyHashPath('#about'), '/experience/');
   assert.equal(legacyHashPath('#work/ai-ecosystem'), '/projects/ai-ecosystem/');
   assert.equal(legacyHashPath('#skills/research'), '/capabilities/research/');
+  assert.equal(legacyHashPath('#skills/delivery'), '/capabilities/planning/');
+  assert.equal(legacyHashPath('#skills/project-management'), '/capabilities/project-management/');
   assert.equal(legacyHashPath('#experience/huawei'), '/experience/huawei/');
   assert.equal(legacyHashPath('#work/unknown'), null);
   assert.equal(legacyHashPath('#project-context'), null);
@@ -47,6 +68,7 @@ test('project routes, translations, category cards and related links stay in syn
   assert.equal(projectRoutes.length, 9);
   for (const [language, cases] of [['zh', zhCases], ['en', enCases]]) {
     const data = portfolio[language];
+    assert.deepEqual(Object.keys(data.skills).sort(), portfolioPages.filter(page => page.type === 'skill').map(page => page.id).sort());
     assert.deepEqual(Object.keys(cases).sort(), projectRoutes.map(page => page.id).sort());
     assert.deepEqual(data.projects.map(project => project.id).sort(), projectRoutes.map(page => page.id).sort());
     assert.equal(data.projects.filter(project => project.featured).length, 3);

@@ -158,7 +158,7 @@ function CategoryPage({ route, data, L, onCopyEmail }) {
   const categories = {
     experience: { path: '/experience/', number: '01', title: L('职业经历', 'Career & background'), intro: L('三段职业经历，两项学科背景。', 'Three roles. A foundation in psychology and business.') },
     projects: { path: '/projects/', number: '02', title: L('项目实践', 'Projects'), intro: L('从用户研究到 AI 产品，呈现两条实践方向。', 'Two areas of practice, from user research to AI products.') },
-    capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('用户研究、产品规划、AI 产品设计与交付协作。', 'User research, product planning, AI product design and delivery.') },
+    capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('结合心理学与工商管理背景，呈现用户研究、产品规划与交付、AI 产品设计及项目管理实践。', 'A background in psychology and business administration informs user research, product planning and delivery, AI product design and project management.') },
     contact: { path: '/contact/', number: '04', title: L('联系我', 'Get in touch'), intro: data.profile.contactText },
   };
   const category = categories[route.type];

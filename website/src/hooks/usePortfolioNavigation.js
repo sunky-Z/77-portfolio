@@ -5,6 +5,10 @@ export default function usePortfolioNavigation() {
   const route = parsePortfolioPath(window.location.pathname);
 
   useLayoutEffect(() => {
+    if (route.redirectTo) {
+      window.location.replace(`${routeHref(route.redirectTo)}${window.location.search}${window.location.hash}`);
+      return;
+    }
     if (route.type !== 'home') return;
     const migrate = () => {
       const path = legacyHashPath(window.location.hash);
@@ -15,7 +19,7 @@ export default function usePortfolioNavigation() {
     migrate();
     window.addEventListener('hashchange', migrate);
     return () => window.removeEventListener('hashchange', migrate);
-  }, [route.key]);
+  }, [route.key, route.redirectTo]);
 
   return { route };
 }

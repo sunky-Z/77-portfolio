@@ -3,7 +3,7 @@ export const portfolioPages = [
   { path: '/', type: 'home', key: 'home', title: '个人介绍', description: '77 的个人介绍。心理学本科，工商管理硕士，现从事 AI 产品经理。' },
   { path: '/experience/', type: 'experience', key: 'experience', parent: '/', title: '职业经历', description: '77 在 HW、NINESTAR 与 DROI 的职业经历，以及心理学与工商管理教育背景。' },
   { path: '/projects/', type: 'projects', key: 'projects', parent: '/', title: '项目实践', description: '主动服务与 AI 任务体验、技能发现与质量治理、AI 订阅权益、海外本地化，以及能源和智能硬件研究与消费端产品分析。' },
-  { path: '/capabilities/', type: 'capabilities', key: 'capabilities', parent: '/', title: '能力与方法', description: '77 在用户研究、产品规划、AI 产品设计与产品交付中的方法实践。' },
+  { path: '/capabilities/', type: 'capabilities', key: 'capabilities', parent: '/', title: '能力与方法', description: '77 在用户研究、产品规划与交付、AI 产品设计和项目管理中的方法实践。' },
   { path: '/contact/', type: 'contact', key: 'contact', parent: '/', title: '联系我', description: '通过邮件联系 77，交流产品、研究与合作事宜。' },
   { path: '/experience/huawei/', type: 'career', id: 'huawei', key: 'career/huawei', parent: '/experience/', title: 'HW · 用户研究与产品策略', description: '参与能源产品的市场、用户与需求研究，支持产品规划和体验评估。' },
   { path: '/experience/hardware/', type: 'career', id: 'hardware', key: 'career/hardware', parent: '/experience/', title: 'NINESTAR · 智能硬件用户研究', description: '参与金融业打印设备使用体验研究，负责人因评估与产品形态设计，相关产品最终投产。' },
@@ -17,10 +17,15 @@ export const portfolioPages = [
   { path: '/projects/hardware-research/', type: 'project', id: 'hardware-research', key: 'project/hardware-research', parent: '/projects/', title: '金融行业打印设备使用体验研究', description: '研究银行前厅与楼内办公的使用差异，承担问卷设计、调研执行、定量数据分析与定性资料整理，形成分场景需求结论。' },
   { path: '/projects/hardware-human-factors/', type: 'project', id: 'hardware-human-factors', key: 'project/hardware-human-factors', parent: '/projects/', title: '打印设备人因评估与产品形态设计', description: '负责打印设备 A/B 试验、使用观察、3D 人因评估、场景与注意力分析及产品形态设计，相关产品最终投产。' },
   { path: '/projects/product-business/', type: 'project', id: 'product-business', key: 'project/product-business', parent: '/projects/', title: '消费端产品分析与商业化', description: '分析 DROI 的 6 条消费端产品线，结合经营数据、用户反馈与渠道表现，参与广告流程设计、版本迭代及发布评估。' },
-  { path: '/capabilities/research/', type: 'skill', id: 'research', key: 'skill/research', parent: '/capabilities/', title: '用户研究', description: '结合访谈、问卷、实地调研、跟岗观察与数据分析，梳理使用情境、用户目标与需求差异。' },
-  { path: '/capabilities/planning/', type: 'skill', id: 'planning', key: 'skill/planning', parent: '/capabilities/', title: '产品规划', description: '结合用户研究、产品数据、市场信息、技术成本与业务条件，形成可评审的产品方案。' },
+  { path: '/capabilities/research/', type: 'skill', id: 'research', key: 'skill/research', parent: '/capabilities/', title: '用户研究', description: '结合心理学背景与实地调研、问卷及定量定性分析，研究用户行为、任务与情境差异，并开展人因评估与产品形态设计。' },
+  { path: '/capabilities/planning/', type: 'skill', id: 'planning', key: 'skill/planning', parent: '/capabilities/', title: '产品规划与交付', description: '结合用户研究、产品数据与业务条件，形成产品方案、流程与规则，推进评审、验收及发布核验。' },
   { path: '/capabilities/ai/', type: 'skill', id: 'ai', key: 'skill/ai', parent: '/capabilities/', title: 'AI 产品设计', description: 'AI 助手与 Agent 应用的场景规划、任务交互、技能检索、运营工作流、应用评估及协同交付，附具体项目与交付依据。' },
-  { path: '/capabilities/delivery/', type: 'skill', id: 'delivery', key: 'skill/delivery', parent: '/capabilities/', title: '产品交付', description: '围绕需求文档、产品原型与流程规则，参与评审、协作、开发跟进、验收与发布评估。' },
+  { path: '/capabilities/project-management/', type: 'skill', id: 'project-management', key: 'skill/project-management', parent: '/capabilities/', title: '项目管理', description: '消费端多产品线及商业化专项的需求组织、阶段推进、跨团队依赖协调、灰度发布跟踪、问题处理和工作交接。' },
+];
+
+// Compatibility documents redirect to current pages and are not content branches.
+export const legacyPageRedirects = [
+  { path: '/capabilities/delivery/', to: '/capabilities/planning/' },
 ];
 
 function defaultBase() {
@@ -47,8 +52,12 @@ export function parsePortfolioPath(pathname, base = defaultBase()) {
 
   relative = relative.replace(/\/index\.html$/, '/');
   if (!relative.endsWith('/')) relative += '/';
-  return portfolioPages.find(page => page.path === relative)
-    || { type: 'notfound', key: 'notfound', parent: '/', invalid: true };
+  const page = portfolioPages.find(page => page.path === relative);
+  if (page) return page;
+  const redirect = legacyPageRedirects.find(entry => entry.path === relative);
+  const destination = redirect && portfolioPages.find(entry => entry.path === redirect.to);
+  return destination ? { ...destination, redirectTo: redirect.to }
+    : { type: 'notfound', key: 'notfound', parent: '/', invalid: true };
 }
 
 // Only the former home document used these hashes as application routes.
@@ -59,5 +68,7 @@ export function legacyHashPath(hash) {
   if (!match) return null;
   const branch = { work: 'projects', skills: 'capabilities', experience: 'experience' }[match[1]];
   const path = `/${branch}/${match[2]}/`;
+  const redirect = legacyPageRedirects.find(entry => entry.path === path);
+  if (redirect) return redirect.to;
   return portfolioPages.some(page => page.path === path) ? path : null;
 }
