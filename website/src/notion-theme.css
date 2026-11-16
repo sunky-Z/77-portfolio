@@ -4,17 +4,17 @@
   --ink: #111111;
   --muted: #615D59;
   --body-text: #44413D;
-  --amber: #FFB110;
-  --coral: #F64932;
-  --blue: #097FE8;
-  --sky: #E6F3FE;
-  --peach: #F6D5B8;
-  --mocha: #B18164;
-  --midnight: #02093A;
+  --amber: #F1DDAE;
+  --coral: #E6C4BA;
+  --blue: #C4D5E0;
+  --sky: #E8EFF3;
+  --peach: #F0DED0;
+  --mocha: #D1BBAA;
+  --midnight: #303B43;
   --line: rgba(0, 0, 0, .08);
   --soft: #F0EFED;
-  --accent: #0075DE;
-  --accent-hover: #005DB5;
+  --accent: #42647A;
+  --accent-hover: #344F61;
   --accent-soft: var(--sky);
   background: var(--paper);
 }
