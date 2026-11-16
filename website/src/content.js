@@ -73,7 +73,7 @@ export const cases = {
       },
       {
         "title": "Travel-planning flow live",
-        "text": "The flow is live. I manually selected different travel modes and preferences and checked whether the generated plan reflected them. I also verified skipping the questions and making later adjustments in the same conversation. No independent quantitative evaluation was conducted."
+        "text": "The flow is live. I manually selected different travel modes and preferences and checked whether the generated plan reflected them. I also verified skipping the questions and making later adjustments in the same conversation."
       },
       {
         "title": "Notification and to-do acceptance",
