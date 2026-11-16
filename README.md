@@ -1,6 +1,6 @@
 # 77 个人站
 
-中英双语个人介绍、职业经历、项目实践和工作方法。React + Vite，21 个独立静态页面；黑白灰为主、橙色作少量强调。
+中英双语个人介绍、职业经历、项目实践和工作方法。React + Vite，22 个独立静态页面；黑白灰为主、橙色作少量强调。
 
 [查看网站](https://sunky-z.github.io/77-portfolio/) · [开发与部署说明](website/README.md) · [设计规范](website/DESIGN.md)
 

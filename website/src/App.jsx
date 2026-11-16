@@ -278,7 +278,7 @@ function ProjectArticle({ id, item, data, L }) {
     ['project-context', L('问题与背景', 'Problem & context')],
     ['project-contribution', L('工作过程', 'Work process')],
     ...(item.decisions?.length ? [['project-decisions', item.decisionLabel || L('关键判断', 'Key decisions')]] : []),
-    ['project-outputs', L('交付与进展', 'Deliverables & progress')],
+    ['project-outputs', L('交付成果', 'Deliverables')],
     ['project-related', L('延伸阅读', 'Further reading')],
   ];
   const titles = Object.fromEntries(sections);
@@ -309,10 +309,6 @@ function ProjectArticle({ id, item, data, L }) {
       </ArticleSection>}
       <ArticleSection id="project-outputs" title={titles['project-outputs']} number={sectionNumber('project-outputs')}>
         <div className="outputs-grid">{item.outputs.map(([title, text]) => <div className="output-card" key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>
-        {item.progress?.length > 0 && <div className="delivery-progress" id="project-progress" data-reading-anchor>
-          <h3 className="result-subheading">{L('当前进展', 'Current progress')}</h3>
-          {item.progress.map(entry => <div className="action-entry" key={entry.title}><h4>{entry.title}</h4><p>{entry.text}</p></div>)}
-        </div>}
         <div className="project-takeaway" id="project-reflection" data-reading-anchor><h3>{L('实践思考', 'Reflection')}</h3><p>{item.lesson}</p></div>
       </ArticleSection>
       <ArticleSection id="project-related" title={titles['project-related']} number={sectionNumber('project-related')}>
@@ -443,7 +439,7 @@ export default function App() {
       try { id = decodeURIComponent(window.location.hash.slice(1)); }
       catch { return; }
       if (!id) return;
-      const target = document.getElementById(id);
+      const target = document.getElementById(id === 'project-progress' ? 'project-contribution' : id);
       if (!target) return;
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       target.focus({ preventScroll: true });

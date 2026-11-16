@@ -5,9 +5,10 @@ import { researchCapabilities } from './research-capability.js';
 import { planningCapabilities } from './planning-capability.js';
 import { projectManagementCapabilities } from './project-management-capability.js';
 
-const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
+const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'energy-product-planning', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
 const featuredProjectIds = ['ai-ecosystem', 'hardware-human-factors', 'station-control-research'];
 const projectCardTitles = {
+  'energy-product-planning': { zh: '充电网络与户用光伏研究', en: 'Charging networks & residential solar research' },
   'hardware-human-factors': { zh: '人因评估与产品形态设计', en: 'Human factors & product-form design' },
   'station-control-research': { zh: '光伏电站管理系统研究', en: 'Solar plant management research' },
   'hardware-research': { zh: '金融行业打印体验研究', en: 'Financial-sector printing research' },
@@ -17,7 +18,8 @@ const projectDetails = {
   'skill-ecosystem': { highlight: { zh: '标签体系：295 → 47 个共享标签', en: 'Taxonomy: 295 labels → 47 shared tags' }, relatedProjects: ['ai-ecosystem', 'international-product'], company: 'DROI', image: 'case-skills.svg', skills: ['ai', 'planning'], featured: true, summary: { zh: '整理技能分类、使用说明与审核发布流程，覆盖发现到首次使用。', en: 'Skill categories, usage guidance and review flows, from discovery to first use.' } },
   'ai-commercialization': { highlight: { zh: '订阅原型覆盖 15 类账户场景', en: 'Subscription prototype covering 15 account scenarios' }, relatedProjects: ['product-business', 'international-product'], company: 'DROI', image: 'case-subscription.svg', skills: ['planning', 'ai'], featured: true, summary: { zh: '梳理账号、设备、订阅与积分的关系，设计权益规则及支付异常流程。', en: 'Account, device, subscription and Credits rules, including payment exceptions.' } },
   'international-product': { highlight: { zh: '内容配置：19 条技能 × 46 个语言配置', en: 'Content configuration: 19 skills × 46 language configurations' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'case-localization.svg', skills: ['planning'], summary: { zh: '多语言技能、套餐与奖励说明的内容配置、核验和海外演示适配。', en: 'Multilingual skills, plan and reward content, with configuration checks and overseas demos.' } },
-  'energy-research': { relatedProjects: ['station-control-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '以市场与用户研究，支持能源产品规划。', en: 'Market and user research supporting energy product planning.' } },
+  'energy-research': { relatedProjects: ['energy-product-planning', 'station-control-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '以市场与用户研究，支持能源产品规划。', en: 'Market and user research supporting energy product planning.' } },
+  'energy-product-planning': { highlight: { zh: '充电平台研究：3 类主要人群 · Kano 需求排序', en: 'Charging-platform study: 3 main user groups · Kano prioritization' }, relatedProjects: ['station-control-research', 'energy-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '充电网络的人群研究与需求排序，结合 C 端户用光伏的智能功能规划，形成产品需求与体验优化输入。', en: 'Charging-platform audience research and requirement prioritization, alongside intelligent-feature planning for residential solar products.' } },
   'station-control-research': { highlight: { zh: '巡检与报警功能方向已纳入研究报告', en: 'Inspection and alert proposals documented in the research report' }, relatedProjects: ['energy-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '围绕地面光伏电站管理系统开展用户研究，分析山地巡检问题、用户画像与功能改进方向。', en: 'User research for a solar plant management system, covering field inspection needs, user profiles and functional improvements.' } },
   'hardware-research': { relatedProjects: ['hardware-human-factors', 'station-control-research'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research', 'planning'], summary: { zh: '研究银行前厅业务与楼内办公的使用差异，承担问卷设计、调研执行及定量定性分析。', en: 'Research into printing needs in bank counter services and office work, covering questionnaire design, fieldwork and quantitative and qualitative analysis.' } },
   'hardware-human-factors': { highlight: { zh: '完成产品形态设计，相关产品最终投产', en: 'Completed product-form design; the product entered production' }, relatedProjects: ['hardware-research', 'ai-ecosystem'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research'], summary: { zh: '结合 A/B 试验、操作观察和 3D 人因评估，分析布局、姿态与注意力分配，形成产品形态方案。', en: 'A/B testing, task observation and 3D human factors evaluation informed layout, posture, attention allocation and product-form design.' } },
@@ -44,7 +46,7 @@ function careerCards(stages, language) {
   return [
     { id: 'current', company: 'DROI', date: language === 'zh' ? '2025.11 — 至今' : '2025.11 — Present', relatedProjects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'product-business'] },
     { id: 'hardware', company: 'NINESTAR', date: '2024.06 — 2025.04', relatedProjects: ['hardware-research', 'hardware-human-factors'] },
-    { id: 'huawei', company: 'HW', date: '2021.06 — 2024.04', relatedProjects: ['station-control-research', 'energy-research'] },
+    { id: 'huawei', company: 'HW', date: '2021.06 — 2024.04', relatedProjects: ['energy-product-planning', 'station-control-research', 'energy-research'] },
   ].map(item => ({ ...item, role: stages[item.id].title, summary: stages[item.id].description }));
 }
 

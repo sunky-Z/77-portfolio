@@ -10,11 +10,11 @@ export const projectGroups = [
   },
   {
     id: 'research',
-    projects: ['hardware-human-factors', 'station-control-research', 'hardware-research'],
+    projects: ['hardware-human-factors', 'station-control-research', 'energy-product-planning', 'hardware-research'],
     title: { zh: '用户研究与产品设计', en: 'User research & product design' },
     description: {
-      zh: '结合真实作业与操作场景，呈现研究分析、需求判断与产品形态设计。',
-      en: 'Research, requirements and product-form design grounded in actual working contexts and interactions.',
+      zh: '从市场与人群洞察，到实际作业与操作场景，呈现需求判断、功能规划与产品形态设计。',
+      en: 'Market and audience research, fieldwork and task analysis inform requirements, feature planning and product-form design.',
     },
   },
 ];
@@ -84,6 +84,16 @@ export const projectBriefs = {
     status: {
       zh: '已形成市场与用户洞察、关键用户旅程及需求与体验评估建议。',
       en: 'Outputs include market and user insights, key user journeys, requirements and experience-evaluation recommendations.',
+    },
+  },
+  'energy-product-planning': {
+    context: {
+      zh: '围绕充电网络与 C 端户用光伏软件，研究市场机会、人群差异及能源使用相关功能。',
+      en: 'Research and planning for charging networks and residential solar software, covering market opportunities, user differences and energy-related features.',
+    },
+    status: {
+      zh: '已形成充电平台人群分层、需求排序与体验优化建议，并开展户用光伏智能功能规划。',
+      en: 'Outputs include charging-platform segmentation, prioritized requirements and experience recommendations, alongside residential solar feature planning.',
     },
   },
   'station-control-research': {

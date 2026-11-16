@@ -242,9 +242,6 @@ h1[tabindex]:focus, h2[tabindex]:focus { outline: none; }
 .project-chapters .toc button { display: flex; gap: 12px; }
 .toc-number { color: #919191; font-size: 13px; padding-top: 1px; }
 .section-number { display: inline-block; color: var(--accent-hover); font-size: 15px; margin-right: 16px; vertical-align: middle; }
-.delivery-progress { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); max-width: 860px; }
-.delivery-progress .result-subheading { font-size: 22px; margin-bottom: 24px; }
-.delivery-progress h4 { font-size: 19px; font-weight: 500; margin-bottom: 8px; }
 .project-takeaway { max-width: 860px; margin-top: 30px; padding: 22px 25px; border-left: 2px solid #bdbdbd; background: var(--soft); }
 .project-takeaway h3 { font-size: 18px; }
 .project-takeaway p { font-size: 16px; }

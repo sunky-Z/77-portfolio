@@ -41,7 +41,7 @@ export const planningCapabilities = {
         evidence: '19 条技能、46 个语言配置，共 874 组内容完成正式服写入与抽查',
       },
     ],
-    projects: ['station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
+    projects: ['energy-product-planning', 'station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
     boundary: '本人承担需求分析、产品方案、业务规则、原型规格及产品验收工作，算法、工程、视觉实现与测试由相应团队协作完成。研究建议、设计交付、验收通过与正式上线按具体项目和功能分别说明。',
   },
   en: {
@@ -86,7 +86,7 @@ export const planningCapabilities = {
         evidence: 'Completed production writes and spot checks for 874 content groups across 19 skills and 46 language configurations',
       },
     ],
-    projects: ['station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
+    projects: ['energy-product-planning', 'station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
     boundary: 'My work covers requirements analysis, product plans, business rules, prototype specifications and product acceptance. Algorithm, engineering, visual implementation and testing involve the respective teams. Research proposals, design delivery, acceptance and production release are stated separately for specific projects and features.',
   },
 };

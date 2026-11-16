@@ -8,7 +8,7 @@ import { cases as enCases } from '../src/content.js';
 import { legacyHashPath, legacyPageRedirects, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
 
 test('all independent pages resolve under both local and GitHub Pages prefixes', () => {
-  assert.equal(portfolioPages.length, 21);
+  assert.equal(portfolioPages.length, 22);
   for (const base of ['/', '/77-portfolio/']) {
     for (const page of portfolioPages) {
       const href = routeHref(page.path, base);
@@ -65,7 +65,7 @@ test('former shared hashes map to documents while page-local section hashes do n
 
 test('project routes, translations, category cards and related links stay in sync', async () => {
   const projectRoutes = portfolioPages.filter(page => page.type === 'project');
-  assert.equal(projectRoutes.length, 9);
+  assert.equal(projectRoutes.length, 10);
   for (const [language, cases] of [['zh', zhCases], ['en', enCases]]) {
     const data = portfolio[language];
     assert.deepEqual(Object.keys(data.skills).sort(), portfolioPages.filter(page => page.type === 'skill').map(page => page.id).sort());
@@ -92,7 +92,6 @@ test('project routes, translations, category cards and related links stay in syn
     }
     for (const id of ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product']) {
       assert.ok(cases[id].decisions.length >= 2, `${language}/${id} decisions`);
-      assert.ok(cases[id].progress.length >= 2, `${language}/${id} progress`);
       assert.equal(cases[id].actions.length, (language === 'zh' ? enCases : zhCases)[id].actions.length);
     }
   }
@@ -100,7 +99,7 @@ test('project routes, translations, category cards and related links stay in syn
 
 test('research cases are reachable from their employers and research methods in both languages', () => {
   for (const data of Object.values(portfolio)) {
-    for (const [company, ids] of [['HW', ['station-control-research']], ['NINESTAR', ['hardware-research', 'hardware-human-factors']]]) {
+    for (const [company, ids] of [['HW', ['station-control-research', 'energy-product-planning']], ['NINESTAR', ['hardware-research', 'hardware-human-factors']]]) {
       const career = data.career.find(entry => entry.company === company);
       for (const id of ids) {
         assert.ok(career.relatedProjects.includes(id));

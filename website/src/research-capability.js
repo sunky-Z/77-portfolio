@@ -35,7 +35,7 @@ export const researchCapabilities = {
         evidence: '辅助巡检与独立报警作为功能建议纳入用户研究报告',
       },
     ],
-    projects: ['energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors'],
+    projects: ['energy-product-planning', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors'],
     boundary: '站控研究中负责实地调研、问卷、数据分析及报告产出；金融行业调研由团队共同开展，本人承担问卷、执行与分析工作。人因案例的研究、分析、场景构想、方案比较及产品形态设计均由本人完成。',
   },
   en: {
@@ -74,7 +74,7 @@ export const researchCapabilities = {
         evidence: 'Assisted inspection and separate fault-alert proposals documented in the user research report',
       },
     ],
-    projects: ['energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors'],
+    projects: ['energy-product-planning', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors'],
     boundary: 'For the solar plant study, I handled fieldwork, questionnaires, data analysis and reporting. The financial-sector study was a team effort, with my work covering questionnaires, fieldwork and analysis. I completed all research, analysis, scenario concepts, option comparison and product-form design in the human factors case.',
   },
 };

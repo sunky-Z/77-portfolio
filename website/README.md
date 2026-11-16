@@ -36,7 +36,7 @@ npm run dev
 | `npm ci` | 按锁文件安装；首次下载或依赖变化后运行 |
 | `npm run dev` | 开发服务，默认端口 5177 |
 | `npm test` | 核对独立路由、内容映射、中英项目与关联链接 |
-| `npm run build` | 生成资源、21 个独立页面和 `404.html` 到 `dist/` |
+| `npm run build` | 生成资源、22 个独立内容页、兼容跳转和 `404.html` 到 `dist/` |
 | `npm run check:build` | 构建后核对 HTML、入口资源、静态文件与部署前缀 |
 | `npm run preview` | 预览构建结果，默认端口 4177 |
 
@@ -108,11 +108,11 @@ npm run check:build
 | 层级 | 路径 | 内容 |
 |---|---|---|
 | 首页 | `/` | 简介、精选项目及分类入口 |
-| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、产品与研究项目及专题（九个详情入口）、四个能力分支 |
+| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、产品与研究项目及专题（十个详情入口）、四个能力分支 |
 | 联系 | `/contact/` | 邮箱及复制入口 |
 | 经历详情 | `/experience/huawei/`、`/experience/hardware/`、`/experience/current/` | 三段职业经历 |
 | DroiClaw 产品专题 | `/projects/ai-ecosystem/`、`/projects/skill-ecosystem/`、`/projects/ai-commercialization/`、`/projects/international-product/` | 同一 AI 助手下的主动服务、技能治理、订阅权益、海外本地化 |
-| 研究及产品分析 | `/projects/energy-research/`、`/projects/station-control-research/`、`/projects/hardware-research/`、`/projects/hardware-human-factors/`、`/projects/product-business/` | 能源、电站管理系统、金融行业打印体验、人因评估与形态设计、消费端产品 |
+| 研究及产品分析 | `/projects/energy-research/`、`/projects/energy-product-planning/`、`/projects/station-control-research/`、`/projects/hardware-research/`、`/projects/hardware-human-factors/`、`/projects/product-business/` | 能源概览、充电网络与户用光伏、电站管理系统、金融行业打印体验、人因评估与形态设计、消费端产品 |
 | 方法详情 | `/capabilities/research/`、`/capabilities/planning/`、`/capabilities/ai/`、`/capabilities/project-management/` | 用户研究、产品规划与交付、AI 产品设计、项目管理 |
 | 兼容地址 | `/capabilities/delivery/` | 跳转至合并后的 `/capabilities/planning/`，保留查询参数和正文位置 |
 
