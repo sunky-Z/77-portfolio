@@ -193,6 +193,9 @@ h1[tabindex]:focus, h2[tabindex]:focus { outline: none; }
 .article-section strong { font-weight: 600; color: var(--ink); }
 .action-entry { margin-bottom: 29px; }
 .action-entry:last-child { margin-bottom: 0; }
+.method-evidence { display: inline-flex; align-items: baseline; gap: 10px; min-height: 40px; max-width: 100%; margin-top: 10px; padding-block: 6px; color: var(--accent-hover); font-size: 15px; line-height: 1.8; }
+.method-evidence:hover span { text-decoration: underline; text-underline-offset: 4px; }
+.method-evidence svg { align-self: center; }
 .article-aside { position: sticky; top: 110px; padding-left: 22px; border-left: 1px solid var(--line); }
 .toc { display: flex; flex-direction: column; gap: 3px; }
 .toc-title { color: var(--muted); font-size: 13px; margin-bottom: 10px; }

@@ -85,6 +85,8 @@ npm run check:build
 | 中英文字体与回退 | `src/fonts.css` |
 | 首页、分类页、正文布局和交互 | `src/App.jsx` |
 | 双语简介、项目卡片、职业入口与能力内容 | `src/portfolio.js` |
+| AI 产品设计能力的双语正文与逐项项目依据 | `src/ai-capability.js` |
+| 项目分组、开篇场景说明及交付状态 | `src/project-reading.js` |
 | 双语项目及职业正文 | `src/content.zh.js`、`src/content.js` |
 | 页面清单、层级与旧地址映射 | `src/routes.js` |
 | 从网址选择页面 | `src/hooks/usePortfolioNavigation.js` |

@@ -1,5 +1,6 @@
 import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
+import { aiCapabilities } from './ai-capability.js';
 
 const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
 const featuredProjectIds = ['ai-ecosystem', 'hardware-human-factors', 'station-control-research'];
@@ -146,31 +147,7 @@ export const portfolio = {
         ],
         "boundary": "研究、业务与技术条件共同影响产品方案；优先级和产品取舍由业务、产品及研发团队协作确定。"
       },
-      "ai": {
-        "title": "AI 产品设计",
-        "summary": "把任务状态、用户介入与结果反馈讲清楚。",
-        "intro": "围绕移动终端 AI 助手，设计主动服务、智能通知、任务执行与技能发现流程。重点处理用户何时需要知道、何时需要介入，以及任务中断后怎样继续和找回结果。",
-        "methods": [
-          {
-            "title": "任务状态与反馈",
-            "text": "梳理任务摘要、发起来源和关键结果，串联对话页、灵动岛与桌面反馈，区分进行中、待确认和已完成等状态。"
-          },
-          {
-            "title": "用户介入与控制",
-            "text": "设计凭据输入、单选与多选补充、授权确认和异常处理；区分停止展示、停止执行与删除记录，补充退出后的结果找回路径。"
-          },
-          {
-            "title": "技能发现与首次使用",
-            "text": "从用途、输入、输出及操作边界组织技能说明，结合分类、搜索、Find-Skill 与首次安装流程，支持技能发现和使用。"
-          }
-        ],
-        "projects": [
-          "ai-ecosystem",
-          "skill-ecosystem",
-          "ai-commercialization"
-        ],
-        "boundary": "实践侧重产品流程、交互规则、技能运营及交付协调。模型、算法、工程实现、视觉设计与测试由相关团队协作完成。"
-      },
+      "ai": aiCapabilities.zh,
       "delivery": {
         "title": "产品交付",
         "summary": "从规则评审，到具体验收与发布核验。",
@@ -300,31 +277,7 @@ export const portfolio = {
         ],
         "boundary": "Research, business and technical conditions inform the plans. Business, product and engineering teams determine priorities and trade-offs together."
       },
-      "ai": {
-        "title": "AI product design",
-        "summary": "Make task states, user input and results clear.",
-        "intro": "Design proactive services, smart notifications, task execution and skill discovery for a mobile AI assistant. The work addresses when users need an update, when they need to act, and how to continue or retrieve results after leaving a task.",
-        "methods": [
-          {
-            "title": "Task states and feedback",
-            "text": "Organize task summaries, request sources and key results across chat, Dynamic Island and desktop feedback, distinguishing work in progress, pending confirmation and completion."
-          },
-          {
-            "title": "User input and control",
-            "text": "Design credential entry, single- and multiple-choice input, authorization and exception handling. Separate hiding a result, stopping execution and deleting a record, and provide a way to retrieve results after leaving."
-          },
-          {
-            "title": "Skill discovery and first use",
-            "text": "Organize skill guidance around purpose, inputs, outputs and operating limits. Connect categories, search, Find-Skill and initial installation flows to discovery and use."
-          }
-        ],
-        "projects": [
-          "ai-ecosystem",
-          "skill-ecosystem",
-          "ai-commercialization"
-        ],
-        "boundary": "The work focuses on product flows, interaction rules, skill operations and delivery coordination. Models, algorithms, implementation, visual design and testing involve the respective teams."
-      },
+      "ai": aiCapabilities.en,
       "delivery": {
         "title": "Product delivery",
         "summary": "From rule reviews to acceptance and release checks.",

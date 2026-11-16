@@ -314,7 +314,12 @@ function SkillArticle({ item, data, L }) {
   return <div className="detail-layout">
     <article className="article-body">
       <ArticleSection id="skill-methods" title={sections[0][1]}>
-        {item.methods.map(method => <div className="action-entry" key={method.title}><h3>{method.title}</h3><p>{method.text}</p></div>)}
+        {item.methods.map(method => <div className="action-entry" key={method.title}>
+          <h3>{method.title}</h3><p>{method.text}</p>
+          {method.projectId && <a className="method-evidence" href={routeHref(`/projects/${method.projectId}/`)}>
+            <span>{method.evidence}</span><Glyph kind="arrow" size={17} />
+          </a>}
+        </div>)}
       </ArticleSection>
       <ArticleSection id="skill-projects" title={sections[1][1]}>
         <div className="related-grid">{item.projects.map(id => <ProjectCard key={id} project={data.projects.find(entry => entry.id === id)} skills={data.skills} L={L} compact />)}</div>

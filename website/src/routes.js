@@ -19,7 +19,7 @@ export const portfolioPages = [
   { path: '/projects/product-business/', type: 'project', id: 'product-business', key: 'project/product-business', parent: '/projects/', title: '消费端产品分析与商业化', description: '分析 DROI 的 6 条消费端产品线，结合经营数据、用户反馈与渠道表现，参与广告流程设计、版本迭代及发布评估。' },
   { path: '/capabilities/research/', type: 'skill', id: 'research', key: 'skill/research', parent: '/capabilities/', title: '用户研究', description: '结合访谈、问卷、实地调研、跟岗观察与数据分析，梳理使用情境、用户目标与需求差异。' },
   { path: '/capabilities/planning/', type: 'skill', id: 'planning', key: 'skill/planning', parent: '/capabilities/', title: '产品规划', description: '结合用户研究、产品数据、市场信息、技术成本与业务条件，形成可评审的产品方案。' },
-  { path: '/capabilities/ai/', type: 'skill', id: 'ai', key: 'skill/ai', parent: '/capabilities/', title: 'AI 产品设计', description: '在 DROI 参与 AI 助手与技能平台设计，涵盖功能入口、任务流程与平台规则。' },
+  { path: '/capabilities/ai/', type: 'skill', id: 'ai', key: 'skill/ai', parent: '/capabilities/', title: 'AI 产品设计', description: 'AI 助手与 Agent 应用的场景规划、任务交互、技能检索、运营工作流、应用评估及协同交付，附具体项目与交付依据。' },
   { path: '/capabilities/delivery/', type: 'skill', id: 'delivery', key: 'skill/delivery', parent: '/capabilities/', title: '产品交付', description: '围绕需求文档、产品原型与流程规则，参与评审、协作、开发跟进、验收与发布评估。' },
 ];
 

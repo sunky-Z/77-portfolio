@@ -58,7 +58,15 @@ test('project routes, translations, category cards and related links stay in syn
       for (const relatedId of project.relatedProjects) assert.ok(cases[relatedId], relatedId);
     }
     for (const career of data.career) for (const id of career.relatedProjects) assert.ok(cases[id], id);
-    for (const skill of Object.values(data.skills)) for (const id of skill.projects) assert.ok(cases[id], id);
+    for (const skill of Object.values(data.skills)) {
+      for (const id of skill.projects) assert.ok(cases[id], id);
+      for (const method of skill.methods) {
+        if (method.projectId) {
+          assert.ok(cases[method.projectId], method.projectId);
+          assert.ok(method.evidence, `${method.title} project evidence`);
+        }
+      }
+    }
     for (const id of ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product']) {
       assert.ok(cases[id].decisions.length >= 2, `${language}/${id} decisions`);
       assert.ok(cases[id].progress.length >= 2, `${language}/${id} progress`);
