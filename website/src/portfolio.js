@@ -2,6 +2,12 @@ import { cases as englishCases, stages as englishStages } from './content.js';
 import { cases as chineseCases, stages as chineseStages } from './content.zh.js';
 
 const projectOrder = ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'energy-research', 'station-control-research', 'hardware-research', 'hardware-human-factors', 'product-business'];
+const featuredProjectIds = ['ai-ecosystem', 'hardware-human-factors', 'station-control-research'];
+const projectCardTitles = {
+  'hardware-human-factors': { zh: '人因评估与产品形态设计', en: 'Human factors & product-form design' },
+  'station-control-research': { zh: '光伏电站管理系统研究', en: 'Solar plant management research' },
+  'hardware-research': { zh: '金融行业打印体验研究', en: 'Financial-sector printing research' },
+};
 const projectDetails = {
   'ai-ecosystem': { highlight: { zh: '29 套卡片模板 · 38 个视觉变体', en: '29 card templates · 38 visual variants' }, relatedProjects: ['skill-ecosystem', 'ai-commercialization'], company: 'DROI', image: 'sketch-ai-v2.webp', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '智能通知、任务反馈与用户介入，让 AI 任务的状态和操作清楚可见。', en: 'Notifications, task feedback and user input make AI task states and actions visible.' } },
   'skill-ecosystem': { highlight: { zh: '标签体系：295 → 47 个共享标签', en: 'Taxonomy: 295 labels → 47 shared tags' }, relatedProjects: ['ai-ecosystem', 'international-product'], company: 'DROI', image: 'case-skills.svg', skills: ['ai', 'planning', 'delivery'], featured: true, summary: { zh: '整理技能分类、使用说明与审核发布流程，覆盖发现到首次使用。', en: 'Skill categories, usage guidance and review flows, from discovery to first use.' } },
@@ -17,12 +23,13 @@ const projectDetails = {
 function projectCards(cases, language) {
   return projectOrder.map(id => ({
     id,
-    title: cases[id].title,
+    title: projectCardTitles[id]?.[language] || cases[id].title,
     company: projectDetails[id].company,
     image: projectDetails[id].image,
     skills: projectDetails[id].skills,
     relatedProjects: projectDetails[id].relatedProjects,
-    featured: Boolean(projectDetails[id].featured),
+    featured: featuredProjectIds.includes(id),
+    featuredOrder: featuredProjectIds.indexOf(id),
     highlight: projectDetails[id].highlight?.[language],
     role: cases[id].overview[1][1],
     summary: projectDetails[id].summary[language],
@@ -110,7 +117,7 @@ export const portfolio = {
           "hardware-research",
           "hardware-human-factors"
         ],
-        "boundary": "实践主要来自 HW 与 NINESTAR 的用户、市场和体验研究工作。研究支持规划与开发，相关决策及交付由团队共同完成。"
+        "boundary": "实践主要来自 HW 与 NINESTAR 的用户、市场和体验研究工作。人因评估案例中的研究、分析与产品形态设计由本人完成；金融行业调研由团队共同开展，本人承担问卷、执行及数据分析工作。"
       },
       "planning": {
         "title": "产品规划",
@@ -264,7 +271,7 @@ export const portfolio = {
           "hardware-research",
           "hardware-human-factors"
         ],
-        "boundary": "Based on user, market and experience research at HW and NINESTAR. Research supports planning and development; decisions and delivery involve the wider team."
+        "boundary": "Based on user, market and experience research at HW and NINESTAR. I completed the research, analysis and product-form design in the human factors case. The financial-sector study was a team effort; my work covered questionnaires, fieldwork and data analysis."
       },
       "planning": {
         "title": "Product planning",

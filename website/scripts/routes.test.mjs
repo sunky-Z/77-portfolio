@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { access } from 'node:fs/promises';
 import { portfolio } from '../src/portfolio.js';
+import { projectGroups, projectBriefs } from '../src/project-reading.js';
 import { cases as zhCases } from '../src/content.zh.js';
 import { cases as enCases } from '../src/content.js';
 import { legacyHashPath, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
@@ -76,5 +77,20 @@ test('research cases are reachable from their employers and research methods in 
         assert.equal(data.projects.find(entry => entry.id === id).company, company);
       }
     }
+  }
+});
+
+test('project areas and supplementary overview cover every project once with bilingual briefs', () => {
+  const grouped = projectGroups.flatMap(group => group.projects);
+  const allIds = Object.keys(zhCases).sort();
+  assert.equal(new Set(grouped).size, grouped.length, 'a case belongs to one primary area');
+  assert.deepEqual([...grouped, 'energy-research'].sort(), allIds);
+  assert.deepEqual(Object.keys(projectBriefs).sort(), allIds);
+  for (const group of projectGroups) {
+    assert.ok(group.projects.length > 0);
+    for (const language of ['zh', 'en']) assert.ok(group.title[language] && group.description[language]);
+  }
+  for (const brief of Object.values(projectBriefs)) {
+    for (const language of ['zh', 'en']) assert.ok(brief.context[language] && brief.status[language]);
   }
 });

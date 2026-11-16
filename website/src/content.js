@@ -42,7 +42,7 @@ export const cases = {
     ],
     "actions": [
       "Proactive service framework: Group current information, task results, decisions awaiting the user, and risks and opportunities into four service types. Define sources, display timing, navigation and exit conditions, delivering 29 card templates and 38 visual variants.",
-      "Smart notification upgrade: Refine categories, priorities, summary timing and retry rules. Design flows across AI calls, SMS summaries, scheduled tasks and to-dos synced to notes, and advance acceptance of the relevant features.",
+      "Smart notification upgrade: Lead the product upgrade from AI summaries to smart notifications. Refine categories, priorities, summary timing and retry rules. Design flows across AI calls, SMS summaries, scheduled tasks and to-dos synced to notes, and advance acceptance of the relevant features.",
       "User intervention during tasks: Design credential input, single- and multiple-choice prompts, permission confirmation and exception handling. Connect feedback across surfaces and address keyboard, camera-clearance and device-format constraints.",
       "Photo cleanup flow: Address result retrieval after leaving, default selections and inconsistent components. Design scan confirmation, progress updates, completion-result retrieval, preview and reselection, and deletion confirmation in a complete interaction prototype.",
       "Service integration and discovery: Check weather and parcel-service interfaces and fields, and design phone-number authorization, asynchronous binding and results. Add contextual entry and exit guidance for 7 core features, from home-screen recommendations to the feature itself."
@@ -379,7 +379,7 @@ export const cases = {
     ],
     "label": "06 / NINESTAR · USER RESEARCH",
     "title": "Financial-Sector Printing Experience Research",
-    "intro": "As part of a financial-sector user experience study, I researched counter-service and office contexts at a bank’s municipal-level branch. My main responsibilities were questionnaire design, research execution, quantitative analysis and organization of qualitative material, examining usage differences and requirement priorities across groups.",
+    "intro": "The study examined printing experience at a bank’s municipal-level branch, comparing usage and requirement priorities across user groups in counter-service and office contexts.",
     "problem": "Requirement differences between counter service and everyday office work",
     "problemText": "Printing equipment in the same bank served different working contexts. The study included regular employees, managers, IT staff and users handling confidential material, with experience analyzed in relation to their actual tasks.",
     "tags": [
@@ -403,7 +403,7 @@ export const cases = {
     "actions": [
       "Questionnaire design and research execution: Designed the questionnaire around financial-sector printing experience and conducted research at a municipal-level bank branch, covering counter-service and office contexts and different user roles.",
       "Quantitative analysis: Analyzed study data by user group and working context to identify differences in the printing requirements of counter-service and everyday office work.",
-      "Qualitative material: Organized the qualitative research material and grouped user needs into findings on counter-service experience and the convenience of office-printing services."
+      "Qualitative material: Organized research material by user role and working context, summarizing the specific needs of different user groups."
     ],
     "outputs": [
       [
@@ -412,11 +412,11 @@ export const cases = {
       ],
       [
         "Context and requirement findings",
-        "Clarity, speed and smooth operation for counter service; convenient local-network access, sharing and cloud printing for office work."
+        "Usage differences between counter-service and office contexts, with requirement priorities for different user roles."
       ]
     ],
     "lesson": "Industry user research benefits from distinguishing specific working contexts. Business processing and everyday office work can place different requirements on equipment and services within the same industry.",
-    "boundary": "The research was conducted as a team. My main responsibilities were questionnaire design, research execution, quantitative analysis and qualitative material organization, producing requirement findings for counter-service and office scenarios."
+    "boundary": "The research was conducted as a team. My main responsibilities were questionnaire design, research execution, quantitative analysis and organization of qualitative material."
   },
   "product-business": {
     "overview": [
@@ -484,7 +484,7 @@ export const cases = {
     ],
     "label": "HW",
     "title": "Solar Plant Management System User Research and Functional Improvement",
-    "intro": "I researched the work, profiles and use problems of people using a SaaS management system for ground-mounted solar plants, provided alongside photovoltaic inverters. Its customers included energy companies and smaller plant owners. I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting, informing functional improvements and early exploration of AI maintenance.",
+    "intro": "The SaaS management system served ground-mounted solar plants alongside photovoltaic inverters, with customers including energy companies and smaller plant owners. The research examined users’ work, profiles and use problems to inform functional improvements and early exploration of AI maintenance.",
     "problem": "Difficulty and safety risks in mountain-site inspections",
     "problemText": "Maintenance staff at one plant in mountainous terrain needed to carry out weekly inspections. Site conditions increased the difficulty of the task and involved safety risks. The research connected system requirements to specific roles, working conditions and tasks.",
     "tags": [
@@ -502,13 +502,13 @@ export const cases = {
       },
       {
         "title": "Propose assisted inspection and individual-panel alerts",
-        "text": "I considered drone- or camera-assisted inspection and separate alerts for faults in individual solar panels. These functional directions were documented in the research report."
+        "text": "I considered drone- or camera-assisted inspection and separate alerts for faults in individual solar panels."
       }
     ],
     "actions": [
       "Research design and execution: Organized the research around actual system-use problems, designed questionnaires and conducted field research to understand users’ roles, working contexts and task requirements.",
       "Data analysis and user profiles: Analyzed questionnaire data and qualitative material to identify user characteristics, use problems and functional needs, informing profiles and improvements to existing modules.",
-      "Functional directions and reporting: Organized use problems into improvement proposals and produced the research report. For mountain-site inspections, I proposed drone- or camera-assisted inspection and individual-panel fault alerts, alongside early exploration of AI maintenance and inspection."
+      "Functional directions and reporting: Organized use problems into requirements for existing modules and maintenance proposals, compiled the research report and explored early directions for AI maintenance and inspection."
     ],
     "outputs": [
       [
@@ -517,7 +517,7 @@ export const cases = {
       ],
       [
         "Maintenance directions",
-        "Research proposals for assisted inspection and individual-panel fault alerts, with early exploration of AI maintenance and inspection."
+        "Proposals for inspection and fault alerts, with preliminary analysis of AI maintenance and inspection."
       ]
     ],
     "progress": [
@@ -527,7 +527,7 @@ export const cases = {
       }
     ],
     "lesson": "Management-system requirements need to be examined in their field conditions. Roles, tasks, operating environments and execution risks provided specific evidence for functional improvements.",
-    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting. The inspection and alerting directions described in this case were documented in the research report."
+    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting."
   },
   "hardware-human-factors": {
     "overview": [
@@ -546,7 +546,7 @@ export const cases = {
     ],
     "label": "NINESTAR",
     "title": "Printer Human Factors Evaluation and Product Form Design",
-    "intro": "I was responsible for human factors research and product form design for key printer components. The work covered A/B trials of left/right layouts, control-panel operation and paper handling, use observation and human factors assessment using 3D models. I combined task performance, participant feedback and scenario analysis to compare options and develop the product form. The product entered production.",
+    "intro": "The study evaluated the human factors of the printer’s output tray and control panel, comparing layouts in actual use to inform product form design.",
     "problem": "Layout effects on posture, visibility and task completion",
     "problemText": "The output tray and the position and layout of the control panel required assessment in real tasks. The analysis considered task completion, standing and seated operating postures, attention to the panel and output area, and obstruction of the output area.",
     "tags": [
@@ -562,14 +562,14 @@ export const cases = {
       },
       {
         "title": "Address panel attention and output-area visibility together",
-        "text": "I considered attention during interaction, comparing the conditions that would allow users to attend to both the control panel and paper output. I also considered obstruction of the output area and integrated the strengths of the options into the product form design."
+        "text": "Developed layout concepts for attention during interaction, comparing how each option could support attention to both the control panel and paper output while keeping the output area visible and unobstructed."
       }
     ],
     "actions": [
       "Study design and task analysis: Set up A/B comparisons around left/right layouts, the output tray and control-panel position, breaking down panel operation, paper loading and paper retrieval into real tasks.",
       "Operation records and participant feedback: Recorded task completion, errors and operating effort, and observed posture. Asked participants about visibility, comfort and fatigue, ease of use and option preferences, and recorded their responses.",
-      "Human factors and attention analysis: Used 3D models to assess the use requirements of parts and buttons. Analyzed standing and seated scenarios and attention during interaction, comparing the layout and obstruction relationships between the panel and paper output.",
-      "Option comparison and form design: Combined human factors data, operation observations and participant feedback to compare the options and integrate their strengths into a product form. The product entered production."
+      "Human factors assessment: Used 3D models to evaluate the design requirements of parts and buttons in actual operating scenarios and assess the suitability of each layout.",
+      "Option comparison and form design: Combined human factors data, operation observations and participant feedback to compare the options and integrate their strengths into a product form."
     ],
     "outputs": [
       [
@@ -588,11 +588,11 @@ export const cases = {
     "progress": [
       {
         "title": "Production",
-        "text": "I completed the research and evaluation, data analysis, scenario concepts, option comparison and product form design. The product entered production."
+        "text": "The product form design was completed, and the product entered production."
       }
     ],
     "lesson": "Evaluating physical interaction requires operation records, posture observation and participant feedback. Examining tasks, posture and visibility within the same use scenario makes the basis for product form decisions clearer.",
-    "boundary": "I carried out the research, analysis, standing and seated scenario concepts, attention concepts, option comparison and product form design in this case. The product entered production."
+    "boundary": "I carried out all research, analysis, standing and seated scenario concepts, attention concepts, option comparison and product form design in this case."
   }
 };
 
