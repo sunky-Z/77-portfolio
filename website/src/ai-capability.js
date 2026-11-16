@@ -12,9 +12,9 @@ export const aiCapabilities = {
       },
       {
         title: 'Agent 任务交互与用户控制',
-        text: '设计任务发起、执行反馈、信息补充、授权确认与结果查看，明确用户介入和异常处理方式。区分停止展示、停止执行与删除记录，保留任务退出后的结果找回路径，让用户理解任务状态并控制后续执行。',
+        text: '设计任务发起、状态反馈、信息补充与结果查看，明确卡片关闭后的后台执行及对话结果回看规则。以出行规划为例，定义半模态单选、多选、跳过和后续调整流程，与算法同事共同讨论推进 Prompt 方案。',
         projectId: 'ai-ecosystem',
-        evidence: '完成主动服务卡片及智能通知相关验收，交付照片清理完整流程原型',
+        evidence: '卡片关闭与结果回看、出行规划信息补充流程已上线，完成相关手工验收',
       },
       {
         title: '技能发现与首次使用',
@@ -57,9 +57,9 @@ export const aiCapabilities = {
       },
       {
         title: 'Agent task interaction and user control',
-        text: 'Design task initiation, execution feedback, additional input, authorization and result review, including user intervention and exceptions. Separate hiding a display, stopping execution and deleting a record, retaining result retrieval after leaving a task so users can understand its status and control subsequent execution.',
+        text: 'Design task initiation, status feedback, clarification and result review, defining continued execution after card dismissal and result retrieval in the conversation. For travel planning, define semi-modal single- and multiple-choice prompts, skipping and later adjustments, working with algorithm colleagues on prompt design.',
         projectId: 'ai-ecosystem',
-        evidence: 'Relevant card and smart-notification acceptance completed; a complete photo-cleanup flow prototype delivered',
+        evidence: 'Card dismissal and result retrieval, and travel-planning clarification, are live with the relevant manual acceptance checks completed',
       },
       {
         title: 'Skill discovery and first use',

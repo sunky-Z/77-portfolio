@@ -28,8 +28,12 @@ export const cases = {
     "problemText": "AI tasks can start from a conversation, notification or home screen, and may require information or permission while running. The design connects initiation, execution, user intervention and result review, while distinguishing what can be dismissed from what continues to run.",
     "decisions": [
       {
-        "title": "Manage display and execution separately",
-        "text": "Distinguish dismissing a card, deleting a source record and completing a business action. Stopping home-screen display and stopping task execution follow separate rules, so closing an entry point does not mean ending the task."
+        "title": "Separate desktop dismissal from task execution",
+        "text": "Dismissing a desktop card removes its display while the task continues in the background. Once complete, the result remains accessible in the corresponding conversation record, preserving the context needed to review it."
+      },
+      {
+        "title": "Make additional information optional",
+        "text": "For travel planning, prompts and conversation context guide the model to identify missing information: ask about travel mode and preferences when details are insufficient and generate when enough is available. Users can skip these questions, generate a plan from available information and refine it later in the same conversation."
       },
       {
         "title": "Use a consistent result hierarchy",
@@ -44,6 +48,7 @@ export const cases = {
       "Proactive service framework: Group current information, task results, decisions awaiting the user, and risks and opportunities into four service types. Define sources, display timing, navigation and exit conditions, delivering 29 card templates and 38 visual variants.",
       "Smart notification upgrade: Lead the product upgrade from AI summaries to smart notifications. Refine categories, priorities, summary timing and retry rules. Design flows across AI calls, SMS summaries, scheduled tasks and to-dos synced to notes, and advance acceptance of the relevant features.",
       "User intervention during tasks: Design credential input, single- and multiple-choice prompts, permission confirmation and exception handling. Connect feedback across surfaces and address keyboard, camera-clearance and device-format constraints.",
+      "Travel-planning requirements and prompt collaboration: Own requirements, interaction design and product acceptance. Define when to ask, which details to request, and rules for single- and multiple-choice components, skipping and later revisions. Use a semi-modal interaction in the conversation, consistent with the wider product, and work with algorithm colleagues on prompt design.",
       "Photo cleanup flow: Address result retrieval after leaving, default selections and inconsistent components. Design scan confirmation, progress updates, completion-result retrieval, preview and reselection, and deletion confirmation in a complete interaction prototype.",
       "Service integration and discovery: Check weather and parcel-service interfaces and fields, and design phone-number authorization, asynchronous binding and results. Add contextual entry and exit guidance for 7 core features, from home-screen recommendations to the feature itself."
     ],
@@ -63,6 +68,14 @@ export const cases = {
     ],
     "progress": [
       {
+        "title": "Desktop dismissal and result retrieval live",
+        "text": "The flow is live. I manually verified that a running task continues after its desktop card is dismissed and that its completed result can be found in the corresponding conversation record."
+      },
+      {
+        "title": "Travel-planning flow live",
+        "text": "The flow is live. I manually selected different travel modes and preferences and checked whether the generated plan reflected them. I also verified skipping the questions and making later adjustments in the same conversation. No independent quantitative evaluation was conducted."
+      },
+      {
         "title": "Notification and to-do acceptance",
         "text": "Completed smart-notification product acceptance and advanced AI-call integration and end-to-end to-do acceptance. These records concern specific features and paths."
       },
@@ -76,7 +89,7 @@ export const cases = {
       }
     ],
     "lesson": "A complete task experience helps users understand what is happening, when they need to intervene and how to find results after leaving a page.",
-    "boundary": "My scope covers scenario and interaction plans, cross-team reviews and product acceptance. Algorithms, engineering, visual implementation and testing involve the respective teams; template and prototype counts describe design deliverables."
+    "boundary": "My scope covers requirements, scenario and interaction plans, cross-team reviews and product acceptance. The prompt approach was discussed and advanced jointly with algorithm colleagues. Algorithms, engineering, visual implementation and testing involve the respective teams; template and prototype counts describe design deliverables."
   },
   "skill-ecosystem": {
     "overview": [

@@ -42,8 +42,8 @@ export const projectBriefs = {
       en: 'DroiClaw is an AI assistant for mobile devices, with proactive services, smart notifications and task execution.',
     },
     status: {
-      zh: '主动服务卡片与智能通知已完成相关验收，照片清理已交付完整流程原型。',
-      en: 'Proactive-service cards and smart notifications have completed relevant acceptance checks; a complete photo-cleanup flow prototype has been delivered.',
+      zh: '卡片关闭与对话结果回看、出行规划信息补充流程已上线；照片清理已交付完整流程原型。',
+      en: 'Card dismissal with result retrieval in the conversation, and the travel-planning clarification flow, are live; a complete photo-cleanup flow prototype has been delivered.',
     },
   },
   'skill-ecosystem': {
