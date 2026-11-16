@@ -7,6 +7,7 @@ import { cases as chineseCases, stages as chineseStages } from './content.zh.js'
 import { useLanguage } from './i18n.js';
 import usePortfolioNavigation from './hooks/usePortfolioNavigation.js';
 import { routeHref } from './routes.js';
+import ProjectWork from './components/ProjectWork.jsx';
 
 const EMAIL = 'Zysq09@gmail.com';
 const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
@@ -285,18 +286,6 @@ function ArticleSection({ id, title, number, children }) {
   </section>;
 }
 
-function ActionList({ actions, ids = [] }) {
-  return <div className="action-list">
-    {actions.map((action, index) => {
-      const plain = action.replace(/<[^>]+>/g, '');
-      const match = plain.match(/^([^:：]+)[:：]\s*(.*)$/s);
-      return <div className="action-entry" key={action} id={ids[index]} data-reading-anchor={ids[index] ? true : undefined} tabIndex={ids[index] ? -1 : undefined}>
-        {match ? <><h3>{match[1]}</h3><p>{match[2]}</p></> : <p>{plain}</p>}
-      </div>;
-    })}
-  </div>;
-}
-
 function TaskFlow({ L }) {
   const steps = [
     ['play', L('任务发起', 'Task started')],
@@ -356,7 +345,7 @@ function ProjectArticle({ id, item, data, L }) {
       <ArticleSection id="project-context" title={titles['project-context']} number={sectionNumber('project-context')}>
         <h3>{item.problem}</h3><p>{item.problemText}</p>
       </ArticleSection>
-      <ArticleSection id="project-contribution" title={titles['project-contribution']} number={sectionNumber('project-contribution')}><ActionList actions={item.actions} ids={item.actionIds} /></ArticleSection>
+      <ArticleSection id="project-contribution" title={titles['project-contribution']} number={sectionNumber('project-contribution')}><ProjectWork actions={item.actions} ids={item.actionIds} L={L} /></ArticleSection>
       {item.decisions?.length > 0 && <ArticleSection id="project-decisions" title={titles['project-decisions']} number={sectionNumber('project-decisions')}>
         {id === 'ai-ecosystem' ? <>
           <DecisionFeature id={id} decision={item.decisions[0]} L={L} />
