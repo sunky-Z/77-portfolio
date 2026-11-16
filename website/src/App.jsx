@@ -209,15 +209,55 @@ function NotFoundPage({ L }) {
 }
 
 function Contents({ items, L, horizontal = false, numbered = false }) {
+  const [activeSection, setActiveSection] = useState(items[0]?.[0] || '');
+
+  useEffect(() => {
+    let frame = 0;
+    const updateSection = () => {
+      frame = 0;
+      const sections = items.map(([id]) => document.getElementById(id)).filter(Boolean);
+      if (!sections.length) { setActiveSection(''); return; }
+
+      const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom || 0;
+      const scrollOffset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const readingTop = Math.max(headerBottom + 20, scrollOffset) + 2;
+      const pageHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+      const atPageEnd = window.scrollY + window.innerHeight >= pageHeight - 2;
+      let current = sections[0].id;
+      if (atPageEnd) current = sections[sections.length - 1].id;
+      else {
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top > readingTop) break;
+          current = section.id;
+        }
+      }
+      setActiveSection(current);
+    };
+    const scheduleUpdate = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateSection);
+    };
+
+    updateSection();
+    window.addEventListener('scroll', scheduleUpdate, { passive: true });
+    window.addEventListener('resize', scheduleUpdate);
+    return () => {
+      window.removeEventListener('scroll', scheduleUpdate);
+      window.removeEventListener('resize', scheduleUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [items]);
+
   function readSection(id) {
     const section = document.getElementById(id);
-    section?.querySelector('h2')?.focus({ preventScroll: true });
-    section?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    if (!section) return;
+    setActiveSection(id);
+    section.querySelector('h2')?.focus({ preventScroll: true });
+    section.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
   return <aside className={horizontal ? 'article-contents' : 'article-aside'}>
     <nav className="toc" aria-label={L('本页目录', 'On this page')}>
       <p className="toc-title">{L('本页内容', 'On this page')}</p>
-      {items.map(([id, title], index) => <button type="button" key={id} onClick={() => readSection(id)}>{numbered && <span className="toc-number">{String(index + 1).padStart(2, '0')}</span>}{title}</button>)}
+      {items.map(([id, title], index) => <button type="button" key={id} aria-current={activeSection === id ? 'location' : undefined} onClick={() => readSection(id)}>{numbered && <span className="toc-number">{String(index + 1).padStart(2, '0')}</span>}{title}</button>)}
     </nav>
   </aside>;
 }
