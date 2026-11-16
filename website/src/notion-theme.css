@@ -1,0 +1,184 @@
+/* Flat, content-led Notion adaptation. Loaded after styles.css. */
+:root {
+  --paper: #F6F5F4;
+  --ink: #111111;
+  --muted: #615D59;
+  --body-text: #44413D;
+  --amber: #FFB110;
+  --coral: #F64932;
+  --blue: #097FE8;
+  --sky: #E6F3FE;
+  --peach: #F6D5B8;
+  --mocha: #B18164;
+  --midnight: #02093A;
+  --line: rgba(0, 0, 0, .08);
+  --soft: #F0EFED;
+  --accent: #0075DE;
+  --accent-hover: #005DB5;
+  --accent-soft: var(--sky);
+  background: var(--paper);
+}
+body, .portfolio { background: var(--paper); }
+[data-tone="amber"] { --tone: var(--amber); }
+[data-tone="coral"] { --tone: var(--coral); }
+[data-tone="blue"] { --tone: var(--blue); }
+[data-tone="sky"] { --tone: var(--sky); }
+[data-tone="peach"] { --tone: var(--peach); }
+[data-tone="mocha"] { --tone: var(--mocha); }
+[data-tone="paper"] { --tone: var(--paper); }
+::selection { background: var(--amber); color: var(--ink); }
+.site-header, .main-nav { background: #fff; }
+.site-header { border-bottom-color: #f0f0f0; }
+.brand-number { background: transparent; }
+.language-switch, .menu-button { border-radius: 5px; }
+.button, .copy-button { border-radius: 8px; }
+.language-switch, .menu-button, .copy-button { background: #fff; }
+.button-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.button-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.button-secondary { background: #fff; border-color: var(--line); color: var(--ink); }
+.button-secondary:hover { background: var(--amber); border-color: transparent; }
+.project-fact strong, .section-number, .direction-number { color: var(--ink); }
+
+/* The approved hero retains its original composition, typography and actions. */
+.home-intro { background: #fff; }
+.hero { --ink: #171717; --body-text: #484848; --line: #e5e5e5; --muted: #686868; --soft: #f7f7f7; --accent: #C25428; --accent-hover: #A74420; color: var(--ink); }
+.hero .button { border-radius: 5px; }
+.hero .button-primary { background: var(--accent); border-color: var(--accent); }
+.hero .button-primary:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+.hero .button-secondary:hover { background: var(--soft); border-color: #bdbdbd; }
+.section { border: 0; padding-block: 52px; }
+.section-heading { margin-bottom: 26px; }
+.section-heading h2 { font-size: 36px; }
+.section-heading .editorial-label { font-size: 17px; color: var(--muted); }
+
+/* Card colour belongs to the content surface, never the whole article. */
+.project-card, .career-card, .skill-card, .related-card { border: 1px solid transparent; border-radius: 12px; background: #fff; box-shadow: none; }
+.project-card:hover, .career-card:hover, .skill-card:hover, .related-card:hover { background: #fff; border-color: #B5BDB1; }
+.project-card[data-tone] .project-cover { background: var(--tone, var(--sky)); border: 0; }
+.project-cover img { mix-blend-mode: multiply; }
+.project-body { background: #fff; }
+.card-description, .related-card p { color: var(--body-text); }
+.card-footer { color: var(--ink); }
+.tag-list span { background: var(--soft); color: var(--muted); }
+.project-list { display: grid; gap: 16px; border: 0; }
+.project-row[data-tone] { padding: 24px; border: 0; border-radius: 12px; background: #fff; }
+.project-row[data-tone] .card-topline { display: inline-flex; padding: 3px 9px; border-radius: 6px; background: var(--tone, var(--sky)); color: var(--ink); margin-bottom: 10px; }
+.project-row[data-tone]:hover { background: #fff; outline: 1px solid #B5BDB1; outline-offset: -1px; }
+.project-directions a { border: 0; border-radius: 12px; background: var(--blue); }
+.project-directions a:last-child { background: var(--sky); }
+.project-directions a:hover { background: var(--amber); }
+.project-product, .independent-projects { border-top: 0; }
+.project-supplement { border-radius: 12px; background: #fff; }
+.career-card:nth-child(1) { --tone: var(--blue); }
+.career-card:nth-child(2) { --tone: var(--peach); }
+.career-card:nth-child(3) { --tone: var(--sky); }
+.career-card .card-topline { align-self: flex-start; padding: 4px 9px; border-radius: 6px; background: var(--tone); color: var(--ink); }
+.skill-card .card-index { display: inline-flex; align-items: center; justify-content: center; width: 44px; min-height: 36px; margin-bottom: 22px; border-radius: 8px; background: var(--tone, var(--sky)); color: var(--ink); }
+
+/* One wide lead project; the two supporting projects share an equal row. */
+.home-selected .selected-projects { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.home-selected .featured-card { display: flex; flex-direction: column; gap: 0; padding: 0; border: 0; border-radius: 12px; overflow: hidden; background: #fff; }
+.home-selected .featured-card .project-body { order: 1; padding: 28px; }
+.home-selected .featured-card .project-cover { order: 0; height: 210px; min-height: 0; aspect-ratio: auto; margin: 0; background: var(--tone, var(--sky)); }
+.home-selected .featured-card .project-cover img { padding: 22px 36px; }
+.home-selected .featured-card .card-description { font-size: 17px; line-height: 1.8; }
+.home-selected .featured-card .project-fact { font-size: 16px; margin-top: 12px; }
+.home-selected .featured-card .card-footer { font-size: 16px; padding-top: 20px; }
+.home-selected .featured-card:first-child { grid-column: 1 / -1; grid-row: auto; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); align-items: stretch; background: var(--tone, var(--blue)); }
+.home-selected .featured-card:first-child .project-body { order: 0; padding: 40px; background: transparent; }
+.home-selected .featured-card:first-child .project-cover { order: 1; height: auto; min-height: 300px; margin: 0; }
+.home-selected .featured-card:first-child .project-cover img { padding: 28px 40px; }
+.home-selected .featured-card:first-child .card-title { font-size: 34px; line-height: 1.4; margin-bottom: 14px; }
+.home-selected .featured-card:not(:first-child) { display: flex; grid-template-columns: none; align-items: stretch; gap: 0; }
+.home-selected .featured-card:not(:first-child) .card-title { font-size: 27px; line-height: 1.4; margin-bottom: 12px; }
+.home-selected .featured-card:nth-child(3) { border: 0; padding: 0; }
+
+/* Methods remain white cards; their small index carries the topic colour. */
+.home-skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.home-skills-grid .skill-card { padding: 24px; }
+.home-skills-grid .skill-card .card-title { font-size: 23px; line-height: 1.4; }
+.home-skills-grid .skill-card .card-description { font-size: 16px; line-height: 1.8; }
+.home-skills-grid .skill-card .card-footer { padding-top: 24px; }
+.home-contact { padding-block: 36px 48px; }
+.home-contact { background: var(--midnight); padding: 30px 32px; margin-block: 20px 48px; border-radius: 12px; }
+.home-contact p, .home-contact > a { color: #fff; }
+.home-contact > a:hover { color: #fff; }
+.category-next { border-top: 0; }
+.contact-inner { padding: 32px; border: 0; border-radius: 12px; background: #fff; }
+
+/* Long-form pages keep the existing reading widths and navigation logic. */
+.detail-heading { border-bottom: 0; }
+.project-brief { background: #fff; border-radius: 12px; }
+.project-brief h2 { display: inline-block; padding: 4px 10px; border-radius: 8px; background: var(--tone, var(--sky)); }
+.project-brief dl > div { border-top: 0; padding-top: 0; }
+.project-brief .brief-status { border: 0; }
+.project-role-note { border-left: 0; padding-left: 0; color: var(--ink); }
+.project-brief dt { color: var(--ink); }
+.article-section { border-bottom: 0; padding-bottom: 0; margin-bottom: 64px; }
+.article-section h2 { color: var(--ink); }
+.article-section .section-number { display: inline-flex; justify-content: center; min-width: 34px; padding: 2px 7px; margin-right: 12px; border-radius: 6px; background: var(--amber); font-size: 14px; }
+.additional-decisions { border-top: 0; padding-top: 0; margin-top: 44px; }
+.output-card { padding: 22px; border: 0; border-radius: 12px; background: #fff; }
+.method-evidence { background: var(--sky); color: var(--ink); border-radius: 8px; }
+.toc button[aria-current="location"] { background: var(--amber); color: var(--ink); }
+.toc button[aria-current="location"] .toc-number { color: var(--ink); }
+.flow-step { background: #fff; border-color: var(--line); border-radius: 12px; }
+.flow-controls dt { background: #fff; border-color: transparent; }
+.flow-controls > div:first-child dt { background: var(--peach); border-color: transparent; }
+.site-footer, .detail-nav, .education-item, .work-metrics { border-color: var(--line); }
+
+@media (max-width: 1100px) {
+  .home-selected .featured-card:first-child .project-body { padding: 32px; }
+  .home-selected .featured-card:first-child .card-title { font-size: 30px; }
+  .home-skills-grid { gap: 14px; }
+  .home-skills-grid .skill-card { padding: 20px; }
+  .home-skills-grid .skill-card .card-title { font-size: 22px; }
+}
+@media (max-width: 850px) {
+  .section { padding-block: 42px; }
+  .section-heading h2 { font-size: 31px; }
+  .home-selected .featured-card:first-child { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); padding: 0; border: 0; gap: 0; }
+  .home-selected .featured-card:first-child .project-body { padding: 26px; }
+  .home-selected .featured-card:first-child .project-cover { height: auto; min-height: 260px; margin: 0; }
+  .home-selected .featured-card:first-child .project-cover img { padding: 22px; }
+  .home-selected .featured-card:not(:first-child) { display: flex; gap: 0; }
+  .home-selected .featured-card:not(:first-child) .project-cover { height: 180px; margin: 0; }
+  .home-selected .featured-card:not(:first-child) .card-title { font-size: 24px; }
+  .home-selected .featured-card .project-body { padding: 24px; }
+  .home-skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+  .home-skills-grid .skill-card { padding: 24px; }
+  .article-section { margin-bottom: 52px; }
+}
+@media (max-width: 620px) {
+  .section { padding-block: 32px; }
+  .section-heading { gap: 12px; margin-bottom: 22px; }
+  .section-heading h2 { font-size: 28px; }
+  .section-heading .editorial-label { font-size: 15px; }
+  .section-more { font-size: 13px; }
+  .home-selected .selected-projects { grid-template-columns: 1fr; gap: 20px; }
+  .home-selected .featured-card:first-child, .home-selected .featured-card:not(:first-child) { display: flex; flex-direction: column; gap: 0; padding: 0; }
+  .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { order: 0; padding: 24px; }
+  .home-selected .featured-card .project-cover, .home-selected .featured-card:first-child .project-cover, .home-selected .featured-card:not(:first-child) .project-cover { order: 1; height: 160px; min-height: 0; margin: 0; aspect-ratio: auto; }
+  .home-selected .featured-card .project-cover img, .home-selected .featured-card:first-child .project-cover img { padding: 16px 28px; }
+  .home-selected .featured-card:first-child .card-title, .home-selected .featured-card:not(:first-child) .card-title { font-size: 25px; margin-bottom: 12px; }
+  .home-selected .featured-card .card-description { font-size: 16px; }
+  .home-selected .featured-card .project-fact { font-size: 15px; }
+  .home-selected .featured-card .card-footer { font-size: 15px; padding-top: 18px; }
+  .home-selected .featured-card:nth-child(3) { padding: 0; border: 0; }
+  .home-skills-grid { grid-template-columns: 1fr; gap: 16px; }
+  .home-skills-grid .skill-card { padding: 24px; }
+  .skill-card .card-index { margin-bottom: 18px; }
+  .project-row[data-tone] { padding: 22px; }
+  .project-brief { padding: 22px; }
+  .project-brief dl > div { padding-top: 0; }
+  .article-section { margin-bottom: 44px; padding-bottom: 0; }
+  .additional-decisions { margin-top: 34px; padding-top: 0; }
+  .output-card { padding: 20px; }
+  .contact-inner { padding: 24px; }
+  .home-contact { padding: 24px; margin-block: 16px 32px; }
+}
+@media (max-width: 360px) {
+  .section-heading { flex-wrap: wrap; }
+  .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { padding: 22px; }
+  .home-selected .featured-card:first-child .card-title, .home-selected .featured-card:not(:first-child) .card-title { font-size: 24px; }
+}

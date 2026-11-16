@@ -10,6 +10,13 @@ import { routeHref } from './routes.js';
 
 const EMAIL = 'Zysq09@gmail.com';
 const asset = name => `${import.meta.env.BASE_URL}assets/${name}`;
+const projectTones = {
+  'ai-ecosystem': 'amber', 'skill-ecosystem': 'sky', 'ai-commercialization': 'sky',
+  'international-product': 'coral', 'energy-research': 'paper', 'energy-product-planning': 'mocha',
+  'station-control-research': 'blue', 'hardware-research': 'sky',
+  'hardware-human-factors': 'coral', 'product-business': 'amber',
+};
+const skillTones = { research: 'sky', planning: 'amber', ai: 'blue', 'project-management': 'peach' };
 
 function Glyph({ kind, size = 20 }) {
   const Icon = { arrow: ArrowRight, back: ArrowLeft, mail: Envelope, copy: CopySimple, close: X, menu: List, play: Play, running: CircleNotch, user: User, result: CheckSquare }[kind];
@@ -43,13 +50,13 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3', f
   const Heading = headingTag;
   const product = projectProductFor(project.id);
   const byline = product ? `${project.company} · ${L(product.title.zh, product.title.en)}` : project.company;
-  if (compact) return <a className="related-card" href={routeHref(`/projects/${project.id}/`)}>
+  if (compact) return <a className="related-card" data-tone={projectTones[project.id]} href={routeHref(`/projects/${project.id}/`)}>
     <p className="card-topline">{byline}</p>
     <h3>{project.title}</h3>
     <p className="card-description">{project.summary}</p>
     <span className="card-footer">{L('了解项目', 'View project')} <Glyph kind="arrow" size={17} /></span>
   </a>;
-  return <a className={`project-card${featured ? ' featured-card' : ''}`} href={routeHref(`/projects/${project.id}/`)}>
+  return <a className={`project-card${featured ? ' featured-card' : ''}`} data-tone={projectTones[project.id]} href={routeHref(`/projects/${project.id}/`)}>
     <div className="project-cover">
       <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
     </div>
@@ -66,7 +73,7 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3', f
 
 function ProjectRow({ project, L, headingTag = 'h3', topic = false }) {
   const Heading = headingTag;
-  return <a className="project-row" href={routeHref(`/projects/${project.id}/`)}>
+  return <a className="project-row" data-tone={projectTones[project.id]} href={routeHref(`/projects/${project.id}/`)}>
     <p className="card-topline">{topic ? L('产品专题', 'Product topic') : project.company}</p>
     <Heading className="project-row-title">{project.title}</Heading>
     <p className="card-description">{project.summary}</p>
@@ -124,7 +131,7 @@ function ProjectIndex({ data, L }) {
 
 function SkillCard({ id, skill, index, L, compact = false, headingTag = 'h3' }) {
   const Heading = headingTag;
-  return <a className={compact ? 'related-card' : 'skill-card'} href={routeHref(`/capabilities/${id}/`)}>
+  return <a className={compact ? 'related-card' : 'skill-card'} data-tone={skillTones[id]} href={routeHref(`/capabilities/${id}/`)}>
     {!compact && <span className="card-index">{String(index + 1).padStart(2, '0')}</span>}
     <Heading className="card-title">{skill.title}</Heading>
     <p className="card-description">{skill.summary}</p>
@@ -144,6 +151,7 @@ function CareerCard({ item, L }) {
 
 function HomePage({ data, L }) {
   return <>
+    <div className="home-intro">
     <section id="top" className="hero wrap" aria-labelledby="home-title" data-reading-anchor>
       <div className="hero-layout">
         <div className="hero-copy">
@@ -161,12 +169,20 @@ function HomePage({ data, L }) {
         {data.profile.summaryCards.map(card => <a href={routeHref(card.href)} key={card.id}>{card.title}</a>)}
       </nav>
     </section>
+    </div>
     <section className="home-selected section wrap" aria-labelledby="selected-title" id="selected" data-reading-anchor>
       <header className="section-heading">
         <div><p className="eyebrow editorial-label" lang="en">Projects</p><h2 id="selected-title" tabIndex={-1}>{L('精选项目', 'Selected projects')}</h2></div>
         <a className="section-more" href={routeHref('/projects/')}>{L('查看全部项目', 'All projects')} <Glyph kind="arrow" size={17} /></a>
       </header>
       <div className="selected-projects">{data.projects.filter(project => project.featured).sort((a, b) => a.featuredOrder - b.featuredOrder).map(project => <ProjectCard key={project.id} project={project} skills={data.skills} L={L} featured />)}</div>
+    </section>
+    <section className="home-capabilities section wrap" aria-labelledby="capabilities-title" id="capabilities" data-reading-anchor>
+      <header className="section-heading">
+        <div><p className="eyebrow editorial-label" lang="en">Approach</p><h2 id="capabilities-title" tabIndex={-1}>{L('能力与方法', 'Capabilities')}</h2></div>
+        <a className="section-more" href={routeHref('/capabilities/')}>{L('查看全部能力', 'All capabilities')} <Glyph kind="arrow" size={17} /></a>
+      </header>
+      <div className="home-skills-grid">{Object.entries(data.skills).map(([id, skill], index) => <SkillCard key={id} id={id} skill={skill} index={index} L={L} />)}</div>
     </section>
     <section className="home-contact wrap" aria-label={L('联系', 'Contact')}>
       <p>{data.profile.contactText}</p>
@@ -324,7 +340,7 @@ function ProjectArticle({ id, item, data, L }) {
   const titles = Object.fromEntries(sections);
   const sectionNumber = id => String(sections.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0');
   const relatedProjects = (project.relatedProjects || []).map(projectId => data.projects.find(entry => entry.id === projectId)).filter(Boolean);
-  return <div className="project-reading">
+  return <div className="project-reading" data-tone={projectTones[id]}>
     <section className="project-brief" id="project-overview" data-reading-anchor aria-labelledby="project-overview-title">
       <h2 id="project-overview-title" tabIndex={-1}>{L('项目概览', 'At a glance')}</h2>
       <dl>
