@@ -466,6 +466,7 @@ export const cases = {
         "Requirements backlog, development tracking, staged acceptance, rollout analysis and release evaluation"
       ]
     ],
+    "actionIds": ["business-analysis", "version-analysis", "advertising-flow", "requirements-release", "project-coordination", "release-risk"],
     "lesson": "Read performance indicators alongside the relevant users, channels and versions. Assess product changes against specific usage issues and a defined evaluation scope.",
     "boundary": "The 6 product lines describe the analysis and requirements scope. Engineering, design, QA and operations share release delivery. This topic covers consumer tools; AI subscriptions and entitlements have a separate case."
   },

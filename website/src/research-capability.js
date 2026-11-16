@@ -1,12 +1,12 @@
 export const researchCapabilities = {
   zh: {
     title: '用户研究',
-    summary: '从真实使用情境，形成产品判断依据。',
-    intro: '结合心理学教育背景与行业研究实践，围绕人的行为、任务目标和使用环境定义研究问题。通过问卷、现场调研、定量与定性分析及人因评估，识别需求差异，形成产品改进和形态设计的依据。',
+    summary: '从行为与情境中，获得产品判断依据。',
+    intro: '结合心理学教育背景，将研究问题放回人的行为、任务目标与使用环境。通过问卷、现场调研、定量与定性分析及人因评估，区分用户陈述、操作表现与场景差异，为需求判断和方案比较提供依据。',
     methods: [
       {
         title: '研究问题与使用情境',
-        text: '将业务问题拆解为使用者、任务、环境与操作困难，结合实际工作过程确定研究重点。围绕山地巡检，将现场风险与管理系统的功能需求联系起来，明确需求分析的具体情境。',
+        text: '将业务问题拆解为使用者、任务、环境与操作困难，明确需要通过调研了解的问题。围绕山地巡检，了解巡检频率、现场条件与安全风险，识别实际作业中的具体限制。',
         projectId: 'station-control-research',
         evidence: '实地了解山地电站每周巡检的执行困难与安全风险',
       },
@@ -29,8 +29,8 @@ export const researchCapabilities = {
         evidence: '本人完成研究、分析与产品形态设计，相关产品最终投产',
       },
       {
-        title: '研究结论与功能建议',
-        text: '将使用问题、用户画像与场景差异整理为功能改进方向，说明问题对应的作业条件及产品支持需求。针对山地巡检提出无人机或监控辅助巡检、单板故障独立报警建议，形成研究输入。',
+        title: '研究综合与报告',
+        text: '将用户画像、使用问题与场景差异整理为研究结论，说明判断所依据的现场条件和调研资料。针对山地巡检提出无人机或监控辅助巡检、单板故障独立报警建议，作为研究报告中的功能改进输入。',
         projectId: 'station-control-research',
         evidence: '辅助巡检与独立报警作为功能建议纳入用户研究报告',
       },
@@ -40,12 +40,12 @@ export const researchCapabilities = {
   },
   en: {
     title: 'User research',
-    summary: 'Ground product decisions in actual use.',
-    intro: 'Combine an educational background in psychology with industry research to define questions around behavior, task goals and working environments. Use questionnaires, fieldwork, quantitative and qualitative analysis, and human factors evaluation to identify differing needs and inform product improvements and form design.',
+    summary: 'Ground product decisions in behavior and context.',
+    intro: 'Draw on an educational background in psychology to study behavior, task goals and working environments. Use questionnaires, fieldwork, quantitative and qualitative analysis, and human factors evaluation to distinguish user accounts, observed actions and contextual differences, informing needs assessment and comparison of design options.',
     methods: [
       {
         title: 'Research questions and context of use',
-        text: 'Break business questions down into users, tasks, environments and operating difficulties, grounding the research in actual work. Connect the risks of mountain-site inspections with management-system requirements to define the context for needs analysis.',
+        text: 'Break business questions down into users, tasks, environments and operating difficulties, identifying what fieldwork needs to establish. Examine inspection frequency, site conditions and safety risks at mountain solar plants to identify practical constraints in the work.',
         projectId: 'station-control-research',
         evidence: 'Field research into the difficulty and safety risks of weekly inspections at a mountain solar plant',
       },
@@ -68,8 +68,8 @@ export const researchCapabilities = {
         evidence: 'I completed the research, analysis and product-form design; the product entered production',
       },
       {
-        title: 'Research findings and feature proposals',
-        text: 'Translate use problems, user profiles and contextual differences into improvement directions, identifying the working conditions and support needs behind each issue. Propose drone- or camera-assisted inspections and individual-panel fault alerts as research input for mountain-site maintenance.',
+        title: 'Research synthesis and reporting',
+        text: 'Synthesize user profiles, use problems and contextual differences into findings, linking each judgment to field conditions and research material. Document drone- or camera-assisted inspections and individual-panel fault alerts as feature proposals in the research report.',
         projectId: 'station-control-research',
         evidence: 'Assisted inspection and separate fault-alert proposals documented in the user research report',
       },

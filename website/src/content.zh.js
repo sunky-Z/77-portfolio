@@ -466,6 +466,7 @@ export const cases = {
         "需求池管理、开发进度跟踪、阶段验收、灰度分析与发布评估"
       ]
     ],
+    "actionIds": ["business-analysis", "version-analysis", "advertising-flow", "requirements-release", "project-coordination", "release-risk"],
     "lesson": "经营指标需要和具体用户、渠道及版本条件一起阅读。产品改动的判断，应落实到相应的使用问题与评估范围。",
     "boundary": "6 条产品线为负责的分析与需求范围，发布由研发、设计、测试与运营共同完成。此处呈现消费端工具产品工作，AI 订阅与权益另设专题。"
   },

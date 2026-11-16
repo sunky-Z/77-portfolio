@@ -21,7 +21,7 @@ const projectDetails = {
   'station-control-research': { highlight: { zh: '巡检与报警功能方向已纳入研究报告', en: 'Inspection and alert proposals documented in the research report' }, relatedProjects: ['energy-research', 'hardware-research'], company: 'HW', image: 'sketch-research-v2.webp', skills: ['research', 'planning'], summary: { zh: '围绕地面光伏电站管理系统开展用户研究，分析山地巡检问题、用户画像与功能改进方向。', en: 'User research for a solar plant management system, covering field inspection needs, user profiles and functional improvements.' } },
   'hardware-research': { relatedProjects: ['hardware-human-factors', 'station-control-research'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research', 'planning'], summary: { zh: '研究银行前厅业务与楼内办公的使用差异，承担问卷设计、调研执行及定量定性分析。', en: 'Research into printing needs in bank counter services and office work, covering questionnaire design, fieldwork and quantitative and qualitative analysis.' } },
   'hardware-human-factors': { highlight: { zh: '完成产品形态设计，相关产品最终投产', en: 'Completed product-form design; the product entered production' }, relatedProjects: ['hardware-research', 'ai-ecosystem'], company: 'NINESTAR', image: 'sketch-hardware-v2.webp', skills: ['research'], summary: { zh: '结合 A/B 试验、操作观察和 3D 人因评估，分析布局、姿态与注意力分配，形成产品形态方案。', en: 'A/B testing, task observation and 3D human factors evaluation informed layout, posture, attention allocation and product-form design.' } },
-  'product-business': { relatedProjects: ['ai-commercialization', 'international-product'], company: 'DROI', image: 'sketch-growth-v2.webp', skills: ['planning', 'project-management'], summary: { zh: '分析 6 条消费端产品线，结合经营数据与用户反馈支持广告与版本迭代。', en: 'Analysis across 6 consumer product lines to inform advertising and release decisions.' } },
+  'product-business': { relatedProjects: ['ai-commercialization', 'international-product'], company: 'DROI', image: 'sketch-growth-v2.webp', skills: ['planning', 'project-management'], summary: { zh: '分析 6 条消费端产品线，结合经营数据与用户反馈组织专项需求，跟进多产品线迭代与版本交付。', en: 'Analyze 6 consumer product lines, organize initiative requirements using business data and user feedback, and coordinate iteration and release milestones.' } },
 };
 
 function projectCards(cases, language) {
@@ -42,9 +42,9 @@ function projectCards(cases, language) {
 
 function careerCards(stages, language) {
   return [
-    { id: 'huawei', company: 'HW', date: '2021.06 — 2024.04', relatedProjects: ['station-control-research', 'energy-research'] },
-    { id: 'hardware', company: 'NINESTAR', date: '2024.06 — 2025.04', relatedProjects: ['hardware-research', 'hardware-human-factors'] },
     { id: 'current', company: 'DROI', date: language === 'zh' ? '2025.11 — 至今' : '2025.11 — Present', relatedProjects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'product-business'] },
+    { id: 'hardware', company: 'NINESTAR', date: '2024.06 — 2025.04', relatedProjects: ['hardware-research', 'hardware-human-factors'] },
+    { id: 'huawei', company: 'HW', date: '2021.06 — 2024.04', relatedProjects: ['station-control-research', 'energy-research'] },
   ].map(item => ({ ...item, role: stages[item.id].title, summary: stages[item.id].description }));
 }
 

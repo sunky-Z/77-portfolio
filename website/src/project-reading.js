@@ -4,8 +4,8 @@ export const projectGroups = [
     projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product', 'product-business'],
     title: { zh: 'AI 产品与商业化', en: 'AI products & monetization' },
     description: {
-      zh: '从 AI 任务体验、技能发现到订阅权益，结合海外适配与消费端产品分析。',
-      en: 'AI task experience, skill discovery and subscription rules, alongside localization and consumer product analysis.',
+      zh: 'DroiClaw AI 助手的产品专题，以及消费端工具产品的分析与交付实践。',
+      en: 'Product topics within the DroiClaw AI assistant, alongside analysis and delivery across consumer tools.',
     },
   },
   {
@@ -18,6 +18,22 @@ export const projectGroups = [
     },
   },
 ];
+
+export const projectProducts = [
+  {
+    id: 'droiclaw',
+    areaId: 'ai',
+    company: 'DROI',
+    title: { zh: 'DroiClaw AI 助手', en: 'DroiClaw AI assistant' },
+    description: {
+      zh: '面向移动终端的 AI 助手。以下四个专题分别呈现任务体验、技能生态、订阅权益与海外适配，属于同一产品的不同工作方向。',
+      en: 'An AI assistant for mobile devices. The four topics below cover task experience, the skill ecosystem, subscription entitlements and localization within the same product.',
+    },
+    projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product'],
+  },
+];
+
+export const projectProductFor = projectId => projectProducts.find(product => product.projects.includes(projectId));
 
 export const projectBriefs = {
   'ai-ecosystem': {

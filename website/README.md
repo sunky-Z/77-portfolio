@@ -87,7 +87,7 @@ npm run check:build
 | 双语简介、项目卡片、职业入口与能力关联 | `src/portfolio.js` |
 | AI 产品设计能力的双语正文与逐项项目依据 | `src/ai-capability.js` |
 | 用户研究、产品规划与交付、项目管理的双语正文与项目依据 | `src/research-capability.js`、`src/planning-capability.js`、`src/project-management-capability.js` |
-| 项目分组、开篇场景说明及交付状态 | `src/project-reading.js` |
+| 项目分组、产品与专题归属、开篇场景说明及交付状态 | `src/project-reading.js` |
 | 双语项目及职业正文 | `src/content.zh.js`、`src/content.js` |
 | 页面清单、层级与旧地址映射 | `src/routes.js` |
 | 从网址选择页面 | `src/hooks/usePortfolioNavigation.js` |
@@ -103,20 +103,22 @@ npm run check:build
 
 ## 信息结构
 
-网站采用“首页 → 分类总览 → 详细正文”的三层架构。HR 可以先看经历与教育背景；业务负责人可以进入项目正文读工作和交付物；陌生访客从简介和精选项目开始。
+网站采用“首页 → 分类总览 → 详细正文”的页面架构。项目总览内部按实践方向、产品、专题组织，DroiClaw 的四个专题属于同一 AI 助手，消费端工具产品另列。专题面包屑及返回入口指向产品区域，各专题继续使用独立网址。HR 可以先看按最近优先排列的经历与教育背景；业务负责人可以进入项目正文读工作和交付物；陌生访客从简介和精选项目开始。
 
 | 层级 | 路径 | 内容 |
 |---|---|---|
 | 首页 | `/` | 简介、精选项目及分类入口 |
-| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、九个项目、四个能力分支 |
+| 分类 | `/experience/`、`/projects/`、`/capabilities/` | 职业经历、产品与研究项目及专题（九个详情入口）、四个能力分支 |
 | 联系 | `/contact/` | 邮箱及复制入口 |
 | 经历详情 | `/experience/huawei/`、`/experience/hardware/`、`/experience/current/` | 三段职业经历 |
-| AI 项目 | `/projects/ai-ecosystem/`、`/projects/skill-ecosystem/`、`/projects/ai-commercialization/`、`/projects/international-product/` | 主动服务、技能治理、订阅权益、海外本地化 |
+| DroiClaw 产品专题 | `/projects/ai-ecosystem/`、`/projects/skill-ecosystem/`、`/projects/ai-commercialization/`、`/projects/international-product/` | 同一 AI 助手下的主动服务、技能治理、订阅权益、海外本地化 |
 | 研究及产品分析 | `/projects/energy-research/`、`/projects/station-control-research/`、`/projects/hardware-research/`、`/projects/hardware-human-factors/`、`/projects/product-business/` | 能源、电站管理系统、金融行业打印体验、人因评估与形态设计、消费端产品 |
 | 方法详情 | `/capabilities/research/`、`/capabilities/planning/`、`/capabilities/ai/`、`/capabilities/project-management/` | 用户研究、产品规划与交付、AI 产品设计、项目管理 |
 | 兼容地址 | `/capabilities/delivery/` | 跳转至合并后的 `/capabilities/planning/`，保留查询参数和正文位置 |
 
 所有页面都有自己的 HTML，可直接访问、刷新、分享或在新标签中打开。面包屑和返回链接指向父分类；经历、项目和方法之间有相关链接。切换语言保留当前页面与阅读位置；旧版 `#about`、`#projects`、`#work/…` 等地址会转换到对应页面。
+
+四项能力分别回答“研究依据如何取得”“产品方案和验收规格如何形成”“AI 交互、使用边界与质量如何设计”“人员、依赖和阶段如何推进”。项目管理的依据链接直接定位到消费端案例的相应段落，段落标识在中英文之间保持一致。
 
 ## 内容和素材边界
 

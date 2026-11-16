@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { access } from 'node:fs/promises';
 import { portfolio } from '../src/portfolio.js';
-import { projectGroups, projectBriefs } from '../src/project-reading.js';
+import { projectGroups, projectBriefs, projectProducts } from '../src/project-reading.js';
 import { cases as zhCases } from '../src/content.zh.js';
 import { cases as enCases } from '../src/content.js';
 import { legacyHashPath, legacyPageRedirects, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
@@ -86,6 +86,7 @@ test('project routes, translations, category cards and related links stay in syn
         if (method.projectId) {
           assert.ok(cases[method.projectId], method.projectId);
           assert.ok(method.evidence, `${method.title} project evidence`);
+          if (method.projectAnchor) assert.ok(cases[method.projectId].actionIds?.includes(method.projectAnchor), `${method.title} evidence section`);
         }
       }
     }
@@ -119,6 +120,14 @@ test('project areas and supplementary overview cover every project once with bil
   for (const group of projectGroups) {
     assert.ok(group.projects.length > 0);
     for (const language of ['zh', 'en']) assert.ok(group.title[language] && group.description[language]);
+  }
+  const topicIds = projectProducts.flatMap(product => product.projects);
+  assert.equal(new Set(topicIds).size, topicIds.length, 'each topic belongs to one product');
+  for (const product of projectProducts) {
+    const area = projectGroups.find(group => group.id === product.areaId);
+    assert.ok(area, 'a product belongs to an existing area');
+    for (const id of product.projects) assert.ok(area.projects.includes(id), `${id} is in its parent product area`);
+    for (const language of ['zh', 'en']) assert.ok(product.title[language] && product.description[language]);
   }
   for (const brief of Object.values(projectBriefs)) {
     for (const language of ['zh', 'en']) assert.ok(brief.context[language] && brief.status[language]);
