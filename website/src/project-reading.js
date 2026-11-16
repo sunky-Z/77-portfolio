@@ -10,7 +10,7 @@ export const projectGroups = [
   },
   {
     id: 'research',
-    projects: ['hardware-human-factors', 'station-control-research', 'energy-product-planning', 'hardware-research'],
+    projects: ['energy-product-planning', 'station-control-research', 'hardware-human-factors', 'hardware-research'],
     title: { zh: '用户研究与产品设计', en: 'User research & product design' },
     description: {
       zh: '从市场与人群洞察，到实际作业与操作场景，呈现需求判断、功能规划与产品形态设计。',
