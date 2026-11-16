@@ -242,9 +242,6 @@ h1[tabindex]:focus, h2[tabindex]:focus { outline: none; }
 .project-chapters .toc button { display: flex; gap: 12px; }
 .toc-number { color: #919191; font-size: 13px; padding-top: 1px; }
 .section-number { display: inline-block; color: var(--accent-hover); font-size: 15px; margin-right: 16px; vertical-align: middle; }
-.project-takeaway { max-width: 860px; margin-top: 30px; padding: 22px 25px; border-left: 2px solid #bdbdbd; background: var(--soft); }
-.project-takeaway h3 { font-size: 18px; }
-.project-takeaway p { font-size: 16px; }
 .project-reading .article-section:not(.decision-section) { max-width: 860px; margin-inline: auto; }
 .project-reading .article-section:has(.outputs-grid), .project-reading #project-related { max-width: none; }
 .project-reading .context-question { margin-top: 27px; }
@@ -440,7 +437,6 @@ h1[tabindex]:focus, h2[tabindex]:focus { outline: none; }
   .project-brief dt { margin-bottom: 5px; }
   .project-brief dd { font-size: 16px; }
   .project-role-note { font-size: 14px; }
-  .project-takeaway { padding: 20px; }
   .article-section { margin-bottom: 30px; padding-bottom: 30px; }
   .article-section h2 { font-size: 26px; margin-bottom: 17px; }
   .article-section h3 { font-size: 21px; }

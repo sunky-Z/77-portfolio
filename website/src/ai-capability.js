@@ -42,7 +42,7 @@ export const aiCapabilities = {
       },
     ],
     projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization'],
-    boundary: '工作重点为 AI 应用层的任务交互、用户控制、技能运营、应用评估与使用规则。模型、算法、工程与视觉实现由对应团队协作完成；具体模块的设计、验收与上线状态分别说明。',
+    boundary: '工作重点为 AI 应用层的任务交互、用户控制、技能运营、应用评估与使用规则。模型、算法、工程与视觉实现由对应团队协作完成。',
   },
   en: {
     title: 'AI product design',
@@ -87,6 +87,6 @@ export const aiCapabilities = {
       },
     ],
     projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization'],
-    boundary: 'The work focuses on application-layer task interaction, user controls, skill operations, application evaluation and usage rules. Models, algorithms, engineering and visual implementation involve the respective teams; design, acceptance and release states are stated separately for each module.',
+    boundary: 'The work focuses on application-layer task interaction, user controls, skill operations, application evaluation and usage rules. Models, algorithms, engineering and visual implementation involve the respective teams.',
   },
 };

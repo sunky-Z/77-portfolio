@@ -179,7 +179,7 @@ function CategoryPage({ route, data, L, onCopyEmail }) {
   const categories = {
     experience: { path: '/experience/', number: '01', title: L('职业经历', 'Career & background'), intro: L('三段职业经历，两项学科背景。', 'Three roles. A foundation in psychology and business.') },
     projects: { path: '/projects/', number: '02', title: L('项目实践', 'Projects'), intro: L('从用户研究到 AI 产品，呈现两条实践方向。', 'Two areas of practice, from user research to AI products.') },
-    capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('结合心理学与工商管理背景，呈现用户研究、产品规划与交付、AI 产品设计及项目管理实践。', 'A background in psychology and business administration informs user research, product planning and delivery, AI product design and project management.') },
+    capabilities: { path: '/capabilities/', number: '03', title: L('能力与方法', 'Capabilities'), intro: L('结合心理学与工商管理背景，开展研究、产品设计与交付。', 'A background in psychology and business informs research, product design and delivery.') },
     contact: { path: '/contact/', number: '04', title: L('联系我', 'Get in touch'), intro: data.profile.contactText },
   };
   const category = categories[route.type];
@@ -309,7 +309,6 @@ function ProjectArticle({ id, item, data, L }) {
       </ArticleSection>}
       <ArticleSection id="project-outputs" title={titles['project-outputs']} number={sectionNumber('project-outputs')}>
         <div className="outputs-grid">{item.outputs.map(([title, text]) => <div className="output-card" key={title}><h3>{title}</h3><p>{text}</p></div>)}</div>
-        <div className="project-takeaway" id="project-reflection" data-reading-anchor><h3>{L('实践思考', 'Reflection')}</h3><p>{item.lesson}</p></div>
       </ArticleSection>
       <ArticleSection id="project-related" title={titles['project-related']} number={sectionNumber('project-related')}>
         <h3 className="related-heading">{L('相关方法', 'Related methods')}</h3>
@@ -439,7 +438,8 @@ export default function App() {
       try { id = decodeURIComponent(window.location.hash.slice(1)); }
       catch { return; }
       if (!id) return;
-      const target = document.getElementById(id === 'project-progress' ? 'project-contribution' : id);
+      const sectionId = { 'project-progress': 'project-contribution', 'project-reflection': 'project-outputs' }[id] || id;
+      const target = document.getElementById(sectionId);
       if (!target) return;
       target.scrollIntoView({ behavior: 'instant', block: 'start' });
       target.focus({ preventScroll: true });

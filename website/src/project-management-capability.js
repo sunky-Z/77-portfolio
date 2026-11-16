@@ -48,7 +48,7 @@ export const projectManagementCapabilities = {
       },
     ],
     projects: ['product-business'],
-    boundary: '职责侧重产品侧的任务组织、跨团队依赖协调、版本节点跟踪与工作交接。研发、设计、测试和运营按各自职责协作完成实现与发布，具体任务的进展和完成范围分别记录。',
+    boundary: '职责侧重产品侧的任务组织、跨团队依赖协调、版本节点跟踪与工作交接。研发、设计、测试和运营按各自职责协作完成实现与发布。',
   },
   en: {
     title: 'Project management',
@@ -99,6 +99,6 @@ export const projectManagementCapabilities = {
       },
     ],
     projects: ['product-business'],
-    boundary: 'My scope centers on product task organization, cross-team dependencies, release milestones and handovers. Engineering, design, QA and operations contribute implementation and releases in their respective roles. Progress and completed scope are recorded for individual tasks.',
+    boundary: 'My scope centers on product task organization, cross-team dependencies, release milestones and handovers. Engineering, design, QA and operations contribute implementation and releases in their respective roles.',
   },
 };

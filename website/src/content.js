@@ -48,7 +48,7 @@ export const cases = {
       "Proactive service framework: Group current information, task results, decisions awaiting the user, and risks and opportunities into four service types. Define sources, display timing, navigation and exit conditions, delivering 29 card templates and 38 visual variants. Completed interface and functional acceptance of the four card types, covering deduplication, manual removal and automatic-dismissal rules, and followed up display and interaction issues.",
       "Smart notification upgrade: Lead the product upgrade from AI summaries to smart notifications, refining categories, priorities, summary timing and retry rules. Design flows across AI calls, SMS summaries, scheduled tasks and to-dos synced to notes. Completed smart-notification product acceptance and advanced AI-call integration and end-to-end to-do acceptance.",
       "User intervention during tasks: Design credential input, single- and multiple-choice prompts, permission confirmation and exception handling. Connect feedback across surfaces and address keyboard, camera-clearance and device-format constraints.",
-      "Travel-planning requirements and prompt collaboration: Own requirements, interaction design and product acceptance, defining when to ask, which details to request, single- and multiple-choice inputs, skipping and later revisions. Use a semi-modal conversation flow consistent with the wider product, and work with algorithm colleagues on prompt design. The flow is live; manual checks covered different travel modes and preferences, whether generated plans reflected them, skipping questions and later adjustments in the same conversation.",
+      "Travel planning: Use semi-modal single- and multiple-choice inputs in the conversation. Manually selected different travel modes and preferences, checked whether plans reflected them, and verified skipping questions and adding or changing details later. The flow is live.",
       "Photo cleanup flow: Address result retrieval after leaving, default selections and inconsistent components. Delivered a complete interaction prototype covering scan confirmation, progress updates, completion-result retrieval, preview and reselection, and deletion confirmation.",
       "Service integration and discovery: Prepared weather and parcel-service integration plans covering interface and field checks, phone-number authorization, asynchronous binding and result feedback. Add contextual entry and exit guidance for 7 core features, from home-screen recommendations to the feature itself."
     ],
@@ -66,8 +66,7 @@ export const cases = {
         "Photo-cleanup prototype, integration plans and product acceptance criteria for relevant features"
       ]
     ],
-    "lesson": "A complete task experience helps users understand what is happening, when they need to intervene and how to find results after leaving a page.",
-    "boundary": "My scope covers requirements, scenario and interaction plans, cross-team reviews and product acceptance. The prompt approach was discussed and advanced jointly with algorithm colleagues. Algorithms, engineering, visual implementation and testing involve the respective teams; template and prototype counts describe design deliverables."
+    "boundary": "My scope covers requirements, scenario and interaction plans, cross-team reviews and product acceptance. The prompt approach was discussed and advanced jointly with algorithm colleagues. Algorithms, engineering, visual implementation and testing involve the respective teams."
   },
   "skill-ecosystem": {
     "overview": [
@@ -111,7 +110,7 @@ export const cases = {
     ],
     "actions": [
       "Taxonomy and search: Organize existing tags and deduplicated popular search terms. Complete the first batch of 197 skill-tag updates with readback verification, and add category and exact-search requirements.",
-      "Content and first use: Review summary length and organize details around purpose, inputs, outputs and boundaries. Save 130 rewritten detail entries in batches and refine first-use guidance.",
+      "Content and first use: Review summary length, save 130 rewritten skill-detail entries in batches and refine first-use guidance.",
       "Find-Skill design: Complete design, testing handoff and production publishing for Find-Skill. Design initial-activation skill installation for both online and offline conditions.",
       "Review and publishing workflows: Design review and usability-validation agents and run through the AI batch-upload agent flow. Add package-version checks, installation states and publishing verification.",
       "Evaluation and quality tracking: Convert selected product-evaluation dimensions into tested Python scripts. Organize 22 people to evaluate 29 skills using manual and scripted methods and review the scores. Establish a dedicated issue tracker for testing, changes and acceptance.",
@@ -131,8 +130,7 @@ export const cases = {
         "Package and version checks, batch-upload agent flow, evaluation scripts and manual score reviews"
       ]
     ],
-    "lesson": "Skill supply needs discovery, understandable descriptions and usability together. Tags, explanations, installation states and publishing quality all form part of first use.",
-    "boundary": "This topic is part of DroiClaw skill-ecosystem work. Tag reviews, content updates and published skills are recorded at their respective stages. Evaluation combines selected scripted checks with manual review."
+    "boundary": "Tag reviews, content updates and published skills are recorded at their respective stages. Evaluation combines selected scripted checks with manual review."
   },
   "ai-commercialization": {
     "overview": [
@@ -167,7 +165,7 @@ export const cases = {
       },
       {
         "title": "Cover the full entitlement lifecycle",
-        "text": "Connect plan browsing, eligibility, claiming, subscriptions, upgrades, payment feedback and exit-and-return paths. Cover cases such as an existing account signing in on a new device, with rules for gift and paid entitlements coexisting and recovery after expiry."
+        "text": "For scenarios such as an existing account signing in on a new device, define rules for gift and paid entitlements coexisting and recovery after expiry."
       },
       {
         "title": "Tie reward conditions to observable behavior",
@@ -195,8 +193,7 @@ export const cases = {
         "82 tasks, 1,000 Credits in stage-plan rewards, and behavior-event definitions"
       ]
     ],
-    "lesson": "Monetization rules need consistent user explanations, interface states and actual permissions. Exceptions and entitlement changes belong in the design and acceptance process alongside normal purchase flows.",
-    "boundary": "My role centers on rules, interaction plans and delivery coordination with product, engineering, QA and operations. The 15 account scenarios describe prototype coverage; acceptance and release states are listed for specific functions."
+    "boundary": "My role centers on rules, interaction plans and delivery coordination with product, engineering, QA and operations. The 15 account scenarios describe prototype coverage."
   },
   "international-product": {
     "overview": [
@@ -235,7 +232,7 @@ export const cases = {
       },
       {
         "title": "Match demonstrations to feature states",
-        "text": "Prepare Chinese and English product points, screenshot and recording lists. Use English device screenshots to inspect unadapted modules and check statements about proactive services and other features against their actual state."
+        "text": "Check Chinese and English product points against actual feature states, particularly statements about proactive services."
       }
     ],
     "actions": [
@@ -259,8 +256,7 @@ export const cases = {
         "Adapted AI-persona and plan content, with English screenshots, recordings and product-communication lists"
       ]
     ],
-    "lesson": "Localization delivery needs language, product rules and actual features to be checked together. Content writes, rule explanations and demonstration checks each have a defined scope and delivery state.",
-    "boundary": "My role covers adaptation and delivery of multilingual content, shared fields, reward rules and product demonstrations. Content preparation, production writes and spot checks are recorded separately; the 46 locale configurations include Traditional Chinese."
+    "boundary": "My role covers adaptation and delivery of multilingual content, shared fields, reward rules and product demonstrations. The 46 locale configurations include Traditional Chinese."
   },
   "energy-research": {
     "overview": [
@@ -308,8 +304,7 @@ export const cases = {
         "Priorities, experience issues and recommendations"
       ]
     ],
-    "lesson": "Research supports specific decisions: which users to prioritize, which needs to address and how to evaluate the proposal.",
-    "boundary": "I contributed to market, user, requirements and experience research, supporting team planning and development. Public notes cover methods and responsibilities; internal business data and unreleased features are excluded."
+    "boundary": "I contributed to market, user, requirements and experience research, supporting team planning and development."
   },
   "energy-product-planning": {
     "overview": [
@@ -372,7 +367,6 @@ export const cases = {
         "FusionSolar generation forecasting, solar-exposure calculation, charging-power adjustment and intelligent solar-storage scheduling"
       ]
     ],
-    "lesson": "Market and user research identify requirement priorities. Layered requirements and scenario conditions then define the capabilities a product needs to provide.",
     "boundary": "My work covered market and user research, requirements design and user-facing feature planning. The charging-platform research ran from June 2023 to January 2024, and all quantities in this topic refer to that branch. The residential-solar and integrated solar-storage-charging work covered product and intelligent-feature planning."
   },
   "hardware-research": {
@@ -428,7 +422,6 @@ export const cases = {
         "Usage differences between counter-service and office contexts, with requirement priorities for different user roles."
       ]
     ],
-    "lesson": "Industry user research benefits from distinguishing specific working contexts. Business processing and everyday office work can place different requirements on equipment and services within the same industry.",
     "boundary": "The research was conducted as a team. My main responsibilities were questionnaire design, research execution, quantitative analysis and organization of qualitative material."
   },
   "product-business": {
@@ -461,7 +454,7 @@ export const cases = {
       "Performance diagnosis: Combine BI, event data, user feedback and support issues to analyze activity, retention, conversion and monetization across 6 consumer product lines.",
       "Versions and channels: Contribute to staged-rollout analysis, channel reviews and churn investigations. Distinguish user groups and version conditions when identifying issues and recommending changes.",
       "Advertising flows: Contribute requirements and flows for lock-screen icons, portrait images and template advertising, assessing changes alongside experience and monetization performance.",
-      "Requirements and releases: Own relevant requirements, prototypes and reviews. Work with engineering, design, QA and operations on staged rollouts, acceptance and post-release evaluation.",
+      "Requirements and releases: Own requirements, prototypes and reviews, coordinating staged rollouts and post-release evaluation.",
       "Multi-project coordination and phased delivery: Track development across product lines and advance staged acceptance of quarterly goals. Maintain a dedicated requirements backlog, align requirements with marketing and operations, and follow first-phase assignment, development progress and second-phase scope alignment.",
       "Release risks and issue tracking: Track crashes, ANRs and device-adaptation issues alongside rollout and channel data. Follow interface integration and testing of fixes, check version intake and freeze milestones, and advance phased handovers."
     ],
@@ -480,8 +473,7 @@ export const cases = {
       ]
     ],
     "actionIds": ["business-analysis", "version-analysis", "advertising-flow", "requirements-release", "project-coordination", "release-risk"],
-    "lesson": "Read performance indicators alongside the relevant users, channels and versions. Assess product changes against specific usage issues and a defined evaluation scope.",
-    "boundary": "The 6 product lines describe the analysis and requirements scope. Engineering, design, QA and operations share release delivery. This topic covers consumer tools; AI subscriptions and entitlements have a separate case."
+    "boundary": "The 6 product lines describe the analysis and requirements scope. Engineering, design, QA and operations share release delivery."
   },
   "station-control-research": {
     "overview": [
@@ -514,7 +506,7 @@ export const cases = {
     "decisions": [
       {
         "title": "Identify use needs through field conditions",
-        "text": "Mountain-site inspection problems were directly related to the working environment and tasks. I examined users’ tasks and difficulties to identify how the existing management functions could support their work and organize improvement directions."
+        "text": "Identify the support the management system needs to provide in relation to mountain-site conditions and inspection tasks."
       },
       {
         "title": "Propose assisted inspection and individual-panel alerts",
@@ -536,7 +528,6 @@ export const cases = {
         "Proposals for inspection and fault alerts, with preliminary analysis of AI maintenance and inspection."
       ]
     ],
-    "lesson": "Management-system requirements need to be examined in their field conditions. Roles, tasks, operating environments and execution risks provided specific evidence for functional improvements.",
     "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting."
   },
   "hardware-human-factors": {
@@ -568,7 +559,7 @@ export const cases = {
     "decisions": [
       {
         "title": "Include standing and seated use in scenario comparison",
-        "text": "I analyzed panel operation, paper loading and paper retrieval in standing and seated scenarios, comparing layouts through task performance, observed posture and participant feedback."
+        "text": "Analyze panel and paper-handling layout requirements for standing and seated use."
       },
       {
         "title": "Address panel attention and output-area visibility together",
@@ -595,7 +586,6 @@ export const cases = {
         "A product form integrating the strengths of the options based on the comparison findings."
       ]
     ],
-    "lesson": "Evaluating physical interaction requires operation records, posture observation and participant feedback. Examining tasks, posture and visibility within the same use scenario makes the basis for product form decisions clearer.",
     "boundary": "I carried out all research, analysis, standing and seated scenario concepts, attention concepts, option comparison and product form design in this case."
   }
 };

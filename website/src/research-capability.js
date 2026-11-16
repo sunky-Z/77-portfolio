@@ -6,7 +6,7 @@ export const researchCapabilities = {
     methods: [
       {
         title: '研究问题与使用情境',
-        text: '将业务问题拆解为使用者、任务、环境与操作困难，明确需要通过调研了解的问题。围绕山地巡检，了解巡检频率、现场条件与安全风险，识别实际作业中的具体限制。',
+        text: '将研究问题拆解为使用者、任务、环境与操作困难，明确现场调研需要回答的问题。',
         projectId: 'station-control-research',
         evidence: '实地了解山地电站每周巡检的执行困难与安全风险',
       },
@@ -18,7 +18,7 @@ export const researchCapabilities = {
       },
       {
         title: '定量分析与定性归纳',
-        text: '结合问卷数据分析与定性资料整理，比较不同人群和场景的使用差异。分别归纳业务操作对清晰、速度与顺畅的要求，以及办公场景对打印服务便利性的需求，形成具体结论。',
+        text: '结合问卷分析与定性资料，比较不同人群和场景的使用差异，形成需求结论。',
         projectId: 'hardware-research',
         evidence: '形成前厅业务体验与局域网、共享、云打印服务的需求差异结论',
       },
@@ -30,7 +30,7 @@ export const researchCapabilities = {
       },
       {
         title: '研究综合与报告',
-        text: '将用户画像、使用问题与场景差异整理为研究结论，说明判断所依据的现场条件和调研资料。针对山地巡检提出无人机或监控辅助巡检、单板故障独立报警建议，作为研究报告中的功能改进输入。',
+        text: '将用户画像、使用问题与现场条件整理为研究结论和报告。',
         projectId: 'station-control-research',
         evidence: '辅助巡检与独立报警作为功能建议纳入用户研究报告',
       },
@@ -45,7 +45,7 @@ export const researchCapabilities = {
     methods: [
       {
         title: 'Research questions and context of use',
-        text: 'Break business questions down into users, tasks, environments and operating difficulties, identifying what fieldwork needs to establish. Examine inspection frequency, site conditions and safety risks at mountain solar plants to identify practical constraints in the work.',
+        text: 'Break research questions down into users, tasks, environments and operating difficulties, defining what fieldwork needs to establish.',
         projectId: 'station-control-research',
         evidence: 'Field research into the difficulty and safety risks of weekly inspections at a mountain solar plant',
       },
@@ -57,7 +57,7 @@ export const researchCapabilities = {
       },
       {
         title: 'Quantitative analysis and qualitative synthesis',
-        text: 'Combine questionnaire analysis with qualitative material to compare use across groups and contexts. Identify requirements for clarity, speed and smooth counter-service operation, alongside the convenience of office-printing services, and develop specific findings.',
+        text: 'Combine questionnaire analysis with qualitative material to compare use across groups and contexts and identify needs.',
         projectId: 'hardware-research',
         evidence: 'Findings distinguishing counter-service experience from local-network, shared and cloud-printing needs',
       },
@@ -69,7 +69,7 @@ export const researchCapabilities = {
       },
       {
         title: 'Research synthesis and reporting',
-        text: 'Synthesize user profiles, use problems and contextual differences into findings, linking each judgment to field conditions and research material. Document drone- or camera-assisted inspections and individual-panel fault alerts as feature proposals in the research report.',
+        text: 'Synthesize user profiles, use problems and field conditions into research findings and reports.',
         projectId: 'station-control-research',
         evidence: 'Assisted inspection and separate fault-alert proposals documented in the user research report',
       },

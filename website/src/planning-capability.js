@@ -6,7 +6,7 @@ export const planningCapabilities = {
     methods: [
       {
         title: '需求范围与功能定义',
-        text: '依据研究发现明确需求对应的人群、任务与作业条件，将现场困难转为具体功能建议。围绕辅助巡检与故障发现说明产品需要解决的问题，形成后续方案讨论的输入。',
+        text: '依据研究发现明确需求人群、任务与作业条件，将现场困难转为功能建议。',
         projectId: 'station-control-research',
         evidence: '山地巡检与单板故障独立报警建议已纳入站控研究报告',
       },
@@ -42,7 +42,7 @@ export const planningCapabilities = {
       },
     ],
     projects: ['energy-product-planning', 'station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
-    boundary: '本人承担需求分析、产品方案、业务规则、原型规格及产品验收工作，算法、工程、视觉实现与测试由相应团队协作完成。研究建议、设计交付、验收通过与正式上线按具体项目和功能分别说明。',
+    boundary: '本人承担需求分析、产品方案、业务规则、原型规格及产品验收工作，算法、工程、视觉实现与测试由相应团队协作完成。',
   },
   en: {
     title: 'Product planning & delivery',
@@ -51,7 +51,7 @@ export const planningCapabilities = {
     methods: [
       {
         title: 'Requirement scope and feature definition',
-        text: 'Use research findings to define the people, tasks and working conditions behind a need, translating practical difficulties into feature proposals. Specify the problems assisted inspection and fault detection should address, providing input for subsequent product planning.',
+        text: 'Use research findings to define the people, tasks and working conditions behind a need, translating practical difficulties into feature proposals.',
         projectId: 'station-control-research',
         evidence: 'Mountain-site inspection and individual-panel fault-alert proposals documented in the research report',
       },
@@ -87,6 +87,6 @@ export const planningCapabilities = {
       },
     ],
     projects: ['energy-product-planning', 'station-control-research', 'ai-commercialization', 'product-business', 'international-product'],
-    boundary: 'My work covers requirements analysis, product plans, business rules, prototype specifications and product acceptance. Algorithm, engineering, visual implementation and testing involve the respective teams. Research proposals, design delivery, acceptance and production release are stated separately for specific projects and features.',
+    boundary: 'My work covers requirements analysis, product plans, business rules, prototype specifications and product acceptance. Algorithm, engineering, visual implementation and testing involve the respective teams.',
   },
 };

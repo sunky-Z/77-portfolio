@@ -26,8 +26,8 @@ export const projectProducts = [
     company: 'DROI',
     title: { zh: 'DroiClaw AI 助手', en: 'DroiClaw AI assistant' },
     description: {
-      zh: '面向移动终端的 AI 助手。以下四个专题分别呈现任务体验、技能生态、订阅权益与海外适配，属于同一产品的不同工作方向。',
-      en: 'An AI assistant for mobile devices. The four topics below cover task experience, the skill ecosystem, subscription entitlements and localization within the same product.',
+      zh: '面向移动终端的 AI 助手。四个专题均属于同一产品。',
+      en: 'An AI assistant for mobile devices, presented through four topics within the same product.',
     },
     projects: ['ai-ecosystem', 'skill-ecosystem', 'ai-commercialization', 'international-product'],
   },
