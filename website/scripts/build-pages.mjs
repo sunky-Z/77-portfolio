@@ -1,4 +1,4 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { build, resolveConfig } from 'vite';
@@ -12,6 +12,21 @@ const output = resolve(root, config.build.outDir);
 const template = await readFile(resolve(output, 'index.html'), 'utf8');
 const origin = (process.env.VITE_SITE_ORIGIN || 'https://sunky-z.github.io').replace(/\/$/, '');
 const escapeHTML = value => value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+
+// The archived build keeps its original source; only its deployment prefix changes.
+async function rebaseArchive(directory) {
+  const entries = await readdir(directory, { withFileTypes: true }).catch(() => []);
+  for (const entry of entries) {
+    const filename = resolve(directory, entry.name);
+    if (entry.isDirectory()) await rebaseArchive(filename);
+    else if (/\.(html|js|css)$/.test(entry.name)) {
+      const source = await readFile(filename, 'utf8');
+      const rewritten = source.replaceAll('/77-portfolio/v1/', `${routeHref('/', config.base)}v1/`);
+      if (rewritten !== source) await writeFile(filename, rewritten, 'utf8');
+    }
+  }
+}
+await rebaseArchive(resolve(output, 'v1'));
 
 function pageHTML(page) {
   const title = escapeHTML(`${page.title} · 77`);

@@ -1,4 +1,4 @@
-// Public project topics describe role, product rules and delivery state within the relevant employment.
+// Public project descriptions preserve responsibilities and delivery states.
 export const cases = {
   "ai-ecosystem": {
     "overview": [
@@ -17,56 +17,56 @@ export const cases = {
     ],
     "label": "01 / DROI · AI TASK EXPERIENCE",
     "title": "Proactive services & AI task experience",
-    "intro": "Within the DroiClaw AI assistant project, I plan proactive services and task experiences and lead the product upgrade from AI summaries to smart notifications. The work connects information delivery, task feedback, user confirmation and result retrieval, alongside reviews and product acceptance.",
+    "intro": "I plan proactive services and AI task interactions for DroiClaw. I led the upgrade from AI summaries to smart notifications and follow the work through review and product acceptance, including delivery, task status, user confirmation and result retrieval.",
     "tags": [
       "Proactive services",
       "Smart notifications",
       "Human–AI interaction",
       "Task feedback"
     ],
-    "problem": "Make task progress, results and next actions clear.",
-    "problemText": "AI tasks can start from a conversation, notification or home screen, and may require information or permission while running. The design connects initiation, execution, user intervention and result review, while distinguishing what can be dismissed from what continues to run.",
+    "problem": "What happens to a task when its card is dismissed?",
+    "problemText": "Tasks can start in a conversation, notification or home screen and may need more information or permission while running. Each entry point must explain the current state, what the user needs to do and where to find the result after leaving. Dismissing a card must also be distinct from stopping the task.",
     "decisions": [
       {
-        "title": "Separate desktop dismissal from task execution",
-        "text": "Dismissing a desktop card removes only its display; the task continues in the background and the completed result remains in the corresponding conversation, preserving its context. I verified both paths through manual checks, and the flow is live."
+        "title": "Dismiss the card, keep the task running",
+        "text": "Dismissing the home-screen card removes the display only. The task continues in the background and its result stays in the original conversation. I manually checked both dismissal and result retrieval; the flow is live."
       },
       {
-        "title": "Make additional information optional",
-        "text": "For travel planning, prompts and conversation context guide the model to identify missing information: ask about travel mode and preferences when details are insufficient and generate when enough is available. Users can skip these questions, generate a plan from available information and refine it later in the same conversation."
+        "title": "Let users skip questions and refine the plan later",
+        "text": "Prompts guide the model to check whether the conversation contains enough information. It asks about travel mode and preferences when details are missing, or generates a plan when they are sufficient. Users can skip the questions, get a plan from the available information and revise it in the same conversation."
       },
       {
-        "title": "Use a consistent result hierarchy",
-        "text": "Organize task summaries, initiation sources and key results into three levels. Connect the conversation, Dynamic Island and home-screen result cards, defining the information and actions each surface provides."
+        "title": "Keep the result hierarchy consistent across entry points",
+        "text": "Task summaries, initiation sources and key results have three distinct levels. The conversation, Dynamic Island and home-screen card each show the information and actions appropriate to that surface."
       },
       {
-        "title": "Consider information and usage costs together",
-        "text": "Separate immediate, scheduled and manual summaries, including rules for messages arriving during summarization. Address irrelevant notifications, duplicates, important timestamps, retries and excessive Token use in the trigger design."
+        "title": "Define summary timing and incoming-message rules",
+        "text": "Set separate rules for immediate, scheduled and manual summaries, including messages that arrive during summarization. The design also addresses irrelevant notifications, duplicate content, missing timestamps and Token use."
       }
     ],
     "actions": [
-      "Proactive service framework: Group current information, task results, decisions awaiting the user, and risks and opportunities into four service types. Define sources, display timing, navigation and exit conditions, delivering 29 card templates and 38 visual variants. Completed interface and functional acceptance of the four card types, covering deduplication, manual removal and automatic-dismissal rules, and followed up display and interaction issues.",
-      "Smart notification upgrade: Lead the product upgrade from AI summaries to smart notifications, refining categories, priorities, summary timing and retry rules. Design flows across AI calls, SMS summaries, scheduled tasks and to-dos synced to notes. Completed smart-notification product acceptance and advanced AI-call integration and end-to-end to-do acceptance.",
-      "User intervention during tasks: Design credential input, single- and multiple-choice prompts, permission confirmation and exception handling. Connect feedback across surfaces and address keyboard, camera-clearance and device-format constraints.",
-      "Travel planning: Use semi-modal single- and multiple-choice inputs in the conversation. Manually selected different travel modes and preferences, checked whether plans reflected them, and verified skipping questions and adding or changing details later. The flow is live.",
-      "Photo cleanup flow: Address result retrieval after leaving, default selections and inconsistent components. Delivered a complete interaction prototype covering scan confirmation, progress updates, completion-result retrieval, preview and reselection, and deletion confirmation.",
-      "Service integration and discovery: Prepared weather and parcel-service integration plans covering interface and field checks, phone-number authorization, asynchronous binding and result feedback. Add contextual entry and exit guidance for 7 core features, from home-screen recommendations to the feature itself."
+      "Proactive services: Define four service types for current information, task results, decisions awaiting the user, and risks and opportunities. Specify sources, display timing, navigation and exit conditions, delivering 29 card templates and 38 visual variants. Complete interface and functional acceptance for all four types and follow up duplicate cards, manual removal, automatic dismissal and interaction issues.",
+      "Smart notifications: Lead the upgrade from AI summaries, defining categories, priorities, summary timing and retries. Design flows for AI calls, SMS summaries, scheduled tasks and to-dos synced to notes. Complete product acceptance for smart notifications and follow AI-call integration and end-to-end to-do acceptance.",
+      "User intervention: Design credential entry, single- and multiple-choice prompts, permission confirmation and exception handling. Keep task feedback consistent across pages and address keyboard obstruction, camera clearance and device-format constraints.",
+      "Travel planning: Add semi-modal single- and multiple-choice inputs to the conversation. Manually choose travel modes and preferences, check whether the plan uses them, and verify skipping questions and adding or changing details later. This flow is live.",
+      "Photo cleanup: Design scan confirmation, progress updates, completion-result retrieval, preview and reselection, and deletion confirmation. Deliver a complete interaction prototype addressing lost results after leaving, default selections and inconsistent components.",
+      "Service integration and guidance: Check weather and parcel-service APIs and fields, and design phone authorization, asynchronous binding and result display. Add home-screen recommendation, entry and exit guidance for 7 core features."
     ],
     "outputs": [
       [
-        "Proactive service templates & controls",
-        "29 card templates, 38 visual variants, and display, exit and settings rules"
+        "Proactive-service card plans",
+        "29 templates, 38 visual variants, and display, exit and settings rules"
       ],
       [
-        "Notification & task interaction plans",
-        "Notification flows, user intervention, cross-surface feedback and exception handling"
+        "Notification and task interactions",
+        "Notification flows, user input and permissions, cross-page feedback and exception handling"
       ],
       [
-        "Full-flow prototypes & acceptance criteria",
-        "Photo-cleanup prototype, integration plans and product acceptance criteria for relevant features"
+        "Flow prototypes and acceptance criteria",
+        "Complete photo-cleanup prototype, service-integration plans and relevant feature checks"
       ]
     ],
-    "boundary": "My scope covers requirements, scenario and interaction plans, cross-team reviews and product acceptance. The prompt approach was discussed and advanced jointly with algorithm colleagues. Algorithms, engineering, visual implementation and testing involve the respective teams."
+    "boundary": "I own requirements, scenario and interaction plans, cross-team reviews and product acceptance. I define the travel-planning clarification rules and discuss the prompt approach with algorithm colleagues. The respective teams handle algorithms, engineering, visual implementation and testing."
   },
   "skill-ecosystem": {
     "overview": [
@@ -85,52 +85,52 @@ export const cases = {
     ],
     "label": "02 / DROI · SKILL ECOSYSTEM",
     "title": "AI skill discovery & quality management",
-    "intro": "Within the DroiClaw AI assistant project, I own skill screening, validation, categories, search, publishing and operating processes. The work addresses how skills are discovered, understood, installed and used through taxonomy and content work, Find-Skill design, and review and publishing flows.",
+    "intro": "I handle skill screening, validation, categories, search and publishing for DroiClaw. This includes tag and content updates, Find-Skill design, and changes to review, installation and update flows.",
     "tags": [
       "Skill discovery",
       "Categories & search",
       "Review & publishing",
       "Operations automation"
     ],
-    "problem": "Help users understand what a skill does and how to use it.",
-    "problemText": "As the skill supply grows, tags, summaries, details and installation states all affect selection. The work addresses understandable content, discovery paths and publishing quality, including installation checks, version compatibility and subsequent updates.",
+    "problem": "Before choosing a skill, users need to know what it does and how to start.",
+    "problemText": "As the catalogue grows, scattered tags, long summaries and unclear installation states make selection harder. I work on categories and search, usage instructions and publishing checks, alongside version compatibility and updates.",
     "decisions": [
       {
-        "title": "Replace fragmented tags with a shared taxonomy",
-        "text": "Review tags across 218 published skills and organize 295 tags into 47 shared tags. Combine business categories, exact-tag searches, pagination and detail navigation in the discovery requirements."
+        "title": "Replace scattered tags with shared categories",
+        "text": "Review 218 published skills and organize 295 tags into 47 shared tags. Add requirements for business categories, exact-tag search, pagination and navigation to skill details."
       },
       {
-        "title": "Explain purpose, inputs and outputs",
-        "text": "Rewrite technical descriptions around purpose, required inputs, expected outputs and operating boundaries. Establish concise summary conventions so detail pages explain how to get started."
+        "title": "Explain purpose before inputs and outputs",
+        "text": "Write skill instructions in terms of purpose, required inputs, expected outputs and limits. Keep summaries short and use the detail page to explain what users need before starting."
       },
       {
-        "title": "Connect pre-publish checks with result verification",
-        "text": "Include skill packages, metadata, package names and version consistency in the publishing flow, distinguishing domestic, overseas, test and production environments. Continue with review-status and publishing-result checks after upload."
+        "title": "Verify the result after uploading",
+        "text": "Before publishing, check the package, metadata, package name and version, keeping domestic, overseas, test and production environments separate. After upload, check review status and the published result."
       }
     ],
     "actions": [
-      "Taxonomy and search: Organize existing tags and deduplicated popular search terms. Complete the first batch of 197 skill-tag updates with readback verification, and add category and exact-search requirements.",
-      "Content and first use: Review summary length, save 130 rewritten skill-detail entries in batches and refine first-use guidance.",
-      "Find-Skill design: Complete design, testing handoff and production publishing for Find-Skill. Design initial-activation skill installation for both online and offline conditions.",
-      "Review and publishing workflows: Design review and usability-validation agents and run through the AI batch-upload agent flow. Add package-version checks, installation states and publishing verification.",
-      "Evaluation and quality tracking: Convert selected product-evaluation dimensions into tested Python scripts. Organize 22 people to evaluate 29 skills using manual and scripted methods and review the scores. Establish a dedicated issue tracker for testing, changes and acceptance.",
-      "Compatibility and updates: Contribute to multi-version coexistence acceptance. Address platform and launcher version limits, conflicting version ranges for the same package name and delivery visibility, and refine update and release coordination."
+      "Tags and search: Organize existing tags and deduplicated popular search terms. Save the first batch of 197 skill-tag updates, read them back to verify the changes, and add category and exact-search requirements.",
+      "Content and first use: Check summary lengths, save 130 rewritten skill-detail entries in batches and revise first-use guidance.",
+      "Find-Skill: Complete design, testing handoff and production publishing. Design first-activation installation for both online and offline conditions.",
+      "Review and publishing: Design skill-review and usability-validation agents and run the AI batch-upload agent flow. Add package-version checks, installation states and checks of published results.",
+      "Evaluation and issue tracking: Turn selected evaluation dimensions into tested Python scripts. Organize 22 people to evaluate 29 skills using scripts and manual checks, then review the scores. Record skill-specific issues and follow testing, fixes and acceptance.",
+      "Compatibility and updates: Contribute to multi-version coexistence acceptance. Address platform and launcher version limits, conflicting version ranges for the same package name and delivery visibility, and update the release process."
     ],
     "outputs": [
       [
-        "Shared tags & discovery rules",
-        "295 tags organized into 47 shared tags; the first 197 updates verified by readback"
+        "Tags and search rules",
+        "295 tags organized into 47 shared tags; the first 197 updates saved and verified by readback"
       ],
       [
-        "Skill explanations & Find-Skill",
-        "Purpose, inputs, outputs and operating boundaries, alongside Find-Skill and initial-installation flows"
+        "Skill instructions and Find-Skill",
+        "Purpose, inputs, outputs and limits, plus Find-Skill design and first-installation flows"
       ],
       [
-        "Review, publishing & evaluation flows",
+        "Review, publishing and evaluation material",
         "Package and version checks, batch-upload agent flow, evaluation scripts and manual score reviews"
       ]
     ],
-    "boundary": "Tag reviews, content updates and published skills are recorded at their respective stages. Evaluation combines selected scripted checks with manual review."
+    "boundary": "Tag reviews, content updates and skill releases have separate delivery records. Scripts check selected evaluation dimensions only; other checks and score reviews are manual."
   },
   "ai-commercialization": {
     "overview": [
@@ -149,51 +149,51 @@ export const cases = {
     ],
     "label": "03 / DROI · AI MONETIZATION",
     "title": "AI subscriptions & entitlements",
-    "intro": "Within the DroiClaw AI assistant project, I contribute to subscriptions, Credits, paid-model access and incentives. The work translates device gifts, paid subscriptions, upgrades, coexisting entitlements and expiry into product rules, complete flows and acceptance requirements, and advances relevant delivery.",
+    "intro": "I contribute to DroiClaw subscriptions, Credits, paid-model access and rewards. I define rules for device gifts, paid plans, upgrades, coexisting benefits and expiry, deliver prototypes and acceptance criteria, and follow feature releases.",
     "tags": [
       "Subscriptions & entitlements",
       "Credits",
       "Payment flows",
       "Incentives"
     ],
-    "problem": "Make entitlements and current access understandable.",
-    "problemText": "Users may hold both device gifts and paid entitlements, while access also depends on accounts, device binding, plan permissions and Credit balances. The design turns these conditions into consistent display, execution and exception rules across claiming, subscribing, upgrading and expiry.",
+    "problem": "When device gifts and paid plans coexist, what can the user access?",
+    "problemText": "Access depends on sign-in, device binding, plans and Credit balances, as well as gifted and paid benefits. Each condition needs clear interface feedback, an expected outcome and exception handling. Claiming, upgrading and expiry rules must agree.",
     "decisions": [
       {
-        "title": "Model identity, devices, permissions and balances separately",
-        "text": "Distinguish account identity, device binding, server entitlements, plan capabilities and Credit balances. Examine signed-out, offline and insufficient-balance states, alongside local and cloud capability boundaries."
+        "title": "Define account, device, access and balance separately",
+        "text": "Distinguish account identity, device binding, server entitlements, plan capabilities and Credit balances. Check which local and cloud features remain available when signed out, offline or short of Credits."
       },
       {
-        "title": "Cover the full entitlement lifecycle",
-        "text": "For scenarios such as an existing account signing in on a new device, define rules for gift and paid entitlements coexisting and recovery after expiry."
+        "title": "Explain coexistence and what happens after expiry",
+        "text": "Define how gifted and paid benefits coexist, and which benefits resume after expiry, including an existing account signing in on a new device."
       },
       {
-        "title": "Tie reward conditions to observable behavior",
-        "text": "Distinguish exposure, clicks, successful downloads, actual invocation and execution results. Map task completion to observable events, align mobile and server checks, and design separate feedback for completion and active claiming."
+        "title": "Award Credits for actual behavior",
+        "text": "Distinguish exposure, clicks, successful downloads, actual invocation and execution results. Define task completion, keep mobile and server checks consistent, and give separate feedback for completing a task and claiming its reward."
       }
     ],
     "actions": [
-      "Entitlement rules: Organize device gifts, first activation, installment claiming, upgrades, validity and expiry. Compare prototypes, PRDs and user explanations to resolve conflicting rules.",
-      "Complete subscription prototype: Deliver a consolidated stage prototype and specification covering 15 account scenarios and 8 request or loading results, including interface states, entry points and exception-return paths.",
-      "User explanations and acceptance: Maintain gift, upgrade and Credit FAQs, aligning Credit sources, distribution, validity and expiry. Completed acceptance of specific paths including Alipay payment-failure fallback, restrictions on selected AI capabilities at zero Credits, gift-period switching and entry-plan capability limits.",
-      "Reward and incentive plan: Design a stage plan of 82 tasks and 1,000 Credits in total rewards. Remove duplicate and low-value tasks, address disproportionate rewards and claiming feedback, and complete reward-allocation logic and domestic reward-center product acceptance.",
-      "Delivery and measurement definitions: Contribute to testing and production releases of subscription-center, top-up and Credit-management server functions, and advance gift-entitlement switching rules and order-system integration with Alipay to release. Youlianghui rewarded video is integrated into production. Add usage-event and deduplication rules as a basis for later usage and conversion analysis."
+      "Entitlement rules: Document device gifts, first activation, installment claiming, upgrades, validity and expiry. Compare prototypes, PRDs and user instructions to correct conflicting rules.",
+      "Subscription prototype: Deliver a consolidated stage prototype and specification covering 15 account scenarios and 8 request or loading results. Specify interface states, entry points and return paths after exceptions.",
+      "Instructions and acceptance: Maintain gift, upgrade and Credit FAQs, including sources, distribution, validity and expiry. Design and verify Alipay payment-failure fallback, limits on selected AI features at zero Credits, gift-period switching and entry-plan feature limits.",
+      "Rewards: Design a stage plan with 82 tasks and 1,000 Credits in total rewards. Remove duplicate and low-value tasks, correct disproportionate rewards and claiming feedback, and complete reward-allocation logic and domestic reward-center product acceptance.",
+      "Release and measurement: Contribute to testing and production releases of subscription-center, top-up and Credit-management server functions. Follow gift switching and order-system integration with Alipay through release. Youlianghui rewarded video is in production. Add usage-event and deduplication rules for later usage and conversion analysis."
     ],
     "outputs": [
       [
-        "Entitlement rules & flow specifications",
-        "Gift, paid, upgrade, coexistence and expiry rules, with related user explanations"
+        "Entitlement rules and flow specifications",
+        "Gift, paid, upgrade, coexistence and expiry rules, with user instructions"
       ],
       [
         "Consolidated subscription prototype",
-        "Stage prototype coverage of 15 account scenarios and 8 request or loading results"
+        "Stage prototype covering 15 account scenarios and 8 request or loading results"
       ],
       [
-        "Incentive & measurement plan",
+        "Reward and measurement plans",
         "82 tasks, 1,000 Credits in stage-plan rewards, and behavior-event definitions"
       ]
     ],
-    "boundary": "My role centers on rules, interaction plans and delivery coordination with product, engineering, QA and operations. The 15 account scenarios describe prototype coverage."
+    "boundary": "I mainly handle rules, interaction plans and delivery coordination. Engineering, QA and operations share the delivery work. The 15 account scenarios refer to prototype coverage."
   },
   "international-product": {
     "overview": [
@@ -212,51 +212,51 @@ export const cases = {
     ],
     "label": "04 / DROI · INTERNATIONAL PRODUCTS",
     "title": "International product & localization",
-    "intro": "In DroiClaw’s overseas product work, I advance localization of skills, AI personas, plans and reward rules, including content configuration, production writes and spot checks, and support English demonstrations and product communication.",
+    "intro": "I handle parts of DroiClaw localization, including skill, AI-persona, plan and reward-rule content, production configuration and spot checks. I also prepare English demonstrations and product materials.",
     "tags": [
       "International products",
       "Multilingual content",
       "Entitlement explanations",
       "Delivery checks"
     ],
-    "problem": "Keep content, rules and actual features aligned across languages.",
-    "problemText": "Overseas versions need skill names and descriptions, plan entitlements, Credit explanations and demonstration content. The work checks meaning, brands, terminology, quantities and locale settings, distinguishing content preparation, production writes and actual feature states.",
+    "problem": "Translated content still needs to match the rules and working features.",
+    "problemText": "I check skill names and descriptions, plan benefits, Credit explanations and demonstration materials for meaning, brand names, terminology, quantities and locale settings. Content preparation, production writes and feature delivery are recorded separately.",
     "decisions": [
       {
-        "title": "Keep each skill consistent across languages",
-        "text": "Align localized names, summaries and descriptions by skill identifier, checking purpose and meaning, with consistent brand names and specialist terms."
+        "title": "Match localized content by skill identifier",
+        "text": "Use the skill identifier to compare names, summaries and details across languages. Check purpose and meaning, and keep brand names and specialist terms consistent."
       },
       {
-        "title": "Review rules and interfaces together",
-        "text": "Check Credit amounts, plan entitlements, brand names and locale settings together. Resolve placeholders, missing translations and inaccurate wording, and review how user explanations connect to payment experiences."
+        "title": "Check numbers, rules and interfaces together",
+        "text": "Check Credit amounts, plan benefits, brand names and configured languages. Correct placeholders, missing translations and inaccurate wording, and compare user instructions with payment flows."
       },
       {
-        "title": "Match demonstrations to feature states",
-        "text": "Check Chinese and English product points against actual feature states, particularly statements about proactive services."
+        "title": "Demonstrate what the product actually supports",
+        "text": "Check Chinese and English product claims against working features, especially wording about proactive services."
       }
     ],
     "actions": [
-      "Skill localization: Select overseas skills and prepare names, summaries and details. Complete production writes and spot checks for 19 skills across 46 locale configurations: 874 content sets, each containing a name, summary and description.",
-      "Existing-content preparation: Prepare multilingual materials for 105 existing skills, organized by locale, keeping content preparation and server writes as separate delivery stages.",
-      "Shared fields and rules: Advance localized fields for personality settings, quick inputs, AI personas and plans. Deliver reward rules in 45 languages, checking entitlements, Credit amounts and brand wording.",
-      "Monetization experience adaptation: Draw on overseas ad-request and display flows, reward Credits, model costs and AI payment plans to align content, entitlement explanations and payment experiences.",
-      "English demonstrations and checks: Completed English demonstration configurations for a batch of skills and AI personas, with English device screenshots and checks of unadapted modules. Prepared product points and demonstration-asset lists."
+      "Skill localization: Select overseas skills and prepare names, summaries and details. Write and spot-check 19 skills across 46 locale configurations in production: 874 content sets, each with a name, summary and description.",
+      "Existing materials: Prepare multilingual content for 105 existing skills in locale-based tables. Record preparation and server-write progress separately.",
+      "Shared fields and rules: Follow localized fields for personality settings, quick input, AI personas and plans. Deliver reward rules in 45 languages and check benefits, Credit amounts and brand wording.",
+      "Payment experience: Compare content, benefit explanations and payment flows against overseas ad requests and display, reward Credits, model costs and AI payment plans.",
+      "English demonstrations: Configure a batch of skills and AI personas for English demonstrations. Capture device screenshots, check unadapted modules and prepare product points and an asset list."
     ],
     "outputs": [
       [
-        "Production multilingual content",
+        "Multilingual content in production",
         "19 skills × 46 locale configurations: 874 sets of names, summaries and descriptions"
       ],
       [
-        "Existing materials & reward rules",
+        "Existing-skill materials and reward rules",
         "Multilingual materials for 105 skills and reward rules in 45 languages"
       ],
       [
-        "Shared fields & demonstration assets",
-        "Adapted AI-persona and plan content, with English screenshots, recordings and product-communication lists"
+        "Shared fields and English demonstration assets",
+        "AI-persona and plan content, plus English screenshots, recordings and product-material lists"
       ]
     ],
-    "boundary": "My role covers adaptation and delivery of multilingual content, shared fields, reward rules and product demonstrations. The 46 locale configurations include Traditional Chinese."
+    "boundary": "I handle adaptation and delivery of multilingual content, shared fields, reward rules and product demonstrations. The 46 locale configurations include Traditional Chinese."
   },
   "energy-research": {
     "overview": [
@@ -275,24 +275,24 @@ export const cases = {
     ],
     "label": "05 / HW · RESEARCH & PLANNING",
     "title": "Research for energy products",
-    "intro": "Contributed to market, user and requirements research at HW, informing energy product planning and experience improvements.",
+    "intro": "I contributed to market, user and requirements research for HW energy products, providing findings and recommendations for product planning and experience changes.",
     "tags": [
       "Market research",
       "User research",
       "User journeys",
       "Requirements"
     ],
-    "problem": "Product planning starts with user differences.",
-    "problemText": "One product serves different roles, goals and contexts. Research combines industry knowledge with user behavior to identify needs, key journeys and opportunities, supporting the team’s planning and prioritization.",
+    "problem": "Different roles use the same energy product for different reasons.",
+    "problemText": "The research compares users’ goals and tasks using industry material and user behavior. The findings describe key journeys, product opportunities and requirements priorities.",
     "actions": [
-      "<strong>Market research:</strong> Map the industry, market participants, platform types and ecosystem relationships through desk research, establishing context for user and product research.",
-      "<strong>User research:</strong> Contribute to interviews, surveys and data analysis to identify goals, differences between user groups and key journeys.",
-      "<strong>Requirements research:</strong> Organize findings into user profiles, product opportunities and requirements priorities to support planning and design.",
-      "<strong>Experience evaluation:</strong> Contribute to prototype and usability evaluations. Record issues, recommend improvements and follow up on their resolution."
+      "<strong>Market research:</strong> Use desk research to map the industry, market participants, platform types and ecosystem relationships.",
+      "<strong>User research:</strong> Contribute to interviews, questionnaires and data analysis, comparing goals, user groups and key journeys.",
+      "<strong>Requirements research:</strong> Prepare user profiles, product opportunities and priorities for the team’s planning and design work.",
+      "<strong>Experience evaluation:</strong> Contribute to prototype and usability evaluations, record issues, recommend changes and follow their resolution."
     ],
     "outputs": [
       [
-        "Market & user insights",
+        "Market and user research material",
         "Industry context, user profiles and product opportunities"
       ],
       [
@@ -300,11 +300,11 @@ export const cases = {
         "Goals and use across different roles"
       ],
       [
-        "Requirements & evaluation",
-        "Priorities, experience issues and recommendations"
+        "Requirements and evaluation recommendations",
+        "Priorities, experience issues and proposed changes"
       ]
     ],
-    "boundary": "I contributed to market, user, requirements and experience research, supporting team planning and development."
+    "boundary": "I contributed to market, user, requirements and experience research. The team continued with product planning and development."
   },
   "energy-product-planning": {
     "overview": [
@@ -323,35 +323,35 @@ export const cases = {
     ],
     "label": "HW · CHARGING NETWORKS & RESIDENTIAL SOLAR",
     "title": "Charging networks & residential solar product research and planning",
-    "intro": "Research and planning covered charging networks and consumer residential solar. The charging work focused on pre-project market, user and requirements research for an operations platform; the residential-solar work focused on user-facing intelligent features and integrated solar, storage and charging.",
+    "intro": "My work covered charging networks and consumer residential solar. For the charging operations platform, I conducted market, user and requirements research before project approval. For residential solar, I worked on user-facing software and intelligent solar, storage and charging features.",
     "tags": [
       "Charging networks",
       "Residential solar",
       "User research",
       "Requirements & feature planning"
     ],
-    "problem": "Translate market and user insights into requirements and feature plans.",
-    "problemText": "Research for the charging operations platform examined platform types, target users and ecosystem relationships to inform pre-project requirements. The consumer residential-solar work examined the coordination of generation, consumption and charging to plan intelligent user-facing features.",
+    "problem": "Understand charging-user differences before defining platform requirements.",
+    "problemText": "The charging-platform study examined market formats, target users and ecosystem relationships before project approval. The residential-solar work planned features around generation, consumption and charging conditions. The research subjects and deliverables are described separately.",
     "decisions": [
       {
-        "title": "Establish segments before focusing on priority users",
-        "text": "Use sensitivity to time, money and work responsibilities as three dimensions for analysis. Identify segments through questionnaire clustering, then conduct in-depth interviews with priority groups to connect differences between users with specific needs."
+        "title": "Segment by questionnaire, then interview priority groups",
+        "text": "Analyze sensitivity to time, money and work responsibilities. Identify segments through questionnaire clustering, then interview priority groups in depth to understand the needs behind their differences."
       },
       {
-        "title": "Connect prioritization with requirements decomposition",
-        "text": "Use Kano to distinguish must-be, performance and attractive requirements. After prioritization, decompose original needs into system-level and development requirements within the integrated product development (IPD) process."
+        "title": "Take priorities through to development requirements",
+        "text": "Use Kano to distinguish must-be, performance and attractive requirements. After ranking them, break original needs into system and development requirements within the integrated product development (IPD) process."
       },
       {
-        "title": "Plan intelligent features around energy-use conditions",
-        "text": "Consider generation, charging behavior, peak and off-peak tariffs, and combined solar, storage and charging in residential scenarios. Define forecasting, calculation, adjustment and scheduling features in relation to these conditions."
+        "title": "Define intelligent features against actual energy use",
+        "text": "Plan forecasts, calculations, charging-power adjustment and scheduling around generation, charging behavior, peak and off-peak tariffs, and combined solar, storage and charging."
       }
     ],
     "actions": [
-      "Market insights: Conduct pre-project research into charging operations platform types, target users and ecosystem relationships. Identify segment opportunities to inform product positioning and research priorities.",
-      "Three-axis user research: Segment users by sensitivity to time, money and work responsibilities. Identify 3 main groups through questionnaire clustering, conduct in-depth interviews with priority groups and produce 24 competitive product attributes.",
-      "Kano and requirements decomposition: Prioritize must-be, performance and attractive requirements. Decompose the Top 10 original needs into 10 system-level requirements and 100+ development requirements within the IPD process.",
-      "High-fidelity usability evaluation: Assess the charging operations platform’s high-fidelity interfaces against Nielsen’s usability heuristics. Identify 50 usability improvement opportunities to inform interface and interaction changes.",
-      "Residential solar and integrated energy feature planning: Plan user-facing FusionSolar features for consumer residential solar, including generation forecasting, solar-exposure calculation, automatic charging-power adjustment and intelligent solar-storage scheduling. Consider generation, charging behavior, peak and off-peak tariffs, and combined solar, storage and charging."
+      "Market research: Study charging-platform formats, target users and ecosystem relationships before project approval. Identify segment opportunities for product positioning and further research.",
+      "User research: Segment users by sensitivity to time, money and work responsibilities. Identify 3 main groups through questionnaire clustering, interview priority groups in depth and produce 24 competitive product attributes.",
+      "Prioritization and requirements: Rank must-be, performance and attractive needs with Kano. Break the Top 10 original needs into 10 system requirements and 100+ development requirements in the IPD process.",
+      "High-fidelity evaluation: Review the charging operations platform against Nielsen’s usability heuristics and identify 50 usability improvement points for interface and interaction changes.",
+      "Residential-solar planning: Plan user-facing FusionSolar generation forecasting, solar-exposure calculation, automatic charging-power adjustment and intelligent solar-storage scheduling. Account for generation, charging behavior, peak and off-peak tariffs, and combined solar, storage and charging."
     ],
     "outputs": [
       [
@@ -360,14 +360,14 @@ export const cases = {
       ],
       [
         "Charging-platform requirements and experience plans",
-        "Kano priorities, layered requirements specifications and 50 high-fidelity usability improvement opportunities"
+        "Kano priorities, layered requirements specifications and 50 high-fidelity usability improvement points"
       ],
       [
         "Residential-solar intelligent-feature plans",
         "FusionSolar generation forecasting, solar-exposure calculation, charging-power adjustment and intelligent solar-storage scheduling"
       ]
     ],
-    "boundary": "My work covered market and user research, requirements design and user-facing feature planning. The charging-platform research ran from June 2023 to January 2024, and all quantities in this topic refer to that branch. The residential-solar and integrated solar-storage-charging work covered product and intelligent-feature planning."
+    "boundary": "I handled market and user research, requirements design and user-facing feature planning. Charging-platform research ran from June 2023 to January 2024; all quantities in this case refer to that work. The residential-solar and combined solar-storage-charging work covered product and intelligent-feature planning."
   },
   "hardware-research": {
     "overview": [
@@ -386,9 +386,9 @@ export const cases = {
     ],
     "label": "06 / NINESTAR · USER RESEARCH",
     "title": "Financial-Sector Printing Experience Research",
-    "intro": "The study examined printing experience at a bank’s municipal-level branch, comparing usage and requirement priorities across user groups in counter-service and office contexts.",
-    "problem": "Requirement differences between counter service and everyday office work",
-    "problemText": "Printing equipment in the same bank served different working contexts. The study included regular employees, managers, IT staff and users handling confidential material, with experience analyzed in relation to their actual tasks.",
+    "intro": "I took part in printing-equipment research at a municipal-level bank branch, comparing counter-service and office use and analyzing the needs of different roles.",
+    "problem": "Counter service and office work place different demands on printing.",
+    "problemText": "Participants included regular employees, managers, IT staff and users handling confidential material. I analyzed findings against their responsibilities and tasks, separating counter-service issues from office use.",
     "tags": [
       "Financial services",
       "Contextual research",
@@ -399,30 +399,30 @@ export const cases = {
     "decisionEyebrow": "Finding",
     "decisions": [
       {
-        "title": "Counter service emphasizes clarity, speed and smooth operation",
-        "text": "Customer-facing employees mainly handled business tasks and required clear, quick and smooth operation. Requirements were analyzed in the context of those specific business processes."
+        "title": "Counter staff need clear, quick and smooth operation",
+        "text": "Counter staff mainly operate equipment as part of specific business tasks. The requirements analysis follows those processes, focusing on clear steps, speed and smooth operation."
       },
       {
-        "title": "Office work emphasizes convenient printing services",
-        "text": "Staff in the office building mainly printed office content and placed greater emphasis on convenient local-network access, shared printing and cloud-printing services. These priorities differed from those of counter-service work."
+        "title": "Office staff need convenient printing services",
+        "text": "Office users place more emphasis on convenient local-network printing, sharing and cloud printing than on counter-service operations."
       }
     ],
     "actions": [
-      "Questionnaire design and research execution: Designed the questionnaire around financial-sector printing experience and conducted research at a municipal-level bank branch, covering counter-service and office contexts and different user roles.",
-      "Quantitative analysis: Analyzed study data by user group and working context to identify differences in the printing requirements of counter-service and everyday office work.",
-      "Qualitative material: Organized research material by user role and working context, summarizing the specific needs of different user groups."
+      "Questionnaire and fieldwork: Design the financial-sector printing-experience questionnaire and conduct research at a municipal-level branch, covering counter service, office work and different user roles.",
+      "Quantitative analysis: Analyze findings by user group and working context, comparing printing-experience requirements in counter service and everyday office work.",
+      "Qualitative analysis: Organize research material by role and working context and summarize each group’s specific needs."
     ],
     "outputs": [
       [
-        "Questionnaire and research analysis material",
-        "Questionnaire design, research records, quantitative analysis and organized qualitative material."
+        "Questionnaire and research material",
+        "Questionnaire, fieldwork records, quantitative analysis and organized qualitative material"
       ],
       [
-        "Context and requirement findings",
-        "Usage differences between counter-service and office contexts, with requirement priorities for different user roles."
+        "Context and requirement comparison",
+        "Differences between counter-service and office use, with requirements for each user group"
       ]
     ],
-    "boundary": "The research was conducted as a team. My main responsibilities were questionnaire design, research execution, quantitative analysis and organization of qualitative material."
+    "boundary": "The research was a team study. My main responsibilities were questionnaire design, fieldwork, quantitative analysis and organizing qualitative material."
   },
   "product-business": {
     "overview": [
@@ -441,39 +441,46 @@ export const cases = {
     ],
     "label": "07 / DROI · CONSUMER PRODUCTS",
     "title": "Consumer product analysis & monetization",
-    "intro": "Own user-needs analysis and business-performance diagnosis across 6 DROI consumer-tool product lines. Combine BI, user feedback and support issues in version reviews, channel analysis and churn investigations, and contribute to advertising flows and release evaluation.",
+    "intro": "I analyze user needs and business performance across 6 DROI consumer-tool product lines. I combine BI, user feedback and support issues in version reviews, channel analysis and churn investigations, and contribute to advertising flows and release evaluation.",
     "tags": [
       "Product analysis",
       "User feedback",
       "Advertising flows",
       "Version evaluation"
     ],
-    "problem": "Connect business performance with specific usage issues.",
-    "problemText": "Changes in versions, channels and advertising entry points need to be examined alongside user behavior. The work tracks activity, retention, ARPU, penetration and conversion, combining data with user feedback and support issues to inform version changes and priorities.",
+    "problem": "Which usage problems sit behind a change in the numbers?",
+    "problemText": "Version, channel and advertising-entry changes need to be examined alongside user behavior. I track activity, retention, ARPU, penetration and conversion, compare them with user feedback and support issues, and recommend version changes and priorities.",
     "actions": [
-      "Performance diagnosis: Combine BI, event data, user feedback and support issues to analyze activity, retention, conversion and monetization across 6 consumer product lines.",
-      "Versions and channels: Contribute to staged-rollout analysis, channel reviews and churn investigations. Distinguish user groups and version conditions when identifying issues and recommending changes.",
-      "Advertising flows: Contribute requirements and flows for lock-screen icons, portrait images and template advertising, assessing changes alongside experience and monetization performance.",
-      "Requirements and releases: Own requirements, prototypes and reviews, coordinating staged rollouts and post-release evaluation.",
-      "Multi-project coordination and phased delivery: Track development across product lines and advance staged acceptance of quarterly goals. Maintain a dedicated requirements backlog, align requirements with marketing and operations, and follow first-phase assignment, development progress and second-phase scope alignment.",
-      "Release risks and issue tracking: Track crashes, ANRs and device-adaptation issues alongside rollout and channel data. Follow interface integration and testing of fixes, check version intake and freeze milestones, and advance phased handovers."
+      "Business analysis: Use BI, event data, user feedback and support issues to analyze activity, retention, conversion and monetization across 6 consumer product lines.",
+      "Versions and channels: Contribute to staged-rollout analysis, channel reviews and churn investigations. Separate user groups and version conditions when identifying issues and recommending changes.",
+      "Advertising flows: Contribute requirements and flows for lock-screen icons, portrait-image and template advertising. Assess changes against user experience and monetization performance.",
+      "Requirements and releases: Own requirements, prototypes and reviews, and coordinate staged rollouts and post-release evaluation.",
+      "Project coordination: Track development and quarterly-goal acceptance across product lines. Maintain the initiative backlog, check requirements with marketing and operations, follow first-phase assignment and development, and prepare second-phase scope.",
+      "Release risks: Track crashes, ANRs and device-adaptation issues using rollout and channel data. Follow API integration and fixes sent to testing, check version intake and freeze status, and complete phased handovers."
     ],
     "outputs": [
       [
-        "Business & user-issue analysis",
-        "Performance, user feedback, channel differences and iteration recommendations"
+        "Business and user-issue analysis",
+        "Product performance, user feedback, channel differences and recommended changes"
       ],
       [
-        "Advertising requirements & prototypes",
+        "Advertising requirements and prototypes",
         "Flows and requirements for lock-screen, portrait-image and template advertising"
       ],
       [
-        "Project coordination & release evaluation",
-        "Requirements backlog, development tracking, staged acceptance, rollout analysis and release evaluation"
+        "Project progress and release evaluation",
+        "Backlog, development progress, staged acceptance, rollout analysis and release evaluation"
       ]
     ],
-    "actionIds": ["business-analysis", "version-analysis", "advertising-flow", "requirements-release", "project-coordination", "release-risk"],
-    "boundary": "The 6 product lines describe the analysis and requirements scope. Engineering, design, QA and operations share release delivery."
+    "actionIds": [
+      "business-analysis",
+      "version-analysis",
+      "advertising-flow",
+      "requirements-release",
+      "project-coordination",
+      "release-risk"
+    ],
+    "boundary": "The 6 product lines describe my analysis and requirements scope. Engineering, design, QA and operations share release delivery."
   },
   "station-control-research": {
     "overview": [
@@ -492,9 +499,9 @@ export const cases = {
     ],
     "label": "HW",
     "title": "Solar Plant Management System User Research and Functional Improvement",
-    "intro": "The SaaS management system served ground-mounted solar plants alongside photovoltaic inverters, with customers including energy companies and smaller plant owners. The research examined users’ work, profiles and use problems to inform functional improvements and early exploration of AI maintenance.",
-    "problem": "Difficulty and safety risks in mountain-site inspections",
-    "problemText": "Maintenance staff at one plant in mountainous terrain needed to carry out weekly inspections. Site conditions increased the difficulty of the task and involved safety risks. The research connected system requirements to specific roles, working conditions and tasks.",
+    "intro": "This SaaS system manages ground-mounted solar plants alongside photovoltaic inverters. Customers include energy companies and smaller plant owners. I carried out fieldwork, questionnaires and analysis, documented use problems and improvement proposals, and explored early AI maintenance ideas.",
+    "problem": "Weekly mountain-site inspections are difficult and carry safety risks.",
+    "problemText": "Maintenance staff at one mountain-site plant had to inspect it every week. The terrain made the work difficult and introduced safety risks. I examined roles, site conditions and tasks together to identify where the management system could help.",
     "tags": [
       "Plant management",
       "User profiles",
@@ -505,30 +512,30 @@ export const cases = {
     "decisionEyebrow": "Finding",
     "decisions": [
       {
-        "title": "Weekly inspections exposed mountain-site constraints",
-        "text": "Maintenance staff at one mountain-site plant needed to inspect it weekly. The terrain made the task difficult and involved safety risks, making support for field inspections a research direction for management-system improvements."
+        "title": "Assess inspections in their field conditions",
+        "text": "At this plant, weekly inspections were difficult and involved safety risks because of the terrain. I used this finding to study how the management system could support field inspections."
       },
       {
-        "title": "Document assisted inspections and panel alerts as proposals",
-        "text": "The research report proposed drone- or camera-assisted inspections and separate alerts for faults in individual solar panels as input for subsequent product discussion."
+        "title": "Record assisted inspections and panel alerts as proposals",
+        "text": "The report proposed using drones or cameras for inspections and issuing separate alerts for faults in individual solar panels. These recommendations were inputs to later product discussions."
       }
     ],
     "actions": [
-      "Research design and execution: Organized the research around actual system-use problems, designed questionnaires and conducted field research to understand users’ roles, working contexts and task requirements.",
-      "Data analysis and user profiles: Analyzed questionnaire data and qualitative material to identify user characteristics, use problems and functional needs, informing profiles and improvements to existing modules.",
-      "Functional directions and reporting: Organized use problems into requirements for existing modules and maintenance proposals. Documented assisted inspection and individual-panel fault alerts in the research report as input for subsequent product discussion, alongside early exploration of AI maintenance and inspection."
+      "Research design and fieldwork: Design the questionnaire and visit users to understand roles, working contexts, tasks and problems with the management system.",
+      "Data analysis and profiles: Analyze questionnaires and qualitative material to describe users, use problems and functional needs for user profiles and changes to existing modules.",
+      "Report and feature proposals: Turn use problems into requirements for existing modules. Include assisted inspection and individual-panel fault alerts in the report for later discussion, alongside preliminary exploration of AI maintenance and inspection."
     ],
     "outputs": [
       [
         "User research report",
-        "Documented use contexts, user profiles, use problems and proposals for functional improvements."
+        "Use contexts, user profiles, problems and proposed feature improvements"
       ],
       [
-        "Maintenance directions",
-        "Proposals for inspection and fault alerts, with preliminary analysis of AI maintenance and inspection."
+        "Maintenance proposals",
+        "Inspection and fault-alert recommendations, plus preliminary analysis of AI maintenance and inspection"
       ]
     ],
-    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting. Assisted inspections and separate individual-panel fault alerts were delivered as research-report proposals for subsequent product discussion."
+    "boundary": "I handled fieldwork, questionnaire design, quantitative and qualitative analysis, and reporting. Assisted inspections and individual-panel fault alerts were delivered as report proposals for later product discussion."
   },
   "hardware-human-factors": {
     "overview": [
@@ -547,9 +554,9 @@ export const cases = {
     ],
     "label": "NINESTAR",
     "title": "Printer Human Factors Evaluation and Product Form Design",
-    "intro": "The study evaluated the human factors of the printer’s output tray and control panel, comparing layouts in actual use to inform product form design.",
-    "problem": "Layout effects on posture, visibility and task completion",
-    "problemText": "The output tray and the position and layout of the control panel required assessment in real tasks. The analysis considered task completion, standing and seated operating postures, attention to the panel and output area, and obstruction of the output area.",
+    "intro": "I evaluated printer output-tray and control-panel layouts, compared their use in real tasks and completed the product-form design. The product entered production.",
+    "problem": "Where should the panel and output tray sit for operation, visibility and paper retrieval?",
+    "problemText": "I assessed layouts through real tasks, looking beyond completion to standing and seated posture, attention to the panel and output area, and whether operation blocked the paper output.",
     "tags": [
       "Human factors",
       "A/B testing",
@@ -558,35 +565,35 @@ export const cases = {
     ],
     "decisions": [
       {
-        "title": "Include standing and seated use in scenario comparison",
-        "text": "Analyze panel and paper-handling layout requirements for standing and seated use."
+        "title": "Compare standing and seated use separately",
+        "text": "Analyze layout requirements for panel operation, paper loading and retrieval in both standing and seated positions."
       },
       {
-        "title": "Address panel attention and output-area visibility together",
-        "text": "Developed layout concepts for attention during interaction, comparing how each option could support attention to both the control panel and paper output while keeping the output area visible and unobstructed."
+        "title": "Keep the output visible while users operate the panel",
+        "text": "Develop attention and layout concepts, then compare how each option supports panel operation and output visibility without obstructing the output area."
       }
     ],
     "actions": [
-      "Study design and task analysis: Set up A/B comparisons around left/right layouts, the output tray and control-panel position, breaking down panel operation, paper loading and paper retrieval into real tasks.",
-      "Operation records and participant feedback: Recorded task completion, errors and operating effort, and observed posture. Asked participants about visibility, comfort and fatigue, ease of use and option preferences, and recorded their responses.",
-      "Human factors assessment: Used 3D models to evaluate the design requirements of parts and buttons in actual operating scenarios and assess the suitability of each layout.",
-      "Option comparison and form design: Combined human factors data, operation observations and participant feedback to compare the options and integrate their strengths into a product form. The product entered production."
+      "Study design: Set up A/B comparisons of left/right printer layouts, output trays and control-panel positions. Break panel operation, paper loading and retrieval into specific tasks.",
+      "Operation records and feedback: Record task completion, errors, misoperation and operating effort, and observe posture. Ask participants about visibility, comfort, fatigue, ease of use and layout preferences.",
+      "3D human factors assessment: Use 3D models to check part and button requirements against operating scenarios and assess each layout.",
+      "Comparison and form design: Compare layouts using human factors data, observations and participant feedback. Combine their strengths into the product-form design. The product entered production."
     ],
     "outputs": [
       [
-        "Human factors assessment material",
-        "A/B operation records, posture observations, participant feedback and human factors assessment using 3D models."
+        "Human factors material",
+        "A/B operation records, posture observations, participant feedback and 3D-model assessment"
       ],
       [
-        "Operating scenarios and layout analysis",
-        "Analysis of standing and seated use, attention allocation and visibility of the panel and paper output."
+        "Task and layout analysis",
+        "Standing and seated use, attention allocation, and panel and output visibility"
       ],
       [
-        "Product-form proposal",
-        "A product form integrating the strengths of the options based on the comparison findings."
+        "Product-form design",
+        "A design combining the strengths identified in the layout comparison"
       ]
     ],
-    "boundary": "I carried out all research, analysis, standing and seated scenario concepts, attention concepts, option comparison and product form design in this case."
+    "boundary": "I carried out all research, analysis, standing and seated scenario concepts, attention concepts, layout comparison and product-form design in this case."
   }
 };
 
@@ -594,12 +601,12 @@ export const stages = {
   "huawei": {
     "label": "01 / HW",
     "title": "User research & product strategy",
-    "description": "Conducted market, user-group and requirements research for solar and charging products, informing product planning alongside field research and improvement proposals for a solar plant management system.",
+    "description": "Conducted market, user and requirements research for solar and charging products and contributed to product planning. Also handled fieldwork and improvement proposals for a solar plant management system.",
     "actions": [
-      "Conducted pre-project market, audience and requirements research for charging networks, using segmentation, Kano prioritization and requirements decomposition, and contributed to intelligent-feature planning for residential solar products.",
-      "For the solar plant management study, took responsibility for field research, questionnaire design, data analysis, qualitative analysis and research reporting.",
-      "Analyzed use problems in relation to roles, tasks and field conditions, and researched improvements to existing modules.",
-      "Documented assisted-inspection and individual-panel alerting ideas for mountain-site inspections in a report, and explored early AI maintenance and inspection directions."
+      "Conducted pre-project market, user and requirements research for charging networks, using segmentation, Kano prioritization and requirements decomposition, and contributed to residential-solar intelligent-feature planning.",
+      "Handled fieldwork, questionnaire design, quantitative and qualitative analysis, and reporting for the plant management study.",
+      "Examined use problems against roles, tasks and site conditions, then proposed changes to existing modules.",
+      "Recorded assisted-inspection and individual-panel alerting proposals for mountain sites and explored early AI maintenance and inspection ideas."
     ],
     "tags": [
       "User research",
@@ -610,12 +617,12 @@ export const stages = {
   "hardware": {
     "label": "02 / NINESTAR",
     "title": "Smart hardware user research",
-    "description": "Contributed to financial-sector printing experience research and took responsibility for human factors research and product form design for a printer that entered production.",
+    "description": "Contributed to banking printing-equipment research and handled printer human factors research and product-form design. The product entered production.",
     "actions": [
-      "Responsible for questionnaire design, research execution, quantitative analysis and qualitative material organization within a team study of financial-sector users.",
-      "Analyzed usage differences between bank counter-service and office contexts, identifying experience requirements and printing-service needs.",
-      "Took responsibility for printer A/B trials, use observation and human factors assessment using 3D models.",
-      "Combined task data, standing and seated scenarios, attention concepts and option comparison into a product form design. The product entered production."
+      "Designed questionnaires, conducted fieldwork and analyzed quantitative and qualitative material within a financial-sector research team.",
+      "Compared bank counter-service and office use, identifying operation requirements and printing-service needs.",
+      "Handled printer A/B trials, operation observations and 3D-model human factors assessment.",
+      "Combined task data, standing and seated scenarios, attention concepts and layout comparisons into the product-form design. The product entered production."
     ],
     "tags": [
       "Smart hardware",
@@ -626,11 +633,11 @@ export const stages = {
   "current": {
     "label": "03 / DROI",
     "title": "AI products & monetization",
-    "description": "Product Manager responsible for AI-assistant scenarios and the skill ecosystem, with contributions to subscription entitlements, localization and consumer-product analysis.",
+    "description": "Product Manager responsible for AI-assistant scenarios and skill-related work, with contributions to subscriptions, localization and consumer-product analysis.",
     "actions": [
-      "Plan proactive services, smart notifications and task feedback, advancing interaction plans, reviews and acceptance of relevant features.",
-      "Design skill discovery, review and publishing flows, manage content quality and contribute to AI subscription and entitlement rules.",
-      "Advance localization and delivery checks, and use consumer-product data, user feedback and version evaluation to recommend iterations."
+      "Plan proactive services, smart notifications and task feedback, deliver interaction plans, and follow reviews and relevant feature acceptance.",
+      "Design skill discovery, review and publishing flows, revise skill content and contribute to AI subscription and entitlement rules.",
+      "Follow localization and delivery checks, and recommend changes using consumer-product data, user feedback and version reviews."
     ],
     "tags": [
       "AI task experience",

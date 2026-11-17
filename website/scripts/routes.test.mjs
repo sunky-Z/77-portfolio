@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { access } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { portfolio } from '../src/portfolio.js';
 import { projectGroups, projectBriefs, projectProducts } from '../src/project-reading.js';
 import { cases as zhCases } from '../src/content.zh.js';
@@ -9,7 +9,7 @@ import { projectAnchors, projectWorkIds } from '../src/project-anchors.js';
 import { legacyHashPath, legacyPageRedirects, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
 
 test('all independent pages resolve under both local and GitHub Pages prefixes', () => {
-  assert.equal(portfolioPages.length, 22);
+  assert.equal(portfolioPages.length, 23);
   for (const base of ['/', '/77-portfolio/']) {
     for (const page of portfolioPages) {
       const href = routeHref(page.path, base);
@@ -20,12 +20,28 @@ test('all independent pages resolve under both local and GitHub Pages prefixes',
 });
 
 test('parent category and document-style URLs remain valid', () => {
+  const product = parsePortfolioPath('/77-portfolio/products/droiclaw/', '/77-portfolio/');
+  assert.equal(product.type, 'product');
+  assert.equal(product.parent, '/projects/');
   const route = parsePortfolioPath('/77-portfolio/projects/ai-ecosystem', '/77-portfolio/');
   assert.equal(route.type, 'project');
   assert.equal(route.id, 'ai-ecosystem');
   assert.equal(route.parent, '/projects/');
   assert.equal(routeHref(route.parent, '/77-portfolio/'), '/77-portfolio/projects/');
   assert.equal(parsePortfolioPath('/77-portfolio', '/77-portfolio/').type, 'home');
+});
+
+test('the previous published site remains available as an independent V1 archive', async () => {
+  const version = JSON.parse(await readFile(new URL('../public/v1/version.json', import.meta.url), 'utf8'));
+  assert.equal(version.version, 'V1');
+  assert.equal(version.source_commit, 'cbf6cfdfb495d3a704224c585d6b953bb05595d6');
+  const originalPages = portfolioPages.filter(page => page.type !== 'product');
+  assert.equal(originalPages.length, version.content_pages);
+  for (const page of originalPages) {
+    const html = await readFile(new URL(`../public/v1${page.path}index.html`, import.meta.url), 'utf8');
+    assert.match(html, /\/77-portfolio\/v1\/assets\//);
+    assert.match(html, /<script[^>]+type="module"/);
+  }
 });
 
 test('merged delivery addresses resolve to planning without creating a fifth capability branch', () => {

@@ -1,28 +1,24 @@
 # 77 个人站
 
-中英双语个人介绍、职业经历、项目实践和工作方法。React + Vite，22 个独立静态页面；黑白灰为主、橙色作少量强调。
+中英双语作品集：个人介绍、职业经历、项目与工作方法。当前 V2 以黑、暖白和红色层次为视觉基础，首页、目录和详情共用组件；正文 18px、辅助文字 16px。
 
-[查看网站](https://sunky-z.github.io/77-portfolio/) · [开发与部署说明](website/README.md) · [设计规范](website/DESIGN.md)
+[查看 V2](https://sunky-z.github.io/77-portfolio/) · [查看 V1](https://sunky-z.github.io/77-portfolio/v1/) · [开发说明](website/README.md) · [设计规范](website/DESIGN.md)
 
-## 在新电脑上继续
-
-安装 Git、VS Code、Node.js 24 后：
+## 本地开发
 
 ```sh
 git clone https://github.com/sunky-Z/77-portfolio.git
-cd 77-portfolio
-code website
-```
-
-在 VS Code 的终端运行：
-
-```sh
+cd 77-portfolio/website
 npm ci
 npm run dev
 ```
 
-开发地址为 `http://127.0.0.1:5177/`。已有仓库先保存自己的改动，再运行 `git pull --ff-only`；锁文件变化后重新 `npm ci`。
+Node.js 24；默认地址 `http://127.0.0.1:5177/`。正式源码在 `website/`，不依赖私人档案或本机绝对路径。
 
-源码在 `website/`，可直接编辑。运行 `npm test`、`npm run build`、`npm run check:build` 检查；本地默认根目录构建，`npm run preview` 使用 `http://127.0.0.1:4177/`。自定义部署前缀与域名的命令见开发说明。
+```sh
+npm test
+npm run build
+npm run check:build
+```
 
-推送 `main` 会触发 GitHub Actions，构建并发布到 GitHub Pages。工程包含依赖锁文件、设计参考与 VS Code 任务；无需私有档案、本机绝对路径或手动复制依赖与构建产物。
+推送 `main` 的网站源码改动后，由 GitHub Actions 发布到 GitHub Pages。V1 保存在 `v1` 分支、`v1` 标签及 `website/public/v1/` 的独立静态版本中；更新 V2 时保留该目录。

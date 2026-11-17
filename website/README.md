@@ -1,6 +1,6 @@
 # 77 个人站
 
-面向初次认识 77 的访客，提供中英双语的个人介绍、职业经历、项目经过与工作方法。采用已选的编辑式布局：黑白灰为主，橙色用于主要操作和少量重点。设计约定见 [DESIGN.md](DESIGN.md)，后续可以先调整变量，再检查实际页面。
+面向初次认识 77 的访客，提供中英双语的个人介绍、职业经历、项目经过与工作方法。当前 V2 从首页延伸同一套黑、暖白和红色设计体系；目录、详情及联系页复用首页组件，正文 18px、辅助文字 16px。设计约定见 [DESIGN.md](DESIGN.md)。
 
 在线网站：[77 个人站](https://sunky-z.github.io/77-portfolio/) · 独立工程仓库：[77-portfolio](https://github.com/sunky-Z/77-portfolio)
 
@@ -36,7 +36,7 @@ npm run dev
 | `npm ci` | 按锁文件安装；首次下载或依赖变化后运行 |
 | `npm run dev` | 开发服务，默认端口 5177 |
 | `npm test` | 核对独立路由、内容映射、中英项目与关联链接 |
-| `npm run build` | 生成资源、22 个独立内容页、兼容跳转和 `404.html` 到 `dist/` |
+| `npm run build` | 生成资源、23 个独立内容页、兼容跳转和 `404.html` 到 `dist/` |
 | `npm run check:build` | 构建后核对 HTML、入口资源、静态文件与部署前缀 |
 | `npm run preview` | 预览构建结果，默认端口 4177 |
 
@@ -81,9 +81,13 @@ npm run check:build
 | 修改目标 | 文件 |
 |---|---|
 | 设计规则、配色与布局约定 | `DESIGN.md` |
-| 橙色、背景、文字、间距、响应式 | `src/styles.css` 中的样式变量和组件规则 |
+| 红色层次与字号 token | `src/system-tokens.css` |
+| 首页的已确认布局 | `src/index-poster.css`、`src/IndexPage.jsx` |
+| 其余页面的响应式视觉 | `src/inner-system.css` |
 | 中英文字体与回退 | `src/fonts.css` |
-| 首页、分类页、正文布局和交互 | `src/App.jsx` |
+| 页面选择、目录、导航与联系页 | `src/NextApp.jsx` |
+| 项目、能力与经历详情 | `src/DetailPages.jsx` |
+| 首页与内页共享组件 | `src/components/PortfolioSystem.jsx` |
 | 双语简介、项目卡片、职业入口与能力关联 | `src/portfolio.js` |
 | AI 产品设计能力的双语正文与逐项项目依据 | `src/ai-capability.js` |
 | 用户研究、产品规划与交付、项目管理的双语正文与项目依据 | `src/research-capability.js`、`src/planning-capability.js`、`src/project-management-capability.js` |
@@ -92,7 +96,8 @@ npm run check:build
 | 页面清单、层级与旧地址映射 | `src/routes.js` |
 | 从网址选择页面 | `src/hooks/usePortfolioNavigation.js` |
 | 语言选择和本机偏好 | `src/i18n.js` |
-| 图片素材 | `public/assets/` |
+| 当前引用的图片素材 | `assets/`（原简笔画保留） |
+| V1 独立静态站 | `public/v1/`（发布时复制，不与 V2 样式混用） |
 | 独立 HTML、标题与分享元数据 | `scripts/build-pages.mjs` |
 | 部署前缀和构建配置 | `vite.config.js` |
 | 发布触发条件与 GitHub Pages | 仓库根目录 `.github/workflows/deploy-pages.yml` |
@@ -127,3 +132,12 @@ npm run check:build
 首页与项目插画采用通用成年男性、白底黑色线稿；人物不作为真实肖像，概念图不作为实际产品截图。首页概括图与项目封面分别使用独立素材。第三方组件及历史许可保留在 `THIRD_PARTY_NOTICES.md`；历史 WebGL、视频与动效组件未进入当前页面运行路径。
 
 公开工程只包含可发布的网站源码、素材与维护文档；简历原件、周报、核对资料、会话和私人档案不进入工程。`node_modules`、`dist`、环境变量、日志与运行资料由 `.gitignore` 排除。
+
+
+## V1 版本保留
+
+[查看 V1](https://sunky-z.github.io/77-portfolio/v1/)。`v1` 分支与标签固定在 V2 改造前的 `cbf6cfd`；静态快照保存在 `public/v1/`，包含原来的 22 个内容页、兼容跳转及资源。
+
+构建脚本只按部署前缀调整 V1 快照中的路径，保留其视觉和正文。不要用 V2 的 CSS、脚本或素材覆盖 V1。`public/v1/version.json` 记录来源版本。标准发布同时提供 V2 和 V1。
+
+当前活跃入口是 `src/main.jsx` → `NextApp.jsx`；早期 `App.jsx` 与旧主题保留作历史源码参考，不参与当前入口。中文优先使用本机苹方，Windows 缺失时回退微软雅黑；不打包 Apple 字体。

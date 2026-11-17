@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 
 function initialLanguage() {
   try {
-    const saved = localStorage.getItem('77-language');
+    const saved = localStorage.getItem('77-language') || localStorage.getItem('77-v2-draft-language');
     if (saved === 'zh' || saved === 'en') return saved;
   } catch { /* The toggle also works when storage is unavailable. */ }
-  return navigator.language?.toLowerCase().startsWith('zh') ? 'zh' : 'en';
+  return 'zh';
 }
 
 export function useLanguage() {

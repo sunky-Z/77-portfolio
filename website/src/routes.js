@@ -1,5 +1,6 @@
-// Every entry is emitted as its own HTML document during the production build.
+// Published pages use independent URLs; portable previews use the page query.
 export const portfolioPages = [
+  { path: '/products/droiclaw/', type: 'product', id: 'droiclaw', key: 'product/droiclaw', parent: '/projects/', title: 'DroiClaw AI 助手', description: 'DroiClaw AI 助手的任务体验、技能生态、订阅权益和海外适配专题。' },
   { path: '/', type: 'home', key: 'home', title: '个人介绍', description: '77 的个人介绍。心理学本科，工商管理硕士，现从事 AI 产品经理。' },
   { path: '/experience/', type: 'experience', key: 'experience', parent: '/', title: '职业经历', description: '77 在 HW、NINESTAR 与 DROI 的职业经历，以及心理学与工商管理教育背景。' },
   { path: '/projects/', type: 'projects', key: 'projects', parent: '/', title: '项目实践', description: '主动服务与 AI 任务体验、技能发现与质量治理、AI 订阅权益、海外本地化，以及能源和智能硬件研究与消费端产品分析。' },
@@ -39,9 +40,12 @@ function normalizedBase(base) {
 }
 
 export function routeHref(path, base = defaultBase()) {
-  const prefix = normalizedBase(base);
-  const suffix = path.replace(/^\/+/, '');
-  return `${prefix}${suffix}`;
+  const [pathname, ...fragment] = path.split('#');
+  const hash = fragment.length ? `#${fragment.join('#')}` : '';
+  if (import.meta.env?.VITE_PORTABLE_PREVIEW === 'true' || (typeof window !== 'undefined' && window.location.protocol === 'file:')) {
+    return `?page=${encodeURIComponent(pathname || '/')}${hash}`;
+  }
+  return `${normalizedBase(base)}${(pathname || '/').replace(/^\/+/, '')}${hash}`;
 }
 
 export function parsePortfolioPath(pathname, base = defaultBase()) {
