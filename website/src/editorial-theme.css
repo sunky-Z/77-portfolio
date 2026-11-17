@@ -125,34 +125,13 @@ a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform
 .flow-step, .flow-controls dt { border-radius: var(--edge); background: var(--surface); }
 .flow-controls > div:first-child dt { background: var(--accent-soft); }
 
-/* The rule exhibit is an explanatory reconstruction of confirmed product rules. */
-.rule-exhibit { margin-bottom: 38px; min-width: 0; }
-.article-section .rule-exhibit h3 { margin-bottom: 10px; font-size: 23px; }
-.article-section .rule-note, .article-section .rule-status { font-size: 14px; line-height: 1.8; color: var(--muted); }
-.rule-table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 20px; text-align: left; }
-.rule-table th, .rule-table td { padding: 18px 18px 18px 0; border-bottom: 1px solid var(--line); vertical-align: top; font-size: 16px; line-height: 1.8; overflow-wrap: anywhere; }
-.rule-table thead th { background: var(--soft); font-weight: 400; font-size: 14px; padding: 10px 14px; color: var(--muted); }
-.rule-table th:first-child { width: 22%; }
-.rule-table tbody th { font-weight: 500; color: var(--ink); }
-.rule-table th { text-align: left; }
-.rule-table thead th { padding-inline: 0; }
-.rule-table td { color: var(--body-text); }
-.article-section .rule-status { margin-top: 16px; }
-
-/* One dismissal affects display and execution differently. */
-.task-flow figcaption { margin-bottom: 20px; font-size: 19px; }
-.task-flow figcaption span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; }
-.task-dismiss { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 16px; background: var(--soft); border: 1px solid var(--line); border-radius: var(--edge); font-size: 16px; }
-.task-branches { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 18px; }
-.task-lane { min-width: 0; }
-.task-lane h4 { font-size: 14px; font-weight: 400; color: var(--muted); margin-bottom: 10px; text-align: center; }
-.article-section .task-display-end { padding: 18px 14px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--edge); font-size: 17px; color: var(--ink); }
-.task-display-end span { display: block; font-size: 14px; line-height: 1.7; color: var(--muted); margin-top: 8px; }
-.article-section .task-execution { display: grid; gap: 10px; list-style: none; margin: 0; padding: 0; }
-.article-section .task-execution li { display: flex; gap: 10px; align-items: start; padding: 14px; margin: 0; background: var(--accent-soft); border-radius: var(--edge); font-size: 16px; line-height: 1.7; color: var(--ink); }
-.task-execution svg { margin-top: 4px; }
-.task-execution strong { display: block; margin-top: 5px; font-size: 14px; font-weight: 400; line-height: 1.7; }
-.article-section .task-context { font-size: 14px; color: var(--muted); line-height: 1.8; margin-top: 16px; }
+/* Only the AI task case restores its earlier topic presentation. */
+.legacy-ai-article .work-topic-list { gap: 10px; margin-bottom: 18px; }
+.legacy-ai-article .work-topic-list button { justify-content: space-between; gap: 12px; min-height: 76px; padding: 16px 19px; border: 1px solid var(--line); border-radius: var(--edge); font-size: 17px; line-height: 1.55; }
+.legacy-ai-article .work-topic-list button svg { flex-shrink: 0; opacity: .4; }
+.legacy-ai-article .work-topic-list button[aria-selected="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.legacy-ai-article .work-topic-list button[aria-selected="true"] svg { opacity: 1; }
+.legacy-ai-article .topic-view .work-panel { min-height: 240px; }
 
 /* Keyboard focus must remain visible when the pointer is on the same link. */
 .project-row[data-tone]:focus-visible, .project-row[data-tone]:hover:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; }
@@ -199,15 +178,9 @@ a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform
   .brief-decision { align-items: start; gap: 10px; padding-bottom: 18px; margin-bottom: 20px; flex-wrap: wrap; }
   .brief-decision > span { width: 100%; }
   .brief-decision strong { flex: 1; font-size: 19px; min-width: 0; }
-  .rule-table, .rule-table tbody { display: block; }
-  .rule-table thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-  .rule-table tbody tr { display: grid; gap: 14px; padding: 20px 0; border-bottom: 1px solid var(--line); }
-  .rule-table th, .rule-table td { display: block; width: auto !important; padding: 0; border: 0; }
-  .rule-table td::before { content: attr(data-label); display: block; font-size: 13px; color: var(--muted); margin-bottom: 4px; }
-  .rule-table tbody th { font-size: 18px; }
-  .task-branches { gap: 12px; }
-  .article-section .task-display-end, .article-section .task-execution li { padding: 14px 10px; font-size: 15px; }
-  .task-display-end span { font-size: 13px; }
+  .legacy-ai-article .work-topic-list { gap: 8px; margin-bottom: 14px; }
+  .legacy-ai-article .work-topic-list button { min-height: 78px; padding: 13px 14px; gap: 8px; font-size: 16px; }
+  .legacy-ai-article .topic-view .work-panel { min-height: 0; }
   .article-section { margin-bottom: 48px; }
   .article-section h2 { font-size: 26px; }
   .article-section .section-number { margin-right: 12px; }

@@ -6,6 +6,7 @@ export function projectAnchors(id, item) {
     'project-overview', 'project-context', 'project-contribution', 'project-outputs', 'project-related',
     ...projectWorkIds(id, item),
     ...(item.decisions?.length ? ['project-decisions', ...item.decisions.map((_, index) => projectDecisionId(id, index))] : []),
+    // Preserve shared links to the former rule exhibit at the existing decision text.
     ...(id === 'ai-ecosystem' ? ['ai-task-rules'] : []),
   ];
 }

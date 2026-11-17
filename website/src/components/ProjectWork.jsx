@@ -1,12 +1,12 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight, CaretDown } from '@phosphor-icons/react';
 
 function currentWorkIndex(ids) {
   try { return Math.max(0, ids.indexOf(decodeURIComponent(window.location.hash.slice(1)))); }
   catch { return 0; }
 }
 
-export default function ProjectWork({ actions, ids = [], L }) {
+export default function ProjectWork({ actions, ids = [], L, legacy = false }) {
   const topics = actions.map(action => {
     const plain = action.replace(/<[^>]+>/g, '');
     const match = plain.match(/^([^:：]+)[:：]\s*(.*)$/s);
@@ -83,7 +83,7 @@ export default function ProjectWork({ actions, ids = [], L }) {
         id={`work-tab-${index}`} ref={element => { tabs.current[index] = element; }}
         aria-selected={active === index} aria-controls={ids[index] || `work-panel-${index}`}
         tabIndex={active === index ? 0 : -1} onClick={() => selectTopic(index)} onKeyDown={event => changeTopic(event, index)}>
-        <span>{topic.title}</span>
+        <span>{topic.title}</span>{legacy && <CaretDown size={17} aria-hidden="true" />}
       </button>)}
     </div>}
     <div id="project-work-content" className="work-content" data-count={topics.length}>
@@ -92,7 +92,7 @@ export default function ProjectWork({ actions, ids = [], L }) {
         data-reading-anchor={ids[index] && !(browsingTopics && index !== active) ? true : undefined}
         aria-labelledby={browsingTopics ? `work-tab-${index}` : `work-heading-${index}`}
         hidden={browsingTopics && index !== active} tabIndex={browsingTopics || ids[index] ? 0 : undefined}>
-        <h3 id={`work-heading-${index}`} className={browsingTopics ? 'work-panel-title' : undefined}>{topic.title}</h3><p>{topic.text}</p>
+        <h3 id={`work-heading-${index}`} className={browsingTopics && !legacy ? 'work-panel-title' : undefined}>{topic.title}</h3><p>{topic.text}</p>
       </section>)}
     </div>
   </div>;

@@ -8,7 +8,6 @@ import { useLanguage } from './i18n.js';
 import usePortfolioNavigation from './hooks/usePortfolioNavigation.js';
 import { routeHref } from './routes.js';
 import ProjectWork from './components/ProjectWork.jsx';
-import TaskEvidence from './components/TaskEvidence.jsx';
 import { projectWorkIds, projectDecisionId } from './project-anchors.js';
 
 const EMAIL = 'Zysq09@gmail.com';
@@ -285,24 +284,28 @@ function ArticleSection({ id, title, number, children }) {
 }
 
 function TaskFlow({ L }) {
+  const steps = [
+    ['play', L('任务发起', 'Task started')],
+    ['running', L('执行中', 'In progress')],
+    ['user', L('用户确认', 'User confirms')],
+    ['result', L('查看结果', 'View result')],
+  ];
   return <figure className="task-flow">
-    <figcaption>{L('关闭卡片后的两条路径', 'Two paths after card dismissal')}<span>{L('交互规则示意', 'Product-rule illustration')}</span></figcaption>
-    <div className="task-dismiss"><Glyph kind="close" size={20} />{L('用户关闭桌面卡片', 'User closes the desktop card')}</div>
-    <div className="task-branches">
-      <div className="task-lane"><h4>{L('桌面展示', 'Desktop display')}</h4>
-        <p className="task-display-end">{L('卡片移除', 'Card dismissed')}<span>{L('停止显示本条信息', 'The information is no longer shown')}</span></p>
-      </div>
-      <div className="task-lane"><h4>{L('后台任务', 'Background task')}</h4>
-        <ol className="task-execution"><li><Glyph kind="running" size={20} />{L('继续执行', 'Execution continues')}</li><li><Glyph kind="result" size={20} /><span>{L('任务完成', 'Task completes')}<strong>{L('原对话查看结果', 'View the result in the same conversation')}</strong></span></li></ol>
-      </div>
-    </div>
-    <p className="task-context">{L('任务记录与对话上下文保留，用户可回到原对话查看结果', 'The task record and conversation context remain available for result retrieval')}</p>
+    <figcaption>{L('交互流程示意', 'Interaction flow · illustration')}</figcaption>
+    <ol className="flow-steps">{steps.map(([icon, label], index) => <li key={icon}>
+      <div className="flow-step"><Glyph kind={icon} size={29} /><span>{label}</span></div>
+      {index < steps.length - 1 && <span className="flow-arrow"><Glyph kind="arrow" size={20} /></span>}
+    </li>)}</ol>
+    <dl className="flow-controls">
+      <div><dt>{L('停止展示', 'Hide display')}</dt><dd>{L('关闭展示入口', 'Close the display')}</dd></div>
+      <div><dt>{L('停止执行', 'Stop execution')}</dt><dd>{L('结束任务运行', 'End the running task')}</dd></div>
+    </dl>
   </figure>;
 }
 
 function DecisionFeature({ id, decision, L }) {
   return <div className="decision-feature" id={projectDecisionId(id, 0)} data-reading-anchor tabIndex={-1}>
-    <div className="decision-copy">
+    <div className="decision-copy" id="ai-task-rules" data-reading-anchor tabIndex={-1}>
       <h3>{decision.title}</h3>
       <p>{decision.text}</p>
     </div>
@@ -323,10 +326,15 @@ function ProjectArticle({ id, item, data, L }) {
   const titles = Object.fromEntries(sections);
   const sectionNumber = id => String(sections.findIndex(([sectionId]) => sectionId === id) + 1).padStart(2, '0');
   const relatedProjects = (project.relatedProjects || []).map(projectId => data.projects.find(entry => entry.id === projectId)).filter(Boolean);
-  return <div className="project-reading" data-tone={projectTones[id]}>
+  // This page's rollback includes its two related-method excerpts, without changing capability pages.
+  const relatedSummaries = id === 'ai-ecosystem' ? {
+    ai: L('设计智能任务的交互与控制，评估应用质量。', 'Design task interactions and user controls. Evaluate application quality.'),
+    planning: L('将需求转为规则、方案与验收标准。', 'Turn requirements into rules, designs and acceptance criteria.'),
+  } : {};
+  return <div className={`project-reading${id === 'ai-ecosystem' ? ' legacy-ai-article' : ''}`} data-tone={projectTones[id]}>
     <section className="project-brief" id="project-overview" data-reading-anchor aria-labelledby="project-overview-title">
       <h2 id="project-overview-title" tabIndex={-1}>{L('项目概览', 'At a glance')}</h2>
-      {item.decisions?.length > 0 && <a className="brief-decision" href={`#${projectDecisionId(id, 0)}`}><span>{item.decisionLabel || L('关键判断', 'Key decision')}</span><strong>{item.decisions[0].title}</strong><Glyph kind="arrow" size={18} /></a>}
+      {id !== 'ai-ecosystem' && item.decisions?.length > 0 && <a className="brief-decision" href={`#${projectDecisionId(id, 0)}`}><span>{item.decisionLabel || L('关键判断', 'Key decision')}</span><strong>{item.decisions[0].title}</strong><Glyph kind="arrow" size={18} /></a>}
       <dl>
         <div><dt>{item.overview[2][0]}</dt><dd>{item.overview[2][1]}</dd></div>
         <div><dt>{L('本人职责', 'My role')}</dt><dd>{project.role}</dd></div>
@@ -341,8 +349,7 @@ function ProjectArticle({ id, item, data, L }) {
         <h3>{item.problem}</h3><p>{item.problemText}</p>
       </ArticleSection>
       <ArticleSection id="project-contribution" title={titles['project-contribution']} number={sectionNumber('project-contribution')}>
-        {id === 'ai-ecosystem' && <TaskEvidence L={L} />}
-        <ProjectWork actions={item.actions} ids={projectWorkIds(id, item)} L={L} />
+        <ProjectWork actions={item.actions} ids={projectWorkIds(id, item)} L={L} legacy={id === 'ai-ecosystem'} />
       </ArticleSection>
       {item.decisions?.length > 0 && <ArticleSection id="project-decisions" title={titles['project-decisions']} number={sectionNumber('project-decisions')}>
         {id === 'ai-ecosystem' ? <>
@@ -355,7 +362,7 @@ function ProjectArticle({ id, item, data, L }) {
       </ArticleSection>
       <ArticleSection id="project-related" title={titles['project-related']} number={sectionNumber('project-related')}>
         <h3 className="related-heading">{L('相关方法', 'Related methods')}</h3>
-        <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={data.skills[skillId]} index={index} L={L} compact />)}</div>
+        <div className="related-grid">{project.skills.map((skillId, index) => <SkillCard key={skillId} id={skillId} skill={{ ...data.skills[skillId], summary: relatedSummaries[skillId] || data.skills[skillId].summary }} index={index} L={L} compact />)}</div>
         <h3 className="related-heading">{L('更多项目', 'More projects')}</h3>
         <div className="related-grid">{relatedProjects.map(entry => <ProjectCard key={entry.id} project={entry} skills={data.skills} L={L} compact />)}</div>
       </ArticleSection>
