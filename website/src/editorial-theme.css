@@ -1,4 +1,4 @@
-/* Portfolio refinement: open work gallery, method index and readable case files.
+/* Portfolio refinement: project cards, method index and readable case files.
    Hero composition and its scoped colours remain in notion-theme.css. */
 :root {
   --paper: #FBFAF8;
@@ -30,35 +30,25 @@
 .category-heading h1 { margin-bottom: 18px; }
 .category-heading .page-intro { color: var(--body-text); }
 
-/* Gallery surfaces end at the image. Titles, context and outputs sit on the page. */
-.project-card, .related-card { background: transparent; border: 0; border-radius: 0; }
-.project-card:hover, .related-card:hover { background: transparent; border: 0; }
-.project-card .project-cover { border-radius: var(--edge); }
-.project-card .project-body { background: transparent; padding: 24px 0 0; }
-.project-card .card-topline { margin-bottom: 10px; color: var(--muted); }
-.project-card:hover .card-title, .related-card:hover .card-title,
+/* Restore the previous project-card layout from notion-theme.css.
+   Brighter colours stay scoped to project browsing, outside the locked hero. */
+.home-selected, .project-group {
+  --amber: #E2E887;
+  --coral: #F0AC85;
+  --blue: #B2ACE0;
+  --mocha: #A7D4BB;
+  --sky: #D2E3EC;
+}
+.home-selected .card-footer, .project-group .card-footer { color: var(--ink); }
+
+.related-card { background: transparent; border: 0; border-radius: 0; }
+.related-card:hover { background: transparent; border: 0; }
+.related-card:hover .card-title,
 .related-card:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; }
 .project-fact { color: var(--ink); }
 .card-footer { color: var(--accent); }
 .card-footer svg { transition: transform .16s ease; }
 a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform: translateX(3px); }
-.home-selected .selected-projects { gap: 48px 36px; }
-.home-selected .featured-card,
-.home-selected .featured-card:not(:first-child) { background: transparent; border-radius: 0; overflow: visible; }
-.home-selected .featured-card .project-body { padding: 24px 0 0; }
-.home-selected .featured-card .project-cover { border-radius: var(--edge); }
-.home-selected .featured-card .card-description { font-size: 17px; line-height: 1.85; }
-.home-selected .featured-card .card-footer { padding-top: 18px; }
-.home-selected .featured-card:first-child {
-  grid-template-columns: minmax(0, 1.14fr) minmax(0, 1fr);
-  gap: 44px; align-items: center; background: transparent; border: 0; padding: 0;
-}
-.home-selected .featured-card:first-child .project-cover { order: 0; height: 330px; min-height: 0; }
-.home-selected .featured-card:first-child .project-body { order: 1; padding: 12px 0; }
-.home-selected .featured-card:first-child .card-title { font-size: 34px; line-height: 1.45; margin-bottom: 16px; }
-.home-selected .featured-card:first-child .card-footer { margin-top: 16px; }
-.home-selected .featured-card:not(:first-child) .card-title { font-size: 27px; line-height: 1.45; }
-.home-selected .featured-card:nth-child(3) { border: 0; padding: 0; }
 
 /* A quieter method index, separate in scale and structure from project work. */
 .home-capabilities { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 64px; }
@@ -84,29 +74,11 @@ a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform
 .home-contact p { color: var(--body-text); font-size: 18px; }
 .home-contact > a, .home-contact > a:hover { color: var(--accent); }
 
-/* Two equal directions; a lead case and a compact supporting index. */
+/* The two directions remain equal, neutral navigation choices. */
 .project-directions { gap: 24px; }
 .project-directions a { background: var(--surface); border-color: var(--line); border-radius: var(--edge); }
 .project-directions a:hover { background: var(--surface); border-color: var(--accent); }
 .direction-summary { color: var(--muted); }
-.project-group { margin-top: 64px; }
-.project-group-heading { margin-bottom: 36px; }
-.project-group-heading h2 { font-size: 32px; }
-.project-product { padding-top: 8px; }
-.project-product-heading { margin-bottom: 30px; }
-.project-group-layout { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 52px; }
-.project-list { gap: 0; }
-.project-row[data-tone] { position: relative; background: transparent; padding: 28px 28px 28px 24px; border-radius: var(--edge); border: 0; }
-.project-list .project-row:first-child { padding-top: 0; }
-.project-list .project-row + .project-row { margin-top: 8px; }
-.project-row[data-tone]:hover { background: var(--soft); outline: none; }
-.project-row[data-tone] .card-topline { padding: 0; background: transparent; border-radius: 0; color: var(--muted); font-size: 13px; }
-.project-row .project-row-title { font-size: 24px; }
-.project-row .card-description { font-size: 16px; line-height: 1.85; }
-.project-row .card-footer { padding-top: 12px; }
-.independent-projects { margin-top: 44px; padding: 28px; background: var(--soft); border-radius: var(--edge); }
-.independent-projects .project-row { padding: 0; }
-.project-supplement { padding: 20px 0; border-radius: 0; border-top: 1px solid var(--line); background: transparent; margin-top: 40px; }
 
 /* Career is chronological information, with roles and scope in distinct columns. */
 .career-grid { display: block; }
@@ -149,33 +121,19 @@ a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform
 .flow-controls > div:first-child dt { background: var(--accent-soft); }
 
 @media (max-width: 1100px) {
-  .home-selected .featured-card:first-child { gap: 32px; }
-  .home-selected .featured-card:first-child .project-body { padding: 8px 0; }
-  .home-selected .featured-card:first-child .card-title { font-size: 30px; }
   .home-capabilities { grid-template-columns: 210px minmax(0, 1fr); gap: 36px; }
   .home-skills-grid { gap: 28px; }
   .home-skills-grid .skill-card { padding: 20px 0 0; }
   .home-skills-grid .skill-card .card-title { font-size: 22px; }
   .career-card { grid-template-columns: 150px 190px minmax(0, 1fr); gap: 28px; }
-  .project-group-layout { gap: 36px; }
 }
 @media (max-width: 850px) {
   .section { padding-block: 48px; }
-  .home-selected .featured-card:first-child { grid-template-columns: 1fr 1fr; gap: 28px; }
-  .home-selected .featured-card:first-child .project-cover { height: 270px; min-height: 0; }
-  .home-selected .featured-card:first-child .project-body { padding: 0; }
-  .home-selected .featured-card .project-body { padding: 20px 0 0; }
-  .home-selected .featured-card .card-description { font-size: 16px; }
   .home-capabilities { display: block; }
   .home-capabilities .section-heading { display: flex; margin-bottom: 30px; }
   .home-capabilities .section-more { margin: 0; }
   .home-skills-grid { gap: 32px 36px; }
   .home-skills-grid .skill-card { padding: 22px 0 0; }
-  .project-group-layout { grid-template-columns: 1fr; gap: 36px; }
-  .project-group .project-body { padding: 20px 0 20px 24px; }
-  .project-list .project-row:first-child { padding-top: 24px; }
-  .project-row[data-tone] { padding: 24px; background: var(--soft); }
-  .project-list .project-row + .project-row { margin-top: 16px; }
   .career-card { grid-template-columns: 155px minmax(0, 1fr); gap: 16px 28px; }
   .career-summary { grid-column: 2; }
   .skills-grid { gap: 32px; }
@@ -185,28 +143,12 @@ a:hover > .card-footer svg, a:hover .project-body > .card-footer svg { transform
   .section-heading, .home-capabilities .section-heading { gap: 14px; margin-bottom: 24px; }
   .section-heading h2 { font-size: 28px; }
   .category-heading { margin-block: 28px 36px; }
-  .home-selected .selected-projects { gap: 36px; }
-  .home-selected .featured-card:first-child, .home-selected .featured-card:not(:first-child) { display: flex; gap: 0; }
-  .home-selected .featured-card .project-body, .home-selected .featured-card:first-child .project-body { order: 0; padding: 0 0 20px; }
-  .home-selected .featured-card .project-cover, .home-selected .featured-card:first-child .project-cover, .home-selected .featured-card:not(:first-child) .project-cover { order: 1; height: auto; min-height: 0; aspect-ratio: 1.7; }
-  .home-selected .featured-card:first-child .card-title, .home-selected .featured-card:not(:first-child) .card-title { font-size: 25px; margin-bottom: 12px; }
-  .home-selected .featured-card:first-child .card-footer { margin-top: 0; }
-  .home-selected .featured-card .card-topline { font-size: 13px; }
   .home-skills-grid { grid-template-columns: 1fr; gap: 28px; }
   .home-skills-grid .skill-card { padding: 20px 0 0; }
   .home-skills-grid .skill-card .card-title { font-size: 23px; }
   .home-contact { padding: 26px 0; margin-block: 12px 20px; }
   .home-contact p { font-size: 16px; }
   .project-directions { gap: 12px; }
-  .project-group { margin-top: 48px; }
-  .project-group-heading { margin-bottom: 24px; }
-  .project-group-heading h2 { font-size: 27px; }
-  .project-group .project-body { padding: 0 0 22px; }
-  .project-list .project-row:first-child, .project-row[data-tone] { padding: 22px; }
-  .project-row .project-row-title { font-size: 22px; }
-  .independent-projects { padding: 22px; margin-top: 28px; }
-  .independent-projects .project-row { padding: 0; }
-  .project-supplement { margin-top: 28px; }
   .career-card { grid-template-columns: 1fr; gap: 16px; padding: 28px 0; }
   .career-card .card-topline { padding: 0; font-size: 15px; }
   .career-summary { grid-column: 1; }

@@ -62,7 +62,7 @@ function ProjectCard({ project, skills, L, compact = false, headingTag = 'h3', f
       <img src={asset(project.image)} alt="" width="900" height="600" loading="lazy" />
     </div>
     <div className="project-body">
-      <p className="card-topline">{topic ? L('产品专题', 'Product topic') : byline}{!featured && !overview && <span>{project.role}</span>}</p>
+      {!featured && <p className="card-topline">{topic ? L('产品专题', 'Product topic') : byline}{!overview && <span>{project.role}</span>}</p>}
       <Heading className="card-title">{project.title}</Heading>
       <p className="card-description">{project.summary}</p>
       {project.highlight && <ProjectFact>{project.highlight}</ProjectFact>}
