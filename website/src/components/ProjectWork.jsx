@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
-import { ArrowRight, CaretDown } from '@phosphor-icons/react';
+import { ArrowRight } from '@phosphor-icons/react';
 
 function currentWorkIndex(ids) {
   try { return Math.max(0, ids.indexOf(decodeURIComponent(window.location.hash.slice(1)))); }
@@ -19,7 +19,7 @@ export default function ProjectWork({ actions, ids = [], L }) {
   const hasTopics = topics.length >= 5;
   const browsingTopics = hasTopics && !showAll;
 
-  // Capability pages link directly to specific consumer-product work items.
+  // A linked work item must be visible before it is positioned or focused.
   useLayoutEffect(() => {
     const followWork = () => {
       let hash;
@@ -50,6 +50,14 @@ export default function ProjectWork({ actions, ids = [], L }) {
     window.dispatchEvent(new Event('resize'));
   }, [active, showAll]);
 
+  function selectTopic(index) {
+    setActive(index);
+    // Keep a shared evidence link aligned with the selected work item, without scrolling.
+    if (ids.includes(window.location.hash.slice(1)) && ids[index]) {
+      window.history.replaceState(window.history.state, '', `${window.location.pathname}${window.location.search}#${ids[index]}`);
+    }
+  }
+
   function changeTopic(event, index) {
     let next;
     if (event.key === 'ArrowRight') next = (index + 1) % topics.length;
@@ -58,7 +66,7 @@ export default function ProjectWork({ actions, ids = [], L }) {
     else if (event.key === 'End') next = topics.length - 1;
     else return;
     event.preventDefault();
-    setActive(next);
+    selectTopic(next);
     tabs.current[next]?.focus({ preventScroll: true });
   }
 
@@ -74,8 +82,8 @@ export default function ProjectWork({ actions, ids = [], L }) {
       {topics.map((topic, index) => <button type="button" role="tab" key={index}
         id={`work-tab-${index}`} ref={element => { tabs.current[index] = element; }}
         aria-selected={active === index} aria-controls={ids[index] || `work-panel-${index}`}
-        tabIndex={active === index ? 0 : -1} onClick={() => setActive(index)} onKeyDown={event => changeTopic(event, index)}>
-        <span>{topic.title}</span><CaretDown size={17} aria-hidden="true" />
+        tabIndex={active === index ? 0 : -1} onClick={() => selectTopic(index)} onKeyDown={event => changeTopic(event, index)}>
+        <span>{topic.title}</span>
       </button>)}
     </div>}
     <div id="project-work-content" className="work-content" data-count={topics.length}>
@@ -84,7 +92,7 @@ export default function ProjectWork({ actions, ids = [], L }) {
         data-reading-anchor={ids[index] && !(browsingTopics && index !== active) ? true : undefined}
         aria-labelledby={browsingTopics ? `work-tab-${index}` : `work-heading-${index}`}
         hidden={browsingTopics && index !== active} tabIndex={browsingTopics || ids[index] ? 0 : undefined}>
-        <h3 id={`work-heading-${index}`}>{topic.title}</h3><p>{topic.text}</p>
+        <h3 id={`work-heading-${index}`} className={browsingTopics ? 'work-panel-title' : undefined}>{topic.title}</h3><p>{topic.text}</p>
       </section>)}
     </div>
   </div>;

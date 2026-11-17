@@ -5,6 +5,7 @@ import { portfolio } from '../src/portfolio.js';
 import { projectGroups, projectBriefs, projectProducts } from '../src/project-reading.js';
 import { cases as zhCases } from '../src/content.zh.js';
 import { cases as enCases } from '../src/content.js';
+import { projectAnchors, projectWorkIds } from '../src/project-anchors.js';
 import { legacyHashPath, legacyPageRedirects, parsePortfolioPath, portfolioPages, routeHref } from '../src/routes.js';
 
 test('all independent pages resolve under both local and GitHub Pages prefixes', () => {
@@ -86,7 +87,8 @@ test('project routes, translations, category cards and related links stay in syn
         if (method.projectId) {
           assert.ok(cases[method.projectId], method.projectId);
           assert.ok(method.evidence, `${method.title} project evidence`);
-          if (method.projectAnchor) assert.ok(cases[method.projectId].actionIds?.includes(method.projectAnchor), `${method.title} evidence section`);
+          assert.ok(method.projectAnchor, `${method.title} must link to a specific evidence section`);
+          assert.ok(projectAnchors(method.projectId, cases[method.projectId]).includes(method.projectAnchor), `${method.title} evidence section`);
         }
       }
     }
@@ -94,6 +96,15 @@ test('project routes, translations, category cards and related links stay in syn
       assert.ok(cases[id].decisions.length >= 2, `${language}/${id} decisions`);
       assert.equal(cases[id].actions.length, (language === 'zh' ? enCases : zhCases)[id].actions.length);
     }
+  }
+});
+
+test('evidence targets stay stable across languages and preserve existing work links', () => {
+  for (const id of Object.keys(zhCases)) {
+    assert.deepEqual(projectAnchors(id, zhCases[id]), projectAnchors(id, enCases[id]), `${id} bilingual anchors`);
+    const anchors = projectAnchors(id, zhCases[id]);
+    assert.equal(new Set(anchors).size, anchors.length, `${id} duplicate anchors`);
+    if (zhCases[id].actionIds) assert.deepEqual(projectWorkIds(id, zhCases[id]), zhCases[id].actionIds, `${id} legacy work links`);
   }
 });
 

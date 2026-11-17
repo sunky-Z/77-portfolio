@@ -505,12 +505,12 @@ export const cases = {
     "decisionEyebrow": "Finding",
     "decisions": [
       {
-        "title": "Identify use needs through field conditions",
-        "text": "Identify the support the management system needs to provide in relation to mountain-site conditions and inspection tasks."
+        "title": "Weekly inspections exposed mountain-site constraints",
+        "text": "Maintenance staff at one mountain-site plant needed to inspect it weekly. The terrain made the task difficult and involved safety risks, making support for field inspections a research direction for management-system improvements."
       },
       {
-        "title": "Propose assisted inspection and individual-panel alerts",
-        "text": "I considered drone- or camera-assisted inspection and separate alerts for faults in individual solar panels."
+        "title": "Document assisted inspections and panel alerts as proposals",
+        "text": "The research report proposed drone- or camera-assisted inspections and separate alerts for faults in individual solar panels as input for subsequent product discussion."
       }
     ],
     "actions": [
@@ -528,7 +528,7 @@ export const cases = {
         "Proposals for inspection and fault alerts, with preliminary analysis of AI maintenance and inspection."
       ]
     ],
-    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting."
+    "boundary": "I was responsible for field research, questionnaire design, data analysis, qualitative analysis and research reporting. Assisted inspections and separate individual-panel fault alerts were delivered as research-report proposals for subsequent product discussion."
   },
   "hardware-human-factors": {
     "overview": [

@@ -1,37 +1,42 @@
 export const researchCapabilities = {
   zh: {
     title: '用户研究',
-    summary: '从行为与情境中，获得产品判断依据。',
+    summary: '结合操作观察与人因评估，判断面板和出纸口的布局。',
     intro: '结合心理学教育背景，将研究问题放回人的行为、任务目标与使用环境。通过问卷、现场调研、定量与定性分析及人因评估，区分用户陈述、操作表现与场景差异，为需求判断和方案比较提供依据。',
     methods: [
       {
         title: '研究问题与使用情境',
         text: '将研究问题拆解为使用者、任务、环境与操作困难，明确现场调研需要回答的问题。',
         projectId: 'station-control-research',
+        projectAnchor: 'station-control-research-decision-1',
         evidence: '实地了解山地电站每周巡检的执行困难与安全风险',
       },
       {
         title: '问卷设计与现场调研',
         text: '围绕不同岗位与使用场景设计问卷，结合现场调研了解实际操作与主观体验。区分前厅业务、楼内办公及不同使用角色，将调研资料对应到具体人群与工作任务。',
         projectId: 'hardware-research',
+        projectAnchor: 'hardware-research-work-1',
         evidence: '在银行市级分行承担问卷设计与调研执行，覆盖多类使用角色',
       },
       {
         title: '定量分析与定性归纳',
         text: '结合问卷分析与定性资料，比较不同人群和场景的使用差异，形成需求结论。',
         projectId: 'hardware-research',
+        projectAnchor: 'hardware-research-work-2',
         evidence: '形成前厅业务体验与局域网、共享、云打印服务的需求差异结论',
       },
       {
         title: '人因与操作体验评估',
         text: '围绕部件布局、面板操作及取放纸任务开展 A/B 对比、操作观察与 3D 人因规则评估。结合站姿、坐姿与用户评价比较方案，构想兼顾面板关注和出纸口可见性的布局条件。',
         projectId: 'hardware-human-factors',
+        projectAnchor: 'hardware-human-factors-work-4',
         evidence: '本人完成研究、分析与产品形态设计，相关产品最终投产',
       },
       {
         title: '研究综合与报告',
         text: '将用户画像、使用问题与现场条件整理为研究结论和报告。',
         projectId: 'station-control-research',
+        projectAnchor: 'station-control-research-work-3',
         evidence: '辅助巡检与独立报警作为功能建议纳入用户研究报告',
       },
     ],
@@ -40,37 +45,42 @@ export const researchCapabilities = {
   },
   en: {
     title: 'User research',
-    summary: 'Ground product decisions in behavior and context.',
+    summary: 'Use task observation and human factors assessment to inform panel and paper-output layouts.',
     intro: 'Draw on an educational background in psychology to study behavior, task goals and working environments. Use questionnaires, fieldwork, quantitative and qualitative analysis, and human factors evaluation to distinguish user accounts, observed actions and contextual differences, informing needs assessment and comparison of design options.',
     methods: [
       {
         title: 'Research questions and context of use',
         text: 'Break research questions down into users, tasks, environments and operating difficulties, defining what fieldwork needs to establish.',
         projectId: 'station-control-research',
+        projectAnchor: 'station-control-research-decision-1',
         evidence: 'Field research into the difficulty and safety risks of weekly inspections at a mountain solar plant',
       },
       {
         title: 'Questionnaire design and fieldwork',
         text: 'Design questionnaires around different roles and use contexts, combining fieldwork with accounts of actual operation and subjective experience. Distinguish counter services, office work and user roles so research material relates to specific people and tasks.',
         projectId: 'hardware-research',
+        projectAnchor: 'hardware-research-work-1',
         evidence: 'Questionnaire design and fieldwork at a municipal-level bank branch, covering multiple user roles',
       },
       {
         title: 'Quantitative analysis and qualitative synthesis',
         text: 'Combine questionnaire analysis with qualitative material to compare use across groups and contexts and identify needs.',
         projectId: 'hardware-research',
+        projectAnchor: 'hardware-research-work-2',
         evidence: 'Findings distinguishing counter-service experience from local-network, shared and cloud-printing needs',
       },
       {
         title: 'Human factors and operating experience',
         text: 'Use A/B comparisons, task observation and 3D human factors assessment to examine component layouts, panel operation and paper handling. Compare standing and seated scenarios with participant feedback, developing layout concepts for panel attention and output-area visibility.',
         projectId: 'hardware-human-factors',
+        projectAnchor: 'hardware-human-factors-work-4',
         evidence: 'I completed the research, analysis and product-form design; the product entered production',
       },
       {
         title: 'Research synthesis and reporting',
         text: 'Synthesize user profiles, use problems and field conditions into research findings and reports.',
         projectId: 'station-control-research',
+        projectAnchor: 'station-control-research-work-3',
         evidence: 'Assisted inspection and separate fault-alert proposals documented in the user research report',
       },
     ],
