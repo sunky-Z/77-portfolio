@@ -105,7 +105,7 @@
 .poster-stats { position: absolute; z-index: 3; right: 0; bottom: 112px; width: 16%; margin: 0; }
 .poster-stats > div { display: flex; align-items: center; gap: 19px; padding: 22px 0; border-bottom: 1px solid #68242a5c; }
 .poster-stats > div:last-child { border: 0; }
-.poster-stats dt { font-family: var(--display); color: var(--accent); font-size: 65px; line-height: .9; letter-spacing: -.025em; white-space: nowrap; min-width: 72px; }
+.poster-stats dt { font-family: var(--display); color: var(--accent); font-size: 65px; line-height: .9; letter-spacing: -.025em; white-space: nowrap; min-width: 72px; flex-shrink: 0; }
 .poster-stats dt > span { font-family: var(--font-family); font-size: 10px; margin-left: 4px; }
 .poster-stats dd { font-size: 11px; color: #c8c0ba; line-height: 1.55; margin: 0; }
 
@@ -331,7 +331,7 @@
   .exhibit-title { gap: 10px; }
   .exhibit-title strong { font-size: 19px; }
   .exhibit-keywords { font-size: 9px; gap: 7px 12px; }
-  .poster-stats { width: 17%; bottom: 100px; }
+  .poster-stats { width: max(17%, 136px); bottom: 100px; }
   .poster-stats dt { font-size: 46px; min-width: 50px; }
   .poster-stats dd { font-size: 9px; }
   .poster-stats > div { gap: 6px; }
