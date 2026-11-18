@@ -144,6 +144,7 @@
 
 /* Project thumbnails carry the visual weight; the captions stay at keyword level. */
 .poster-projects { border-top: 1px solid var(--line); padding-block: 28px 39px; }
+.home-page .poster-practice + .poster-projects { border-top: 0; }
 .poster-section-heading { display: flex; align-items: center; justify-content: space-between; gap: 30px; margin-bottom: 25px; }
 .poster-section-heading h2, .poster-background > h2, .poster-method > h2 { display: flex; align-items: baseline; gap: 17px; font-size: 22px; font-weight: 500; line-height: 1.4; letter-spacing: -.02em; }
 .poster-section-heading h2 > span, .poster-background > h2 > span, .poster-method > h2 > span { font-family: 'Portfolio Times', serif; font-size: 10px; letter-spacing: .04em; color: var(--dim); font-weight: 400; }

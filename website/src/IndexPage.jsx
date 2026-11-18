@@ -79,5 +79,5 @@ function ProjectPerspective({ L }) {
 }
 
 export default function IndexPage({ data, L, language, copyEmail, status }) {
-  return <><PosterHero L={L} /><PosterProjects data={data} L={L} language={language} /><div className="poster-practice wrap"><Background data={data} L={L} language={language} /><WorkingMethod L={L} language={language} /><ProjectPerspective L={L} /></div><PosterContact L={L} copyEmail={copyEmail} status={status} /></>;
+  return <><PosterHero L={L} /><div className="poster-practice wrap"><Background data={data} L={L} language={language} /><WorkingMethod L={L} language={language} /><ProjectPerspective L={L} /></div><PosterProjects data={data} L={L} language={language} /><PosterContact L={L} copyEmail={copyEmail} status={status} /></>;
 }
