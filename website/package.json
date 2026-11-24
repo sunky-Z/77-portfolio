@@ -10,7 +10,7 @@
     "dev": "vite --host 127.0.0.1 --port 5177 --strictPort",
     "build": "node scripts/build-pages.mjs",
     "test:routes": "node --test scripts/routes.test.mjs",
-    "test": "npm run test:routes",
+    "test": "node --test scripts/*.test.mjs",
     "check:build": "node scripts/check-build.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4177 --strictPort"
   },

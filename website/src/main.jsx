@@ -6,5 +6,6 @@ import './system-tokens.css';
 import './next-theme.css';
 import './index-poster.css';
 import './inner-system.css';
+import './navigation-system.css';
 
 createRoot(document.getElementById('root')).render(<React.StrictMode><App /></React.StrictMode>);

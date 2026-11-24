@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowUpRight } from '@phosphor-icons/react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowLeft, ArrowUpRight, CaretDown } from '@phosphor-icons/react';
 import { routeHref } from './routes.js';
+import { getReadingHref } from './reading-state.js';
 import { projectBriefs, projectProductFor } from './project-reading.js';
+import { getCareerCapabilities, getProjectRelations } from './project-relations.js';
 import { projectWorkIds, projectDecisionId } from './project-anchors.js';
 import ProjectWork from './components/ProjectWork.jsx';
 import { asset } from './assets.js';
@@ -9,6 +11,9 @@ import { SectionHeading } from './components/PortfolioSystem.jsx';
 
 function ArticleToc({ sections, L }) {
   const [active, setActive] = useState(sections[0]?.[0]);
+  const [open, setOpen] = useState(false);
+  const toggle = useRef(null);
+  const contents = useRef(null);
 
   useEffect(() => {
     let frame = 0;
@@ -16,8 +21,11 @@ function ArticleToc({ sections, L }) {
       frame = 0;
       const elements = sections.map(([id]) => document.getElementById(id)).filter(Boolean);
       if (!elements.length) return;
-      const header = document.querySelector('.site-header')?.getBoundingClientRect().bottom || 0;
-      const offset = Math.max(header + 28, 120);
+      const header = Number.parseFloat(getComputedStyle(document.documentElement)
+        .getPropertyValue('--site-header-height')) || 0;
+      const tocHeight = window.matchMedia('(max-width: 900px)').matches
+        ? toggle.current?.getBoundingClientRect().height || 0 : 0;
+      const offset = header + tocHeight + 24;
       let current = elements[0].id;
       for (const element of elements) {
         if (element.getBoundingClientRect().top > offset) break;
@@ -34,18 +42,50 @@ function ArticleToc({ sections, L }) {
     update();
     window.addEventListener('scroll', schedule, { passive: true });
     window.addEventListener('resize', schedule);
+    window.addEventListener('hashchange', schedule);
     return () => {
       window.removeEventListener('scroll', schedule);
       window.removeEventListener('resize', schedule);
+      window.removeEventListener('hashchange', schedule);
       if (frame) window.cancelAnimationFrame(frame);
     };
   }, [sections]);
 
-  return <aside className="article-toc">
-    <nav aria-label={L('本页目录', 'On this page')}>
+  useEffect(() => {
+    if (!open) return;
+    const closeOutside = event => { if (!contents.current?.contains(event.target)) setOpen(false); };
+    const closeOnEscape = event => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      setOpen(false);
+      toggle.current?.focus();
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    window.addEventListener('pointerdown', closeOutside);
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape);
+      window.removeEventListener('pointerdown', closeOutside);
+    };
+  }, [open]);
+
+  const currentTitle = sections.find(([id]) => id === active)?.[1] || sections[0]?.[1];
+  return <aside ref={contents} className={`article-toc${open ? ' is-open' : ''}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
+    <button className="toc-toggle" type="button" ref={toggle} aria-expanded={open}
+      aria-controls="article-section-links" onClick={() => setOpen(value => !value)}>
+      <small>{L('本页内容', 'On this page')}</small><strong>{currentTitle}</strong>
+      <CaretDown size={18} aria-hidden="true" />
+    </button>
+    <nav id="article-section-links" aria-label={L('本页目录', 'On this page')}>
       <p className="eyebrow">{L('本页内容', 'On this page')}</p>
       {sections.map(([id, title], index) => <a href={`#${id}`} key={id}
-        aria-current={active === id ? 'location' : undefined}>
+        aria-current={active === id ? 'location' : undefined} onClick={() => {
+          setOpen(false);
+          requestAnimationFrame(() => {
+            const target = document.getElementById(id);
+            target?.scrollIntoView({ block: 'start', behavior: 'instant' });
+            target?.focus({ preventScroll: true });
+          });
+        }}>
         <span>{String(index + 1).padStart(2, '0')}</span>{title}
       </a>)}
     </nav>
@@ -53,26 +93,27 @@ function ArticleToc({ sections, L }) {
 }
 
 function ArticleSection({ id, title, index, children }) {
-  return <section id={id} className="article-section" data-reading-anchor aria-labelledby={`${id}-title`}>
+  return <section id={id} className="article-section" data-reading-anchor tabIndex={-1} aria-labelledby={`${id}-title`}>
     <p className="section-kicker" aria-hidden="true">{String(index + 1).padStart(2, '0')}</p>
     <SectionHeading title={title} headingId={`${id}-title`} className="article-section-heading" />
     {children}
   </section>;
 }
 
-function DetailFrame({ title, eyebrow, tags = [], category, categoryPath, parent, L, children }) {
-  const parentHref = parent?.href || routeHref(categoryPath);
+function DetailFrame({ title, eyebrow, tags = [], category, categoryPath, parent, context, next, L, children }) {
+  const parentHref = getReadingHref(parent?.path || categoryPath);
   const parentTitle = parent?.title || category;
   return <div className="detail-page"><div className="wrap">
     <nav className="breadcrumb" aria-label={L('当前位置', 'Breadcrumb')}>
       <a href={routeHref('/')}>{L('首页', 'Home')}</a><span aria-hidden="true">/</span>
       <a href={routeHref(categoryPath)}>{category}</a><span aria-hidden="true">/</span>
-      {parent && <><a href={parent.href}>{parent.title}</a><span aria-hidden="true">/</span></>}
+      {parent && <><a href={routeHref(parent.path)}>{parent.title}</a><span aria-hidden="true">/</span></>}
       <span aria-current="page">{title}</span>
     </nav>
     <header className="detail-heading" id="detail-heading" data-reading-anchor>
       <p className="eyebrow">{eyebrow}</p>
       <h1 tabIndex={-1}>{title}</h1>
+      {context}
       {tags.length > 0 && <ul className="detail-tags" aria-label={L('主题', 'Topics')}>
         {tags.map(tag => <li key={tag}>{tag}</li>)}
       </ul>}
@@ -81,9 +122,19 @@ function DetailFrame({ title, eyebrow, tags = [], category, categoryPath, parent
       </a>
     </header>
     {children}
-    <nav className="detail-bottom-nav" aria-label={L('继续了解', 'Keep exploring')}>
-      <a className="plain-link" href={parentHref}><ArrowLeft size={17} aria-hidden="true" />{parentTitle}</a>
-      <a className="plain-link" href={routeHref('/contact/')}>{L('联系我', 'Get in touch')}<ArrowUpRight size={18} aria-hidden="true" /></a>
+    <nav className="reading-continuation" aria-label={L('继续了解', 'Keep exploring')}>
+      <a className="reading-continuation-primary return-to-directory" href={parentHref}>
+        <span><small>{L('返回目录', 'Back to directory')}</small><strong>{parentTitle}</strong></span>
+        <ArrowLeft size={20} aria-hidden="true" />
+      </a>
+      <div className="reading-continuation-secondary">
+        {next && <a href={routeHref(`/projects/${next.project.id}/`)}>
+          <span><small>{next.kind === 'product' ? L('同一产品 · 下一专题', 'Same product · Next topic') : L('下一相关案例', 'Next related case')}</small>
+            <strong>{next.project.title}</strong></span><ArrowUpRight size={20} aria-hidden="true" />
+        </a>}
+        <a href={routeHref('/contact/')}><span><small>{L('交流与合作', 'Conversation & collaboration')}</small>
+          <strong>{L('联系我', 'Get in touch')}</strong></span><ArrowUpRight size={20} aria-hidden="true" /></a>
+      </div>
     </nav>
   </div></div>;
 }
@@ -102,10 +153,21 @@ export function ProjectDetail({ route, data, cases, L }) {
   const project = data.projects.find(entry => entry.id === id);
   const brief = projectBriefs[id];
   const product = projectProductFor(id);
+  const { career, capabilities, next } = getProjectRelations(id, data);
   const parent = product ? {
     title: L(product.title.zh, product.title.en),
-    href: routeHref(`/products/${product.id}/`),
+    path: `/products/${product.id}/`,
   } : undefined;
+  const context = <nav className="detail-context" aria-label={L('项目关联', 'Project context')}>
+    {career && <a href={routeHref(`/experience/${career.id}/`)}>
+      <span><small>{L('所属任职经历', 'Career context')}</small><strong>{career.company} · {career.role}</strong></span>
+      <ArrowUpRight size={17} aria-hidden="true" />
+    </a>}
+    {capabilities.map(skill => <a key={skill.id} href={routeHref(`/capabilities/${skill.id}/`)}>
+      <span><small>{L('相关能力', 'Related capability')}</small><strong>{skill.title}</strong></span>
+      <ArrowUpRight size={17} aria-hidden="true" />
+    </a>)}
+  </nav>;
   const sections = [
     ['project-overview', L('项目概览', 'Overview')],
     ['project-context', L('问题与背景', 'Problem & context')],
@@ -118,7 +180,7 @@ export function ProjectDetail({ route, data, cases, L }) {
   const titleOf = sectionId => sections.find(([entry]) => entry === sectionId)?.[1];
 
   return <DetailFrame title={item.title} eyebrow={`${project.company} / ${product ? L('产品专题', 'Product topic') : L('项目案例', 'Project case')}`}
-    tags={item.tags} category={L('项目实践', 'Projects')} categoryPath="/projects/" parent={parent} L={L}>
+    tags={item.tags} category={L('项目实践', 'Projects')} categoryPath="/projects/" parent={parent} context={context} next={next} L={L}>
     <figure className="detail-cover" data-project={id}>
       <img src={asset(project.image)} alt="" width="900" height="600" />
     </figure>
@@ -157,13 +219,25 @@ export function ProjectDetail({ route, data, cases, L }) {
           </div>)}</div>
         </ArticleSection>
         <ArticleSection id="project-related" title={titleOf('project-related')} index={indexOf('project-related')}>
-          <h3>{L('相关能力', 'Capabilities')}</h3>
-          <div className="related-links">{project.skills.map(skillId => <a href={routeHref(`/capabilities/${skillId}/`)} key={skillId}>
-            <span><small>{L('能力与方法', 'Capabilities')}</small><strong>{data.skills[skillId].title}</strong></span>
-            <ArrowUpRight size={20} aria-hidden="true" />
-          </a>)}</div>
-          <h3>{L('继续阅读', 'Continue reading')}</h3>
-          <div className="related-links">{project.relatedProjects?.map(projectId => <RelatedProject
+          <nav className="detail-related-nav" aria-label={L('继续阅读', 'Continue reading')}>
+            {career && <a href={routeHref(`/experience/${career.id}/`)}>
+              <span><small>{L('任职背景', 'Career background')}</small><strong>{career.company} · {career.role}</strong>
+                <span>{career.date}</span></span><ArrowUpRight size={20} aria-hidden="true" />
+            </a>}
+            {capabilities.map(skill => <a key={skill.id} href={routeHref(`/capabilities/${skill.id}/`)}>
+              <span><small>{L('本项目涉及的能力', 'Capability used in this project')}</small><strong>{skill.title}</strong>
+                <span>{L('查看方法与其他应用项目', 'See methods and other project examples')}</span></span>
+              <ArrowUpRight size={20} aria-hidden="true" />
+            </a>)}
+            {next && <a href={routeHref(`/projects/${next.project.id}/`)}>
+              <span><small>{next.kind === 'product' ? L('同一产品 · 下一专题', 'Same product · Next topic') : L('下一相关案例', 'Next related case')}</small>
+                <strong>{next.project.title}</strong><span>{next.kind === 'product'
+                  ? L(next.product.title.zh, next.product.title.en) : next.project.company}</span></span>
+              <ArrowUpRight size={20} aria-hidden="true" />
+            </a>}
+          </nav>
+          <h3>{L('其他关联项目', 'Other related projects')}</h3>
+          <div className="related-links">{project.relatedProjects?.filter(projectId => projectId !== next?.project.id).map(projectId => <RelatedProject
             key={projectId} project={data.projects.find(entry => entry.id === projectId)} L={L} />)}</div>
         </ArticleSection>
       </article>
@@ -211,10 +285,12 @@ export function SkillDetail({ route, data, L }) {
 export function CareerDetail({ route, data, stages, L }) {
   const item = data.career.find(entry => entry.id === route.id);
   const stage = stages[route.id];
+  const capabilities = getCareerCapabilities(route.id, data);
   const sections = [
     ['career-overview', L('任职概述', 'Overview')],
     ['career-work', L('职责与实践', 'Responsibilities')],
     ['career-projects', L('相关项目', 'Related projects')],
+    ['career-capabilities', L('涉及的能力与方法', 'Capabilities & methods used')],
   ];
   return <DetailFrame title={item.company} eyebrow={`${item.date} / ${stage.title}`}
     tags={stage.tags} category={L('职业经历', 'Career')} categoryPath="/experience/" L={L}>
@@ -235,6 +311,13 @@ export function CareerDetail({ route, data, stages, L }) {
         <ArticleSection id="career-projects" title={sections[2][1]} index={2}>
           <div className="related-links">{item.relatedProjects.map(id => <RelatedProject key={id}
             project={data.projects.find(entry => entry.id === id)} L={L} />)}</div>
+        </ArticleSection>
+        <ArticleSection id="career-capabilities" title={sections[3][1]} index={3}>
+          <p>{L('以下能力对应上列任职项目。', 'These capabilities are used in the projects listed above.')}</p>
+          <div className="career-capabilities related-links">{capabilities.map(skill => <a key={skill.id} href={routeHref(`/capabilities/${skill.id}/`)}>
+            <span><small>{L('能力与方法', 'Capabilities')}</small><strong>{skill.title}</strong></span>
+            <ArrowUpRight size={20} aria-hidden="true" />
+          </a>)}</div>
         </ArticleSection>
       </article>
     </div>

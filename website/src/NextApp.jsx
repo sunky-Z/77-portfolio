@@ -6,6 +6,8 @@ import { cases as enCases, stages as enStages } from './content.js';
 import { projectProducts } from './project-reading.js';
 import { useLanguage } from './i18n.js';
 import usePortfolioNavigation from './hooks/usePortfolioNavigation.js';
+import useReadingState from './hooks/useReadingState.js';
+import { getReadingHref, readProjectFilter, setProjectFilter } from './reading-state.js';
 import { routeHref } from './routes.js';
 import { asset } from './assets.js';
 import { ProjectDetail, SkillDetail, CareerDetail } from './DetailPages.jsx';
@@ -36,25 +38,45 @@ function SectionHeading({ number, english, title, link, linkLabel }) {
 
 function Header({ home, L, language, onLanguage, route }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(() => window.scrollY > 24);
+  const [, refreshTargets] = useState(0);
   const menu = useRef(null);
-  const homeSection = id => home ? `#${id}` : routeHref({ identity: '/experience/', 'selected-work': '/projects/', expertise: '/capabilities/', 'contact-section': '/contact/' }[id]);
-  const currentArea = ['project', 'product', 'projects'].includes(route.type) ? 'selected-work' :
-    ['skill', 'capabilities'].includes(route.type) ? 'expertise' : ['career', 'experience'].includes(route.type) ? 'identity' : 'contact-section';
+  const navigation = useRef(null);
+  const currentArea = ['project', 'product', 'projects'].includes(route.type) ? 'projects' :
+    ['skill', 'capabilities'].includes(route.type) ? 'capabilities' : ['career', 'experience'].includes(route.type) ? 'experience' : route.type === 'contact' ? 'contact' : null;
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > 24);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+  useEffect(() => {
+    const update = () => refreshTargets(value => value + 1);
+    const desktop = window.matchMedia('(min-width: 761px)');
+    const closeOnDesktop = () => { if (desktop.matches) setOpen(false); };
+    window.addEventListener('portfolio:reading-change', update);
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => {
+      window.removeEventListener('portfolio:reading-change', update);
+      desktop.removeEventListener('change', closeOnDesktop);
+    };
+  }, []);
   useEffect(() => {
     if (!open) return;
+    const focusFrame = requestAnimationFrame(() => navigation.current?.querySelector('a')?.focus());
     const close = event => { if (event.key === 'Escape') { setOpen(false); menu.current?.focus(); } };
     const outside = event => { if (!event.target.closest('.site-header')) setOpen(false); };
     document.addEventListener('keydown', close);
     document.addEventListener('pointerdown', outside);
-    return () => { document.removeEventListener('keydown', close); document.removeEventListener('pointerdown', outside); };
+    return () => { cancelAnimationFrame(focusFrame); document.removeEventListener('keydown', close); document.removeEventListener('pointerdown', outside); };
   }, [open]);
-  return <header className={`site-header${home ? ' on-hero' : ''}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
+  return <header className={`site-header${home ? ' on-hero' : ''}${scrolled ? ' is-scrolled' : ''}${open ? ' menu-is-open' : ''}`} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
     <div className="header-inner wrap">
       <a className="brand" href={routeHref('/')} aria-label={L('77 首页', '77 home')}><span>77.</span><span className="brand-role">{L('产品经理', 'Product Manager')}</span></a>
-      <nav id="main-navigation" className={`main-nav${open ? ' is-open' : ''}`} aria-label={L('主导航', 'Main navigation')} onClick={() => setOpen(false)}>
-        <a href={homeSection('identity')} aria-current={!home && currentArea === 'identity' ? 'page' : undefined}>{L('个人经历', 'Background')}</a><a href={homeSection('selected-work')} aria-current={!home && currentArea === 'selected-work' ? 'page' : undefined}>{L('项目', 'Work')}</a><a href={homeSection('expertise')} aria-current={!home && currentArea === 'expertise' ? 'page' : undefined}>{L('能力', 'Expertise')}</a><a className="mobile-contact" href={homeSection('contact-section')} aria-current={!home && currentArea === 'contact-section' ? 'page' : undefined}>{L('联系我', 'Contact')}</a>
+      <nav id="main-navigation" ref={navigation} className={`main-nav${open ? ' is-open' : ''}`} aria-label={L('主导航', 'Main navigation')} onClick={() => setOpen(false)}>
+        <a href={getReadingHref('/experience/')} aria-current={currentArea === 'experience' ? 'page' : undefined}>{L('个人经历', 'Background')}</a><a href={getReadingHref('/projects/')} aria-current={currentArea === 'projects' ? 'page' : undefined}>{L('项目实践', 'Projects')}</a><a href={getReadingHref('/capabilities/')} aria-current={currentArea === 'capabilities' ? 'page' : undefined}>{L('能力与方法', 'Expertise')}</a><a className="mobile-contact" href={routeHref('/contact/')} aria-current={currentArea === 'contact' ? 'page' : undefined}>{L('联系我', 'Contact')}</a>
       </nav>
-      <div className="header-actions"><button className="language-switch" onClick={onLanguage} aria-label={language === 'zh' ? '切换为英文' : 'Switch to Chinese'}>{language === 'zh' ? 'EN' : '中文'}</button><a className="header-contact" href={homeSection('contact-section')}>{L('联系我', 'Contact')}<ArrowUpRight {...iconProps} /></a><button className="menu-button" ref={menu} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-navigation" aria-label={open ? L('关闭导航', 'Close navigation') : L('打开导航', 'Open navigation')}>{open ? <X {...iconProps} /> : <List {...iconProps} />}</button></div>
+      <div className="header-actions"><button className="language-switch" onClick={onLanguage} aria-label={language === 'zh' ? '切换为英文' : 'Switch to Chinese'}>{language === 'zh' ? 'EN' : '中文'}</button><a className="header-contact" href={routeHref('/contact/')} aria-current={currentArea === 'contact' ? 'page' : undefined}>{L('联系我', 'Contact')}<ArrowUpRight {...iconProps} /></a><button className="menu-button" ref={menu} onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="main-navigation" aria-label={open ? L('关闭导航', 'Close navigation') : L('打开导航', 'Open navigation')}>{open ? <X {...iconProps} /> : <List {...iconProps} />}</button></div>
     </div>
   </header>;
 }
@@ -93,26 +115,47 @@ function PageHeading({ eyebrow, title, keywords, back, backLabel }) {
 }
 
 function ProjectsDirectory({ data, cases, L }) {
-  const [filter, setFilter] = useState('all');
+  const [filter, setFilter] = useState(readProjectFilter);
+  const selectFilter = value => { setFilter(value); setProjectFilter(value); };
+  useEffect(() => {
+    const syncFilter = () => setFilter(readProjectFilter());
+    window.addEventListener('popstate', syncFilter);
+    return () => window.removeEventListener('popstate', syncFilter);
+  }, []);
   const rows = data.projects.filter(item => !productIds.includes(item.id) && item.id !== 'energy-research');
   const filters = [['all', L('全部', 'All')], ['ai', L('AI 产品与商业化', 'AI products & monetization')], ['research', L('用户研究与产品设计', 'Research & product design')]];
-  return <div className="directory-page"><PageHeading eyebrow="WORK INDEX" title={L('项目实践', 'Projects')} keywords={L(['AI 助手', '消费端产品', '能源', '智能硬件'], ['AI assistant', 'Consumer products', 'Energy', 'Hardware'])} /><div className="wrap"><div className="directory-filters" aria-label={L('筛选项目方向', 'Filter project area')}>{filters.map(([id, label]) => <button key={id} onClick={() => setFilter(id)} aria-pressed={filter === id}>{label}</button>)}</div>{(filter === 'all' || filter === 'ai') && <section className="directory-group" id="droiclaw"><SystemHeading className="directory-group-title" english="01 / AI" title={L('AI 产品与商业化', 'AI products & monetization')} /><div className="directory-grid"><ProjectTile id="droiclaw" data={data} cases={cases} L={L} />{rows.filter(item => item.id === 'product-business').map(item => <ProjectTile key={item.id} id={item.id} data={data} cases={cases} L={L} />)}</div></section>}{(filter === 'all' || filter === 'research') && <section className="directory-group" id="research"><SystemHeading className="directory-group-title" english="02 / RESEARCH" title={L('用户研究与产品设计', 'Research & product design')} /><div className="directory-grid">{rows.filter(item => item.id !== 'product-business').map(item => <ProjectTile key={item.id} id={item.id} data={data} cases={cases} L={L} />)}</div><a className="plain-link supplement-link" href={routeHref('/projects/energy-research/')}>{L('补充阅读 / 能源产品研究概览', 'Further reading / Energy research overview')}<ArrowUpRight {...iconProps} /></a></section>}</div></div>;
+  return <div className="directory-page"><PageHeading eyebrow="WORK INDEX" title={L('项目实践', 'Projects')} keywords={L(['AI 助手', '消费端产品', '能源', '智能硬件'], ['AI assistant', 'Consumer products', 'Energy', 'Hardware'])} /><div className="wrap"><div className="directory-filters" aria-label={L('筛选项目方向', 'Filter project area')}>{filters.map(([id, label]) => <button key={id} onClick={() => selectFilter(id)} aria-pressed={filter === id}>{label}</button>)}</div>{(filter === 'all' || filter === 'ai') && <section className="directory-group" id="droiclaw"><SystemHeading className="directory-group-title" english="01 / AI" title={L('AI 产品与商业化', 'AI products & monetization')} /><div className="directory-grid"><ProjectTile id="droiclaw" data={data} cases={cases} L={L} />{rows.filter(item => item.id === 'product-business').map(item => <ProjectTile key={item.id} id={item.id} data={data} cases={cases} L={L} />)}</div></section>}{(filter === 'all' || filter === 'research') && <section className="directory-group" id="research"><SystemHeading className="directory-group-title" english="02 / RESEARCH" title={L('用户研究与产品设计', 'Research & product design')} /><div className="directory-grid">{rows.filter(item => item.id !== 'product-business').map(item => <ProjectTile key={item.id} id={item.id} data={data} cases={cases} L={L} />)}</div><a className="plain-link supplement-link" href={routeHref('/projects/energy-research/')}>{L('补充阅读 / 能源产品研究概览', 'Further reading / Energy research overview')}<ArrowUpRight {...iconProps} /></a></section>}</div></div>;
 }
 
 function ProductOverview({ data, cases, L }) {
   const topics = productIds.map(id => data.projects.find(item => item.id === id));
-  return <div className="directory-page product-overview"><PageHeading eyebrow="DROI / AI ASSISTANT" title={L('DroiClaw AI 助手', 'DroiClaw AI assistant')} keywords={L(['移动终端', 'AI 任务', '用户控制'], ['Mobile devices', 'AI tasks', 'User control'])} back={routeHref('/projects/')} backLabel={L('全部项目', 'All projects')} /><div className="wrap"><Artwork id="droiclaw" L={L} /><div className="product-topics-heading"><span className="eyebrow">{L('同一产品 · 四个工作专题', 'One product · Four areas of work')}</span><h2>{L('DroiClaw 的四项工作', 'Four areas of work on DroiClaw')}</h2></div><div className="product-topics">{topics.map((item, index) => <GlowCard className="system-card topic-glow" key={item.id}><a href={routeHref(`/projects/${item.id}/`)}><span className="topic-number">0{index + 1}</span><div><h3>{item.title}</h3><div className="keywords">{cases[item.id].tags.slice(0, 3).map(word => <Keyline key={word}>{word}</Keyline>)}</div></div><ArrowUpRight size={27} aria-hidden="true" /></a></GlowCard>)}</div></div></div>;
+  const career = data.career.find(entry => entry.relatedProjects.includes(productIds[0]));
+  const skills = [...new Set(topics.flatMap(item => item.skills))];
+  return <div className="directory-page product-overview">
+    <PageHeading eyebrow="DROI / AI ASSISTANT" title={L('DroiClaw AI 助手', 'DroiClaw AI assistant')} keywords={L(['移动终端', 'AI 任务', '用户控制'], ['Mobile devices', 'AI tasks', 'User control'])} back={getReadingHref('/projects/')} backLabel={L('全部项目', 'All projects')} />
+    <div className="wrap">
+      <nav className="detail-context" aria-label={L('产品关联', 'Product connections')}>
+        {career && <a href={routeHref(`/experience/${career.id}/`)}><span><small>{L('所属任职经历', 'Career background')}</small><strong>{career.company} · {career.role}</strong></span><ArrowUpRight size={17} aria-hidden="true" /></a>}
+        {skills.map(id => <a key={id} href={routeHref(`/capabilities/${id}/`)}><span><small>{L('相关能力', 'Related capability')}</small><strong>{data.skills[id].title}</strong></span><ArrowUpRight size={17} aria-hidden="true" /></a>)}
+      </nav>
+      <Artwork id="droiclaw" L={L} />
+      <div className="product-topics-heading"><span className="eyebrow">{L('同一产品 · 四个工作专题', 'One product · Four areas of work')}</span><h2>{L('DroiClaw 的四项工作', 'Four areas of work on DroiClaw')}</h2></div>
+      <div className="product-topics">{topics.map((item, index) => <GlowCard className="system-card topic-glow" key={item.id}><a href={routeHref(`/projects/${item.id}/`)}><span className="topic-number">0{index + 1}</span><div><h3>{item.title}</h3><div className="keywords">{cases[item.id].tags.slice(0, 3).map(word => <Keyline key={word}>{word}</Keyline>)}</div></div><ArrowUpRight size={27} aria-hidden="true" /></a></GlowCard>)}</div>
+      <nav className="reading-continuation" aria-label={L('继续了解', 'Keep exploring')}><a className="continuation-primary" href={getReadingHref('/projects/')}>{L('返回项目列表', 'Back to projects')}</a>{career && <a className="continuation-secondary" href={routeHref(`/experience/${career.id}/`)}>{L('了解 DROI 任职经历', 'Explore my work at DROI')}</a>}</nav>
+    </div>
+  </div>;
 }
 
 function ExperienceDirectory({ data, L }) {
   return <div className="directory-page"><PageHeading eyebrow="BACKGROUND" title={L('个人经历', 'Background')} keywords={L(['心理学', '工商管理', '产品经理'], ['Psychology', 'Business', 'Product management'])} /><div className="wrap experience-directory">{data.career.map((item, index) => <a className="experience-row" key={item.id} href={routeHref(`/experience/${item.id}/`)}><span className="experience-number">0{index + 1}</span><div><span className="eyebrow">{item.date}</span><h2>{item.company}</h2></div><h3>{item.role}</h3><ArrowUpRight size={26} aria-hidden="true" /></a>)}<div className="education-block"><h2>{L('教育背景', 'Education')}</h2>{data.profile.education.map(item => <div key={item.school}><span>{item.date}</span><h3>{item.degree} / {item.field}</h3><p>{item.school}</p></div>)}</div></div></div>;
 }
 
-function CompactFooter({ L }) { return <footer className="inner-footer wrap"><a className="footer-brand" href={routeHref('/')}>77.</a><a className="version-link" href={`${import.meta.env.BASE_URL}v1/`}>V1<ArrowUpRight size={16} aria-hidden="true" /></a><a className="plain-link" href={`${routeHref('/')}#contact-section`}>{L('产品、研究与合作', 'Product, research & collaboration')}<ArrowUpRight {...iconProps} /></a></footer>; }
+function CompactFooter({ L }) { return <footer className="inner-footer wrap"><a className="footer-brand" href={routeHref('/')}>77.</a><a className="version-link" href={`${import.meta.env.BASE_URL}v1/`}>V1<ArrowUpRight size={16} aria-hidden="true" /></a><a className="plain-link" href={routeHref('/contact/')}>{L('产品、研究与合作', 'Product, research & collaboration')}<ArrowUpRight {...iconProps} /></a></footer>; }
 
 export default function App() {
   const [language, toggleLanguage] = useLanguage();
   const { route } = usePortfolioNavigation();
+  useReadingState({ route, language });
   const [status, setStatus] = useState('');
   const [toast, setToast] = useState('');
   const timer = useRef(null);
